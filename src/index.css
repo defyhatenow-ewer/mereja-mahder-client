@@ -1,0 +1,222 @@
+@import "tailwindcss";
+@plugin "daisyui";
+@plugin "daisyui/theme" {
+  name: "light";
+  default: true;
+  prefersdark: true;
+
+  --color-primary: oklch(93.09% 0.1932 105.13);
+  --color-secondary: oklch(25.16% 0.0019 106.53);
+  --color-tertiary: oklch(88.53% 0 0);
+}
+
+@font-face {
+  font-family: "Poppins";
+  src: url("./assets/fonts/Poppins/Poppins-Regular.ttf");
+}
+
+@font-face {
+  font-family: "Poppins Italic";
+  src: url("./assets/fonts/Poppins/Poppins-Italic.ttf");
+}
+
+@font-face {
+  font-family: "Poppins Bold";
+  src: url("./assets/fonts/Poppins/Poppins-Bold.ttf");
+}
+
+@font-face {
+  font-family: "Poppins Black";
+  src: url("./assets/fonts/Poppins/Poppins-Black.ttf");
+}
+
+@font-face {
+  font-family: "Poppins Black Italic";
+  src: url("./assets/fonts/Poppins/Poppins-BlackItalic.ttf");
+}
+
+@font-face {
+  font-family: "Poppins Bold Italic";
+  src: url("./assets/fonts/Poppins/Poppins-BoldItalic.ttf");
+}
+
+@font-face {
+  font-family: "Poppins Extra Bold";
+  src: url("./assets/fonts/Poppins/Poppins-ExtraBold.ttf");
+}
+
+@font-face {
+  font-family: "Poppins Light";
+  src: url("./assets/fonts/Poppins/Poppins-Light.ttf");
+}
+
+@font-face {
+  font-family: "Poppins Extra Light";
+  src: url("./assets/fonts/Poppins/Poppins-ExtraLight.ttf");
+}
+
+@font-face {
+  font-family: "Poppins Semi Bold";
+  src: url("./assets/fonts/Poppins/Poppins-SemiBold.ttf");
+}
+
+@font-face {
+  font-family: "Poppins Medium";
+  src: url("./assets/fonts/Poppins/Poppins-Medium.ttf");
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("./assets/fonts/Inter/Inter-Italic-VariableFont_opsz\,wght.ttf");
+}
+
+@theme {
+  --font-poppins: "Poppins", "sans-serif";
+  --font-inter: "Inter", "sans-serif";
+  --font-poppins-bold: "Poppins Bold", "sans-serif";
+  --font-poppins-semi-bold: "Poppins Semi Bold", "sans-serif";
+  --font-poppins-extra-bold: "Poppins Extra Bold", "sans-serif";
+  --font-poppins-medium: "Poppins Medium", "sans-serif";
+  --font-poppins-light: "Poppins Light", "sans-serif";
+  --font-poppins-extra-light: "Poppins Extra Light", "sans-serif";
+  --font-poppins-italic: "Poppins Italic", "sans-serif";
+  --font-poppins-black: "Poppins Black", "sans-serif";
+  --color-custom-gray: oklch(88.53% 0 0 / 30.2%);
+  --color-light-red: oklch(60.3% 0.166 35);
+}
+
+@layer base {
+  body {
+    @apply font-poppins;
+    @apply bg-white;
+  }
+
+  h1 {
+    @apply text-5xl;
+    @apply font-poppins-bold;
+  }
+
+  h2 {
+    @apply text-xl;
+    @apply font-poppins-medium;
+  }
+
+  h3 {
+    @apply text-lg;
+    @apply font-poppins-medium;
+  }
+
+  @media (min-width: 768px) {
+    h1 {
+      @apply text-6xl;
+    }
+    h2 {
+      @apply text-5xl;
+    }
+    body {
+      @apply text-sm;
+    }
+  }
+}
+
+:root {
+  font-synthesis-weight: none;
+}
+
+.hide {
+  opacity: 0;
+  z-index: -1;
+}
+
+.hide .loading {
+  opacity: 0;
+  z-index: -1;
+}
+
+.custom-input {
+  cursor: text;
+  border: none;
+  position: relative;
+  display: inline-flex;
+  flex-shrink: 1;
+  appearance: none;
+  align-items: center;
+  gap: calc(0.25rem /* 4px */ * 2) /* 0.5rem = 8px */;
+  background-color: #ebebeb /* var(--color-base-100) */;
+  padding-inline: calc(0.25rem /* 4px */ * 3) /* 0.75rem = 12px */;
+  vertical-align: middle;
+  white-space: nowrap;
+  width: clamp(3rem /* 48px */, 20rem /* 320px */, 100%);
+  height: var(--size);
+  font-size: 0.875rem /* 14px */;
+  border-start-start-radius: var(
+    --join-ss,
+    var(--radius-field) /* var(--radius-field) */
+  );
+  border-start-end-radius: var(
+    --join-se,
+    var(--radius-field) /* var(--radius-field) */
+  );
+  border-end-start-radius: var(
+    --join-es,
+    var(--radius-field) /* var(--radius-field) */
+  );
+  border-end-end-radius: var(
+    --join-ee,
+    var(--radius-field) /* var(--radius-field) */
+  );
+  border-color: var(--input-color);
+  border-color: var(--input-color);
+  box-shadow: none;
+  :where(input) {
+    display: inline-flex;
+    height: 100%;
+    width: 100%;
+    appearance: none;
+    background-color: transparent;
+    border: none;
+    &:focus,
+    &:focus-within {
+      --tw-outline-style: none;
+      outline-style: none;
+      @media (forced-colors: active) {
+        outline: 2px solid transparent;
+        outline-offset: 2px;
+      }
+    }
+  }
+  &:focus,
+  &:focus-within {
+    --input-color: var(--color-base-content) /* var(--color-base-content) */;
+    box-shadow: none;
+    outline: none;
+    outline-offset: 2px;
+    isolation: isolate;
+  }
+  &:has(> input[disabled]),
+  &:is(:disabled, [disabled]) {
+    border-width: 0 !important;
+    background-color: #ebebeb !important;
+    color: inherit !important;
+    &::placeholder {
+      color: inherit !important;
+    }
+    box-shadow: none !important;
+  }
+  &:has(> input[disabled]) > input[disabled] {
+    cursor: not-allowed;
+  }
+  &::-webkit-date-and-time-value {
+    text-align: inherit;
+  }
+  &[type="number"] {
+    &::-webkit-inner-spin-button {
+      margin-block: calc(0.25rem /* 4px */ * -3) /* -0.75rem = -12px */;
+      margin-inline-end: calc(0.25rem /* 4px */ * -3) /* -0.75rem = -12px */;
+    }
+  }
+  &::-webkit-calendar-picker-indicator {
+    position: absolute;
+    inset-inline-end: 0.75em;
+  }
+}
