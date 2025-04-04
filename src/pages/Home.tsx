@@ -211,8 +211,7 @@ const Home = () => {
         {factChecks && factChecks.docs ? (
           <div className="grid grid-flow-row grid-cols-1 gap-3 md:gap-8 md:grid-cols-2">
             {factChecks.docs.map((post) => (
-              <Link
-                to={`${routes.Posts.absolute}/${post.id}`}
+              <div
                 key={post.id}
                 className="flex flex-col gap-5 md:gap-0 md:flex-row"
               >
@@ -230,21 +229,27 @@ const Home = () => {
                     />
                   )}
                 <div className="flex flex-col gap-3 p-5 bg-[#F4F4F4] w-full md:w-1/2 md:p-8 md:gap-6">
-                  <div className="flex gap-5 items-center">
-                    {["FactCheck", "News"].map((tag, index) => (
-                      <div
-                        key={index}
+                  <div className="flex gap-5 items-center flex-wrap">
+                    {post.tags.map((tag) => (
+                      <Link
+                        to={`${routes.Posts.absolute}?tag=${tag.title}`}
+                        key={tag.id}
                         className="px-3 py-2 bg-primary rounded-2xl md:rounded-3xl md:px-4 md:py-1"
                       >
-                        {tag}
-                      </div>
+                        {tag.title}
+                      </Link>
                     ))}
                   </div>
-                  <h3>{post.title}</h3>
+                  <Link
+                    to={`${routes.Posts.absolute}/${post.id}`}
+                    className="text-lg font-poppins-medium"
+                  >
+                    {post.title}
+                  </Link>
                   <small className="text-[#0B121580]">8 min read</small>
                   <RichTextReader data={post.excerpt} />
                 </div>
-              </Link>
+              </div>
             ))}
           </div>
         ) : (

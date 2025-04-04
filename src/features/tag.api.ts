@@ -27,8 +27,6 @@ const tagApi = apiWithTagTags.injectEndpoints({
           { where: params.where, select: params.select },
           { addQueryPrefix: true }
         );
-        delete params.where;
-        delete params.select;
         return {
           url: `tags${filters}`,
           method: "GET",

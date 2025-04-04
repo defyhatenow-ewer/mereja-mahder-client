@@ -52,6 +52,15 @@ const Reports = () => {
     setPage(1);
   };
 
+  const closeCategoryDropdown = (id: string) => {
+    setCategory(id);
+    setOpen(false);
+    const DropDown = document.getElementById("category-menu");
+    if (DropDown) {
+      DropDown.removeAttribute("open");
+    }
+  };
+
   if (isLoading) return <Loader />;
 
   return (
@@ -69,7 +78,7 @@ const Reports = () => {
           }}
         />
         <details
-          id="language-menu"
+          id="category-menu"
           className="dropdown dropdown-end bg-[#EBEBEB] text-sm w-full p-2 rounded-2xl md:rounded-4xl md:py-3 md:px-5 md:max-w-[10rem]"
           onToggle={(e) => {
             if (e.currentTarget.open) {
@@ -78,6 +87,7 @@ const Reports = () => {
               setOpen(false);
             }
           }}
+          open={open}
         >
           <summary className="list-none text-white h-full align-middle cursor-pointer">
             <div className="h-full flex justify-between items-center text-black rounded-md">
@@ -92,13 +102,13 @@ const Reports = () => {
           <ul className="p-3 gap-2 shadow menu dropdown-content z-[1] rounded-sm w-32 text-sm">
             <li
               className="cursor-pointer p-1 hover:bg-primary"
-              onClick={() => setCategory("category 1")}
+              onClick={() => closeCategoryDropdown("cat 1")}
             >
               Category 1
             </li>
             <li
               className="cursor-pointer p-1 hover:bg-primary"
-              onClick={() => setCategory("category 1")}
+              onClick={() => closeCategoryDropdown("cat 2")}
             >
               Category 2
             </li>

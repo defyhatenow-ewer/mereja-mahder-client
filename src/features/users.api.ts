@@ -32,8 +32,6 @@ const userApi = apiWithUserTags.injectEndpoints({
           { where: params.where, select: params.select },
           { addQueryPrefix: true }
         );
-        delete params.where;
-        delete params.select;
         return {
           url: `users${filters}`,
           method: "GET",

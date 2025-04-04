@@ -63,3 +63,11 @@ export const pickIdUsingTitle = (value: string, arr?: DocWithTitle[]) => {
   }
   return undefined;
 };
+
+export const pickTitleUsingID = (id: string, arr?: DocWithTitle[]) => {
+  const obj = (arr ?? []).find((obj) => obj.id === id);
+  if (obj) {
+    return obj["title"];
+  }
+  return undefined;
+};
