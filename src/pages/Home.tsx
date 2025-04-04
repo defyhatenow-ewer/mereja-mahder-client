@@ -13,26 +13,69 @@ import { useGetPostsQuery } from "../features/posts.api";
 import { Loader, RichTextReader } from "../components";
 import { config } from "../config";
 import { formatDateTime } from "../utils";
+import { createFilter, createSelect, pickIdUsingTitle } from "../utils/filters";
+import { useGetCategoriesQuery } from "../features/categories.api";
 
 const Home = () => {
-  const { data, isLoading } = useGetPostsQuery({
-    limit: 3,
-  });
-  const { data: reports } = useGetPostsQuery({
-    where: {
-      categories: {
-        title: "report",
-      },
-    },
+  const { data: categories, isLoading } = useGetCategoriesQuery({
+    select: createSelect(["id", "title"]),
   });
 
+  const reportId = pickIdUsingTitle("report", categories?.docs);
+  const factCheckId = pickIdUsingTitle("fact check", categories?.docs);
+  const radioShowId = pickIdUsingTitle("radio show", categories?.docs);
+  const { data: reports } = useGetPostsQuery(
+    {
+      where: createFilter(
+        {
+          label: "categories",
+          value: reportId,
+        },
+        "contains"
+      ),
+      limit: 3,
+    },
+    {
+      skip: !reportId,
+    }
+  );
+  const { data: factChecks } = useGetPostsQuery(
+    {
+      where: createFilter(
+        {
+          label: "categories",
+          value: factCheckId,
+        },
+        "contains"
+      ),
+      limit: 4,
+    },
+    {
+      skip: !factCheckId,
+    }
+  );
+  const { data: radioShows } = useGetPostsQuery(
+    {
+      where: createFilter(
+        {
+          label: "categories",
+          value: radioShowId,
+        },
+        "contains"
+      ),
+      limit: 3,
+    },
+    {
+      skip: !radioShowId,
+    }
+  );
+
   if (isLoading) return <Loader />;
-  console.log({ data, reports });
   return (
     <div className="flex flex-col bg-white gap-5 md:gap-16">
-      <section className="flex flex-col mx-5 gap-5 md:gap-0 md:h-[460px] md:mx-12 md:flex-row xl:h-[500px]">
+      <section className="flex flex-col mx-5 gap-5 md:gap-0 md:h-[560px] md:mx-12 md:flex-row xl:h-[600px] 2xl:h-[760px]">
         <div className="flex flex-col w-full gap-0 md:w-1/2 md:gap-0">
-          <div className="flex flex-col flex-grow gap-5 justify-between bg-primary p-5 rounded-t-2xl rounded-b-2xl md:gap-0 md:rounded-t-4xl md:rounded-br-none md:rounded-bl-4xl md:p-12">
+          <div className="flex flex-col flex-grow gap-5 justify-between bg-primary p-5 rounded-t-2xl rounded-b-2xl md:gap-0 md:rounded-t-4xl md:rounded-br-none md:rounded-bl-4xl md:p-12 lg:p-24">
             <img src={amharicTextBlack} className="max-w-36" />
             <h1>Mereja Mahder</h1>
             <p>
@@ -57,7 +100,7 @@ const Home = () => {
           </div>
         </div>
         <div className="flex flex-col gap-0 w-full bg-primary md:w-1/2">
-          <div className="w-full h-1/2 pl-2 pb-2 bg-white md:rounded-bl-4xl md:pb-4 md:pl-4">
+          <div className="w-full h-3/4 pl-2 pb-2 bg-white md:rounded-bl-4xl md:pb-4 md:pl-4">
             <img
               src={affGroupPhoto}
               className="rounded-2xl object-cover object-left-top h-full w-full md:rounded-4xl"
@@ -81,9 +124,9 @@ const Home = () => {
             <div className="h-full w-full bg-custom-gray md:rounded-tl-4xl"></div>
           </div>
         </div>
-        {data && data.docs ? (
+        {reports && reports.docs ? (
           <div className="grid grid-flow-row grid-cols-1 gap-3 px-5 md:gap-8 md:px-12 md:grid-cols-3">
-            {data.docs.map((post) => (
+            {reports.docs.map((post) => (
               <Link
                 to={`${routes.Posts.absolute}/${post.id}`}
                 key={post.id}
@@ -92,14 +135,14 @@ const Home = () => {
                 {typeof post.featuredImage === "string" && (
                   <img
                     src={`${config.env.apiKey}${post.featuredImage}`}
-                    className="rounded-2xl md:rounded-3xl"
+                    className="rounded-2xl md:rounded-3xl object-cover object-center h-full md:h-96"
                   />
                 )}
                 {post.featuredImage &&
                   typeof post.featuredImage !== "string" && (
                     <img
                       src={`${config.env.apiKey}${post.featuredImage.url}`}
-                      className="rounded-2xl md:rounded-3xl"
+                      className="rounded-2xl md:rounded-3xl object-cover object-center h-full md:h-96"
                     />
                   )}
                 <div className="flex flex-col gap-2">
@@ -165,9 +208,9 @@ const Home = () => {
       </section>
       <section className="flex flex-col gap-5 p-5 pt-0 md:gap-12 md:pt-0 md:p-12">
         <h2>Recent fact-checks</h2>
-        {data && data.docs ? (
+        {factChecks && factChecks.docs ? (
           <div className="grid grid-flow-row grid-cols-1 gap-3 md:gap-8 md:grid-cols-2">
-            {data.docs.map((post) => (
+            {factChecks.docs.map((post) => (
               <Link
                 to={`${routes.Posts.absolute}/${post.id}`}
                 key={post.id}
@@ -176,14 +219,14 @@ const Home = () => {
                 {typeof post.featuredImage === "string" && (
                   <img
                     src={`${config.env.apiKey}${post.featuredImage}`}
-                    className="w-full md:w-1/2"
+                    className="w-full  object-cover object-center md:w-1/2"
                   />
                 )}
                 {post.featuredImage &&
                   typeof post.featuredImage !== "string" && (
                     <img
                       src={`${config.env.apiKey}${post.featuredImage.url}`}
-                      className="w-full md:w-1/2"
+                      className="w-full  object-cover object-center md:w-1/2"
                     />
                   )}
                 <div className="flex flex-col gap-3 p-5 bg-[#F4F4F4] w-full md:w-1/2 md:p-8 md:gap-6">
@@ -242,31 +285,33 @@ const Home = () => {
       </section>
       <section className="flex flex-col gap-5 p-5 pt-0 md:pt-0 md:gap-12 md:p-12">
         <h2>Media Productions</h2>
-        {data && data.docs ? (
+        {radioShows && radioShows.docs ? (
           <div className="grid grid-flow-row grid-cols-1 gap-3 md:gap-8 md:grid-cols-3">
-            {data.docs.map((post) => (
+            {radioShows.docs.map((post) => (
               <Link
                 to={`${routes.Posts.absolute}/${post.id}`}
                 key={post.id}
-                className="flex flex-col gap-3 md:gap-5"
+                className="flex flex-col justify-between gap-3 md:gap-5"
               >
                 {typeof post.featuredImage === "string" && (
                   <img
                     src={`${config.env.apiKey}${post.featuredImage}`}
-                    className="w-full"
+                    className="w-full object-cover object-center h-full md:h-64"
                   />
                 )}
                 {post.featuredImage &&
                   typeof post.featuredImage !== "string" && (
                     <img
                       src={`${config.env.apiKey}${post.featuredImage.url}`}
-                      className="w-full"
+                      className="w-full object-cover object-center h-full md:h-64"
                     />
                   )}
-                <small className="text-[#0B121580]">
-                  {formatDateTime(post.createdAt)}
-                </small>
-                <h3>{post.title}</h3>
+                <div className="flex flex-col gap-3 md:gap-5">
+                  <small className="text-[#0B121580]">
+                    {formatDateTime(post.createdAt)}
+                  </small>
+                  <h3>{post.title}</h3>
+                </div>
               </Link>
             ))}
           </div>

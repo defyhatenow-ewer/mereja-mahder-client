@@ -6,6 +6,7 @@ import { Bell, ChevronDown, ChevronUp } from "../../components/Icons";
 import { useEffect, useState } from "react";
 import { useMeQuery } from "../../features/auth.api";
 import { avatarPlaceholder } from "../../assets/images";
+import { config } from "../../config";
 
 const links = [
   new CustomLink(
@@ -65,6 +66,8 @@ const Navbar = () => {
       });
     }
   });
+
+  console.log(data);
   return (
     <div className="flex flex-row justify-between items-center w-full pb-5 md:pb-0">
       <label className="input rounded-2xl md:!w-112">
@@ -129,17 +132,26 @@ const Navbar = () => {
         </ul>
       </details>
       {data && (
-        <div className="flex gap-3 items-center md:gap-5">
+        <a
+          href={routes.Settings.absolute}
+          className="flex gap-3 items-center md:gap-5"
+        >
           <div className="avatar">
             <div className="w-12 rounded-full">
-              <img src={data.user.avatar ?? avatarPlaceholder} />
+              <img
+                src={
+                  data.user.avatar
+                    ? `${config.env.apiKey}${data.user.avatar.thumbnailURL}`
+                    : avatarPlaceholder
+                }
+              />
             </div>
           </div>
           <div className="flex flex-col gap-1 text-sm">
             <span>{data.user.name}</span>
             <span className="capitalize">{data.user.role}</span>
           </div>
-        </div>
+        </a>
       )}
       <div className="hidden md:block">
         <LogoutButton />

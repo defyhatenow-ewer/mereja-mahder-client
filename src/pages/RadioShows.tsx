@@ -5,8 +5,9 @@ import { ChevronUp, ChevronDown, Refresh } from "../components/Icons";
 import { Link } from "react-router-dom";
 import { config } from "../config";
 import { routes } from "../routing";
-import { createFilter } from "../utils/filters";
+import { createFilter, createSelect, pickIdUsingTitle } from "../utils/filters";
 import { formatDateTime } from "../utils";
+import { useGetCategoriesQuery } from "../features/categories.api";
 
 const RadioShows = () => {
   const [search, setSearch] = useState("");
@@ -14,14 +15,36 @@ const RadioShows = () => {
   const [category, setCategory] = useState("");
   const [page, setPage] = useState(1);
 
-  const { data, isLoading } = useGetPostsQuery({
-    where: createFilter({ label: "title", value: search }, "like"),
-    limit: 6,
-    page,
+  const { data: categories, isLoading } = useGetCategoriesQuery({
+    select: createSelect(["id", "title"]),
   });
+  const radioShowId = pickIdUsingTitle("radio show", categories?.docs);
+
+  const { data } = useGetPostsQuery(
+    {
+      where: {
+        and: [
+          createFilter(
+            {
+              label: "categories",
+              value: radioShowId,
+            },
+            "contains"
+          ),
+          createFilter({ label: "title", value: search }, "like"),
+        ],
+      },
+      limit: 6,
+      page,
+    },
+    {
+      skip: !radioShowId,
+    }
+  );
 
   const clearSearch = () => {
     setSearch("");
+    setPage(1);
   };
 
   if (isLoading) return <Loader />;
@@ -40,7 +63,10 @@ const RadioShows = () => {
           placeholder="Search..."
           value={search}
           className="input border-0 w-full bg-[#EBEBEB] p-3 rounded-2xl md:rounded-4xl md:p-6"
-          onChange={(e) => setSearch(e.target.value)}
+          onChange={(e) => {
+            setSearch(e.target.value);
+            setPage(1);
+          }}
         />
         <details
           id="language-menu"
@@ -97,25 +123,27 @@ const RadioShows = () => {
                 <Link
                   to={`${routes.Posts.absolute}/${post.id}`}
                   key={post.id}
-                  className="flex flex-col gap-3 md:gap-5"
+                  className="flex flex-col justify-between gap-3 md:gap-5"
                 >
                   {typeof post.featuredImage === "string" && (
                     <img
                       src={`${config.env.apiKey}${post.featuredImage}`}
-                      className="w-full"
+                      className="w-full h-full object-cover object-center md:h-64"
                     />
                   )}
                   {post.featuredImage &&
                     typeof post.featuredImage !== "string" && (
                       <img
                         src={`${config.env.apiKey}${post.featuredImage.url}`}
-                        className="w-full"
+                        className="w-full object-cover object-center h-full md:h-64"
                       />
                     )}
-                  <small className="text-[#0B121580]">
-                    {formatDateTime(post.createdAt)}
-                  </small>
-                  <h3>{post.title}</h3>
+                  <div className="flex flex-col gap-3 md:gap-5">
+                    <small className="text-[#0B121580]">
+                      {formatDateTime(post.createdAt)}
+                    </small>
+                    <h3>{post.title}</h3>
+                  </div>
                 </Link>
               ))}
             </div>
@@ -126,7 +154,7 @@ const RadioShows = () => {
             />
           </div>
         ) : (
-          <p>No reports found</p>
+          <p>No radio shows found</p>
         )}
       </section>
     </div>

@@ -10,7 +10,8 @@ import {
 import { Link } from "react-router-dom";
 import { config } from "../config";
 import { routes } from "../routing";
-import { createFilter } from "../utils/filters";
+import { createFilter, createSelect, pickIdUsingTitle } from "../utils/filters";
+import { useGetCategoriesQuery } from "../features/categories.api";
 
 const Resources = () => {
   const [search, setSearch] = useState("");
@@ -18,14 +19,36 @@ const Resources = () => {
   const [category, setCategory] = useState("");
   const [page, setPage] = useState(1);
 
-  const { data, isLoading } = useGetPostsQuery({
-    where: createFilter({ label: "title", value: search }, "like"),
-    limit: 6,
-    page,
+  const { data: categories, isLoading } = useGetCategoriesQuery({
+    select: createSelect(["id", "title"]),
   });
+  const resourcesId = pickIdUsingTitle("resources", categories?.docs);
+
+  const { data } = useGetPostsQuery(
+    {
+      where: {
+        and: [
+          createFilter(
+            {
+              label: "categories",
+              value: resourcesId,
+            },
+            "contains"
+          ),
+          createFilter({ label: "title", value: search }, "like"),
+        ],
+      },
+      limit: 6,
+      page,
+    },
+    {
+      skip: !resourcesId,
+    }
+  );
 
   const clearSearch = () => {
     setSearch("");
+    setPage(1);
   };
 
   if (isLoading) return <Loader />;
@@ -44,7 +67,10 @@ const Resources = () => {
           placeholder="Search..."
           value={search}
           className="input border-0 w-full bg-[#EBEBEB] p-3 rounded-2xl md:rounded-4xl md:p-6"
-          onChange={(e) => setSearch(e.target.value)}
+          onChange={(e) => {
+            setSearch(e.target.value);
+            setPage(1);
+          }}
         />
         <details
           id="language-menu"
@@ -106,14 +132,14 @@ const Resources = () => {
                   {typeof post.featuredImage === "string" && (
                     <img
                       src={`${config.env.apiKey}${post.featuredImage}`}
-                      className="rounded-md"
+                      className="rounded-md object-cover object-center"
                     />
                   )}
                   {post.featuredImage &&
                     typeof post.featuredImage !== "string" && (
                       <img
                         src={`${config.env.apiKey}${post.featuredImage.url}`}
-                        className="rounded-md"
+                        className="rounded-md object-cover object-center"
                       />
                     )}
                   <div className="flex flex-col gap-2 p-5 md:p-8">
@@ -149,7 +175,7 @@ const Resources = () => {
             />
           </div>
         ) : (
-          <p>No reports found</p>
+          <p>No resources found</p>
         )}
       </section>
     </div>

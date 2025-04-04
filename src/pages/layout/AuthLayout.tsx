@@ -41,7 +41,7 @@ const AuthLayout = () => {
 
         <div className="hidden flex-col relative justify-center items-center w-full h-full md:flex md:w-1/2">
           <div className="absolute top-0 right-0 bg-primary h-40 rounded-bl-4xl w-1/8"></div>
-          <div className="flex bg-primary mt-24 h-[calc(100%-160px)] w-full">
+          <div className="flex bg-primary mt-12 h-[calc(100%-112px)] w-full">
             <div className="flex flex-col justify-center items-center gap-5 bg-white h-full w-full rounded-bl-4xl md:gap-8">
               <Link
                 to={routes.Home.absolute}
@@ -59,9 +59,16 @@ const AuthLayout = () => {
         </div>
 
         {/* Mobile */}
-        <div className="flex flex-col justify-center items-center gap-5 p-5 bg-white h-screen md:hidden">
-          <img src={logo} className="w-1/2" />
-          <Outlet />
+        <div className="flex flex-col justify-between items-center gap-5 p-3 bg-white h-screen w-screen md:hidden">
+          <div className="flex flex-col h-full justify-center items-center p-6 gap-5 bg-primary rounded-3xl">
+            <div className="flex flex-col justify-center items-center gap-8 bg-[url('/src/assets/images/white_stripe.png')] bg-no-repeat bg-center bg-[length:auto_100%]">
+              <h1 className="text-center">{setPageTitle()}</h1>
+              <img src={logo} className="w-1/2" />
+            </div>
+            <div className="bg-white rounded-3xl p-5">
+              <Outlet />
+            </div>
+          </div>
         </div>
       </main>
     </>

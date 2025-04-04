@@ -20,7 +20,7 @@ const FrontNavbar = () => {
   const { data } = useMeQuery();
 
   return (
-    <nav className="bg-white w-full flex justify-between items-center gap-5 p-5 md:p-12">
+    <nav className="bg-white w-full flex justify-between items-center gap-5 p-5 md:p-8 md:px-12 2xl:p-12">
       <Link to={routes.Home.absolute}>
         <img className="w-1/2 md:w-auto md:max-h-12" src={logo} alt="logo" />
       </Link>

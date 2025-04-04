@@ -10,7 +10,8 @@ import {
 import { Link } from "react-router-dom";
 import { config } from "../config";
 import { routes } from "../routing";
-import { createFilter } from "../utils/filters";
+import { createFilter, createSelect, pickIdUsingTitle } from "../utils/filters";
+import { useGetCategoriesQuery } from "../features/categories.api";
 
 const Reports = () => {
   const [search, setSearch] = useState("");
@@ -18,14 +19,37 @@ const Reports = () => {
   const [category, setCategory] = useState("");
   const [page, setPage] = useState(1);
 
-  const { data, isLoading } = useGetPostsQuery({
-    where: createFilter({ label: "title", value: search }, "like"),
-    limit: 6,
-    page,
+  const { data: categories, isLoading } = useGetCategoriesQuery({
+    select: createSelect(["id", "title"]),
   });
+
+  const reportId = pickIdUsingTitle("report", categories?.docs);
+
+  const { data } = useGetPostsQuery(
+    {
+      where: {
+        and: [
+          createFilter(
+            {
+              label: "categories",
+              value: reportId,
+            },
+            "contains"
+          ),
+          createFilter({ label: "title", value: search }, "like"),
+        ],
+      },
+      limit: 6,
+      page,
+    },
+    {
+      skip: !reportId,
+    }
+  );
 
   const clearSearch = () => {
     setSearch("");
+    setPage(1);
   };
 
   if (isLoading) return <Loader />;
@@ -39,7 +63,10 @@ const Reports = () => {
           placeholder="Search..."
           value={search}
           className="input border-0 w-full bg-[#EBEBEB] p-3 rounded-2xl md:rounded-4xl md:p-6"
-          onChange={(e) => setSearch(e.target.value)}
+          onChange={(e) => {
+            setSearch(e.target.value);
+            setPage(1);
+          }}
         />
         <details
           id="language-menu"
@@ -101,14 +128,14 @@ const Reports = () => {
                   {typeof post.featuredImage === "string" && (
                     <img
                       src={`${config.env.apiKey}${post.featuredImage}`}
-                      className="rounded-2xl md:rounded-3xl"
+                      className="rounded-2xl object-cover object-center h-full md:h-96 md:rounded-3xl"
                     />
                   )}
                   {post.featuredImage &&
                     typeof post.featuredImage !== "string" && (
                       <img
                         src={`${config.env.apiKey}${post.featuredImage.url}`}
-                        className="rounded-2xl md:rounded-3xl"
+                        className="rounded-2xl object-cover object-center md:rounded-3xl"
                       />
                     )}
                   <div className="flex flex-col gap-2">

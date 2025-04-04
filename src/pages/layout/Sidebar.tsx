@@ -5,7 +5,6 @@ import {
   ArchiveBox,
   ArrowLeftRectangle,
   Chart,
-  Cog,
   DocumentCheck,
   FolderOpen,
   HomeIcon,
@@ -155,12 +154,12 @@ const Sidebar = () => {
                 title={
                   data.user.role === "admin"
                     ? navLink.title
-                    : navLink.alt ?? navLink.title
+                    : (navLink.alt ?? navLink.title)
                 }
                 icon={
                   data.user.role !== "admin"
                     ? navLink.icon
-                    : navLink.altIcon ?? navLink.icon
+                    : (navLink.altIcon ?? navLink.icon)
                 }
                 route={navLink.route}
               />
@@ -173,13 +172,13 @@ const Sidebar = () => {
         <h2 className="text-base font-poppins">FORUMS</h2>
       </div>
       <div className="flex flex-col gap-2">
-        <Link
+        {/* <Link
           to={routes.Settings.absolute}
           className={`bg-white hover:bg-primary text-secondary flex gap-3 py-1 pe-3 items-center w-full`}
         >
           <Cog />
           <span>Settings</span>
-        </Link>
+        </Link> */}
         <button
           onClick={logout}
           className={`bg-white cursor-pointer hover:bg-primary text-secondary flex gap-3 py-1 pe-3 items-center w-full`}

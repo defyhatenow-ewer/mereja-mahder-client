@@ -1,6 +1,7 @@
 import { z } from "zod";
 import IQueryFilter from "./IQueryFilter";
 import { ISpace } from "./space.types";
+import { IMedia } from "./media.types";
 
 export const UserSchema = z.object({
   id: z.string(),
@@ -16,7 +17,10 @@ export const UserSchema = z.object({
   loginAttempts: z.number().min(0).optional(),
 });
 
-export type IUser = z.infer<typeof UserSchema> & { space?: ISpace };
+export type IUser = z.infer<typeof UserSchema> & {
+  space?: ISpace;
+  avatar?: IMedia;
+};
 
 // export interface IUser extends IDoc {
 //   id: string;

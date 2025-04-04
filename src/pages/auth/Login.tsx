@@ -108,7 +108,7 @@ const Login = () => {
               </span>
             </label>
           </div>
-          <div className="flex justify-between items-center">
+          <div className="flex flex-wrap justify-between items-center">
             <label className="label cursor-pointer">
               <input
                 type="checkbox"

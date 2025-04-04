@@ -108,23 +108,26 @@ const Register = () => {
               required
             />
           </div>
-
-          <div className="flex justify-between items-center">
-            {data.docs.map((space) => (
-              <label key={space.id} className="label cursor-pointer">
-                <input
-                  type="radio"
-                  className="radio radio-xs radio-secondary mr-2"
-                  name="spaces"
-                  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-                  onChange={(_e) => setSpace(space.id)}
-                />
-                <span className="label-text text-black text-sm">
-                  {getSpaceName(space.title)}
-                </span>
-              </label>
-            ))}
+          <div className="flex flex-col gap-2">
+            <p className="font-poppins-medium">Choose a space</p>
+            <div className="flex flex-wrap justify-between items-center">
+              {data.docs.map((space) => (
+                <label key={space.id} className="label cursor-pointer">
+                  <input
+                    type="radio"
+                    className="radio radio-xs radio-secondary mr-2"
+                    name="spaces"
+                    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+                    onChange={(_e) => setSpace(space.id)}
+                  />
+                  <span className="label-text text-black text-sm">
+                    {getSpaceName(space.title)}
+                  </span>
+                </label>
+              ))}
+            </div>
           </div>
+
           <div className="flex justify-between items-center">
             <label className="label cursor-pointer">
               <input
@@ -143,7 +146,7 @@ const Register = () => {
               </span>
             </label>
           </div>
-          <div className="flex justify-between items-center">
+          <div className="flex flex-wrap justify-between items-center">
             <label className="label cursor-pointer">
               <input
                 type="checkbox"

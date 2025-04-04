@@ -82,9 +82,9 @@ const About = () => {
           {focusAreas.map((area) => (
             <div
               key={area.title}
-              className="flex flex-col gap-3 justify-between md:gap-12"
+              className="flex flex-col gap-3 justify-between md:gap-12 xl:gap-16"
             >
-              <img src={area.image} />
+              <img src={area.image} className="h-full md:h-96" />
               <h3 className="text-3xl">{area.title}</h3>
             </div>
           ))}

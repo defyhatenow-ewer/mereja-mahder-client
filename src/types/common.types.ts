@@ -53,7 +53,7 @@ export type WhereField = {
   [key in Operator]?: JsonValue;
 };
 export type Where = {
-  [key: string]: Where | Where[] | WhereField | boolean | string;
+  [key: string]: Where | Where[] | WhereField | boolean;
 } & {
   and?: Where[];
   or?: Where[];

@@ -5,7 +5,8 @@ import { ChevronUp, ChevronDown, Refresh } from "../components/Icons";
 import { Link } from "react-router-dom";
 import { config } from "../config";
 import { routes } from "../routing";
-import { createFilter } from "../utils/filters";
+import { createSelect, pickIdUsingTitle } from "../utils/filters";
+import { useGetCategoriesQuery } from "../features/categories.api";
 
 const FactChecks = () => {
   const [search, setSearch] = useState("");
@@ -13,17 +14,42 @@ const FactChecks = () => {
   const [category, setCategory] = useState("");
   const [page, setPage] = useState(1);
 
-  const { data, isLoading } = useGetPostsQuery({
-    where: createFilter({ label: "title", value: search }, "like"),
-    limit: 6,
-    page,
-  });
+  const { data: categories, isLoading: isCategoriesLoading } =
+    useGetCategoriesQuery({
+      select: createSelect(["id", "title"]),
+    });
+  const factCheckId = pickIdUsingTitle("fact check", categories?.docs);
+
+  const { data, isLoading } = useGetPostsQuery(
+    {
+      where: {
+        and: [
+          {
+            categories: {
+              contains: factCheckId,
+            },
+          },
+          {
+            title: {
+              like: search,
+            },
+          },
+        ],
+      },
+      limit: 6,
+      page,
+    },
+    {
+      skip: !factCheckId,
+    }
+  );
 
   const clearSearch = () => {
     setSearch("");
+    setPage(1);
   };
 
-  if (isLoading) return <Loader />;
+  if (isLoading || isCategoriesLoading) return <Loader />;
 
   return (
     <div className="flex flex-col bg-white gap-5 p-5 pt-0 md:p-12 md:pt-0 md:gap-16">
@@ -34,7 +60,10 @@ const FactChecks = () => {
           placeholder="Search..."
           value={search}
           className="input border-0 w-full bg-[#EBEBEB] p-3 rounded-2xl md:rounded-4xl md:p-6"
-          onChange={(e) => setSearch(e.target.value)}
+          onChange={(e) => {
+            setSearch(e.target.value);
+            setPage(1);
+          }}
         />
         <details
           id="language-menu"
