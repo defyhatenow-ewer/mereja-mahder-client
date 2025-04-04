@@ -33,6 +33,7 @@ export default {
   Reports: new Path("reports"),
   Resources: new Path("resources"),
   RadioShows: new Path("radio-shows"),
+  SingleRadioShow: new Path("radio-shows/:id"),
   Auth: new Path("auth"),
   Login: new Path("login", "/auth/login"),
   Register: new Path("register", "/auth/register"),

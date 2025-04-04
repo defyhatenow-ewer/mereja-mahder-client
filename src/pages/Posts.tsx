@@ -1,15 +1,19 @@
 import { useState } from "react";
 import { Loader, Pagination } from "../components";
 import { useGetPostsQuery } from "../features/posts.api";
-import { ChevronUp, ChevronDown, Refresh } from "../components/Icons";
+import {
+  ChevronUp,
+  ChevronDown,
+  ArrowDown,
+  Refresh,
+} from "../components/Icons";
 import { Link } from "react-router-dom";
 import { config } from "../config";
 import { routes } from "../routing";
 import { createFilter, createSelect, pickIdUsingTitle } from "../utils/filters";
-import { formatDateTime } from "../utils";
 import { useGetCategoriesQuery } from "../features/categories.api";
 
-const RadioShows = () => {
+const Posts = () => {
   const [search, setSearch] = useState("");
   const [open, setOpen] = useState(false);
   const [category, setCategory] = useState("");
@@ -18,7 +22,8 @@ const RadioShows = () => {
   const { data: categories, isLoading } = useGetCategoriesQuery({
     select: createSelect(["id", "title"]),
   });
-  const radioShowId = pickIdUsingTitle("radio show", categories?.docs);
+
+  const reportId = pickIdUsingTitle("report", categories?.docs);
 
   const { data } = useGetPostsQuery(
     {
@@ -27,7 +32,7 @@ const RadioShows = () => {
           createFilter(
             {
               label: "categories",
-              value: radioShowId,
+              value: reportId,
             },
             "contains"
           ),
@@ -38,7 +43,7 @@ const RadioShows = () => {
       page,
     },
     {
-      skip: !radioShowId,
+      skip: !reportId,
     }
   );
 
@@ -51,12 +56,7 @@ const RadioShows = () => {
 
   return (
     <div className="flex flex-col bg-white gap-5 p-5 pt-0 md:p-12 md:pt-0 md:gap-16">
-      <div className="flex flex-col gap-3">
-        <h2>Media Productions</h2>
-        <h3 className="text-[#D5D5D5] text-2xl font-poppins">
-          Podcasts, Radio talk shows & TV interviews
-        </h3>
-      </div>
+      <h2>Archive</h2>
       <section className="flex flex-col gap-5 md:justify-between md:items-center md:gap-8 md:flex-row">
         <input
           type="text"
@@ -121,28 +121,31 @@ const RadioShows = () => {
             <div className="grid grid-flow-row grid-cols-1 gap-5 md:gap-8 md:grid-cols-3">
               {data.docs.map((post) => (
                 <Link
-                  to={`${routes.RadioShows.absolute}/${post.id}`}
+                  to={`${routes.Posts.absolute}/${post.id}`}
                   key={post.id}
-                  className="flex flex-col justify-between gap-3 md:gap-5"
+                  className="flex flex-col justify-between gap-3 p-5 bg-[#E4E4E4] rounded-2xl md:gap-6 md:rounded-3xl"
                 >
                   {typeof post.featuredImage === "string" && (
                     <img
                       src={`${config.env.apiKey}${post.featuredImage}`}
-                      className="w-full h-full object-cover object-center md:h-64"
+                      className="rounded-2xl object-cover object-center h-full md:h-96 md:rounded-3xl"
                     />
                   )}
                   {post.featuredImage &&
                     typeof post.featuredImage !== "string" && (
                       <img
                         src={`${config.env.apiKey}${post.featuredImage.url}`}
-                        className="w-full object-cover object-center h-full md:h-64"
+                        className="rounded-2xl object-cover object-center md:rounded-3xl"
                       />
                     )}
-                  <div className="flex flex-col gap-3 md:gap-5">
-                    <small className="text-[#0B121580]">
-                      {formatDateTime(post.createdAt)}
-                    </small>
-                    <h3>{post.title}</h3>
+                  <div className="flex flex-col gap-2">
+                    <small>PDF</small>
+                    <div className="flex justify-between items-center w-full gap-3 md:gap-6">
+                      <p>{post.title}</p>
+                      <div className="flex justify-center items-center bg-primary rounded-full min-w-12 min-h-12">
+                        <ArrowDown className="size-5" />
+                      </div>
+                    </div>
                   </div>
                 </Link>
               ))}
@@ -154,11 +157,11 @@ const RadioShows = () => {
             />
           </div>
         ) : (
-          <p>No radio shows found</p>
+          <p>No posts found</p>
         )}
       </section>
     </div>
   );
 };
 
-export default RadioShows;
+export default Posts;

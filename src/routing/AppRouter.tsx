@@ -13,6 +13,7 @@ import {
   Reports,
   Resources,
   SinglePost,
+  SingleRadioShow,
 } from "../pages";
 
 // Auth pages
@@ -31,6 +32,7 @@ import { Data, PartnerOverview, ReportList } from "../pages/partners";
 import { SafetyResources, WomenOverview } from "../pages/womenSafeSpaces";
 import ProtectedRoute from "./ProtectedRoute";
 import restrictions from "./restrictions";
+import Posts from "../pages/Posts";
 
 const AppRouter = createBrowserRouter([
   {
@@ -54,6 +56,10 @@ const AppRouter = createBrowserRouter([
             element: <Forbidden />,
           },
           {
+            path: routes.Posts.relative,
+            element: <Posts />,
+          },
+          {
             path: routes.SinglePost.relative,
             element: <SinglePost />,
           },
@@ -64,6 +70,10 @@ const AppRouter = createBrowserRouter([
           {
             path: routes.RadioShows.relative,
             element: <RadioShows />,
+          },
+          {
+            path: routes.SingleRadioShow.relative,
+            element: <SingleRadioShow />,
           },
           {
             path: routes.Reports.relative,

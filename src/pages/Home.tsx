@@ -289,7 +289,7 @@ const Home = () => {
           <div className="grid grid-flow-row grid-cols-1 gap-3 md:gap-8 md:grid-cols-3">
             {radioShows.docs.map((post) => (
               <Link
-                to={`${routes.Posts.absolute}/${post.id}`}
+                to={`${routes.RadioShows.absolute}/${post.id}`}
                 key={post.id}
                 className="flex flex-col justify-between gap-3 md:gap-5"
               >
