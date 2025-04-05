@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { Loader, RichTextReader } from "../components";
 import { useGetSinglePostQuery } from "../features/posts.api";
 import { formatDateTime } from "../utils";
@@ -8,6 +8,7 @@ import {
   TwitterButton,
 } from "../components/ShareButtons";
 import { config } from "../config";
+import { routes } from "../routing";
 
 const buttonList = [FacebookButton, LinkedInButton, TwitterButton];
 
@@ -42,14 +43,15 @@ const SinglePost = () => {
             <small className="text-[#0B121580]">
               {formatDateTime(post.createdAt)}
             </small>
-            <div className="flex gap-5 items-center">
-              {["FactCheck", "News"].map((tag, index) => (
-                <div
-                  key={index}
+            <div className="flex gap-2 items-center">
+              {post.tags.map((tag) => (
+                <Link
+                  to={`${routes.Posts.absolute}?tag=${tag.title}`}
+                  key={tag.id}
                   className="px-3 py-2 bg-primary rounded-2xl md:rounded-3xl md:px-4 md:py-1"
                 >
-                  {tag}
-                </div>
+                  {tag.title}
+                </Link>
               ))}
             </div>
           </div>

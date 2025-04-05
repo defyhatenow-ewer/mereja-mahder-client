@@ -230,7 +230,7 @@ const Home = () => {
                       />
                     )}
                   <div className="flex flex-col gap-3 p-5 bg-[#F4F4F4] w-full md:w-1/2 md:p-8 md:gap-6">
-                    <div className="flex gap-5 items-center flex-wrap">
+                    <div className="flex gap-2 items-center flex-wrap">
                       {post.tags.map((tag) => (
                         <Link
                           to={`${routes.Posts.absolute}?tag=${tag.title}`}

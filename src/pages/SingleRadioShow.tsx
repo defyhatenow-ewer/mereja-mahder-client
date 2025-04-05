@@ -73,14 +73,15 @@ const SingleRadioShow = () => {
           <small className="text-[#0B121580]">
             {formatDateTime(post.createdAt)}
           </small>
-          <div className="flex gap-5 items-center">
-            {["FactCheck", "News"].map((tag, index) => (
-              <div
-                key={index}
+          <div className="flex gap-2 items-center">
+            {post.tags.map((tag) => (
+              <Link
+                to={`${routes.Posts.absolute}?tag=${tag.title}`}
+                key={tag.id}
                 className="px-3 py-2 bg-primary rounded-2xl md:rounded-3xl md:px-4 md:py-1"
               >
-                {tag}
-              </div>
+                {tag.title}
+              </Link>
             ))}
           </div>
         </div>
