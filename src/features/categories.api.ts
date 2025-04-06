@@ -23,18 +23,11 @@ const categoryApi = apiWithCategoryTags.injectEndpoints({
     }),
     getCategories: builder.query<IQueryResults<ICategory>, IQueryFilter>({
       query: (params) => {
-        const filters = qs.stringify(
-          {
-            where: params.where,
-            select: params.select,
-          },
-          { addQueryPrefix: true }
-        );
-        console.log(filters);
+        const filters = qs.stringify(params.query, { addQueryPrefix: true });
         return {
           url: `categories${filters}`,
           method: "GET",
-          params,
+          params: params.options,
         };
       },
       providesTags: (data) =>

@@ -23,14 +23,11 @@ const tagApi = apiWithTagTags.injectEndpoints({
     }),
     getTags: builder.query<IQueryResults<ITag>, IQueryFilter>({
       query: (params) => {
-        const filters = qs.stringify(
-          { where: params.where, select: params.select },
-          { addQueryPrefix: true }
-        );
+        const filters = qs.stringify(params.query, { addQueryPrefix: true });
         return {
           url: `tags${filters}`,
           method: "GET",
-          params,
+          params: params.options,
         };
       },
       providesTags: (data) =>

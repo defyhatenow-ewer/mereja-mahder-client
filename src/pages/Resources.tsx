@@ -10,7 +10,7 @@ import {
 import { Link } from "react-router-dom";
 import { config } from "../config";
 import { routes } from "../routing";
-import { createFilter, createSelect, pickIdUsingTitle } from "../utils/filters";
+import { createSelect, pickIdUsingTitle } from "../utils/filters";
 import { useGetCategoriesQuery } from "../features/categories.api";
 
 const Resources = () => {
@@ -20,26 +20,34 @@ const Resources = () => {
   const [page, setPage] = useState(1);
 
   const { data: categories, isLoading } = useGetCategoriesQuery({
-    select: createSelect(["id", "title"]),
+    query: {
+      select: createSelect(["id", "title"]),
+    },
   });
   const resourcesId = pickIdUsingTitle("resources", categories?.docs);
 
   const { data, isLoading: isPostsLoading } = useGetPostsQuery(
     {
-      where: {
-        and: [
-          createFilter(
+      query: {
+        where: {
+          and: [
             {
-              label: "categories",
-              value: resourcesId,
+              categories: {
+                contains: resourcesId,
+              },
             },
-            "contains"
-          ),
-          createFilter({ label: "title", value: search }, "like"),
-        ],
+            {
+              title: {
+                like: search,
+              },
+            },
+          ],
+        },
       },
-      limit: 6,
-      page,
+      options: {
+        limit: 6,
+        page,
+      },
     },
     {
       skip: !resourcesId,

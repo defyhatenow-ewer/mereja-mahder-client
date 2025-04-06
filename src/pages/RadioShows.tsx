@@ -5,7 +5,7 @@ import { ChevronUp, ChevronDown, Refresh } from "../components/Icons";
 import { Link } from "react-router-dom";
 import { config } from "../config";
 import { routes } from "../routing";
-import { createFilter, createSelect, pickIdUsingTitle } from "../utils/filters";
+import { createSelect, pickIdUsingTitle } from "../utils/filters";
 import { formatDateTime } from "../utils";
 import { useGetCategoriesQuery } from "../features/categories.api";
 
@@ -16,26 +16,34 @@ const RadioShows = () => {
   const [page, setPage] = useState(1);
 
   const { data: categories, isLoading } = useGetCategoriesQuery({
-    select: createSelect(["id", "title"]),
+    query: {
+      select: createSelect(["id", "title"]),
+    },
   });
   const radioShowId = pickIdUsingTitle("radio show", categories?.docs);
 
   const { data, isLoading: isPostsLoading } = useGetPostsQuery(
     {
-      where: {
-        and: [
-          createFilter(
+      query: {
+        where: {
+          and: [
             {
-              label: "categories",
-              value: radioShowId,
+              categories: {
+                contains: radioShowId,
+              },
             },
-            "contains"
-          ),
-          createFilter({ label: "title", value: search }, "like"),
-        ],
+            {
+              title: {
+                like: search,
+              },
+            },
+          ],
+        },
       },
-      limit: 6,
-      page,
+      options: {
+        limit: 6,
+        page,
+      },
     },
     {
       skip: !radioShowId,

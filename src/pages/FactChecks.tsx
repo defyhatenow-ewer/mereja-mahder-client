@@ -16,28 +16,34 @@ const FactChecks = () => {
 
   const { data: categories, isLoading: isCategoriesLoading } =
     useGetCategoriesQuery({
-      select: createSelect(["id", "title"]),
+      query: {
+        select: createSelect(["id", "title"]),
+      },
     });
   const factCheckId = pickIdUsingTitle("fact check", categories?.docs);
 
   const { data, isLoading } = useGetPostsQuery(
     {
-      where: {
-        and: [
-          {
-            categories: {
-              contains: factCheckId,
+      query: {
+        where: {
+          and: [
+            {
+              categories: {
+                contains: factCheckId,
+              },
             },
-          },
-          {
-            title: {
-              like: search,
+            {
+              title: {
+                like: search,
+              },
             },
-          },
-        ],
+          ],
+        },
       },
-      limit: 6,
-      page,
+      options: {
+        limit: 6,
+        page,
+      },
     },
     {
       skip: !factCheckId,

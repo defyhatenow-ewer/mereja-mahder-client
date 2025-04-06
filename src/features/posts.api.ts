@@ -31,14 +31,11 @@ const postApi = apiWithPostTags.injectEndpoints({
     }),
     getPosts: builder.query<IQueryResults<IPost>, IQueryFilter>({
       query: (params) => {
-        const filters = qs.stringify(
-          { where: params.where, select: params.select },
-          { addQueryPrefix: true }
-        );
+        const filters = qs.stringify(params.query, { addQueryPrefix: true });
         return {
           url: `posts${filters}`,
           method: "GET",
-          params,
+          params: params.options,
         };
       },
       providesTags: (data) =>

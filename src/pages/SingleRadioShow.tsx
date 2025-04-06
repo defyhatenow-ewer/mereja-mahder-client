@@ -18,8 +18,10 @@ const buttonList = [FacebookButton, LinkedInButton, TwitterButton];
 const SingleRadioShow = () => {
   const { id } = useParams();
   const { data: categories } = useGetCategoriesQuery({
-    where: createFilter({ label: "title", value: "radio show" }),
-    select: createSelect(["id", "title"]),
+    query: {
+      where: createFilter({ label: "title", value: "radio show" }),
+      select: createSelect(["id", "title"]),
+    },
   });
   const radioShowId = pickIdUsingTitle("radio show", categories?.docs);
 
@@ -33,21 +35,25 @@ const SingleRadioShow = () => {
   );
   const { data: posts, isLoading: isPostsLoading } = useGetPostsQuery(
     {
-      where: {
-        and: [
-          {
-            id: {
-              not_equals: id as string,
+      query: {
+        where: {
+          and: [
+            {
+              id: {
+                not_equals: id as string,
+              },
             },
-          },
-          {
-            categories: {
-              contains: radioShowId,
+            {
+              categories: {
+                contains: radioShowId,
+              },
             },
-          },
-        ],
+          ],
+        },
       },
-      limit: 5,
+      options: {
+        limit: 5,
+      },
     },
     {
       skip: !id || !radioShowId,

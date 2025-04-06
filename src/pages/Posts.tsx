@@ -25,38 +25,46 @@ const Posts = () => {
   console.log({ tagFromParams: searchParams.get("tag") });
 
   const { data: categories, isLoading } = useGetCategoriesQuery({
-    select: createSelect(["id", "title"]),
+    query: {
+      select: createSelect(["id", "title"]),
+    },
   });
 
   const { data: tags, isLoading: isTagsLoading } = useGetTagsQuery({
-    select: createSelect(["id", "title"]),
+    query: {
+      select: createSelect(["id", "title"]),
+    },
   });
 
   const reportId = pickIdUsingTitle("report", categories?.docs);
 
   const { data, isLoading: isPostsLoading } = useGetPostsQuery(
     {
-      where: {
-        and: [
-          {
-            tags: {
-              contains: tag,
+      query: {
+        where: {
+          and: [
+            {
+              tags: {
+                contains: tag,
+              },
             },
-          },
-          {
-            categories: {
-              contains: category,
+            {
+              categories: {
+                contains: category,
+              },
             },
-          },
-          {
-            title: {
-              like: search,
+            {
+              title: {
+                like: search,
+              },
             },
-          },
-        ],
+          ],
+        },
       },
-      limit: 9,
-      page,
+      options: {
+        limit: 9,
+        page,
+      },
     },
     {
       skip: !reportId,

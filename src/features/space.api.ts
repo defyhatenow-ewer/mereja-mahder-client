@@ -23,14 +23,11 @@ const spaceApi = apiWithSpaceTags.injectEndpoints({
     }),
     getSpaces: builder.query<IQueryResults<ISpace>, IQueryFilter>({
       query: (params) => {
-        const filters = qs.stringify(
-          { where: params.where, select: params.select },
-          { addQueryPrefix: true }
-        );
+        const filters = qs.stringify(params.query, { addQueryPrefix: true });
         return {
           url: `spaces${filters}`,
           method: "GET",
-          params,
+          params: params.options,
         };
       },
       providesTags: (data) =>

@@ -13,57 +13,65 @@ import { useGetPostsQuery } from "../features/posts.api";
 import { Loader, RichTextReader } from "../components";
 import { config } from "../config";
 import { formatDateTime } from "../utils";
-import { createFilter, createSelect, pickIdUsingTitle } from "../utils/filters";
+import { createSelect, pickIdUsingTitle } from "../utils/filters";
 import { useGetCategoriesQuery } from "../features/categories.api";
 
 const Home = () => {
   const { data: categories, isLoading } = useGetCategoriesQuery({
-    select: createSelect(["id", "title"]),
+    query: {
+      select: createSelect(["id", "title"]),
+    },
   });
 
   const reportId = pickIdUsingTitle("report", categories?.docs);
   const factCheckId = pickIdUsingTitle("fact check", categories?.docs);
   const radioShowId = pickIdUsingTitle("radio show", categories?.docs);
-  const { data: reports } = useGetPostsQuery(
+  const { data: reports, isLoading: isReportsLoading } = useGetPostsQuery(
     {
-      where: createFilter(
-        {
-          label: "categories",
-          value: reportId,
+      query: {
+        where: {
+          categories: {
+            contains: reportId,
+          },
         },
-        "contains"
-      ),
-      limit: 3,
+      },
+      options: {
+        limit: 3,
+      },
     },
     {
       skip: !reportId,
     }
   );
-  const { data: factChecks } = useGetPostsQuery(
+  const { data: factChecks, isLoading: isFactChecksLoading } = useGetPostsQuery(
     {
-      where: createFilter(
-        {
-          label: "categories",
-          value: factCheckId,
+      query: {
+        where: {
+          categories: {
+            contains: factCheckId,
+          },
         },
-        "contains"
-      ),
-      limit: 4,
+      },
+      options: {
+        limit: 4,
+      },
     },
     {
       skip: !factCheckId,
     }
   );
-  const { data: radioShows } = useGetPostsQuery(
+  const { data: radioShows, isLoading: isRadioShowsLoading } = useGetPostsQuery(
     {
-      where: createFilter(
-        {
-          label: "categories",
-          value: radioShowId,
+      query: {
+        where: {
+          categories: {
+            contains: radioShowId,
+          },
         },
-        "contains"
-      ),
-      limit: 3,
+      },
+      options: {
+        limit: 3,
+      },
     },
     {
       skip: !radioShowId,
@@ -72,7 +80,14 @@ const Home = () => {
 
   return (
     <>
-      <Loader show={isLoading} />
+      <Loader
+        show={
+          isLoading ||
+          isReportsLoading ||
+          isFactChecksLoading ||
+          isRadioShowsLoading
+        }
+      />
       <div className="flex flex-col bg-white gap-5 md:gap-16">
         <section className="flex flex-col mx-5 gap-5 md:gap-0 md:h-[560px] md:mx-12 md:flex-row xl:h-[600px] 2xl:h-[760px]">
           <div className="flex flex-col w-full gap-0 md:w-1/2 md:gap-0">
