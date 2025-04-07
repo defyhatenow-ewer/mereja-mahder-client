@@ -137,23 +137,23 @@ const FactChecks = () => {
                     {typeof post.featuredImage === "string" && (
                       <img
                         src={`${config.env.apiKey}${post.featuredImage}`}
-                        className="w-full  object-cover object-center md:w-1/2"
+                        className="w-full  object-cover object-center rounded-2xl md:rounded-none md:w-1/2"
                       />
                     )}
                     {post.featuredImage &&
                       typeof post.featuredImage !== "string" && (
                         <img
                           src={`${config.env.apiKey}${post.featuredImage.url}`}
-                          className="w-full  object-cover object-center md:w-1/2"
+                          className="w-full  object-cover object-center rounded-2xl md:rounded-none md:w-1/2"
                         />
                       )}
-                    <div className="flex flex-col gap-3 p-5 bg-[#F4F4F4] w-full md:w-1/2 md:p-8 md:gap-6">
+                    <div className="flex flex-col gap-3 p-5 px-0 bg-white w-full md:bg-[#F4F4F4] md:w-1/2 md:p-8 md:gap-6">
                       <div className="flex gap-2 items-center flex-wrap">
                         {post.tags.map((tag) => (
                           <Link
                             to={`${routes.Posts.absolute}?tag=${tag.title}`}
                             key={tag.id}
-                            className="px-3 py-2 bg-primary rounded-2xl md:rounded-3xl md:px-4 md:py-1"
+                            className="px-3 py-2 bg-primary rounded-2xl text-xs md:text-sm md:rounded-3xl md:px-4 md:py-1"
                           >
                             {tag.title}
                           </Link>

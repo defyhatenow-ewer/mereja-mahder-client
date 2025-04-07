@@ -75,7 +75,7 @@ const SingleRadioShow = () => {
     <div className="flex flex-col bg-white gap-5 p-5 pt-0 md:p-12 md:pt-0 md:gap-12">
       <section className="flex flex-col gap-3 w-full md:w-4/5 md:gap-5">
         <h2>{post.title}</h2>
-        <div className="flex gap-3 items-center md:gap-5">
+        <div className="flex gap-3 items-center flex-col md:flex-row md:gap-5">
           <small className="text-[#0B121580]">
             {formatDateTime(post.createdAt)}
           </small>
@@ -84,7 +84,7 @@ const SingleRadioShow = () => {
               <Link
                 to={`${routes.Posts.absolute}?tag=${tag.title}`}
                 key={tag.id}
-                className="px-3 py-2 bg-primary rounded-2xl md:rounded-3xl md:px-4 md:py-1"
+                className="px-3 py-2 bg-primary rounded-2xl text-xs md:text-sm md:rounded-3xl md:px-4 md:py-1"
               >
                 {tag.title}
               </Link>
@@ -93,7 +93,7 @@ const SingleRadioShow = () => {
         </div>
       </section>
       <section className="flex flex-col gap-5 md:gap-12 md:flex-row">
-        <div className="flex flex-col gap-5 w-full md:w-7/10 md:gap-16">
+        <div className="flex flex-col gap-5 w-full items-center md:items-start md:w-7/10 md:gap-16">
           <RichTextReader data={post.content} />
           <div className="flex flex-col gap-2">
             <small>Share this post</small>
@@ -154,7 +154,9 @@ const SingleRadioShow = () => {
                     to={`${routes.Posts.absolute}/${doc.id}`}
                     className="flex flex-col gap-2"
                   >
-                    <h4 className="font-poppins-medium">{doc.title}</h4>
+                    <h4 className="font-poppins-medium text-left">
+                      {doc.title}
+                    </h4>
                     <small className="text-[#0B121580]">
                       {formatDateTime(doc.createdAt)}
                     </small>

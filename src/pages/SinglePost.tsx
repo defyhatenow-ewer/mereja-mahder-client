@@ -36,10 +36,10 @@ const SinglePost = () => {
 
   return (
     <div className="flex flex-col justify-center bg-white gap-5 p-5 pt-0 md:p-12 md:pt-0 md:gap-12">
-      <section className="flex flex-col self-center gap-5 w-full xl:w-4xl md:gap-12 xl:gap-16">
+      <section className="flex flex-col self-center items-center gap-5 w-full xl:w-4xl md:items-start md:gap-12 xl:gap-16">
         <div className="flex flex-col gap-3 w-full md:gap-5">
           <h2>{post.title}</h2>
-          <div className="flex gap-3 items-center md:gap-5">
+          <div className="flex gap-3 items-center flex-col md:flex-row md:gap-5">
             <small className="text-[#0B121580]">
               {formatDateTime(post.createdAt)}
             </small>
@@ -48,7 +48,7 @@ const SinglePost = () => {
                 <Link
                   to={`${routes.Posts.absolute}?tag=${tag.title}`}
                   key={tag.id}
-                  className="px-3 py-2 bg-primary rounded-2xl md:rounded-3xl md:px-4 md:py-1"
+                  className="px-3 py-2 bg-primary rounded-2xl text-xs md:text-sm md:rounded-3xl md:px-4 md:py-1"
                 >
                   {tag.title}
                 </Link>

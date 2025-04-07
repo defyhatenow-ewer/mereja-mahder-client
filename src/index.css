@@ -66,6 +66,11 @@
 }
 
 @font-face {
+  font-family: "Poppins Regular";
+  src: url("./assets/fonts/Poppins/Poppins-Regular.ttf");
+}
+
+@font-face {
   font-family: "Inter";
   src: url("./assets/fonts/Inter/Inter-Italic-VariableFont_opsz\,wght.ttf");
 }
@@ -77,6 +82,7 @@
   --font-poppins-semi-bold: "Poppins Semi Bold", "sans-serif";
   --font-poppins-extra-bold: "Poppins Extra Bold", "sans-serif";
   --font-poppins-medium: "Poppins Medium", "sans-serif";
+  --font-poppins-regular: "Poppins Regular", "sans-serif";
   --font-poppins-light: "Poppins Light", "sans-serif";
   --font-poppins-extra-light: "Poppins Extra Light", "sans-serif";
   --font-poppins-italic: "Poppins Italic", "sans-serif";
@@ -94,27 +100,67 @@
   h1 {
     @apply text-5xl;
     @apply font-poppins-bold;
+    @apply text-center;
   }
 
   h2 {
-    @apply text-xl;
+    @apply text-4xl;
     @apply font-poppins-medium;
+    @apply text-center;
   }
 
   h3 {
+    @apply text-2xl;
+    @apply font-poppins-medium;
+    @apply text-center;
+  }
+
+  h4 {
     @apply text-lg;
     @apply font-poppins-medium;
+    @apply text-center;
+  }
+
+  h5 {
+    @apply text-lg;
+    @apply font-poppins-medium;
+    @apply text-center;
+  }
+
+  h6 {
+    @apply text-base;
+    @apply font-poppins-medium;
+    @apply text-center;
   }
 
   @media (min-width: 768px) {
     h1 {
       @apply text-6xl;
+      @apply text-left;
     }
     h2 {
       @apply text-5xl;
+      @apply text-left;
+    }
+    h3 {
+      @apply text-3xl;
+      @apply text-left;
+    }
+    h4 {
+      @apply text-2xl;
+      @apply text-left;
+    }
+    h5 {
+      @apply text-xl;
+      @apply text-left;
+    }
+    h6 {
+      @apply text-lg;
+      @apply text-left;
     }
     body {
       @apply text-sm;
+      @apply font-poppins-regular;
     }
   }
 }

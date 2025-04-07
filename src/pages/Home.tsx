@@ -88,24 +88,39 @@ const Home = () => {
           isRadioShowsLoading
         }
       />
-      <div className="flex flex-col bg-white gap-5 md:gap-16">
+      <div className="flex flex-col bg-white gap-8 md:gap-16">
         <section className="flex flex-col mx-5 gap-5 md:gap-0 md:h-[560px] md:mx-12 md:flex-row xl:h-[600px] 2xl:h-[760px]">
           <div className="flex flex-col w-full gap-0 md:w-1/2 md:gap-0">
-            <div className="flex flex-col flex-grow gap-5 justify-between bg-primary p-5 rounded-t-2xl rounded-b-2xl md:gap-0 md:rounded-t-4xl md:rounded-br-none md:rounded-bl-4xl md:p-12 lg:p-24">
+            <div className="flex flex-col flex-grow gap-5 justify-between bg-primary p-8 rounded-t-2xl rounded-b-2xl md:gap-0 md:rounded-t-4xl md:rounded-br-none md:rounded-bl-4xl md:p-12 lg:p-24">
               <img src={amharicTextBlack} className="max-w-36" />
-              <h1>Mereja Mahder</h1>
+              <h1 className="text-left">Mereja Mahder</h1>
               <p>
                 An open-access information repository by #defyhatenow Ethiopia,
                 serving as a central hub for credible reports, cybersecurity and
                 safety resources, fact-checks, open datasets and informative
                 resources to discern disinformation.
               </p>
-            </div>
-            <div className="bg-primary">
-              <div className="bg-white h-full w-full pt-5 pe-0 md:rounded-tr-4xl md:pt-4 md:pe-4">
+              <div className="flex flex-col items-center md:hidden">
+                <img
+                  src={affGroupPhoto}
+                  className="rounded-4xl object-cover object-left-top w-full"
+                />
                 <Link
                   to={routes.About.relative}
-                  className="flex justify-between items-center gap-3 bg-secondary text-white cursor-pointer rounded-4xl p-3 ps-4 w-[100%-20px] md:w-[100%-48px] md:ps-6"
+                  className="flex justify-between items-center gap-3 outline-20 outline-primary bg-secondary text-white cursor-pointer rounded-4xl p-3 ps-4 w-fit"
+                >
+                  <span>Learn more</span>
+                  <div className="flex justify-center items-center rounded-full p-1 bg-primary text-secondary">
+                    <ArrowUpRight />
+                  </div>
+                </Link>
+              </div>
+            </div>
+            <div className="bg-primary hidden md:flex">
+              <div className="bg-white h-full w-full pt-5 px-12 md:rounded-tr-4xl md:pt-4 md:pe-4">
+                <Link
+                  to={routes.About.relative}
+                  className="flex justify-between items-center gap-3 bg-secondary text-white cursor-pointer rounded-4xl p-3 ps-4 w-[100%-20px] text-sm md:text-base md:w-[100%-48px] md:ps-6"
                 >
                   <span>Learn more</span>
                   <div className="flex justify-center items-center rounded-full p-1 bg-primary text-secondary">
@@ -115,7 +130,7 @@ const Home = () => {
               </div>
             </div>
           </div>
-          <div className="flex flex-col gap-0 w-full bg-primary md:w-1/2">
+          <div className="hidden flex-col gap-0 w-full bg-primary md:flex md:w-1/2">
             <div className="w-full h-3/4 pl-2 pb-2 bg-white md:rounded-bl-4xl md:pb-4 md:pl-4">
               <img
                 src={affGroupPhoto}
@@ -131,9 +146,9 @@ const Home = () => {
           </div>
         </section>
         {/* Reports */}
-        <section className="flex flex-col bg-custom-gray w-full gap-5 md:gap-12">
+        <section className="flex flex-col bg-custom-gray w-full gap-8 rounded-4xl md:rounded-none md:gap-12">
           <div className="flex w-full bg-custom-gray">
-            <div className="bg-white p-5 pt-0 w-full justify-center md:justify-start md:rounded-br-4xl md:pt-8 md:p-12 md:w-sm">
+            <div className="bg-white p-8 pt-0 w-full justify-center md:justify-start md:rounded-br-4xl md:pt-8 md:p-12 md:w-sm">
               <h2 className="text-center md:text-left">Reports</h2>
             </div>
             <div className="flex-grow bg-white hidden md:flex">
@@ -141,7 +156,7 @@ const Home = () => {
             </div>
           </div>
           {reports && reports.docs ? (
-            <div className="grid grid-flow-row grid-cols-1 gap-3 px-5 md:gap-8 md:px-12 md:grid-cols-3">
+            <div className="grid grid-flow-row grid-cols-1 gap-8 px-5 md:gap-8 md:px-12 md:grid-cols-3">
               {reports.docs.map((post) => (
                 <Link
                   to={`${routes.Posts.absolute}/${post.id}`}
@@ -180,10 +195,10 @@ const Home = () => {
             <div className="flex-grow bg-white hidden md:flex">
               <div className="h-full w-full bg-custom-gray rounded-br-4xl"></div>
             </div>
-            <div className="bg-white p-5 pb-0 w-full md:rounded-tl-4xl md:pt-5 md:px-12 md:w-sm">
+            <div className="flex justify-center bg-white p-5 pb-0 w-full md:rounded-tl-4xl md:pt-5 md:px-12 md:w-sm">
               <Link
                 to={routes.Reports.relative}
-                className="flex justify-between items-center gap-3 bg-secondary text-white cursor-pointer rounded-4xl p-3 ps-4 w-[100%-20px] md:w-[100%-48px] md:ps-6"
+                className="flex justify-between items-center gap-3 bg-secondary text-white cursor-pointer rounded-4xl p-3 ps-4 w-fit text-sm md:text-base md:w-[100%-48px] md:ps-6"
               >
                 <span>View More</span>
                 <div className="flex justify-center items-center rounded-full p-1 bg-primary text-secondary">
@@ -193,20 +208,26 @@ const Home = () => {
             </div>
           </div>
         </section>
-        <section className="flex flex-col gap-5 md:min-h-96 md:gap-0 md:flex-row">
-          <div className="flex flex-col bg-light-red w-full text-white md:rounded-tr-4xl md:w-1/2">
-            <div className="flex flex-col flex-grow justify-center gap-5 py-8 p-5 md:py-12 md:gap-12 md:p-12">
-              <h2 className="font-poppins">Field Guide</h2>
-              <p>
-                Mobilizing civic and digital action to counter online hate
-                speech and online incitement to violence in Ethiopia.
-              </p>
+        <section className="flex flex-col gap-8 md:min-h-96 md:gap-0 md:flex-row">
+          <div className="flex flex-col bg-light-red text-white m-5 md:m-0 md:w-1/2">
+            <div className="bg-white flex-grow">
+              <div className="flex flex-col flex-grow h-full bg-light-red rounded-4xl justify-center items-center gap-8 pt-8 p-8 pb-0 md:rounded-none md:rounded-tr-4xl md:items-start md:py-12 md:gap-12 md:p-12">
+                <h2 className="font-poppins">Field Guide</h2>
+                <p className="text-center md:text-left">
+                  Mobilizing civic and digital action to counter online hate
+                  speech and online incitement to violence in Ethiopia.
+                </p>
+                <img
+                  src={fieldGuides}
+                  className="w-9/10 inline z-1 -mb-10 md:hidden"
+                />
+              </div>
             </div>
 
-            <div className="bg-white px-5 pt-5 w-full md:rounded-tr-4xl md:pt-8 md:px-12">
+            <div className="bg-white px-5 pt-16 w-full md:rounded-tr-4xl md:pt-8 md:px-12">
               <Link
                 to={routes.Resources.relative}
-                className="flex justify-between items-center gap-3 bg-secondary text-white cursor-pointer rounded-4xl p-3 ps-4 w-[100%-20px] md:w-[100%-48px] md:ps-6"
+                className="flex justify-between items-center gap-3 bg-secondary text-white cursor-pointer rounded-4xl p-3 ps-4 w-[100%-20px] text-sm md:text-base md:w-[100%-48px] md:ps-6"
               >
                 <span>View SM HS mitigation Field Guide</span>
                 <div className="flex justify-center items-center rounded-full p-1 bg-primary text-secondary">
@@ -215,15 +236,15 @@ const Home = () => {
               </Link>
             </div>
           </div>
-          <div className="bg-light-red h-full w-full flex relative min-h-72 rounded-bl-2xl md:rounded-bl-4xl md:min-h-96 md:w-1/2">
+          <div className="bg-light-red h-full w-full relative min-h-72 rounded-bl-2xl hidden md:flex md:rounded-bl-4xl md:min-h-96 md:w-1/2">
             <div className="h-1/3 w-full bg-white rounded-bl-2xl hidden md:block md:min-h-32 md:rounded-bl-4xl"></div>
             <div className="absolute bg-transparent inset-0 z-1 min-h-64 flex justify-center items-center md:min-h-96">
               <img src={fieldGuides} className="max-h-64 md:max-h-96" />
             </div>
           </div>
         </section>
-        <section className="flex flex-col gap-5 p-5 pt-0 md:gap-12 md:pt-0 md:p-12">
-          <h2>Recent fact-checks</h2>
+        <section className="flex flex-col gap-8 p-8 pt-0 md:gap-12 md:pt-0 md:p-12">
+          <h2>Recent Fact-checks</h2>
           {factChecks && factChecks.docs ? (
             <div className="grid grid-flow-row grid-cols-1 gap-3 md:gap-8 md:grid-cols-2">
               {factChecks.docs.map((post) => (
@@ -234,23 +255,23 @@ const Home = () => {
                   {typeof post.featuredImage === "string" && (
                     <img
                       src={`${config.env.apiKey}${post.featuredImage}`}
-                      className="w-full  object-cover object-center md:w-1/2"
+                      className="w-full  object-cover object-center rounded-2xl md:rounded-none md:w-1/2"
                     />
                   )}
                   {post.featuredImage &&
                     typeof post.featuredImage !== "string" && (
                       <img
                         src={`${config.env.apiKey}${post.featuredImage.url}`}
-                        className="w-full  object-cover object-center md:w-1/2"
+                        className="w-full  object-cover object-center rounded-2xl md:rounded-none md:w-1/2"
                       />
                     )}
-                  <div className="flex flex-col gap-3 p-5 bg-[#F4F4F4] w-full md:w-1/2 md:p-8 md:gap-6">
+                  <div className="flex flex-col gap-3 p-5 px-0 bg-white w-full md:bg-[#F4F4F4] md:w-1/2 md:p-8 md:gap-6">
                     <div className="flex gap-2 items-center flex-wrap">
                       {post.tags.map((tag) => (
                         <Link
                           to={`${routes.Posts.absolute}?tag=${tag.title}`}
                           key={tag.id}
-                          className="px-3 py-2 bg-primary rounded-2xl md:rounded-3xl md:px-4 md:py-1"
+                          className="px-3 py-2 bg-primary rounded-2xl text-xs md:text-sm md:rounded-3xl md:px-4 md:py-1"
                         >
                           {tag.title}
                         </Link>
@@ -275,7 +296,7 @@ const Home = () => {
           )}
           <Link
             to={routes.FactChecks.relative}
-            className="flex justify-between items-center gap-3 bg-secondary text-white cursor-pointer rounded-4xl p-3 ps-4 w-full md:max-w-sm md:ps-6"
+            className="flex justify-between items-center gap-3 bg-secondary text-white cursor-pointer rounded-4xl p-3 ps-4 w-full text-sm md:text-base md:max-w-sm md:ps-6"
           >
             <span>Read More Articles</span>
             <div className="flex justify-center items-center rounded-full p-1 bg-primary text-secondary">
@@ -283,18 +304,18 @@ const Home = () => {
             </div>
           </Link>
         </section>
-        <section className="flex flex-col bg-primary p-5 pt-0 md:pt-0 md:p-12 md:flex-row">
-          <img src={graphic1} className="w-full md:w-1/3" />
-          <div className="flex flex-col justify-center items-center text-center gap-3 pt-5 md:pt-12 md:gap-5">
+        <section className="flex flex-col bg-primary p-8 mx-8 rounded-4xl md:rounded-none md:mx-0 md:pt-0 md:p-12 md:flex-row">
+          <img src={graphic1} className="w-full hidden md:inline md:w-1/3" />
+          <div className="flex flex-col justify-center items-center text-center gap-3 md:pt-12 md:gap-5">
             <h2>Access Resources</h2>
-            <h3>Cybersecurity & Safety</h3>
+            <h3 className="font-poppins-regular">Cybersecurity & Safety</h3>
             <p>
               Mobilizing civic and digital action to counter online hate speech
               and online incitement to violence in Ethiopia.
             </p>
             <Link
               to={routes.Resources.relative}
-              className="flex justify-between items-center gap-3 bg-secondary text-white cursor-pointer rounded-4xl p-3 ps-4 w-full md:max-w-sm md:ps-6"
+              className="flex justify-between items-center gap-3 bg-secondary text-white cursor-pointer rounded-4xl p-3 ps-4 w-full text-sm md:text-base md:max-w-sm md:ps-6"
             >
               <span>View Resources</span>
               <div className="flex justify-center items-center rounded-full p-1 bg-primary text-secondary">
@@ -302,38 +323,54 @@ const Home = () => {
               </div>
             </Link>
           </div>
-          <img src={graphic2} className="w-full md:w-1/3" />
+          <img src={graphic2} className="w-full hidden md:inline md:w-1/3" />
         </section>
-        <section className="flex flex-col gap-5 p-5 pt-0 md:pt-0 md:gap-12 md:p-12">
-          <h2>Media Productions</h2>
+        <section className="flex flex-col gap-8 p-8 pt-0 md:pt-0 md:gap-12 md:p-12">
+          <h2 className="hidden md:block">Media Productions</h2>
+          <h2 className="block md:hidden">Radio Shows</h2>
           {radioShows && radioShows.docs ? (
-            <div className="grid grid-flow-row grid-cols-1 gap-3 md:gap-8 md:grid-cols-3">
+            <div className="grid grid-flow-row grid-cols-1 gap-8 md:gap-8 md:grid-cols-3">
               {radioShows.docs.map((post) => (
-                <Link
-                  to={`${routes.RadioShows.absolute}/${post.id}`}
+                <div
                   key={post.id}
-                  className="flex flex-col justify-between gap-3 md:gap-5"
+                  className="flex flex-col justify-between gap-3 border-1 border-[#D5D5D5] rounded-3xl md:rounded-none md:border-0 md:gap-5"
                 >
                   {typeof post.featuredImage === "string" && (
                     <img
                       src={`${config.env.apiKey}${post.featuredImage}`}
-                      className="w-full object-cover object-center h-full md:h-64"
+                      className="w-full object-cover object-center h-full rounded-3xl md:rounded-none md:h-64"
                     />
                   )}
                   {post.featuredImage &&
                     typeof post.featuredImage !== "string" && (
                       <img
                         src={`${config.env.apiKey}${post.featuredImage.url}`}
-                        className="w-full object-cover object-center h-full md:h-64"
+                        className="w-full object-cover object-center h-full rounded-3xl md:rounded-none md:h-64"
                       />
                     )}
-                  <div className="flex flex-col gap-3 md:gap-5">
+                  <div className="flex flex-col gap-3 p-5 md:p-0 md:gap-5">
                     <small className="text-[#0B121580]">
                       {formatDateTime(post.createdAt)}
                     </small>
-                    <h3>{post.title}</h3>
+                    <a
+                      className="text-left text-lg md:text-xl"
+                      href={`${routes.RadioShows.absolute}/${post.id}`}
+                    >
+                      {post.title}
+                    </a>
+                    <div className="flex gap-2 items-center flex-wrap md:hidden">
+                      {post.tags.map((tag) => (
+                        <Link
+                          to={`${routes.Posts.absolute}?tag=${tag.title}`}
+                          key={tag.id}
+                          className="px-3 py-2 bg-primary rounded-2xl text-xs md:text-sm md:rounded-3xl md:px-4 md:py-1"
+                        >
+                          {tag.title}
+                        </Link>
+                      ))}
+                    </div>
                   </div>
-                </Link>
+                </div>
               ))}
             </div>
           ) : (
@@ -341,7 +378,7 @@ const Home = () => {
           )}
           <Link
             to={routes.RadioShows.relative}
-            className="flex justify-between items-center gap-3 bg-secondary text-white cursor-pointer rounded-4xl p-3 ps-4 w-full md:max-w-sm md:ps-6"
+            className="flex justify-between items-center self-center gap-8 bg-secondary text-white cursor-pointer rounded-4xl p-3 ps-4 w-fit text-sm md:text-base md:max-w-sm md:ps-6"
           >
             <span>More radio shows</span>
             <div className="flex justify-center items-center rounded-full p-1 bg-primary text-secondary">
