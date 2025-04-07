@@ -98,19 +98,19 @@
   }
 
   h1 {
-    @apply text-5xl;
+    @apply text-3xl;
     @apply font-poppins-bold;
     @apply text-center;
   }
 
   h2 {
-    @apply text-4xl;
+    @apply text-2xl;
     @apply font-poppins-medium;
     @apply text-center;
   }
 
   h3 {
-    @apply text-2xl;
+    @apply text-xl;
     @apply font-poppins-medium;
     @apply text-center;
   }

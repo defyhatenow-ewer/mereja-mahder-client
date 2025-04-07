@@ -117,7 +117,7 @@ const Home = () => {
               </div>
             </div>
             <div className="bg-primary hidden md:flex">
-              <div className="bg-white h-full w-full pt-5 px-12 md:rounded-tr-4xl md:pt-4 md:pe-4">
+              <div className="bg-white h-full w-full pt-5 pe-12 md:rounded-tr-4xl md:pt-4 md:pe-4">
                 <Link
                   to={routes.About.relative}
                   className="flex justify-between items-center gap-3 bg-secondary text-white cursor-pointer rounded-4xl p-3 ps-4 w-[100%-20px] text-sm md:text-base md:w-[100%-48px] md:ps-6"
@@ -307,7 +307,7 @@ const Home = () => {
         <section className="flex flex-col bg-primary p-8 mx-8 rounded-4xl md:rounded-none md:mx-0 md:pt-0 md:p-12 md:flex-row">
           <img src={graphic1} className="w-full hidden md:inline md:w-1/3" />
           <div className="flex flex-col justify-center items-center text-center gap-3 md:pt-12 md:gap-5">
-            <h2>Access Resources</h2>
+            <h2 className="text-center">Access Resources</h2>
             <h3 className="font-poppins-regular">Cybersecurity & Safety</h3>
             <p>
               Mobilizing civic and digital action to counter online hate speech
@@ -378,7 +378,7 @@ const Home = () => {
           )}
           <Link
             to={routes.RadioShows.relative}
-            className="flex justify-between items-center self-center gap-8 bg-secondary text-white cursor-pointer rounded-4xl p-3 ps-4 w-fit text-sm md:text-base md:max-w-sm md:ps-6"
+            className="flex justify-between items-center self-center gap-8 bg-secondary text-white cursor-pointer rounded-4xl p-3 ps-4 w-fit text-sm md:self-start md:text-base md:w-sm md:ps-6"
           >
             <span>More radio shows</span>
             <div className="flex justify-center items-center rounded-full p-1 bg-primary text-secondary">
