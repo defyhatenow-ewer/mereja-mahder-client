@@ -17,6 +17,7 @@ import {
   pickIdUsingTitle,
   pickTitleUsingID,
 } from "../utils/filters";
+import { makeDownloadable } from "../utils";
 
 const Reports = () => {
   const [search, setSearch] = useState("");
@@ -212,34 +213,58 @@ const Reports = () => {
             <div className="flex flex-col gap-5 md:gap-8">
               <div className="grid grid-flow-row grid-cols-1 gap-5 md:gap-8 md:grid-cols-3">
                 {data.docs.map((post) => (
-                  <Link
-                    to={`${routes.Reports.absolute}/${post.id}`}
+                  <div
                     key={post.id}
                     className="flex flex-col justify-between gap-3 p-5 bg-[#E4E4E4] rounded-2xl md:gap-6 md:rounded-3xl"
                   >
-                    {typeof post.featuredImage === "string" && (
-                      <img
-                        src={`${config.env.apiKey}${post.featuredImage}`}
-                        className="rounded-2xl object-cover object-center h-full md:h-96 md:rounded-3xl"
-                      />
-                    )}
-                    {post.featuredImage &&
-                      typeof post.featuredImage !== "string" && (
+                    <Link to={`${routes.Reports.absolute}/${post.id}`}>
+                      {typeof post.featuredImage === "string" && (
                         <img
-                          src={`${config.env.apiKey}${post.featuredImage.url}`}
-                          className="rounded-2xl object-cover object-center md:rounded-3xl"
+                          src={`${config.env.apiKey}${post.featuredImage}`}
+                          className="rounded-2xl object-cover object-center h-full md:h-96 md:rounded-3xl"
                         />
                       )}
+                      {post.featuredImage &&
+                        typeof post.featuredImage !== "string" && (
+                          <img
+                            src={`${config.env.apiKey}${post.featuredImage.url}`}
+                            className="rounded-2xl object-cover object-center md:rounded-3xl"
+                          />
+                        )}
+                    </Link>
                     <div className="flex flex-col gap-2">
                       <small>PDF</small>
                       <div className="flex justify-between items-center w-full gap-3 md:gap-6">
-                        <p>{post.title}</p>
-                        <div className="flex justify-center items-center bg-primary rounded-full min-w-12 min-h-12">
-                          <ArrowDown className="size-5" />
-                        </div>
+                        <Link to={`${routes.Reports.absolute}/${post.id}`}>
+                          {post.title}
+                        </Link>
+                        {post.pdf && typeof post.pdf === "string" && (
+                          <a
+                            href={makeDownloadable(
+                              `${config.env.apiKey}${post.pdf}`
+                            )}
+                            download
+                            className="flex justify-center items-center bg-primary rounded-full min-w-12 min-h-12"
+                          >
+                            <ArrowDown className="size-5" />
+                          </a>
+                        )}
+                        {post.pdf &&
+                          typeof post.pdf !== "string" &&
+                          post.pdf.url && (
+                            <a
+                              href={makeDownloadable(
+                                `${config.env.apiKey}${post.pdf.url}`
+                              )}
+                              download
+                              className="flex justify-center items-center bg-primary rounded-full min-w-12 min-h-12"
+                            >
+                              <ArrowDown className="size-5" />
+                            </a>
+                          )}
                       </div>
                     </div>
-                  </Link>
+                  </div>
                 ))}
               </div>
               <Pagination

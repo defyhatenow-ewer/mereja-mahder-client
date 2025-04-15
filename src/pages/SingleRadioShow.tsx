@@ -65,7 +65,7 @@ const SingleRadioShow = () => {
           <div className="flex gap-2 items-center">
             {(post.tags || []).map((tag) => (
               <Link
-                to={`${routes.Posts.absolute}?tag=${tag.title}`}
+                to={`${routes.RadioShows.absolute}?tag=${tag.title}`}
                 key={tag.id}
                 className="px-3 py-2 bg-primary rounded-2xl text-xs md:text-sm md:rounded-3xl md:px-4 md:py-1"
               >
@@ -135,7 +135,7 @@ const SingleRadioShow = () => {
                 {posts.docs.map((doc) => (
                   <Link
                     key={doc.id}
-                    to={`${routes.Posts.absolute}/${doc.id}`}
+                    to={`${routes.RadioShows.absolute}/${doc.id}`}
                     className="flex flex-col gap-2"
                   >
                     <h4 className="font-poppins-medium text-left text-xs md:text-sm">
