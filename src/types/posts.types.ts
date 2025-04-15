@@ -1,11 +1,11 @@
 import { z } from "zod";
 import { RelatedSchema } from "./IDoc";
-import { CategorySchema } from "./categories.types";
-import { TagSchema } from "./tags.types";
-import { UserSchema } from "./users.types";
-import { SpaceSchemaRelated } from "./space.types";
+import { CategorySchema, ICategory } from "./categories.types";
+import { ITag, TagSchema } from "./tags.types";
+import { IUser, UserSchema } from "./users.types";
+import { ISpace, SpaceSchemaRelated } from "./space.types";
 import { IMedia } from "./media.types";
-import type { SerializedEditorState } from "@payloadcms/richtext-lexical/lexical";
+import { SerializedEditorState } from "@payloadcms/richtext-lexical/lexical";
 
 export const PopulatedAuthors = z.array(
   z.object({
@@ -42,8 +42,309 @@ export const PostSchema = z.object({
   meta: MetaSchema,
 });
 
-export type IPost = z.infer<typeof PostSchema> & {
-  featuredImage: IMedia | string;
+export interface IPost {
+  id: string;
+  title: string;
+  featuredImage?: (string | null) | IMedia;
   content: SerializedEditorState;
-  excerpt: SerializedEditorState;
-};
+  excerpt?: SerializedEditorState;
+  pdf?: (string | null) | IMedia;
+  iframe?: string | null;
+  relatedPosts?: (string | IPost)[] | null;
+  categories?: (string | ICategory)[] | null;
+  tags?: ITag[];
+  meta?: {
+    title?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (string | null) | IMedia;
+    description?: string | null;
+  };
+  publishedAt?: string | null;
+  authors?: (string | IUser)[] | null;
+  populatedAuthors?:
+    | {
+        id?: string | null;
+        name?: string | null;
+      }[]
+    | null;
+  views?: number | null;
+  space?: (string | null) | ISpace;
+  privacy?: ("private" | "public") | null;
+  slug?: string | null;
+  slugLock?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ("draft" | "published") | null;
+}
+
+export interface IReport {
+  id: string;
+  title: string;
+  featuredImage?: (string | null) | IMedia;
+  content: SerializedEditorState;
+  excerpt?: SerializedEditorState;
+  pdf?: (string | null) | IMedia;
+  relatedReports?: (string | IReport)[] | null;
+  categories?: (string | ICategory)[] | null;
+  tags?: ITag[];
+  meta?: {
+    title?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (string | null) | IMedia;
+    description?: string | null;
+  };
+  publishedAt?: string | null;
+  authors?: (string | IUser)[] | null;
+  populatedAuthors?:
+    | {
+        id?: string | null;
+        name?: string | null;
+      }[]
+    | null;
+  views?: number | null;
+  space?: (string | null) | ISpace;
+  privacy?: ("private" | "public") | null;
+  slug?: string | null;
+  slugLock?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ("draft" | "published") | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "articles".
+ */
+export interface IArticle {
+  id: string;
+  title: string;
+  featuredImage?: (string | null) | IMedia;
+  content: SerializedEditorState;
+  excerpt?: SerializedEditorState;
+  relatedArticles?: (string | IArticle)[] | null;
+  categories?: (string | ICategory)[] | null;
+  tags?: ITag[];
+  meta?: {
+    title?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (string | null) | IMedia;
+    description?: string | null;
+  };
+  publishedAt?: string | null;
+  authors?: (string | IUser)[] | null;
+  populatedAuthors?:
+    | {
+        id?: string | null;
+        name?: string | null;
+      }[]
+    | null;
+  views?: number | null;
+  space?: (string | null) | ISpace;
+  privacy?: ("private" | "public") | null;
+  slug?: string | null;
+  slugLock?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ("draft" | "published") | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "materials".
+ */
+export interface IMaterial {
+  id: string;
+  title: string;
+  featuredImage?: (string | null) | IMedia;
+  content: SerializedEditorState;
+  excerpt?: SerializedEditorState;
+  pdf?: (string | null) | IMedia;
+  relatedMaterials?: (string | IMaterial)[] | null;
+  categories?: (string | ICategory)[] | null;
+  tags?: ITag[];
+  meta?: {
+    title?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (string | null) | IMedia;
+    description?: string | null;
+  };
+  publishedAt?: string | null;
+  authors?: (string | IUser)[] | null;
+  populatedAuthors?:
+    | {
+        id?: string | null;
+        name?: string | null;
+      }[]
+    | null;
+  views?: number | null;
+  space?: (string | null) | ISpace;
+  privacy?: ("private" | "public") | null;
+  slug?: string | null;
+  slugLock?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ("draft" | "published") | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "resources".
+ */
+export interface IResource {
+  id: string;
+  title: string;
+  featuredImage?: (string | null) | IMedia;
+  content: SerializedEditorState;
+  excerpt?: SerializedEditorState;
+  pdf?: (string | null) | IMedia;
+  relatedResources?: (string | IResource)[] | null;
+  categories?: (string | ICategory)[] | null;
+  tags?: ITag[];
+  meta?: {
+    title?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (string | null) | IMedia;
+    description?: string | null;
+  };
+  publishedAt?: string | null;
+  authors?: (string | IUser)[] | null;
+  populatedAuthors?:
+    | {
+        id?: string | null;
+        name?: string | null;
+      }[]
+    | null;
+  views?: number | null;
+  space?: (string | null) | ISpace;
+  privacy?: ("private" | "public") | null;
+  slug?: string | null;
+  slugLock?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ("draft" | "published") | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "shows".
+ */
+export interface IShow {
+  id: string;
+  title: string;
+  featuredImage?: (string | null) | IMedia;
+  content: SerializedEditorState;
+  excerpt?: SerializedEditorState;
+  iframe: string;
+  relatedShows?: (string | IShow)[] | null;
+  categories?: (string | ICategory)[] | null;
+  tags?: ITag[];
+  meta?: {
+    title?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (string | null) | IMedia;
+    description?: string | null;
+  };
+  publishedAt?: string | null;
+  authors?: (string | IUser)[] | null;
+  populatedAuthors?:
+    | {
+        id?: string | null;
+        name?: string | null;
+      }[]
+    | null;
+  views?: number | null;
+  space?: (string | null) | ISpace;
+  privacy?: ("private" | "public") | null;
+  slug?: string | null;
+  slugLock?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ("draft" | "published") | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "charts".
+ */
+export interface IChart {
+  id: string;
+  title: string;
+  featuredImage?: (string | null) | IMedia;
+  content: SerializedEditorState;
+  excerpt?: SerializedEditorState;
+  iframe: string;
+  relatedCharts?: (string | IChart)[] | null;
+  categories?: (string | ICategory)[] | null;
+  tags?: ITag[];
+  meta?: {
+    title?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (string | null) | IMedia;
+    description?: string | null;
+  };
+  publishedAt?: string | null;
+  authors?: (string | IUser)[] | null;
+  populatedAuthors?:
+    | {
+        id?: string | null;
+        name?: string | null;
+      }[]
+    | null;
+  views?: number | null;
+  space?: (string | null) | ISpace;
+  privacy?: ("private" | "public") | null;
+  slug?: string | null;
+  slugLock?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ("draft" | "published") | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "banners".
+ */
+export interface IBanner {
+  id: string;
+  title: string;
+  image: string | IMedia;
+  links: LinkBlock[];
+  space: string | ISpace;
+  slug?: string | null;
+  slugLock?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+
+export interface LinkBlock {
+  links?:
+    | {
+        link: {
+          type?: ("reference" | "custom") | null;
+          newTab?: boolean | null;
+          reference?: {
+            relationTo: "posts";
+            value: string | IPost;
+          } | null;
+          url?: string | null;
+          label: string;
+          /**
+           * Choose how the link should be rendered.
+           */
+          appearance?: ("default" | "outline") | null;
+        };
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: "link";
+}

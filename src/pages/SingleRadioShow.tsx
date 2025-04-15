@@ -1,6 +1,6 @@
 import { Link, useParams } from "react-router-dom";
+import parse from "html-react-parser";
 import { Loader, RichTextReader } from "../components";
-import { useGetPostsQuery, useGetSinglePostQuery } from "../features/posts.api";
 import { formatDateTime } from "../utils";
 import {
   FacebookButton,
@@ -9,23 +9,15 @@ import {
 } from "../components/ShareButtons";
 import { config } from "../config";
 import { ArrowUpRight } from "../components/Icons";
-import { createFilter, createSelect, pickIdUsingTitle } from "../utils/filters";
 import { routes } from "../routing";
-import { useGetCategoriesQuery } from "../features/categories.api";
+import { useGetShowsQuery, useGetSingleShowQuery } from "../features/shows.api";
 
 const buttonList = [FacebookButton, LinkedInButton, TwitterButton];
 
 const SingleRadioShow = () => {
   const { id } = useParams();
-  const { data: categories } = useGetCategoriesQuery({
-    query: {
-      where: createFilter({ label: "title", value: "radio show" }),
-      select: createSelect(["id", "title"]),
-    },
-  });
-  const radioShowId = pickIdUsingTitle("radio show", categories?.docs);
 
-  const { data: post, isLoading } = useGetSinglePostQuery(
+  const { data: post, isLoading } = useGetSingleShowQuery(
     {
       id: id as string,
     },
@@ -33,22 +25,13 @@ const SingleRadioShow = () => {
       skip: !id,
     }
   );
-  const { data: posts, isLoading: isPostsLoading } = useGetPostsQuery(
+  const { data: posts, isLoading: isPostsLoading } = useGetShowsQuery(
     {
       query: {
         where: {
-          and: [
-            {
-              id: {
-                not_equals: id as string,
-              },
-            },
-            {
-              categories: {
-                contains: radioShowId,
-              },
-            },
-          ],
+          id: {
+            not_equals: id as string,
+          },
         },
       },
       options: {
@@ -56,7 +39,7 @@ const SingleRadioShow = () => {
       },
     },
     {
-      skip: !id || !radioShowId,
+      skip: !id,
     }
   );
 
@@ -80,7 +63,7 @@ const SingleRadioShow = () => {
             {formatDateTime(post.createdAt)}
           </small>
           <div className="flex gap-2 items-center">
-            {post.tags.map((tag) => (
+            {(post.tags || []).map((tag) => (
               <Link
                 to={`${routes.Posts.absolute}?tag=${tag.title}`}
                 key={tag.id}
@@ -94,6 +77,7 @@ const SingleRadioShow = () => {
       </section>
       <section className="flex flex-col gap-5 md:gap-12 md:flex-row">
         <div className="flex flex-col gap-5 w-full items-center md:items-start md:w-7/10 md:gap-16">
+          {parse(post.iframe)}
           <RichTextReader data={post.content} />
           <div className="flex flex-col gap-2">
             <small>Share this post</small>
@@ -154,7 +138,7 @@ const SingleRadioShow = () => {
                     to={`${routes.Posts.absolute}/${doc.id}`}
                     className="flex flex-col gap-2"
                   >
-                    <h4 className="font-poppins-medium text-left">
+                    <h4 className="font-poppins-medium text-left text-xs md:text-sm">
                       {doc.title}
                     </h4>
                     <small className="text-[#0B121580]">

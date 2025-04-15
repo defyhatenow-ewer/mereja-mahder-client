@@ -9,84 +9,37 @@ import {
 } from "../assets/images";
 import { routes } from "../routing";
 import { ArrowDown, ArrowUpRight, ChevronRight } from "../components/Icons";
-import { useGetPostsQuery } from "../features/posts.api";
 import { Loader, RichTextReader } from "../components";
 import { config } from "../config";
 import { formatDateTime } from "../utils";
-import { createSelect, pickIdUsingTitle } from "../utils/filters";
-import { useGetCategoriesQuery } from "../features/categories.api";
+import { useGetReportsQuery } from "../features/reports.api";
+import { useGetArticlesQuery } from "../features/articles.api";
+import { useGetShowsQuery } from "../features/shows.api";
 
 const Home = () => {
-  const { data: categories, isLoading } = useGetCategoriesQuery({
-    query: {
-      select: createSelect(["id", "title"]),
+  const { data: reports, isLoading: isReportsLoading } = useGetReportsQuery({
+    options: {
+      limit: 3,
     },
   });
-
-  const reportId = pickIdUsingTitle("report", categories?.docs);
-  const factCheckId = pickIdUsingTitle("fact check", categories?.docs);
-  const radioShowId = pickIdUsingTitle("radio show", categories?.docs);
-  const { data: reports, isLoading: isReportsLoading } = useGetPostsQuery(
-    {
-      query: {
-        where: {
-          categories: {
-            contains: reportId,
-          },
-        },
-      },
-      options: {
-        limit: 3,
-      },
-    },
-    {
-      skip: !reportId,
-    }
-  );
-  const { data: factChecks, isLoading: isFactChecksLoading } = useGetPostsQuery(
-    {
-      query: {
-        where: {
-          categories: {
-            contains: factCheckId,
-          },
-        },
-      },
+  const { data: factChecks, isLoading: isFactChecksLoading } =
+    useGetArticlesQuery({
       options: {
         limit: 4,
       },
-    },
+    });
+  const { data: radioShows, isLoading: isRadioShowsLoading } = useGetShowsQuery(
     {
-      skip: !factCheckId,
-    }
-  );
-  const { data: radioShows, isLoading: isRadioShowsLoading } = useGetPostsQuery(
-    {
-      query: {
-        where: {
-          categories: {
-            contains: radioShowId,
-          },
-        },
-      },
       options: {
         limit: 3,
       },
-    },
-    {
-      skip: !radioShowId,
     }
   );
 
   return (
     <>
       <Loader
-        show={
-          isLoading ||
-          isReportsLoading ||
-          isFactChecksLoading ||
-          isRadioShowsLoading
-        }
+        show={isReportsLoading || isFactChecksLoading || isRadioShowsLoading}
       />
       <div className="flex flex-col bg-white gap-8 md:gap-16">
         <section className="flex flex-col mx-5 gap-5 md:gap-0 md:h-[560px] md:mx-12 md:flex-row xl:h-[600px] 2xl:h-[760px]">
@@ -159,7 +112,7 @@ const Home = () => {
             <div className="grid grid-flow-row grid-cols-1 gap-8 px-5 md:gap-8 md:px-12 md:grid-cols-3">
               {reports.docs.map((post) => (
                 <Link
-                  to={`${routes.Posts.absolute}/${post.id}`}
+                  to={`${routes.Reports.absolute}/${post.id}`}
                   key={post.id}
                   className="flex flex-col gap-3 p-5 bg-white rounded-2xl md:gap-6 md:rounded-3xl"
                 >
@@ -267,9 +220,9 @@ const Home = () => {
                     )}
                   <div className="flex flex-col gap-3 p-5 px-0 bg-white w-full md:bg-[#F4F4F4] md:w-1/2 md:p-8 md:gap-6">
                     <div className="flex gap-2 items-center flex-wrap">
-                      {post.tags.map((tag) => (
+                      {(post.tags || []).map((tag) => (
                         <Link
-                          to={`${routes.Posts.absolute}?tag=${tag.title}`}
+                          to={`${routes.FactChecks.absolute}?tag=${tag.title}`}
                           key={tag.id}
                           className="px-3 py-2 bg-primary rounded-2xl text-xs md:text-sm md:rounded-3xl md:px-4 md:py-1"
                         >
@@ -278,13 +231,13 @@ const Home = () => {
                       ))}
                     </div>
                     <Link
-                      to={`${routes.Posts.absolute}/${post.id}`}
+                      to={`${routes.FactChecks.absolute}/${post.id}`}
                       className="text-lg font-poppins-medium"
                     >
                       {post.title}
                     </Link>
                     <small className="text-[#0B121580]">8 min read</small>
-                    <RichTextReader data={post.excerpt} />
+                    {post.excerpt && <RichTextReader data={post.excerpt} />}
                   </div>
                 </div>
               ))}
@@ -359,9 +312,9 @@ const Home = () => {
                       {post.title}
                     </a>
                     <div className="flex gap-2 items-center flex-wrap md:hidden">
-                      {post.tags.map((tag) => (
+                      {(post.tags || []).map((tag) => (
                         <Link
-                          to={`${routes.Posts.absolute}?tag=${tag.title}`}
+                          to={`${routes.RadioShows.absolute}?tag=${tag.title}`}
                           key={tag.id}
                           className="px-3 py-2 bg-primary rounded-2xl text-xs md:text-sm md:rounded-3xl md:px-4 md:py-1"
                         >

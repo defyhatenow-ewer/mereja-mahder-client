@@ -1,6 +1,5 @@
 import { Link, useParams } from "react-router-dom";
 import { Loader, RichTextReader } from "../components";
-import { useGetSinglePostQuery } from "../features/posts.api";
 import { formatDateTime } from "../utils";
 import {
   FacebookButton,
@@ -9,12 +8,14 @@ import {
 } from "../components/ShareButtons";
 import { config } from "../config";
 import { routes } from "../routing";
+import { useGetSingleReportQuery } from "../features/reports.api";
 
 const buttonList = [FacebookButton, LinkedInButton, TwitterButton];
 
-const SinglePost = () => {
+const SingleReport = () => {
   const { id } = useParams();
-  const { data: post, isLoading } = useGetSinglePostQuery(
+
+  const { data: post, isLoading } = useGetSingleReportQuery(
     {
       id: id as string,
     },
@@ -46,7 +47,7 @@ const SinglePost = () => {
             <div className="flex gap-2 items-center">
               {(post.tags || []).map((tag) => (
                 <Link
-                  to={`${routes.Posts.absolute}?tag=${tag.title}`}
+                  to={`${routes.Reports.absolute}?tag=${tag.title}`}
                   key={tag.id}
                   className="px-3 py-2 bg-primary rounded-2xl text-xs md:text-sm md:rounded-3xl md:px-4 md:py-1"
                 >
@@ -79,4 +80,4 @@ const SinglePost = () => {
   );
 };
 
-export default SinglePost;
+export default SingleReport;

@@ -15,6 +15,7 @@
     "@tailwindcss/vite": "^4.0.14",
     "async-mutex": "^0.5.0",
     "axios": "^1.8.3",
+    "html-react-parser": "^5.2.3",
     "qs-esm": "^7.0.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",

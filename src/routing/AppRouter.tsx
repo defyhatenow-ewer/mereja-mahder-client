@@ -12,8 +12,11 @@ import {
   RadioShows,
   Reports,
   Resources,
+  SingleFactCheck,
   SinglePost,
   SingleRadioShow,
+  SingleReport,
+  SingleResource,
 } from "../pages";
 
 // Auth pages
@@ -68,6 +71,10 @@ const AppRouter = createBrowserRouter([
             element: <FactChecks />,
           },
           {
+            path: routes.SingleFactCheck.relative,
+            element: <SingleFactCheck />,
+          },
+          {
             path: routes.RadioShows.relative,
             element: <RadioShows />,
           },
@@ -80,8 +87,16 @@ const AppRouter = createBrowserRouter([
             element: <Reports />,
           },
           {
+            path: routes.SingleReport.relative,
+            element: <SingleReport />,
+          },
+          {
             path: routes.Resources.relative,
             element: <Resources />,
+          },
+          {
+            path: routes.SingleResource.relative,
+            element: <SingleResource />,
           },
         ],
       },

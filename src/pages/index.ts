@@ -7,6 +7,9 @@ import ServerError from "./ServerError";
 import Resources from "./Resources";
 import SinglePost from "./SinglePost";
 import SingleRadioShow from "./SingleRadioShow";
+import SingleFactCheck from "./SingleFactCheck";
+import SingleReport from "./SingleReport";
+import SingleResource from "./SingleResource";
 
 export {
   About,
@@ -18,4 +21,7 @@ export {
   ServerError,
   SinglePost,
   SingleRadioShow,
+  SingleFactCheck,
+  SingleReport,
+  SingleResource,
 };

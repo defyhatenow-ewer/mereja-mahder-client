@@ -147,15 +147,15 @@
       @apply text-left;
     }
     h4 {
-      @apply text-2xl;
+      @apply text-lg;
       @apply text-left;
     }
     h5 {
-      @apply text-xl;
+      @apply text-lg;
       @apply text-left;
     }
     h6 {
-      @apply text-lg;
+      @apply text-sm;
       @apply text-left;
     }
     body {

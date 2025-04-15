@@ -22,7 +22,6 @@ const Posts = () => {
   const [tag, setTag] = useState("");
   const [page, setPage] = useState(1);
   const [searchParams] = useSearchParams();
-  console.log({ tagFromParams: searchParams.get("tag") });
 
   const { data: categories, isLoading } = useGetCategoriesQuery({
     query: {
@@ -244,7 +243,7 @@ const Posts = () => {
                         {post.title}
                       </a>
                       <div className="flex gap-2 items-center flex-wrap md:hidden">
-                        {post.tags.map((tag) => (
+                        {(post.tags || []).map((tag) => (
                           <Link
                             to={`${routes.Posts.absolute}?tag=${tag.title}`}
                             key={tag.id}
