@@ -12,8 +12,10 @@ import {
   pickIdUsingTitle,
   pickTitleUsingID,
 } from "../utils/filters";
+import { useTranslation } from "react-i18next";
 
 const FactChecks = () => {
+  const { t } = useTranslation();
   const [search, setSearch] = useState("");
   const [open, setOpen] = useState(false);
   const [tagOpen, setTagOpen] = useState(false);
@@ -102,7 +104,7 @@ const FactChecks = () => {
     <>
       <Loader show={isLoading || isCategoriesLoading || isTagsLoading} />
       <div className="flex flex-col bg-white gap-5 p-5 pt-0 md:p-12 md:pt-0 md:gap-16">
-        <h2>Fact Checks</h2>
+        <h2>{t("factChecks")}</h2>
         <section className="flex flex-col gap-5 md:justify-between md:items-center md:gap-8 md:flex-row">
           <input
             type="text"
@@ -197,7 +199,7 @@ const FactChecks = () => {
             aria-disabled={isLoading}
             className="flex justify-between items-center gap-3 bg-secondary text-primary cursor-pointer rounded-4xl p-2 ps-4 w-full md:max-w-[10rem] md:ps-6"
           >
-            <span>Clear</span>
+            <span>{t("clear")}</span>
             <div className="flex justify-center items-center rounded-full p-1 bg-primary text-secondary">
               <Refresh />
             </div>
@@ -256,7 +258,7 @@ const FactChecks = () => {
               />
             </div>
           ) : (
-            <p>No reports found</p>
+            <p>{t("reportsNotFound")}</p>
           )}
         </section>
       </div>

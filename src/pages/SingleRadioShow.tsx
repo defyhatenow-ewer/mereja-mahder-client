@@ -11,10 +11,12 @@ import { config } from "../config";
 import { ArrowUpRight } from "../components/Icons";
 import { routes } from "../routing";
 import { useGetShowsQuery, useGetSingleShowQuery } from "../features/shows.api";
+import { useTranslation } from "react-i18next";
 
 const buttonList = [FacebookButton, LinkedInButton, TwitterButton];
 
 const SingleRadioShow = () => {
+  const { t } = useTranslation();
   const { id } = useParams();
 
   const { data: post, isLoading } = useGetSingleShowQuery(
@@ -48,7 +50,7 @@ const SingleRadioShow = () => {
   if (!isLoading && !post)
     return (
       <div className="flex flex-col bg-white gap-5 p-5 pt-0 md:p-12 md:pt-0 md:gap-16">
-        No post found
+        {t("postNotFound")}
       </div>
     );
 
@@ -80,7 +82,7 @@ const SingleRadioShow = () => {
           {parse(post.iframe)}
           <RichTextReader data={post.content} />
           <div className="flex flex-col gap-2">
-            <small>Share this post</small>
+            <small>{t("sharePost")}</small>
             <div className="flex gap-1">
               {buttonList.map((Btn, index) => (
                 <Btn
@@ -101,9 +103,9 @@ const SingleRadioShow = () => {
           <div className="flex flex-col bg-primary rounded-md md:rounded-2xl">
             <div className="bg-white rounded-t-md md:rounded-t-2xl">
               <p className="bg-primary p-5 rounded-t-md rounded-bl-md md:rounded-bl-2xl md:rounded-t-2xl md:p-8">
-                Subscribe to listen to{" "}
+                {t("subscribeToListen")}{" "}
                 <strong className="font-poppins-semi-bold">#BeAware</strong>{" "}
-                Radio Shows
+                {t("radioShows")}
               </p>
             </div>
             <div className="flex">
@@ -114,7 +116,7 @@ const SingleRadioShow = () => {
                     target="_blank"
                     className="flex justify-between items-center gap-3 bg-secondary text-primary cursor-pointer rounded-4xl p-1 ps-2 md:ps-4"
                   >
-                    <span>Subscribe</span>
+                    <span>{t("subscribe")}</span>
                     <div className="flex justify-center items-center rounded-full p-1 bg-primary text-secondary">
                       <ArrowUpRight />
                     </div>
@@ -127,9 +129,11 @@ const SingleRadioShow = () => {
               </div>
             </div>
           </div>
-          <p>Get update to every weeks post of #BeAware Radio Shows</p>
+          <p>
+            {t("getUpdates")} #BeAware {t("radioShows")}
+          </p>
           <div className="flex flex-col gap-2 bg-[#F3F3F3] rounded-md p-5 md:p-8 md:rounded-2xl md:gap-6">
-            <h3 className="font-poppins-medium">Recent Posts</h3>
+            <h3 className="font-poppins-medium">{t("recentPosts")}</h3>
             {posts && posts.docs.length ? (
               <div className="grid grid-cols-1 gap-3 md:gap-6">
                 {posts.docs.map((doc) => (
@@ -149,7 +153,7 @@ const SingleRadioShow = () => {
                 ))}
               </div>
             ) : (
-              <p>No recent posts</p>
+              <p>{t("recentPosts")}</p>
             )}
           </div>
         </div>

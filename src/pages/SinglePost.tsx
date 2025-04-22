@@ -9,10 +9,12 @@ import {
 } from "../components/ShareButtons";
 import { config } from "../config";
 import { routes } from "../routing";
+import { useTranslation } from "react-i18next";
 
 const buttonList = [FacebookButton, LinkedInButton, TwitterButton];
 
 const SinglePost = () => {
+  const { t } = useTranslation();
   const { id } = useParams();
   const { data: post, isLoading } = useGetSinglePostQuery(
     {
@@ -28,7 +30,7 @@ const SinglePost = () => {
   if (!isLoading && !post)
     return (
       <div className="flex flex-col bg-white gap-5 p-5 pt-0 md:p-12 md:pt-0 md:gap-16">
-        No post found
+        {t("postNotFound")}
       </div>
     );
 
@@ -58,7 +60,7 @@ const SinglePost = () => {
         </div>
         <RichTextReader data={post.content} />
         <div className="flex flex-col gap-2">
-          <small>Share this post</small>
+          <small>{t("sharePost")}</small>
           <div className="flex gap-1">
             {buttonList.map((Btn, index) => (
               <Btn

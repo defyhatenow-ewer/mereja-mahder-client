@@ -6,8 +6,11 @@ import { routes } from "../../routing";
 import { useGetSpacesQuery } from "../../features/space.api";
 import { toast } from "react-toastify";
 import { ArrowUpRight } from "../../components/Icons";
+import { translate } from "../../i18n";
+import { useTranslation } from "react-i18next";
 
 const Register = () => {
+  const { t } = useTranslation();
   localStorage.setItem("rememberMe", "false");
   const navigate = useNavigate();
   const [registerUser, { isLoading }] = useRegisterMutation();
@@ -25,14 +28,14 @@ const Register = () => {
     setPassword("");
   };
 
-  const getSpaceName = (_space: string): string => {
+  const getSpaceName = async (_space: string): Promise<string> => {
     switch (_space) {
       case "aff":
-        return "AFF Fellow";
+        return translate("affFellow");
       case "partners":
-        return "Partner";
+        return translate("partner");
       case "women_safe_space":
-        return "Women Safe Spaces";
+        return translate("womenSafeSpaces");
 
       default:
         return _space;
@@ -44,9 +47,9 @@ const Register = () => {
     const rememberMe = localStorage.getItem("rememberMe");
 
     if (!space) {
-      toast.error("Please select one of three spaces first!");
+      toast.error(translate("selectSpace"));
     } else if (!acceptTerms) {
-      toast.error("Please accept the terms and conditions first!");
+      toast.error(translate("acceptT&C"));
     } else {
       await registerUser({ name, email, password })
         .unwrap()
@@ -79,7 +82,7 @@ const Register = () => {
           onSubmit={handleSubmit}
         >
           <div className="flex flex-col gap-1">
-            <label>Email Address</label>
+            <label>{t("emailAddress")}</label>
             <input
               type="email"
               placeholder="Email"
@@ -89,7 +92,7 @@ const Register = () => {
             />
           </div>
           <div className="flex flex-col gap-1">
-            <label>Username</label>
+            <label>{t("username")}</label>
             <input
               type="text"
               placeholder="Name"
@@ -99,7 +102,7 @@ const Register = () => {
             />
           </div>
           <div className="flex flex-col gap-1">
-            <label>Password</label>
+            <label>{t("password")}</label>
             <input
               type="password"
               placeholder="Password"
@@ -109,7 +112,7 @@ const Register = () => {
             />
           </div>
           <div className="flex flex-col gap-2">
-            <p className="font-poppins-medium">Choose a space</p>
+            <p className="font-poppins-medium">{t("chooseSpace")}</p>
             <div className="flex flex-wrap justify-between items-center">
               {data.docs.map((space) => (
                 <label key={space.id} className="label cursor-pointer">
@@ -142,7 +145,7 @@ const Register = () => {
                 }}
               />
               <span className="label-text text-[#202224] text-sm">
-                I accept terms and conditions
+                {t("IAcceptT&C")}
               </span>
             </label>
           </div>
@@ -159,13 +162,15 @@ const Register = () => {
                   }
                 }}
               />
-              <span className="label-text text-black text-sm">Remember me</span>
+              <span className="label-text text-black text-sm">
+                {t("rememberMe")}
+              </span>
             </label>
             <Link
               to={routes.ForgotPassword.absolute}
               className="text-secondary text-sm font-poppins-semi-bold"
             >
-              Forgot Password?
+              {t("forgotPassword")}?
             </Link>
           </div>
           <button
@@ -173,18 +178,18 @@ const Register = () => {
             aria-disabled={isLoading}
             className="flex cursor-pointer justify-between items-center bg-primary rounded-4xl p-2 ps-5 w-full md:max-w-[200px] md:ps-8"
           >
-            <span>Register</span>
+            <span>{t("register")}</span>
             <div className="flex justify-center items-center rounded-full p-1 bg-secondary text-primary">
               <ArrowUpRight />
             </div>
           </button>
           <p className="text-sm text-secondary font-normal">
-            You do have an account?{" "}
+            {t("doHaveAccount")}?{" "}
             <Link
               to={routes.Login.absolute}
               className="text-black font-poppins-semi-bold"
             >
-              Login
+              {t("login")}
             </Link>
           </p>
         </form>

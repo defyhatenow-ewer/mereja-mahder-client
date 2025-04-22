@@ -13,8 +13,10 @@ import {
   pickIdUsingTitle,
   pickTitleUsingID,
 } from "../utils/filters";
+import { useTranslation } from "react-i18next";
 
 const RadioShows = () => {
+  const { t } = useTranslation();
   const [search, setSearch] = useState("");
   const [open, setOpen] = useState(false);
   const [tagOpen, setTagOpen] = useState(false);
@@ -103,9 +105,9 @@ const RadioShows = () => {
       <Loader show={isPostsLoading || isLoading || isTagsLoading} />
       <div className="flex flex-col bg-white gap-8 p-5 pt-0 md:p-12 md:pt-0 md:gap-16">
         <div className="flex flex-col gap-3">
-          <h2>Media Productions</h2>
+          <h2>{t("mediaProductions")}</h2>
           <h3 className="text-[#D5D5D5] text-2xl font-poppins">
-            Podcasts, Radio talk shows & TV interviews
+            {t("podcasts&Shows")}
           </h3>
         </div>
         <section className="flex flex-col gap-5 md:justify-between md:items-center md:gap-8 md:flex-row">
@@ -202,7 +204,7 @@ const RadioShows = () => {
             aria-disabled={isPostsLoading}
             className="flex justify-between items-center gap-3 bg-secondary text-primary cursor-pointer rounded-4xl p-2 ps-4 w-full md:max-w-[10rem] md:ps-6"
           >
-            <span>Clear</span>
+            <span>{t("clear")}</span>
             <div className="flex justify-center items-center rounded-full p-1 bg-primary text-secondary">
               <Refresh />
             </div>
@@ -262,7 +264,7 @@ const RadioShows = () => {
               />
             </div>
           ) : (
-            <p>No radio shows found</p>
+            <p>{t("showsNotFound")}</p>
           )}
         </section>
       </div>

@@ -5,8 +5,10 @@ import { config } from "../../config";
 import { useGetBannersQuery } from "../../features/banners.api";
 import { useGetResourcesQuery } from "../../features/resources.api";
 import { routes } from "../../routing";
+import { useTranslation } from "react-i18next";
 
 const LearningResources = () => {
+  const { t } = useTranslation();
   const { data: banners, isLoading: isLoadingBanner } = useGetBannersQuery({
     query: {
       where: {
@@ -36,7 +38,7 @@ const LearningResources = () => {
         {banners && banners.docs.length && (
           <section className="flex flex-col justify-between items-center gap-5 bg-primary p-5 rounded-md md:rounded-4xl md:p-8 md:flex-row">
             <div className="flex flex-col gap-5 w-full md:w-1/2 md:gap-5">
-              <p>UPCOMING ACTIVITY</p>
+              <p>{t("upcomingActivity")}</p>
               <h2 className="text-lg font-poppins-semi-bold md:text-2xl">
                 {banners.docs[0].title}
               </h2>
@@ -139,7 +141,7 @@ const LearningResources = () => {
               </div>
             </div>
           ) : (
-            <p>No resources found</p>
+            <p>{t("resourcesNotFound")}</p>
           )}
         </section>
       </div>

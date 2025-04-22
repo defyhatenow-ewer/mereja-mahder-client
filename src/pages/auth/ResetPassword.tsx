@@ -5,9 +5,12 @@ import { Loader } from "../../components";
 import { useResetPasswordMutation } from "../../features/auth.api";
 import { routes } from "../../routing";
 import { ArrowUpRight } from "../../components/Icons";
+import { useTranslation } from "react-i18next";
+import { translate } from "../../i18n";
 
 const ResetPassword = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const [resetPassword, { isLoading }] = useResetPasswordMutation();
 
   const [password, setPassword] = useState("");
@@ -19,9 +22,9 @@ const ResetPassword = () => {
     const token = localStorage.getItem("token");
 
     if (password === "") {
-      toast.error("Please add a new password");
+      toast.error(translate("pleaseAddPassword"));
     } else if (!token) {
-      toast.error("Please login");
+      toast.error(translate("pleaseLogin"));
     } else {
       await resetPassword({
         password,
@@ -31,9 +34,7 @@ const ResetPassword = () => {
         .then(() => {
           setPassword("");
           navigate(routes.Login.absolute);
-          toast.success(
-            "Your change was successful. Try signing in with the new password"
-          );
+          toast.success(translate("changeSuccessful"));
         });
     }
   }
@@ -48,7 +49,7 @@ const ResetPassword = () => {
           onSubmit={handleResetPassword}
         >
           <div className="flex flex-col gap-1">
-            <label>Password</label>
+            <label>{t("password")}</label>
             <input
               type="password"
               placeholder="Password"
@@ -62,18 +63,18 @@ const ResetPassword = () => {
             aria-disabled={isLoading}
             className="flex justify-between items-center bg-primary cursor-pointer rounded-4xl p-2 ps-5 w-full md:max-w-[200px] md:ps-8"
           >
-            <span>Send</span>
+            <span>{t("send")}</span>
             <div className="flex justify-center items-center rounded-full p-1 bg-secondary text-primary">
               <ArrowUpRight />
             </div>
           </button>
           <p>
-            Remembered your password?{" "}
+            {t("rememberedPassword")}?{" "}
             <Link
               to={routes.Login.absolute}
               className="text-secondary font-poppins-semi-bold"
             >
-              Login
+              {t("login")}
             </Link>
           </p>
         </form>

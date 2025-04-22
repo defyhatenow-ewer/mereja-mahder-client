@@ -5,8 +5,11 @@ import { Loader } from "../../components";
 import { routes } from "../../routing";
 import { toast } from "react-toastify";
 import { ArrowUpRight } from "../../components/Icons";
+import { translate } from "../../i18n";
+import { useTranslation } from "react-i18next";
 
 const ForgotPassword = () => {
+  const { t } = useTranslation();
   const [forgotPassword, { isLoading }] = useForgotPasswordMutation();
 
   const [email, setEmail] = useState("");
@@ -16,13 +19,13 @@ const ForgotPassword = () => {
     e.preventDefault();
 
     if (email === "") {
-      toast.error("Please add an email");
+      toast.error(translate("pleaseAddMail"));
     } else {
       await forgotPassword({ email })
         .unwrap()
         .then(() => {
           setEmail("");
-          toast.success("Check your email for a link to reset your password");
+          toast.success(translate("checkEmail"));
         });
     }
   }
@@ -37,7 +40,7 @@ const ForgotPassword = () => {
           onSubmit={handleForgotPassword}
         >
           <div className="flex flex-col gap-1">
-            <label>Email Address</label>
+            <label>{t("emailAddress")}</label>
             <input
               type="email"
               placeholder="Email"
@@ -51,18 +54,18 @@ const ForgotPassword = () => {
             aria-disabled={isLoading}
             className="flex justify-between items-center bg-primary cursor-pointer rounded-4xl p-2 ps-5 w-full md:max-w-[200px] md:ps-8"
           >
-            <span>Send</span>
+            <span>{t("send")}</span>
             <div className="flex justify-center items-center rounded-full p-1 bg-secondary text-primary">
               <ArrowUpRight />
             </div>
           </button>
           <p>
-            You don&apos;t have an account?{" "}
+            {t("dontHaveAccount")}?{" "}
             <Link
               to={routes.Register.absolute}
               className="text-secondary font-poppins-semi-bold"
             >
-              Get Started
+              {t("getStarted")}
             </Link>
           </p>
         </form>

@@ -2,8 +2,10 @@ import { useParams } from "react-router-dom";
 import { Loader, RichTextReader } from "../../components";
 import { formatDateTime } from "../../utils";
 import { useGetSingleResourceQuery } from "../../features/resources.api";
+import { useTranslation } from "react-i18next";
 
 const SinglePrivateSafetyResource = () => {
+  const { t } = useTranslation();
   const { id } = useParams();
 
   const { data: post, isLoading } = useGetSingleResourceQuery(
@@ -20,7 +22,7 @@ const SinglePrivateSafetyResource = () => {
   if (!isLoading && !post)
     return (
       <div className="flex flex-col bg-white gap-5 p-5 pt-0 md:p-12 md:pt-0 md:gap-16">
-        No post found
+        {t("postNotFound")}
       </div>
     );
 

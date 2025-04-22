@@ -13,8 +13,10 @@ import {
 import { useGetCategoriesQuery } from "../features/categories.api";
 import { formatDateTime } from "../utils";
 import { useGetTagsQuery } from "../features/tag.api";
+import { useTranslation } from "react-i18next";
 
 const Posts = () => {
+  const { t } = useTranslation();
   const [search, setSearch] = useState("");
   const [open, setOpen] = useState(false);
   const [tagOpen, setTagOpen] = useState(false);
@@ -109,7 +111,7 @@ const Posts = () => {
     <>
       <Loader show={isLoading || isTagsLoading || isPostsLoading} />
       <div className="flex flex-col bg-white gap-5 p-5 pt-0 md:p-12 md:pt-0 md:gap-16">
-        <h2>Archive</h2>
+        <h2>{t("archive")}</h2>
         <section className="flex flex-col gap-5 md:justify-between md:items-center md:gap-8 md:flex-row">
           <input
             type="text"
@@ -204,7 +206,7 @@ const Posts = () => {
             aria-disabled={isLoading}
             className="flex justify-between items-center gap-3 bg-secondary text-primary cursor-pointer rounded-4xl p-2 ps-4 w-full md:max-w-[8rem] md:ps-6"
           >
-            <span>Clear</span>
+            <span>{t("clear")}</span>
             <div className="flex justify-center items-center rounded-full p-1 bg-primary text-secondary">
               <Refresh />
             </div>
@@ -264,7 +266,7 @@ const Posts = () => {
               />
             </div>
           ) : (
-            <p>No posts found</p>
+            <p>{t("postsNotFound")}</p>
           )}
         </section>
       </div>

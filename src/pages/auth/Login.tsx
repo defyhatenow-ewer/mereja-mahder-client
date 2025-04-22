@@ -6,6 +6,8 @@ import { routes } from "../../routing";
 import { toast } from "react-toastify";
 import { ArrowUpRight } from "../../components/Icons";
 import { goToDashboard } from "../../utils";
+import { translate } from "../../i18n";
+import { useTranslation } from "react-i18next";
 
 interface IdealLocationState {
   from: {
@@ -16,6 +18,7 @@ interface IdealLocationState {
 type LocationState = IdealLocationState | null;
 
 const Login = () => {
+  const { t } = useTranslation();
   localStorage.setItem("rememberMe", "false");
   const navigate = useNavigate();
   const location = useLocation();
@@ -37,7 +40,7 @@ const Login = () => {
     const rememberMe = localStorage.getItem("rememberMe");
 
     if (!acceptTerms) {
-      toast.error("Please accept the terms and conditions first!");
+      toast.error(translate("acceptT&C"));
     } else {
       await loginUser({ email, password })
         .unwrap()
@@ -71,7 +74,7 @@ const Login = () => {
           onSubmit={handleSubmit}
         >
           <div className="flex flex-col gap-1">
-            <label>Email Address</label>
+            <label>{t("emailAddress")}</label>
             <input
               type="email"
               placeholder="Email"
@@ -81,7 +84,7 @@ const Login = () => {
             />
           </div>
           <div className="flex flex-col gap-1">
-            <label>Password</label>
+            <label>{t("password")}</label>
             <input
               type="password"
               placeholder="Password"
@@ -104,7 +107,7 @@ const Login = () => {
                 }}
               />
               <span className="label-text text-[#202224] text-sm">
-                I accept terms and conditions
+                {t("IAcceptT&C")}
               </span>
             </label>
           </div>
@@ -121,13 +124,15 @@ const Login = () => {
                   }
                 }}
               />
-              <span className="label-text text-black text-sm">Remember me</span>
+              <span className="label-text text-black text-sm">
+                {t("rememberMe")}
+              </span>
             </label>
             <Link
               to={routes.ForgotPassword.absolute}
               className="text-secondary text-sm font-poppins-semi-bold"
             >
-              Forgot Password?
+              {t("forgotPassword")}
             </Link>
           </div>
           <button
@@ -135,18 +140,18 @@ const Login = () => {
             aria-disabled={isLoading}
             className="flex justify-between items-center bg-primary cursor-pointer rounded-4xl p-2 ps-5 w-full md:max-w-[200px] md:ps-8"
           >
-            <span>Login</span>
+            <span>{t("login")}</span>
             <div className="flex justify-center items-center rounded-full p-1 bg-secondary text-primary">
               <ArrowUpRight />
             </div>
           </button>
           <p>
-            You don&apos;t have an account?{" "}
+            {t("dontHaveAccount")}?{" "}
             <Link
               to={routes.Register.absolute}
               className="text-black font-poppins-semi-bold"
             >
-              Register
+              {t("register")}
             </Link>
           </p>
         </form>

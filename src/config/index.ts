@@ -1,3 +1,4 @@
 import config from "./config";
+import lngs from "./languages";
 
-export { config };
+export { config, lngs };

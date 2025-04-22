@@ -4,8 +4,10 @@ import { useGetChartsQuery } from "../../features/charts.api";
 import { routes } from "../../routing";
 import { config } from "../../config";
 import { formatDateTime } from "../../utils";
+import { useTranslation } from "react-i18next";
 
 const Data = () => {
+  const { t } = useTranslation();
   const { data, isLoading } = useGetChartsQuery({
     options: {
       limit: 6,
@@ -45,7 +47,7 @@ const Data = () => {
                   {chart.title}
                 </h3>
                 <button className="text-white bg-secondary py-2 px-5 rounded-3xl w-fit">
-                  See more
+                  {t("seeMore")}
                 </button>
               </div>
             </Link>

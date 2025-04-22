@@ -2,22 +2,23 @@ import { Link, Outlet, useLocation } from "react-router-dom";
 import { CustomToast } from "../../components";
 import { amharicText, logo } from "../../assets/images";
 import { routes } from "../../routing";
+import { translate } from "../../i18n";
 
 const AuthLayout = () => {
   const location = useLocation();
 
-  const setPageTitle = (): string => {
+  const setPageTitle = (): Promise<string> | string => {
     switch (location.pathname) {
       case routes.Login.absolute:
-        return "Login";
+        return translate("login");
       case routes.Register.absolute:
-        return "Register";
+        return translate("register");
       case routes.ForgotPassword.absolute:
-        return "Forgot Password?";
+        return `${translate("forgotPassword")}?`;
       case routes.ResetPassword.absolute:
-        return "Reset Password";
+        return translate("resetPassword");
       default:
-        return "Login";
+        return translate("login");
     }
   };
 

@@ -2,9 +2,11 @@ import { useParams } from "react-router-dom";
 import { Loader, RichTextReader } from "../../components";
 import { formatDateTime } from "../../utils";
 import { useGetSingleMaterialQuery } from "../../features/materials.api";
+import { useTranslation } from "react-i18next";
 
 const SinglePrivateMaterial = () => {
   const { id } = useParams();
+  const { t } = useTranslation();
 
   const { data: post, isLoading } = useGetSingleMaterialQuery(
     {
@@ -20,7 +22,7 @@ const SinglePrivateMaterial = () => {
   if (!isLoading && !post)
     return (
       <div className="flex flex-col bg-white gap-5 p-5 pt-0 md:p-12 md:pt-0 md:gap-16">
-        No post found
+        {t("postNotFound")}
       </div>
     );
 

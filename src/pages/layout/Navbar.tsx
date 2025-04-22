@@ -6,41 +6,43 @@ import { useEffect, useState } from "react";
 import { useMeQuery } from "../../features/auth.api";
 import { avatarPlaceholder } from "../../assets/images";
 import { config } from "../../config";
+import { useTranslation } from "react-i18next";
+import { lngs } from "../../config";
 
 const links = [
   new CustomLink(
-    "Fellows",
+    "fellows",
     routes.Fellows.absolute,
     SpaceTypes.AFF,
     "Overview"
   ),
   new CustomLink(
-    "Partners",
+    "partners",
     routes.Partners.absolute,
     SpaceTypes.Partner,
     "Overview"
   ),
   new CustomLink(
-    "Women Safe Space",
+    "womenSafeSpace",
     routes.WomenSafeSpace.absolute,
     SpaceTypes.Women,
     "Overview"
   ),
-  new CustomLink("Forum", routes.Forum.absolute),
+  new CustomLink("forum", routes.Forum.absolute),
   new CustomLink(
-    "Learning Resources",
+    "learningResources",
     routes.LearningResources.absolute,
     SpaceTypes.AFF
   ),
-  new CustomLink("Data", routes.Data.absolute, SpaceTypes.Partner),
-  new CustomLink("Reports", routes.ReportList.absolute, SpaceTypes.Partner),
+  new CustomLink("data", routes.Data.absolute, SpaceTypes.Partner),
+  new CustomLink("reports", routes.ReportList.absolute, SpaceTypes.Partner),
   new CustomLink(
-    "Safety Resources",
+    "safetyResources",
     routes.SafetyResources.absolute,
     SpaceTypes.Women
   ),
   new CustomLink(
-    "Settings",
+    "settings",
     routes.Settings.absolute,
     SpaceTypes.General,
     "",
@@ -49,9 +51,14 @@ const links = [
 ];
 
 const Navbar = () => {
+  const { i18n } = useTranslation();
   const { data } = useMeQuery();
   const [open, setOpen] = useState(false);
-  const [language, setLanguage] = useState(navigator.language || "en-US");
+  const [language, setLanguage] = useState(
+    i18n.resolvedLanguage
+      ? lngs[i18n.resolvedLanguage as keyof typeof lngs].nativeName
+      : "English"
+  );
 
   useEffect(() => {
     const Menu = document.getElementById("language-menu");
@@ -59,14 +66,23 @@ const Navbar = () => {
       document.addEventListener("click", (e) => {
         const withinBoundaries = e.composedPath().includes(Menu);
         if (!withinBoundaries && open) {
-          console.log("outside");
           setOpen(false);
+          Menu.removeAttribute("open");
         }
       });
     }
-  });
+  }, [open]);
 
-  console.log(data);
+  const changeLanguage = (lng: string) => {
+    i18n.changeLanguage(lng);
+    setLanguage(lngs[lng as keyof typeof lngs].nativeName);
+    setOpen(false);
+    const DropDown = document.getElementById("language-menu");
+    if (DropDown) {
+      DropDown.removeAttribute("open");
+    }
+  };
+
   return (
     <div className="flex flex-row justify-between items-center w-full pb-5 md:pb-0">
       <label className="input rounded-2xl md:!w-112">
@@ -105,29 +121,27 @@ const Navbar = () => {
           }
         }}
       >
-        <summary className="list-none text-white h-full align-middle cursor-pointer">
+        <summary className="list-none text-secondary h-full align-middle cursor-pointer">
           <div className="h-full flex justify-between gap-2 items-center text-black p-1 rounded-md">
             <span>{language}</span>
             {open ? (
-              <ChevronUp className="size-3" />
+              <ChevronUp className="size-4" />
             ) : (
-              <ChevronDown className="size-3" />
+              <ChevronDown className="size-4" />
             )}
           </div>
         </summary>
-        <ul className="p-3 gap-2 shadow menu dropdown-content z-[1] rounded-sm w-32 text-sm">
-          <li
-            className="cursor-pointer p-1 hover:bg-primary"
-            onClick={() => setLanguage("en")}
-          >
-            English
-          </li>
-          <li
-            className="cursor-pointer p-1 hover:bg-primary"
-            onClick={() => setLanguage("am")}
-          >
-            Amharic
-          </li>
+        <ul className="p-3 gap-2 shadow menu dropdown-content z-[1] rounded-sm w-32 text-sm bg-white">
+          {Object.keys(lngs).map((lng) => (
+            <li
+              key={lng}
+              className="cursor-pointer p-1 text-sm hover:bg-primary"
+              onClick={() => changeLanguage(lng)}
+              aria-disabled={i18n.resolvedLanguage === lng}
+            >
+              {lngs[lng as keyof typeof lngs].nativeName}
+            </li>
+          ))}
         </ul>
       </details>
       {data && (

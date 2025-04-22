@@ -3,8 +3,10 @@ import parse from "html-react-parser";
 import { Loader, RichTextReader } from "../components";
 import { formatDateTime } from "../utils";
 import { useGetSingleChartQuery } from "../features/charts.api";
+import { useTranslation } from "react-i18next";
 
 const SingleChart = () => {
+  const { t } = useTranslation();
   const { id } = useParams();
 
   const { data: post, isLoading } = useGetSingleChartQuery(
@@ -21,7 +23,7 @@ const SingleChart = () => {
   if (!isLoading && !post)
     return (
       <div className="flex flex-col bg-white gap-5 p-5 pt-0 md:p-12 md:pt-0 md:gap-16">
-        No post found
+        {t("postNotFound")}
       </div>
     );
 

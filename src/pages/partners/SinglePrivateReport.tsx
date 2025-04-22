@@ -3,8 +3,10 @@ import { Loader, RichTextReader } from "../../components";
 import { formatDateTime, makeDownloadable } from "../../utils";
 import { useGetSingleReportQuery } from "../../features/reports.api";
 import { ArrowDown } from "../../components/Icons";
+import { useTranslation } from "react-i18next";
 
 const SinglePrivateReport = () => {
+  const { t } = useTranslation();
   const { id } = useParams();
 
   const { data: post, isLoading } = useGetSingleReportQuery(
@@ -21,7 +23,7 @@ const SinglePrivateReport = () => {
   if (!isLoading && !post)
     return (
       <div className="flex flex-col bg-white gap-5 p-5 pt-0 md:p-12 md:pt-0 md:gap-16">
-        No post found
+        {t("postNotFound")}
       </div>
     );
 
@@ -45,7 +47,7 @@ const SinglePrivateReport = () => {
             href={makeDownloadable(post.pdf)}
             className="flex justify-between items-center gap-3 bg-secondary text-white cursor-pointer rounded-2xl p-3 w-full text-sm md:text-base md:w-md"
           >
-            <span>Download</span>
+            <span>{t("download")}</span>
             <div className="flex justify-center items-center rounded-full p-1 bg-primary text-secondary">
               <ArrowDown />
             </div>
@@ -57,7 +59,7 @@ const SinglePrivateReport = () => {
             href={makeDownloadable(post.pdf.url as string)}
             className="flex justify-between items-center gap-3 bg-secondary text-white cursor-pointer rounded-2xl p-3 w-full text-sm md:text-base md:w-md"
           >
-            <span>Download</span>
+            <span>{t("download")}</span>
             <div className="flex justify-center items-center rounded-full p-1 bg-primary text-secondary">
               <ArrowDown />
             </div>

@@ -17,6 +17,7 @@ import { useLogoutMutation, useMeQuery } from "../../features/auth.api";
 import { SpaceTypes } from "../../utils";
 import { logo } from "../../assets/images";
 import { resetAuth } from "../../app/api";
+import { useTranslation } from "react-i18next";
 
 type NavItemProps = {
   title: string;
@@ -30,7 +31,7 @@ type NavItemProps = {
 
 const navLinks: NavItemProps[] = [
   {
-    title: "Fellows",
+    title: "fellows",
     icon: <HomeIcon className="size-4" />,
     route: routes.Fellows.absolute,
     space: SpaceTypes.AFF,
@@ -38,7 +39,7 @@ const navLinks: NavItemProps[] = [
     altIcon: <DocumentCheck className="size-4" />,
   },
   {
-    title: "Partners",
+    title: "partners",
     icon: <HomeIcon className="size-4" />,
     route: routes.Partners.absolute,
     space: SpaceTypes.Partner,
@@ -46,7 +47,7 @@ const navLinks: NavItemProps[] = [
     altIcon: <Users className="size-4" />,
   },
   {
-    title: "Women Safe Space",
+    title: "womenSafeSpace",
     icon: <HomeIcon className="size-4" />,
     route: routes.WomenSafeSpace.absolute,
     space: SpaceTypes.Women,
@@ -54,25 +55,25 @@ const navLinks: NavItemProps[] = [
     altIcon: <UserPlus className="size-4" />,
   },
   {
-    title: "Learning Resources",
+    title: "learningResources",
     icon: <OpenBook className="size-4" />,
     route: routes.LearningResources.absolute,
     space: SpaceTypes.AFF,
   },
   {
-    title: "Reports",
+    title: "reports",
     icon: <FolderOpen className="size-4" />,
     route: routes.ReportList.absolute,
     space: SpaceTypes.Partner,
   },
   {
-    title: "Data",
+    title: "data",
     icon: <Chart className="size-4" />,
     route: routes.Data.absolute,
     space: SpaceTypes.Partner,
   },
   {
-    title: "Safety Resources",
+    title: "safetyResources",
     icon: <ArchiveBox className="size-4" />,
     route: routes.SafetyResources.absolute,
     space: SpaceTypes.Women,
@@ -80,6 +81,7 @@ const navLinks: NavItemProps[] = [
 ];
 
 const NavItem = ({ title, icon, route }: NavItemProps) => {
+  const { t } = useTranslation();
   const location = useLocation();
   const isActive = location.pathname.includes(route);
   return (
@@ -90,12 +92,13 @@ const NavItem = ({ title, icon, route }: NavItemProps) => {
       } hover:bg-primary flex gap-3 py-1 pe-3 items-center w-full`}
     >
       {icon}
-      <span>{title}</span>
+      <span>{t(title)}</span>
     </Link>
   );
 };
 
 const Sidebar = () => {
+  const { t } = useTranslation();
   const { data, isFetching } = useMeQuery();
   const [logoutUser] = useLogoutMutation();
   const navigate = useNavigate();
@@ -119,7 +122,7 @@ const Sidebar = () => {
         <Link to={routes.Home.absolute}>
           <img src={logo} className="max-h-10 mb-3" />
         </Link>
-        <h2 className="text-base font-poppins">OVERVIEW</h2>
+        <h2 className="text-base font-poppins">{t("overviewCaps")}</h2>
         {navLinks.map((navLink) => {
           if (navLink.admin && data.user.role === "admin") {
             return (
@@ -162,7 +165,7 @@ const Sidebar = () => {
         })}
       </nav>
       <div>
-        <h2 className="text-base font-poppins">FORUMS</h2>
+        <h2 className="text-base font-poppins">{t("forumsCaps")}</h2>
       </div>
       <div className="flex flex-col gap-2">
         {/* <Link
@@ -177,7 +180,7 @@ const Sidebar = () => {
           className={`bg-white cursor-pointer hover:bg-primary text-secondary flex gap-3 py-1 pe-3 items-center w-full`}
         >
           <ArrowLeftRectangle />
-          <span>Logout</span>
+          <span>{t("logout")}</span>
         </button>
       </div>
     </div>

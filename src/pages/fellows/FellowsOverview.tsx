@@ -6,8 +6,10 @@ import { useGetBannersQuery } from "../../features/banners.api";
 import { routes } from "../../routing";
 import { useGetMaterialsQuery } from "../../features/materials.api";
 import { useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const FellowsOverview = () => {
+  const { t } = useTranslation();
   const maxScrollWidth = useRef(0);
   const [currentIndex, setCurrentIndex] = useState(0);
   const carousel = useRef<HTMLDivElement>(null);
@@ -80,7 +82,7 @@ const FellowsOverview = () => {
         {banners && banners.docs.length && (
           <section className="flex flex-col justify-between items-center gap-5 bg-primary p-5 rounded-md md:rounded-4xl md:p-8 md:flex-row">
             <div className="flex flex-col gap-5 w-full md:w-1/2 md:gap-5">
-              <p>UPCOMING ACTIVITY</p>
+              <p>{t("upcomingActivity")}</p>
               <h2 className="text-lg font-poppins-semi-bold md:text-2xl">
                 {banners.docs[0].title}
               </h2>
@@ -115,7 +117,7 @@ const FellowsOverview = () => {
         )}
         <section className="flex flex-col gap-5">
           <div className="flex justify-between items-center">
-            <h2 className="text-lg">Continue Learning</h2>
+            <h2 className="text-lg">{t("continueLearning")}</h2>
             <div className="flex items-center gap-2">
               <button
                 onClick={movePrev}

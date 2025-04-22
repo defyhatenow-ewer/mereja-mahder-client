@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import {
   affGroupPhoto,
   amharicTextBlack,
@@ -17,6 +18,7 @@ import { useGetArticlesQuery } from "../features/articles.api";
 import { useGetShowsQuery } from "../features/shows.api";
 
 const Home = () => {
+  const { t } = useTranslation();
   const { data: reports, isLoading: isReportsLoading } = useGetReportsQuery({
     options: {
       limit: 3,
@@ -47,12 +49,7 @@ const Home = () => {
             <div className="flex flex-col flex-grow gap-5 justify-between bg-primary p-8 rounded-t-2xl rounded-b-2xl md:gap-0 md:rounded-t-4xl md:rounded-br-none md:rounded-bl-4xl md:p-12 lg:p-24">
               <img src={amharicTextBlack} className="max-w-36" />
               <h1 className="text-left">Mereja Mahder</h1>
-              <p>
-                An open-access information repository by #defyhatenow Ethiopia,
-                serving as a central hub for credible reports, cybersecurity and
-                safety resources, fact-checks, open datasets and informative
-                resources to discern disinformation.
-              </p>
+              <p>{t("description")}</p>
               <div className="flex flex-col items-center md:hidden">
                 <img
                   src={affGroupPhoto}
@@ -62,7 +59,7 @@ const Home = () => {
                   to={routes.About.relative}
                   className="flex justify-between items-center gap-3 outline-20 outline-primary bg-secondary text-white cursor-pointer rounded-4xl p-3 ps-4 w-fit"
                 >
-                  <span>Learn more</span>
+                  <span>{t("learnMore")}</span>
                   <div className="flex justify-center items-center rounded-full p-1 bg-primary text-secondary">
                     <ArrowUpRight />
                   </div>
@@ -75,7 +72,7 @@ const Home = () => {
                   to={routes.About.relative}
                   className="flex justify-between items-center gap-3 bg-secondary text-white cursor-pointer rounded-4xl p-3 ps-4 w-[100%-20px] text-sm md:text-base md:w-[100%-48px] md:ps-6"
                 >
-                  <span>Learn more</span>
+                  <span>{t("learnMore")}</span>
                   <div className="flex justify-center items-center rounded-full p-1 bg-primary text-secondary">
                     <ArrowUpRight />
                   </div>
@@ -102,7 +99,7 @@ const Home = () => {
         <section className="flex flex-col bg-custom-gray w-full gap-8 rounded-4xl md:rounded-none md:gap-12">
           <div className="flex w-full bg-custom-gray">
             <div className="bg-white p-8 pt-0 w-full justify-center md:justify-start md:rounded-br-4xl md:pt-8 md:p-12 md:w-sm">
-              <h2 className="text-center md:text-left">Reports</h2>
+              <h2 className="text-center md:text-left">{t("reports")}</h2>
             </div>
             <div className="flex-grow bg-white hidden md:flex">
               <div className="h-full w-full bg-custom-gray md:rounded-tl-4xl"></div>
@@ -166,7 +163,7 @@ const Home = () => {
               ))}
             </div>
           ) : (
-            <div className="p-5 md:p-12">Sorry. No reports found</div>
+            <div className="p-5 md:p-12">{t("reportsNotFound")}</div>
           )}
           <div className="flex w-full">
             <div className="flex-grow bg-white hidden md:flex">
@@ -177,7 +174,7 @@ const Home = () => {
                 to={routes.Reports.relative}
                 className="flex justify-between items-center gap-3 bg-secondary text-white cursor-pointer rounded-4xl p-3 ps-4 w-fit text-sm md:text-base md:w-[100%-48px] md:ps-6"
               >
-                <span>View More</span>
+                <span>{t("viewMore")}</span>
                 <div className="flex justify-center items-center rounded-full p-1 bg-primary text-secondary">
                   <ChevronRight />
                 </div>
@@ -189,10 +186,9 @@ const Home = () => {
           <div className="flex flex-col bg-light-red text-white m-5 md:m-0 md:w-1/2">
             <div className="bg-white flex-grow">
               <div className="flex flex-col flex-grow h-full bg-light-red rounded-4xl justify-center items-center gap-8 pt-8 p-8 pb-0 md:rounded-none md:rounded-tr-4xl md:items-start md:py-12 md:gap-12 md:p-12">
-                <h2 className="font-poppins">Field Guide</h2>
+                <h2 className="font-poppins">{t("fieldGuide")}</h2>
                 <p className="text-center md:text-left">
-                  Mobilizing civic and digital action to counter online hate
-                  speech and online incitement to violence in Ethiopia.
+                  {t("fieldGuideDescription")}
                 </p>
                 <img
                   src={fieldGuides}
@@ -206,7 +202,7 @@ const Home = () => {
                 to={routes.Resources.relative}
                 className="flex justify-between items-center gap-3 bg-secondary text-white cursor-pointer rounded-4xl p-3 ps-4 w-[100%-20px] text-sm md:text-base md:w-[100%-48px] md:ps-6"
               >
-                <span>View SM HS mitigation Field Guide</span>
+                <span>{t("viewFieldGuide")}</span>
                 <div className="flex justify-center items-center rounded-full p-1 bg-primary text-secondary">
                   <ChevronRight />
                 </div>
@@ -221,7 +217,7 @@ const Home = () => {
           </div>
         </section>
         <section className="flex flex-col gap-8 p-8 pt-0 md:gap-12 md:pt-0 md:p-12">
-          <h2>Recent Fact-checks</h2>
+          <h2>{t("recentFactChecks")}</h2>
           {factChecks && factChecks.docs ? (
             <div className="grid grid-flow-row grid-cols-1 gap-3 md:gap-8 md:grid-cols-2">
               {factChecks.docs.map((post) => (
@@ -267,15 +263,13 @@ const Home = () => {
               ))}
             </div>
           ) : (
-            <div className="p-5 md:p-12">
-              Sorry. No fact-checking articles found
-            </div>
+            <div className="p-5 md:p-12">{t("articlesNotFound")}</div>
           )}
           <Link
             to={routes.FactChecks.relative}
             className="flex justify-between items-center gap-3 bg-secondary text-white cursor-pointer rounded-4xl p-3 ps-4 w-full text-sm md:text-base md:max-w-sm md:ps-6"
           >
-            <span>Read More Articles</span>
+            <span>{t("readMoreArticles")}</span>
             <div className="flex justify-center items-center rounded-full p-1 bg-primary text-secondary">
               <ChevronRight />
             </div>
@@ -284,17 +278,16 @@ const Home = () => {
         <section className="flex flex-col bg-primary p-8 mx-8 rounded-4xl md:rounded-none md:mx-0 md:pt-0 md:p-12 md:flex-row">
           <img src={graphic1} className="w-full hidden md:inline md:w-1/3" />
           <div className="flex flex-col justify-center items-center text-center gap-3 md:pt-12 md:gap-5">
-            <h2 className="text-center">Access Resources</h2>
-            <h3 className="font-poppins-regular">Cybersecurity & Safety</h3>
-            <p>
-              Mobilizing civic and digital action to counter online hate speech
-              and online incitement to violence in Ethiopia.
-            </p>
+            <h2 className="text-center">{t("accessResources")}</h2>
+            <h3 className="font-poppins-regular">
+              {t("cybersecurity&safety")}
+            </h3>
+            <p>{t("accessResourcesDescription")}</p>
             <Link
               to={routes.Resources.relative}
               className="flex justify-between items-center gap-3 bg-secondary text-white cursor-pointer rounded-4xl p-3 ps-4 w-full text-sm md:text-base md:max-w-sm md:ps-6"
             >
-              <span>View Resources</span>
+              <span>{t("viewResources")}</span>
               <div className="flex justify-center items-center rounded-full p-1 bg-primary text-secondary">
                 <ChevronRight />
               </div>
@@ -303,8 +296,8 @@ const Home = () => {
           <img src={graphic2} className="w-full hidden md:inline md:w-1/3" />
         </section>
         <section className="flex flex-col gap-8 p-8 pt-0 md:pt-0 md:gap-12 md:p-12">
-          <h2 className="hidden md:block">Media Productions</h2>
-          <h2 className="block md:hidden">Radio Shows</h2>
+          <h2 className="hidden md:block">{t("mediaProductions")}</h2>
+          <h2 className="block md:hidden">{t("radioShows")}</h2>
           {radioShows && radioShows.docs ? (
             <div className="grid grid-flow-row grid-cols-1 gap-8 md:gap-8 md:grid-cols-3">
               {radioShows.docs.map((post) => (
@@ -351,13 +344,13 @@ const Home = () => {
               ))}
             </div>
           ) : (
-            <div className="p-5 md:p-12">Sorry. No radio shows found</div>
+            <div className="p-5 md:p-12">{t("showsNotFound")}</div>
           )}
           <Link
             to={routes.RadioShows.relative}
             className="flex justify-between items-center self-center gap-8 bg-secondary text-white cursor-pointer rounded-4xl p-3 ps-4 w-fit text-sm md:self-start md:text-base md:w-sm md:ps-6"
           >
-            <span>More radio shows</span>
+            <span>{t("moreShows")}</span>
             <div className="flex justify-center items-center rounded-full p-1 bg-primary text-secondary">
               <ChevronRight />
             </div>

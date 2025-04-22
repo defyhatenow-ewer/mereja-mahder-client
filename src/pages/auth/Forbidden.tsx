@@ -1,5 +1,8 @@
+import { useTranslation } from "react-i18next";
+
 const Forbidden = () => {
-  return <div>Forbidden</div>;
+  const { t } = useTranslation();
+  return <div>{t("forbidden")}</div>;
 };
 
 export default Forbidden;

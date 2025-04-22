@@ -17,8 +17,10 @@ import {
   pickIdUsingTitle,
   pickTitleUsingID,
 } from "../utils/filters";
+import { useTranslation } from "react-i18next";
 
 const Resources = () => {
+  const { t } = useTranslation();
   const [search, setSearch] = useState("");
   const [open, setOpen] = useState(false);
   const [tagOpen, setTagOpen] = useState(false);
@@ -107,9 +109,9 @@ const Resources = () => {
       <Loader show={isPostsLoading || isLoading || isTagsLoading} />
       <div className="flex flex-col bg-white gap-5 p-5 pt-0 md:p-12 md:pt-0 md:gap-16">
         <div className="flex flex-col gap-3">
-          <h2>Resources</h2>
+          <h2>{t("resources")}</h2>
           <h3 className="text-[#D5D5D5] text-2xl font-poppins">
-            Cybersecurity & Online Safety
+            {t("cybersecurity&onlineSafety")}
           </h3>
         </div>
         <section className="flex flex-col gap-5 md:justify-between md:items-center md:gap-8 md:flex-row">
@@ -206,7 +208,7 @@ const Resources = () => {
             aria-disabled={isPostsLoading}
             className="flex justify-between items-center gap-3 bg-secondary text-primary cursor-pointer rounded-4xl p-2 ps-4 w-full md:max-w-[10rem] md:ps-6"
           >
-            <span>Clear</span>
+            <span>{t("clear")}</span>
             <div className="flex justify-center items-center rounded-full p-1 bg-primary text-secondary">
               <Refresh />
             </div>
@@ -272,7 +274,7 @@ const Resources = () => {
               />
             </div>
           ) : (
-            <p>No resources found</p>
+            <p>{t("resourcesNotFound")}</p>
           )}
         </section>
       </div>

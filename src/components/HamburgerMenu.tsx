@@ -3,23 +3,27 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { routes } from "../routing";
 import { useLogoutMutation, useMeQuery } from "../features/auth.api";
 import { resetAuth } from "../app/api";
-import { Close, Hamburger } from "./Icons";
+import { ChevronDown, ChevronUp, Close, Hamburger } from "./Icons";
 import Loader from "./Loader";
 import { CustomLink, goToDashboard, SpaceTypes } from "../utils";
 import { IUserWithoutPassword } from "../types/users.types";
+import { useTranslation } from "react-i18next";
+import { lngs } from "../config";
+import { TFunction } from "i18next";
 
 type MenuItemProps = {
   user: IUserWithoutPassword;
   link: CustomLink;
+  t: TFunction<"translation", undefined>;
 };
 
-const MenuItem = ({ user, link }: MenuItemProps) => {
+const MenuItem = ({ user, link, t }: MenuItemProps) => {
   const title =
     user.role === "admin"
-      ? link.title
+      ? t(link.title)
       : link.alt === ""
-      ? link.title
-      : link.alt;
+        ? t(link.title)
+        : t(link.alt as string);
   if (link.space == SpaceTypes.Admin) {
     if (user.role === "admin") {
       return link.anchor ? (
@@ -64,16 +68,47 @@ const HamburgerMenu = ({
   includeLogout = false,
   dashboard = false,
 }: Props) => {
+  const { t, i18n } = useTranslation();
   const { data, isLoading } = useMeQuery();
   const location = useLocation();
   const navigate = useNavigate();
   const [logoutUser] = useLogoutMutation();
   const [open, setOpen] = useState(false);
+  const [language, setLanguage] = useState(
+    i18n.resolvedLanguage
+      ? lngs[i18n.resolvedLanguage as keyof typeof lngs].nativeName
+      : "English"
+  );
+  const [openLanguageMenu, setOpenLanguageMenu] = useState(false);
 
   useEffect(() => {
     const Menu = document.getElementById("hamburger-menu");
     Menu?.removeAttribute("open");
   }, [location]);
+
+  useEffect(() => {
+    const Menu = document.getElementById("language-menu");
+    if (Menu) {
+      document.addEventListener("click", (e) => {
+        const withinBoundaries = e.composedPath().includes(Menu);
+        if (!withinBoundaries && openLanguageMenu) {
+          setOpenLanguageMenu(false);
+          Menu.removeAttribute("open");
+        }
+      });
+    }
+  }, [openLanguageMenu]);
+
+  const changeLanguage = (lng: string) => {
+    i18n.changeLanguage(lng);
+    setLanguage(lngs[lng as keyof typeof lngs].nativeName);
+    setOpen(false);
+    setOpenLanguageMenu(false);
+    const DropDown = document.getElementById("language-menu");
+    DropDown?.removeAttribute("open");
+    const Menu = document.getElementById("hamburger-menu");
+    Menu?.removeAttribute("open");
+  };
 
   async function logout() {
     await logoutUser().then(() => {
@@ -106,14 +141,14 @@ const HamburgerMenu = ({
       <ul className="p-3 shadow menu dropdown-content z-[1] rounded-sm bg-primary text-black font-[500] font-roboto w-[60vw]">
         {dashboard && data
           ? links.map((link) => (
-              <MenuItem key={link.title} user={data.user} link={link} />
+              <MenuItem key={link.title} user={data.user} link={link} t={t} />
             ))
           : links.map((link) => (
-              <li key={link.title}>
+              <li key={t(link.title)}>
                 {link.anchor ? (
-                  <a href={link.route}>{link.title}</a>
+                  <a href={link.route}>{t(link.title)}</a>
                 ) : (
-                  <Link to={link.route}>{link.title}</Link>
+                  <Link to={link.route}>{t(link.title)}</Link>
                 )}
               </li>
             ))}
@@ -122,12 +157,12 @@ const HamburgerMenu = ({
           : data &&
             data.user && (
               <li>
-                <Link to={goToDashboard(data.user)}>Dashboard</Link>
+                <Link to={goToDashboard(data.user)}>{t("dashboard")}</Link>
               </li>
             )}
         {includeLogout && (
           <li>
-            <a onClick={logout}>Logout</a>
+            <a onClick={logout}>{t("logout")}</a>
           </li>
         )}
         {/* <li>
@@ -139,6 +174,40 @@ const HamburgerMenu = ({
             <h2 className="font-permanent-marker text-base">#defyhatenow</h2>
           </a>
         </li> */}
+        <details
+          id="language-menu"
+          className="dropdown dropdown-end text-sm z-[99] px-3"
+          onToggle={(e) => {
+            if (e.currentTarget.open) {
+              setOpenLanguageMenu(true);
+            } else {
+              setOpenLanguageMenu(false);
+            }
+          }}
+        >
+          <summary className="list-none text-secondary h-full align-middle cursor-pointer">
+            <div className="h-full flex justify-between gap-2 items-center text-black p-1 rounded-md">
+              <span>{language}</span>
+              {openLanguageMenu ? (
+                <ChevronUp className="size-4" />
+              ) : (
+                <ChevronDown className="size-4" />
+              )}
+            </div>
+          </summary>
+          <ul className="p-3 gap-2 shadow menu dropdown-content z-[1] rounded-sm w-32 text-sm bg-primary">
+            {Object.keys(lngs).map((lng) => (
+              <li
+                key={lng}
+                className="cursor-pointer p-1 text-sm hover:bg-primary"
+                onClick={() => changeLanguage(lng)}
+                aria-disabled={i18n.resolvedLanguage === lng}
+              >
+                {lngs[lng as keyof typeof lngs].nativeName}
+              </li>
+            ))}
+          </ul>
+        </details>
       </ul>
     </details>
   );
