@@ -1,5 +1,4 @@
 import formatErrorMessage from "./formatErrorMessage";
-import uploadImage, { useUploadImage } from "./uploadImage";
 import deleteEmptyProps from "./deleteEmptyProps";
 import shortenString from "./shortenString";
 import makeDownloadable from "./makeDownloadable";
@@ -13,8 +12,6 @@ import formatDateTime from "./formatDateTime";
 
 export {
   formatErrorMessage,
-  uploadImage,
-  useUploadImage,
   deleteEmptyProps,
   shortenString,
   makeDownloadable,

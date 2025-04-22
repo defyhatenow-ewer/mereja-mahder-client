@@ -30,13 +30,6 @@ type NavItemProps = {
 
 const navLinks: NavItemProps[] = [
   {
-    title: "Overview",
-    icon: <HomeIcon className="size-4" />,
-    route: routes.Dashboard.absolute,
-    space: SpaceTypes.Admin,
-    admin: true,
-  },
-  {
     title: "Fellows",
     icon: <HomeIcon className="size-4" />,
     route: routes.Fellows.absolute,

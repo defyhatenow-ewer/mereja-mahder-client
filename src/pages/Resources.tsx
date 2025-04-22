@@ -236,15 +236,17 @@ const Resources = () => {
                         />
                       )}
                     <div className="flex flex-col gap-2 p-5 md:p-8">
-                      <div className="flex gap-5 items-center">
-                        {["FactCheck", "News"].map((tag, index) => (
-                          <div
-                            key={index}
-                            className="px-3 py-2 bg-primary rounded-2xl md:rounded-3xl md:px-4 md:py-1"
-                          >
-                            {tag}
-                          </div>
-                        ))}
+                      <div className="flex gap-3 items-center">
+                        {post.tags &&
+                          post.tags.map((tag, index) => (
+                            <Link
+                              to={`${routes.Resources.absolute}?tag=${tag.title}`}
+                              key={index}
+                              className="px-3 py-2 bg-primary rounded-2xl text-xs md:rounded-3xl md:px-4 md:py-1"
+                            >
+                              {tag.title}
+                            </Link>
+                          ))}
                       </div>
                       <h3>{post.title}</h3>
                       <small className="text-[#555555]">PDF</small>

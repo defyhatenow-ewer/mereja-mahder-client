@@ -135,15 +135,15 @@
 
   @media (min-width: 768px) {
     h1 {
-      @apply text-6xl;
-      @apply text-left;
-    }
-    h2 {
       @apply text-5xl;
       @apply text-left;
     }
+    h2 {
+      @apply text-4xl;
+      @apply text-left;
+    }
     h3 {
-      @apply text-3xl;
+      @apply text-xl;
       @apply text-left;
     }
     h4 {

@@ -6,8 +6,6 @@ const envSchema = z.object({
   baseUrl: z.string(),
   prod: z.boolean(),
   dev: z.boolean(),
-  cloudinaryName: z.string(),
-  cloudinaryPreset: z.string(),
   siteUrl: z.string().url(),
 });
 
@@ -17,15 +15,13 @@ const env = envSchema.parse({
   baseUrl: import.meta.env.BASE_URL,
   prod: import.meta.env.PROD,
   dev: import.meta.env.DEV,
-  cloudinaryName: import.meta.env.VITE_CLOUDINARY_NAME,
-  cloudinaryPreset: import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET,
   siteUrl: import.meta.env.VITE_SITE_URL,
 });
 
 const config = {
   env,
-  apiUrl: env.apiKey + "api/",
-  dashboardUrl: env.apiKey + "admin/",
+  apiUrl: env.apiKey + "/api/",
+  dashboardUrl: env.apiKey + "/admin/",
 };
 
 export default config;

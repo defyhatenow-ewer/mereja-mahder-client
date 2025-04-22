@@ -1,5 +1,4 @@
 import { routes } from "../../routing";
-import { LogoutButton } from "../../components";
 import HamburgerMenu from "../../components/HamburgerMenu";
 import { CustomLink, SpaceTypes } from "../../utils";
 import { Bell, ChevronDown, ChevronUp } from "../../components/Icons";
@@ -153,9 +152,6 @@ const Navbar = () => {
           </div>
         </a>
       )}
-      <div className="hidden md:block">
-        <LogoutButton />
-      </div>
       <div className="block md:hidden">
         <HamburgerMenu links={links} includeLogout dashboard />
       </div>

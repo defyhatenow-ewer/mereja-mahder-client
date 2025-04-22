@@ -235,7 +235,10 @@ const Reports = () => {
                     <div className="flex flex-col gap-2">
                       <small>PDF</small>
                       <div className="flex justify-between items-center w-full gap-3 md:gap-6">
-                        <Link to={`${routes.Reports.absolute}/${post.id}`}>
+                        <Link
+                          className="font-poppins-medium text-lg"
+                          to={`${routes.Reports.absolute}/${post.id}`}
+                        >
                           {post.title}
                         </Link>
                         {post.pdf && typeof post.pdf === "string" && (

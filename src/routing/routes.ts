@@ -60,10 +60,33 @@ export default {
   ),
   Partners: new Path("partners", "/dashboard/partners"),
   Data: new Path("data", "/dashboard/partners/data"),
+  SingleChart: new Path("data/:id", "/dashboard/partners/data/:id"),
+  SinglePrivatePost: new Path("single/:id", "/dashboard/posts/single/:id"),
   ReportList: new Path("reports", "/dashboard/partners/reports"),
   WomenSafeSpace: new Path("women-safe-space", "/dashboard/women-safe-space"),
   SafetyResources: new Path(
     "safety-resources",
     "/dashboard/women-safe-space/safety-resources"
+  ),
+  SinglePrivateReport: new Path(
+    "reports/:id",
+    "/dashboard/partners/reports/:id"
+  ),
+  SinglePrivateLearningResource: new Path(
+    "learning-resources/:id",
+    "/dashboard/fellows/learning-resources/:id"
+  ),
+  Materials: new Path("materials", "/dashboard/fellows/materials"),
+  SinglePrivateMaterial: new Path(
+    "materials/:id",
+    "/dashboard/fellows/materials/:id"
+  ),
+  SinglePrivateSafetyResource: new Path(
+    "safety-resources/:id",
+    "/dashboard/women-safe-space/safety-resources/:id"
+  ),
+  SinglePrivateArticles: new Path(
+    "articles/:id",
+    "/dashboard/fellows/articles/:id"
   ),
 };

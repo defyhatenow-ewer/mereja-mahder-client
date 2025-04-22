@@ -10,6 +10,8 @@ import SingleRadioShow from "./SingleRadioShow";
 import SingleFactCheck from "./SingleFactCheck";
 import SingleReport from "./SingleReport";
 import SingleResource from "./SingleResource";
+import SingleChart from "./SingleChart";
+import SinglePrivatePost from "./SinglePrivatePost";
 
 export {
   About,
@@ -24,4 +26,6 @@ export {
   SingleFactCheck,
   SingleReport,
   SingleResource,
+  SingleChart,
+  SinglePrivatePost,
 };
