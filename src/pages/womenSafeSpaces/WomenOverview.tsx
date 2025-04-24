@@ -81,7 +81,7 @@ const WomenOverview = () => {
                   <tr key={report.id} className="text-sm">
                     <td className="max-w-32">
                       <Link
-                        to={`${routes.SafetyResources.absolute}/${report.id}`}
+                        to={`${routes.ReportList.absolute}/${report.id}`}
                         className="text-wrap text-sm font-poppins-semi-bold"
                       >
                         {report.title}

@@ -18,6 +18,7 @@ import { SpaceTypes } from "../../utils";
 import { logo } from "../../assets/images";
 import { resetAuth } from "../../app/api";
 import { useTranslation } from "react-i18next";
+import { useGetForumsQuery } from "../../features/forums.api";
 
 type NavItemProps = {
   title: string;
@@ -35,7 +36,7 @@ const navLinks: NavItemProps[] = [
     icon: <HomeIcon className="size-4" />,
     route: routes.Fellows.absolute,
     space: SpaceTypes.AFF,
-    alt: "Overview",
+    alt: "overview",
     altIcon: <DocumentCheck className="size-4" />,
   },
   {
@@ -43,7 +44,7 @@ const navLinks: NavItemProps[] = [
     icon: <HomeIcon className="size-4" />,
     route: routes.Partners.absolute,
     space: SpaceTypes.Partner,
-    alt: "Overview",
+    alt: "overview",
     altIcon: <Users className="size-4" />,
   },
   {
@@ -51,7 +52,7 @@ const navLinks: NavItemProps[] = [
     icon: <HomeIcon className="size-4" />,
     route: routes.WomenSafeSpace.absolute,
     space: SpaceTypes.Women,
-    alt: "Overview",
+    alt: "overview",
     altIcon: <UserPlus className="size-4" />,
   },
   {
@@ -89,7 +90,7 @@ const NavItem = ({ title, icon, route }: NavItemProps) => {
       to={route}
       className={`${
         isActive ? "text-[#D15334]" : "text-secondary"
-      } hover:bg-primary flex gap-3 py-1 pe-3 items-center w-full`}
+      } hover:bg-primary flex gap-3 py-1 pe-3 items-center w-full text-xs`}
     >
       {icon}
       <span>{t(title)}</span>
@@ -100,6 +101,7 @@ const NavItem = ({ title, icon, route }: NavItemProps) => {
 const Sidebar = () => {
   const { t } = useTranslation();
   const { data, isFetching } = useMeQuery();
+  const { data: forums } = useGetForumsQuery({});
   const [logoutUser] = useLogoutMutation();
   const navigate = useNavigate();
 
@@ -116,11 +118,13 @@ const Sidebar = () => {
 
   if (!data) return <Loader />;
 
+  console.log(forums);
+
   return (
     <div className="bg-white flex flex-col justify-between items-start p-5 gap-5">
-      <nav className="flex flex-col gap-2">
+      <nav className="flex flex-col gap-1">
         <Link to={routes.Home.absolute}>
-          <img src={logo} className="max-h-10 mb-3" />
+          <img src={logo} className="max-h-12 mb-3" />
         </Link>
         <h2 className="text-base font-poppins">{t("overviewCaps")}</h2>
         {navLinks.map((navLink) => {
@@ -166,6 +170,16 @@ const Sidebar = () => {
       </nav>
       <div>
         <h2 className="text-base font-poppins">{t("forumsCaps")}</h2>
+        {forums &&
+          forums.docs.map((forum) => (
+            <Link
+              key={forum.id}
+              to={`${routes.Forum.absolute}/${forum.id}`}
+              className="text-xs"
+            >
+              {forum.title}
+            </Link>
+          ))}
       </div>
       <div className="flex flex-col gap-2">
         {/* <Link

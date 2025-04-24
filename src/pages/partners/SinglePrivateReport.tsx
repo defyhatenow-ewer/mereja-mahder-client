@@ -1,9 +1,9 @@
 import { useParams } from "react-router-dom";
 import { Loader, RichTextReader } from "../../components";
-import { formatDateTime, makeDownloadable } from "../../utils";
+import { formatDateTime } from "../../utils";
 import { useGetSingleReportQuery } from "../../features/reports.api";
-import { ArrowDown } from "../../components/Icons";
 import { useTranslation } from "react-i18next";
+import { config } from "../../config";
 
 const SinglePrivateReport = () => {
   const { t } = useTranslation();
@@ -40,31 +40,17 @@ const SinglePrivateReport = () => {
         </div>
       </section>
       <div className="flex flex-col gap-5 w-full items-center md:items-start md:gap-12">
+        {post.pdf && (
+          <iframe
+            src={
+              typeof post.pdf === "string"
+                ? `${config.env.apiKey}${post.pdf}`
+                : `${config.env.apiKey}${post.pdf.url}`
+            }
+            className="w-full h-[800px] self-center"
+          ></iframe>
+        )}
         <RichTextReader data={post.content} />
-        {typeof post.pdf === "string" && (
-          <a
-            download
-            href={makeDownloadable(post.pdf)}
-            className="flex justify-between items-center gap-3 bg-secondary text-white cursor-pointer rounded-2xl p-3 w-full text-sm md:text-base md:w-md"
-          >
-            <span>{t("download")}</span>
-            <div className="flex justify-center items-center rounded-full p-1 bg-primary text-secondary">
-              <ArrowDown />
-            </div>
-          </a>
-        )}
-        {post.pdf && typeof post.pdf !== "string" && (
-          <a
-            download
-            href={makeDownloadable(post.pdf.url as string)}
-            className="flex justify-between items-center gap-3 bg-secondary text-white cursor-pointer rounded-2xl p-3 w-full text-sm md:text-base md:w-md"
-          >
-            <span>{t("download")}</span>
-            <div className="flex justify-center items-center rounded-full p-1 bg-primary text-secondary">
-              <ArrowDown />
-            </div>
-          </a>
-        )}
       </div>
     </div>
   );

@@ -14,19 +14,19 @@ const links = [
     "fellows",
     routes.Fellows.absolute,
     SpaceTypes.AFF,
-    "Overview"
+    "overview"
   ),
   new CustomLink(
     "partners",
     routes.Partners.absolute,
     SpaceTypes.Partner,
-    "Overview"
+    "overview"
   ),
   new CustomLink(
     "womenSafeSpace",
     routes.WomenSafeSpace.absolute,
     SpaceTypes.Women,
-    "Overview"
+    "overview"
   ),
   new CustomLink("forum", routes.Forum.absolute),
   new CustomLink(

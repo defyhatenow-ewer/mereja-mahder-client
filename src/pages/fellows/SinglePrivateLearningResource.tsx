@@ -3,6 +3,7 @@ import { Loader, RichTextReader } from "../../components";
 import { formatDateTime } from "../../utils";
 import { useGetSingleResourceQuery } from "../../features/resources.api";
 import { useTranslation } from "react-i18next";
+import { config } from "../../config";
 
 const SinglePrivateLearningResource = () => {
   const { t } = useTranslation();
@@ -39,6 +40,16 @@ const SinglePrivateLearningResource = () => {
         </div>
       </section>
       <div className="flex flex-col gap-5 w-full items-center md:items-start md:gap-12">
+        {post.pdf && (
+          <iframe
+            src={
+              typeof post.pdf === "string"
+                ? `${config.env.apiKey}${post.pdf}`
+                : `${config.env.apiKey}${post.pdf.url}`
+            }
+            className="w-full h-[800px] self-center"
+          ></iframe>
+        )}
         <RichTextReader data={post.content} />
       </div>
     </div>

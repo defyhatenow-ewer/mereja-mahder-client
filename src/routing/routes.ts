@@ -53,6 +53,7 @@ export default {
   DashboardForbidden: new Path("forbidden", "/dashboard/forbidden"),
   Overview: new Path("overview", "/dashboard/overview"),
   Forum: new Path("forum", "/dashboard/forum"),
+  SingleForum: new Path("forum/:id", "/dashboard/forum/:id"),
   Fellows: new Path("fellows", "/dashboard/fellows"),
   LearningResources: new Path(
     "learning-resources",

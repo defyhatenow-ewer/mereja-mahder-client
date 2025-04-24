@@ -53,9 +53,9 @@ const FrontNavbar = () => {
   };
 
   return (
-    <nav className="bg-white w-full flex justify-between items-center gap-5 p-5 md:p-8 md:px-12 2xl:p-12">
+    <nav className="bg-white w-full flex justify-between items-center gap-5 p-5 md:p-5 md:px-12 2xl:p-12">
       <Link to={routes.Home.absolute}>
-        <img className="w-1/2 md:w-auto md:max-h-12" src={logo} alt="logo" />
+        <img className="w-1/2 md:w-auto md:max-h-16" src={logo} alt="logo" />
       </Link>
       <div className="hidden flex-row gap-8 items-center justify-end md:flex">
         <ul className="menu menu-horizontal gap-3">

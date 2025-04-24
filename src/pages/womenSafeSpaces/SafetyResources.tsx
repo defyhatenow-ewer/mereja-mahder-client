@@ -3,9 +3,9 @@ import { Loader, RichTextReader } from "../../components";
 import { ArrowUpRight } from "../../components/Icons";
 import { config } from "../../config";
 import { useGetBannersQuery } from "../../features/banners.api";
-import { useGetResourcesQuery } from "../../features/resources.api";
 import { routes } from "../../routing";
 import { useTranslation } from "react-i18next";
+import { useGetSafetyResourcesQuery } from "../../features/safetyResources.api";
 
 const SafetyResources = () => {
   const { t } = useTranslation();
@@ -18,7 +18,7 @@ const SafetyResources = () => {
       },
     },
   });
-  const { data, isLoading: isResourcesLoading } = useGetResourcesQuery({
+  const { data, isLoading: isResourcesLoading } = useGetSafetyResourcesQuery({
     query: {
       where: {
         _status: {

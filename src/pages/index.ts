@@ -12,6 +12,7 @@ import SingleReport from "./SingleReport";
 import SingleResource from "./SingleResource";
 import SingleChart from "./SingleChart";
 import SinglePrivatePost from "./SinglePrivatePost";
+import SingleForum from "./SingleForum";
 
 export {
   About,
@@ -28,4 +29,5 @@ export {
   SingleResource,
   SingleChart,
   SinglePrivatePost,
+  SingleForum,
 };

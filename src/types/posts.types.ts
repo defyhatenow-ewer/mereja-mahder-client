@@ -191,10 +191,6 @@ export interface IMaterial {
   createdAt: string;
   _status?: ("draft" | "published") | null;
 }
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "resources".
- */
 export interface IResource {
   id: string;
   title: string;
@@ -203,6 +199,45 @@ export interface IResource {
   excerpt?: SerializedEditorState;
   pdf?: (string | null) | IMedia;
   relatedResources?: (string | IResource)[] | null;
+  categories?: (string | ICategory)[] | null;
+  tags?: ITag[];
+  meta?: {
+    title?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (string | null) | IMedia;
+    description?: string | null;
+  };
+  publishedAt?: string | null;
+  authors?: (string | IUser)[] | null;
+  populatedAuthors?:
+    | {
+        id?: string | null;
+        name?: string | null;
+      }[]
+    | null;
+  views?: number | null;
+  space?: (string | null) | ISpace;
+  privacy?: ("private" | "public") | null;
+  slug?: string | null;
+  slugLock?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ("draft" | "published") | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "resources".
+ */
+export interface ISafetyResource {
+  id: string;
+  title: string;
+  featuredImage?: (string | null) | IMedia;
+  content: SerializedEditorState;
+  excerpt?: SerializedEditorState;
+  pdf?: (string | null) | IMedia;
+  relatedSafetyResources?: (string | ISafetyResource)[] | null;
   categories?: (string | ICategory)[] | null;
   tags?: ITag[];
   meta?: {

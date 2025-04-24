@@ -14,6 +14,7 @@ import {
   Resources,
   SingleChart,
   SingleFactCheck,
+  SingleForum,
   SinglePost,
   SinglePrivatePost,
   SingleRadioShow,
@@ -183,6 +184,15 @@ const AppRouter = createBrowserRouter([
             element: (
               <ProtectedRoute
                 children={<Forum />}
+                restrictedTo={restrictions.none}
+              />
+            ),
+          },
+          {
+            path: routes.SingleForum.relative,
+            element: (
+              <ProtectedRoute
+                children={<SingleForum />}
                 restrictedTo={restrictions.none}
               />
             ),

@@ -59,6 +59,16 @@ const SingleReport = () => {
             </div>
           </div>
         </div>
+        {post.pdf && (
+          <iframe
+            src={
+              typeof post.pdf === "string"
+                ? `${config.env.apiKey}${post.pdf}`
+                : `${config.env.apiKey}${post.pdf.url}`
+            }
+            className="w-full h-[800px] self-center"
+          ></iframe>
+        )}
         <RichTextReader data={post.content} />
         <div className="flex flex-col gap-2">
           <small>{t("sharePost")}</small>
