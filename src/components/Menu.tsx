@@ -5,7 +5,8 @@ import {
   yellowLogoWithCampaign,
 } from "../assets/images";
 import { routes } from "../routing";
-import HamburgerMenu, { CustomLink } from "./HamburgerMenu";
+import HamburgerMenu from "./HamburgerMenu";
+import { CustomLink, SpaceTypes } from "../utils";
 
 type Props = {
   withLogin?: boolean;
@@ -15,6 +16,7 @@ const links: CustomLink[] = [
   {
     title: "Login",
     route: routes.Profile.absolute,
+    space: SpaceTypes.General,
   },
 ];
 
