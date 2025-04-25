@@ -60,14 +60,17 @@ const SingleReport = () => {
           </div>
         </div>
         {post.pdf && (
-          <iframe
+          <embed
             src={
               typeof post.pdf === "string"
                 ? `${config.env.apiKey}${post.pdf}`
                 : `${config.env.apiKey}${post.pdf.url}`
             }
-            className="w-full h-[800px] self-center"
-          ></iframe>
+            // className="w-full h-[800px] self-center"
+            type="application/pdf"
+            height="100%"
+            width="100%"
+          ></embed>
         )}
         <RichTextReader data={post.content} />
         <div className="flex flex-col gap-2">

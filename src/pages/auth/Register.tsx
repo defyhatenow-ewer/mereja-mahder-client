@@ -28,20 +28,6 @@ const Register = () => {
     setPassword("");
   };
 
-  const getSpaceName = async (_space: string): Promise<string> => {
-    switch (_space) {
-      case "aff":
-        return translate("affFellow");
-      case "partners":
-        return translate("partner");
-      case "women_safe_space":
-        return translate("womenSafeSpaces");
-
-      default:
-        return _space;
-    }
-  };
-
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const rememberMe = localStorage.getItem("rememberMe");
@@ -124,7 +110,13 @@ const Register = () => {
                     onChange={(_e) => setSpace(space.id)}
                   />
                   <span className="label-text text-black text-sm">
-                    {getSpaceName(space.title)}
+                    {space.title === "aff"
+                      ? t("affFellow")
+                      : space.title === "partners"
+                        ? t("partner")
+                        : space.title === "women_safe_space"
+                          ? t("womenSafeSpaces")
+                          : space.title}
                   </span>
                 </label>
               ))}

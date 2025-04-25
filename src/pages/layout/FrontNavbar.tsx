@@ -53,97 +53,99 @@ const FrontNavbar = () => {
   };
 
   return (
-    <nav className="bg-white w-full flex justify-between items-center gap-5 p-5 md:p-5 md:px-12 2xl:p-12">
-      <Link to={routes.Home.absolute}>
-        <img className="w-1/2 md:w-auto md:max-h-16" src={logo} alt="logo" />
-      </Link>
-      <div className="hidden flex-row gap-8 items-center justify-end md:flex">
-        <ul className="menu menu-horizontal gap-3">
-          {links.map((link) => (
-            <li key={link.title}>
-              {link.anchor ? (
-                <a
-                  href={link.route}
-                  className={`${
-                    location.pathname === link.route
-                      ? "bg-[#D9D9D9]"
-                      : "bg-white"
-                  } text-sm rounded-2xl py-2 px-4`}
-                >
-                  {t(link.title)}
-                </a>
-              ) : (
-                <Link
-                  to={link.route}
-                  className={`${
-                    location.pathname === link.route
-                      ? "bg-[#D9D9D9]"
-                      : "bg-white"
-                  } text-sm rounded-2xl py-2 px-4 hover:bg-primary`}
-                >
-                  {t(link.title)}
-                </Link>
-              )}
-            </li>
-          ))}
-          <li>
-            <details
-              id="language-menu"
-              className="dropdown dropdown-end text-sm z-[99]"
-              onToggle={(e) => {
-                if (e.currentTarget.open) {
-                  setOpen(true);
-                } else {
-                  setOpen(false);
-                }
-              }}
-            >
-              <summary className="list-none text-secondary h-full align-middle cursor-pointer">
-                <div className="h-full flex justify-between gap-2 items-center text-black p-1 rounded-md">
-                  {language}
-                </div>
-              </summary>
-              <ul className="p-3 gap-2 shadow menu dropdown-content z-[1] rounded-sm w-32 text-sm bg-white">
-                {Object.keys(lngs).map((lng) => (
-                  <li
-                    key={lng}
-                    className="cursor-pointer p-1 text-sm hover:bg-primary"
-                    onClick={() => changeLanguage(lng)}
-                    aria-disabled={i18n.resolvedLanguage === lng}
+    <div className="flex justify-center bg-white">
+      <nav className="bg-white w-full flex justify-between items-center max-w-[1400px] gap-5 p-5 md:p-5 md:px-12 2xl:p-12">
+        <Link to={routes.Home.absolute}>
+          <img className="w-1/2 md:w-auto md:max-h-16" src={logo} alt="logo" />
+        </Link>
+        <div className="hidden flex-row gap-8 items-center justify-end md:flex">
+          <ul className="menu menu-horizontal gap-3">
+            {links.map((link) => (
+              <li key={link.title}>
+                {link.anchor ? (
+                  <a
+                    href={link.route}
+                    className={`${
+                      location.pathname === link.route
+                        ? "bg-[#D9D9D9]"
+                        : "bg-white"
+                    } text-sm rounded-2xl py-2 px-4`}
                   >
-                    {lngs[lng as keyof typeof lngs].nativeName}
-                  </li>
-                ))}
-              </ul>
-            </details>
-          </li>
-        </ul>
-        {data && data.user ? (
-          <Link
-            to={goToDashboard(data.user)}
-            className="flex justify-between items-center gap-3 bg-secondary text-primary cursor-pointer rounded-4xl p-2 ps-3 w-full md:w-fit md:ps-5"
-          >
-            <span>{t("dashboard")}</span>
-            <div className="flex justify-center items-center rounded-full p-1 bg-primary text-secondary">
-              <ArrowUpRight />
-            </div>
-          </Link>
-        ) : (
-          <Link
-            to={routes.Login.absolute}
-            className="flex justify-between items-center gap-3 bg-secondary text-primary cursor-pointer rounded-4xl p-2 ps-3 w-full md:w-fit md:ps-5"
-          >
-            <span>{t("login")}</span>
-            <div className="flex justify-center items-center rounded-full p-1 bg-primary text-secondary">
-              <ArrowUpRight />
-            </div>
-          </Link>
-        )}
-      </div>
-      <div className="flex items-center justify-end md:hidden">
-        <HamburgerMenu links={links} />
-      </div>
-    </nav>
+                    {t(link.title)}
+                  </a>
+                ) : (
+                  <Link
+                    to={link.route}
+                    className={`${
+                      location.pathname === link.route
+                        ? "bg-[#D9D9D9]"
+                        : "bg-white"
+                    } text-sm rounded-2xl py-2 px-4 hover:bg-primary`}
+                  >
+                    {t(link.title)}
+                  </Link>
+                )}
+              </li>
+            ))}
+            <li>
+              <details
+                id="language-menu"
+                className="dropdown dropdown-end text-sm z-[99]"
+                onToggle={(e) => {
+                  if (e.currentTarget.open) {
+                    setOpen(true);
+                  } else {
+                    setOpen(false);
+                  }
+                }}
+              >
+                <summary className="list-none text-secondary h-full align-middle cursor-pointer">
+                  <div className="h-full flex justify-between gap-2 items-center text-black p-1 rounded-md">
+                    {language}
+                  </div>
+                </summary>
+                <ul className="p-3 gap-2 shadow menu dropdown-content z-[1] rounded-sm w-32 text-sm bg-white">
+                  {Object.keys(lngs).map((lng) => (
+                    <li
+                      key={lng}
+                      className="cursor-pointer p-1 text-sm hover:bg-primary"
+                      onClick={() => changeLanguage(lng)}
+                      aria-disabled={i18n.resolvedLanguage === lng}
+                    >
+                      {lngs[lng as keyof typeof lngs].nativeName}
+                    </li>
+                  ))}
+                </ul>
+              </details>
+            </li>
+          </ul>
+          {data && data.user ? (
+            <Link
+              to={goToDashboard(data.user)}
+              className="flex justify-between items-center gap-3 bg-secondary text-primary cursor-pointer rounded-4xl p-2 ps-3 w-full md:w-fit md:ps-5"
+            >
+              <span>{t("dashboard")}</span>
+              <div className="flex justify-center items-center rounded-full p-1 bg-primary text-secondary">
+                <ArrowUpRight />
+              </div>
+            </Link>
+          ) : (
+            <Link
+              to={routes.Login.absolute}
+              className="flex justify-between items-center gap-3 bg-secondary text-primary cursor-pointer rounded-4xl p-2 ps-3 w-full md:w-fit md:ps-5"
+            >
+              <span>{t("login")}</span>
+              <div className="flex justify-center items-center rounded-full p-1 bg-primary text-secondary">
+                <ArrowUpRight />
+              </div>
+            </Link>
+          )}
+        </div>
+        <div className="flex items-center justify-end md:hidden">
+          <HamburgerMenu links={links} />
+        </div>
+      </nav>
+    </div>
   );
 };
 

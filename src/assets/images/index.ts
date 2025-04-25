@@ -59,9 +59,11 @@ import digitalResilience from "./digital-resilience.png";
 import communityEngagement from "./grassroots-engangement.png";
 import counteringHateSpeech from "./countering-hate-speech.png";
 import civicEngagement from "./civic-engagement.png";
+import mobilizingCivicAction from "./mobilizing_civic_action.jpg";
 
 export {
   graphic1,
+  mobilizingCivicAction,
   amharicText,
   civicActionGraphic,
   digitalResilience,

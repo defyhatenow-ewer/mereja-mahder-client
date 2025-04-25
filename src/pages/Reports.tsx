@@ -106,9 +106,9 @@ const Reports = () => {
   };
 
   return (
-    <>
+    <div className="flex justify-center">
       <Loader show={isPostsLoading || isLoading || isTagsLoading} />
-      <div className="flex flex-col bg-white gap-5 p-5 pt-0 md:p-12 md:pt-0 md:gap-16">
+      <div className="flex flex-col bg-white gap-5 p-5 pt-0 max-w-[1400px] md:p-12 md:pt-0 md:gap-16">
         <h2>{t("reports")}</h2>
         <section className="flex flex-col gap-5 md:justify-between md:items-center md:gap-8 md:flex-row">
           <input
@@ -283,7 +283,7 @@ const Reports = () => {
           )}
         </section>
       </div>
-    </>
+    </div>
   );
 };
 

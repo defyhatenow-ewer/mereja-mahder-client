@@ -105,9 +105,9 @@ const Resources = () => {
   };
 
   return (
-    <>
+    <div className="flex justify-center">
       <Loader show={isPostsLoading || isLoading || isTagsLoading} />
-      <div className="flex flex-col bg-white gap-5 p-5 pt-0 md:p-12 md:pt-0 md:gap-16">
+      <div className="flex flex-col bg-white gap-5 p-5 pt-0 max-w-[1400px] md:p-12 md:pt-0 md:gap-16">
         <div className="flex flex-col gap-3">
           <h2>{t("resources")}</h2>
           <h3 className="text-[#D5D5D5] text-2xl font-poppins">
@@ -278,7 +278,7 @@ const Resources = () => {
           )}
         </section>
       </div>
-    </>
+    </div>
   );
 };
 

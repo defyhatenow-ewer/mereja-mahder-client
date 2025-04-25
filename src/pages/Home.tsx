@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import {
-  affGroupPhoto,
+  mobilizingCivicAction,
   amharicTextBlack,
   fieldGuides,
   graphic1,
@@ -43,16 +43,16 @@ const Home = () => {
       <Loader
         show={isReportsLoading || isFactChecksLoading || isRadioShowsLoading}
       />
-      <div className="flex flex-col bg-white gap-8 md:gap-16">
-        <section className="flex flex-col mx-5 gap-5 md:gap-0 md:h-[560px] md:mx-12 md:flex-row xl:h-[600px] 2xl:h-[760px]">
+      <div className="flex flex-col items-center bg-white gap-8 md:gap-16">
+        <section className="flex flex-col px-5 gap-5 max-w-[1400px] md:gap-0 md:h-[400px] md:px-12 md:flex-row xl:h-[500px] 2xl:h-[500px]">
           <div className="flex flex-col w-full gap-0 md:w-1/2 md:gap-0">
-            <div className="flex flex-col flex-grow gap-5 justify-between bg-primary p-8 rounded-t-2xl rounded-b-2xl md:gap-0 md:rounded-t-4xl md:rounded-br-none md:rounded-bl-4xl md:p-12 lg:p-24">
+            <div className="flex flex-col flex-grow gap-5 justify-between bg-primary p-8 rounded-t-2xl rounded-b-2xl md:gap-0 md:rounded-t-4xl md:rounded-br-none md:rounded-bl-4xl md:p-12 lg:p-12">
               <img src={amharicTextBlack} className="max-w-36" />
-              <h1 className="text-left">Mereja Mahder</h1>
+              <h1 className="text-left text-6xl">Mereja Mahder</h1>
               <p>{t("description")}</p>
               <div className="flex flex-col items-center md:hidden">
                 <img
-                  src={affGroupPhoto}
+                  src={mobilizingCivicAction}
                   className="rounded-4xl object-cover object-left-top w-full"
                 />
                 <Link
@@ -81,9 +81,9 @@ const Home = () => {
             </div>
           </div>
           <div className="hidden flex-col gap-0 w-full bg-primary md:flex md:w-1/2">
-            <div className="w-full h-3/4 pl-2 pb-2 bg-white md:rounded-bl-4xl md:pb-4 md:pl-4">
+            <div className="w-full h-3/5 pl-2 pb-2 bg-white md:rounded-bl-4xl md:pb-4 md:pl-4">
               <img
-                src={affGroupPhoto}
+                src={mobilizingCivicAction}
                 className="rounded-2xl object-cover object-left-top h-full w-full md:rounded-4xl"
               />
             </div>
@@ -96,17 +96,19 @@ const Home = () => {
           </div>
         </section>
         {/* Reports */}
-        <section className="flex flex-col bg-custom-gray w-full gap-8 rounded-4xl md:rounded-none md:gap-12">
+        <section className="flex flex-col items-center bg-custom-gray w-full gap-8 rounded-4xl md:rounded-none md:gap-12">
           <div className="flex w-full bg-custom-gray">
-            <div className="bg-white p-8 pt-0 w-full justify-center md:justify-start md:rounded-br-4xl md:pt-8 md:p-12 md:w-sm">
-              <h2 className="text-center md:text-left">{t("reports")}</h2>
+            <div className="bg-white p-8 pt-0 w-full justify-center md:justify-start md:rounded-br-4xl md:pt-8 md:p-12 md:w-sm xl:p-16 xl:w-md 2xl:w-xl">
+              <h2 className="text-center md:text-left xl:text-right">
+                {t("reports")}
+              </h2>
             </div>
             <div className="flex-grow bg-white hidden md:flex">
               <div className="h-full w-full bg-custom-gray md:rounded-tl-4xl"></div>
             </div>
           </div>
           {reports && reports.docs ? (
-            <div className="grid grid-flow-row grid-cols-1 gap-8 px-5 md:gap-8 md:px-12 md:grid-cols-3">
+            <div className="grid grid-flow-row grid-cols-1 gap-8 px-5 max-w-[1400px] md:gap-8 md:px-12 md:grid-cols-3">
               {reports.docs.map((post) => (
                 <div
                   key={post.id}
@@ -169,7 +171,7 @@ const Home = () => {
             <div className="flex-grow bg-white hidden md:flex">
               <div className="h-full w-full bg-custom-gray rounded-br-4xl"></div>
             </div>
-            <div className="flex justify-center bg-white p-5 pb-0 w-full md:rounded-tl-4xl md:pt-5 md:px-12 md:w-sm">
+            <div className="flex justify-center bg-white p-5 pb-0 w-full md:rounded-tl-4xl md:pt-5 md:px-12 md:w-sm xl:w-md xl:p-12 xl:pb-0 xl:justify-start">
               <Link
                 to={routes.Reports.relative}
                 className="flex justify-between items-center gap-3 bg-secondary text-white cursor-pointer rounded-4xl p-3 ps-4 w-fit text-sm md:text-base md:w-[100%-48px] md:ps-6"
@@ -182,14 +184,16 @@ const Home = () => {
             </div>
           </div>
         </section>
-        <section className="flex flex-col gap-8 md:min-h-96 md:gap-0 md:flex-row">
+        <section className="flex flex-col w-full gap-8 md:min-h-96 md:gap-0 md:flex-row">
           <div className="flex flex-col bg-light-red text-white m-5 md:m-0 md:w-1/2">
             <div className="bg-white flex-grow">
               <div className="flex flex-col flex-grow h-full bg-light-red rounded-4xl justify-center items-center gap-8 pt-8 p-8 pb-0 md:rounded-none md:rounded-tr-4xl md:items-start md:py-12 md:gap-12 md:p-12">
-                <h2 className="font-poppins">{t("fieldGuide")}</h2>
-                <p className="text-center md:text-left">
-                  {t("fieldGuideDescription")}
-                </p>
+                <div className="flex flex-col gap-8 max-w-[600px] self-end md:gap-12">
+                  <h2 className="font-poppins">{t("fieldGuide")}</h2>
+                  <p className="text-center md:text-left">
+                    {t("fieldGuideDescription")}
+                  </p>
+                </div>
                 <img
                   src={fieldGuides}
                   className="w-9/10 inline z-1 -mb-10 md:hidden"
@@ -197,10 +201,10 @@ const Home = () => {
               </div>
             </div>
 
-            <div className="bg-white px-5 pt-16 w-full md:rounded-tr-4xl md:pt-8 md:px-12">
+            <div className="bg-white px-5 pt-16 w-full flex justify-end md:rounded-tr-4xl md:pt-8 md:px-12">
               <Link
                 to={routes.Resources.relative}
-                className="flex justify-between items-center gap-3 bg-secondary text-white cursor-pointer rounded-4xl p-3 ps-4 w-[100%-20px] text-sm md:text-base md:w-[100%-48px] md:ps-6"
+                className="flex justify-between items-center gap-3 bg-secondary text-white cursor-pointer rounded-4xl p-3 ps-4 w-[100%-20px] text-sm max-w-[600px] md:text-base md:w-full md:ps-6"
               >
                 <span>{t("viewFieldGuide")}</span>
                 <div className="flex justify-center items-center rounded-full p-1 bg-primary text-secondary">
@@ -211,12 +215,12 @@ const Home = () => {
           </div>
           <div className="bg-light-red h-full w-full relative min-h-72 rounded-bl-2xl hidden md:flex md:rounded-bl-4xl md:min-h-96 md:w-1/2">
             <div className="h-1/3 w-full bg-white rounded-bl-2xl hidden md:block md:min-h-32 md:rounded-bl-4xl"></div>
-            <div className="absolute bg-transparent inset-0 z-1 min-h-64 flex justify-center items-center md:min-h-96">
+            <div className="absolute bg-transparent inset-0 z-1 min-h-64 flex justify-center items-center max-w-[700px] md:min-h-96">
               <img src={fieldGuides} className="max-h-64 md:max-h-96" />
             </div>
           </div>
         </section>
-        <section className="flex flex-col gap-8 p-8 pt-0 md:gap-12 md:pt-0 md:p-12">
+        <section className="flex flex-col gap-8 p-8 pt-0 max-w-[1400px] md:gap-12 md:pt-0 md:p-12">
           <h2>{t("recentFactChecks")}</h2>
           {factChecks && factChecks.docs ? (
             <div className="grid grid-flow-row grid-cols-1 gap-3 md:gap-8 md:grid-cols-2">
@@ -275,27 +279,29 @@ const Home = () => {
             </div>
           </Link>
         </section>
-        <section className="flex flex-col bg-primary p-8 mx-8 rounded-4xl md:rounded-none md:mx-0 md:pt-0 md:p-12 md:flex-row">
-          <img src={graphic1} className="w-full hidden md:inline md:w-1/3" />
-          <div className="flex flex-col justify-center items-center text-center gap-3 md:pt-12 md:gap-5">
-            <h2 className="text-center">{t("accessResources")}</h2>
-            <h3 className="font-poppins-regular">
-              {t("cybersecurity&safety")}
-            </h3>
-            <p>{t("accessResourcesDescription")}</p>
-            <Link
-              to={routes.Resources.relative}
-              className="flex justify-between items-center gap-3 bg-secondary text-white cursor-pointer rounded-4xl p-3 ps-4 w-full text-sm md:text-base md:max-w-sm md:ps-6"
-            >
-              <span>{t("viewResources")}</span>
-              <div className="flex justify-center items-center rounded-full p-1 bg-primary text-secondary">
-                <ChevronRight />
-              </div>
-            </Link>
+        <section className="flex bg-primary mx-8 rounded-4xl justify-center md:rounded-none md:mx-0 md:w-full">
+          <div className="flex flex-col bg-primary p-8 rounded-4xl max-w-[1400px] md:rounded-none md:mx-0 md:pt-0 md:p-12 md:flex-row">
+            <img src={graphic1} className="w-full hidden md:inline md:w-1/3" />
+            <div className="flex flex-col justify-center items-center text-center gap-3 md:pt-12 md:gap-5">
+              <h2 className="text-center">{t("accessResources")}</h2>
+              <h3 className="font-poppins-regular">
+                {t("cybersecurity&safety")}
+              </h3>
+              <p>{t("accessResourcesDescription")}</p>
+              <Link
+                to={routes.Resources.relative}
+                className="flex justify-between items-center gap-3 bg-secondary text-white cursor-pointer rounded-4xl p-3 ps-4 w-full text-sm md:text-base md:max-w-sm md:ps-6"
+              >
+                <span>{t("viewResources")}</span>
+                <div className="flex justify-center items-center rounded-full p-1 bg-primary text-secondary">
+                  <ChevronRight />
+                </div>
+              </Link>
+            </div>
+            <img src={graphic2} className="w-full hidden md:inline md:w-1/3" />
           </div>
-          <img src={graphic2} className="w-full hidden md:inline md:w-1/3" />
         </section>
-        <section className="flex flex-col gap-8 p-8 pt-0 md:pt-0 md:gap-12 md:p-12">
+        <section className="flex flex-col gap-8 p-8 pt-0 max-w-[1400px] md:pt-0 md:gap-12 md:p-12">
           <h2 className="hidden md:block">{t("mediaProductions")}</h2>
           <h2 className="block md:hidden">{t("radioShows")}</h2>
           {radioShows && radioShows.docs ? (
