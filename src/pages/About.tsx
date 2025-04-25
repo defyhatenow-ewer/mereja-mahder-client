@@ -48,7 +48,7 @@ const About = () => {
             src={amharicText}
             className="bg-secondary max-w-xs py-1 px-3 rounded-2xl md:rounded-4xl md:py-2 md:px-16"
           />
-          <p className="w-full md:max-w-sm">{t("aboutDescription")}</p>
+          <p className="w-full">{t("aboutDescription")}</p>
         </div>
         <div className="flex flex-col gap-3 w-full md:gap-6 md:w-1/2">
           <a
@@ -58,7 +58,10 @@ const About = () => {
           >
             <img src={dhnEthLogo} className="" />
           </a>
-          <img src={civicActionGraphic} className="rounded-md md:rounded-3xl" />
+          <img
+            src={civicActionGraphic}
+            className="rounded-md max-h-76 object-cover object-center md:rounded-3xl"
+          />
         </div>
       </section>
       {/* {t("focusAreas")} */}

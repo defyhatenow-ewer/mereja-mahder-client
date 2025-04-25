@@ -54,7 +54,7 @@ const FrontNavbar = () => {
 
   return (
     <div className="flex justify-center bg-white">
-      <nav className="bg-white w-full flex justify-between items-center max-w-[1400px] gap-5 p-5 md:p-5 md:px-12 2xl:p-12">
+      <nav className="bg-white w-full flex justify-between items-center max-w-[1400px] gap-5 p-5 md:p-5 md:px-12">
         <Link to={routes.Home.absolute}>
           <img className="w-1/2 md:w-auto md:max-h-16" src={logo} alt="logo" />
         </Link>

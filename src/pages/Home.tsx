@@ -48,7 +48,11 @@ const Home = () => {
           <div className="flex flex-col w-full gap-0 md:w-1/2 md:gap-0">
             <div className="flex flex-col flex-grow gap-5 justify-between bg-primary p-8 rounded-t-2xl rounded-b-2xl md:gap-0 md:rounded-t-4xl md:rounded-br-none md:rounded-bl-4xl md:p-12 lg:p-12">
               <img src={amharicTextBlack} className="max-w-36" />
-              <h1 className="text-left text-3xl md:text-6xl">Mereja Mahder</h1>
+              <h1 className="text-left text-3xl md:text-6xl">
+                Mereja
+                <br />
+                Mahder
+              </h1>
               <p>{t("description")}</p>
               <div className="flex flex-col items-center md:hidden">
                 <img
@@ -98,7 +102,7 @@ const Home = () => {
         {/* Reports */}
         <section className="flex flex-col items-center bg-custom-gray w-full gap-8 rounded-4xl md:rounded-none md:gap-12">
           <div className="flex w-full bg-custom-gray">
-            <div className="bg-white p-8 pt-0 w-full justify-center md:justify-start md:rounded-br-4xl md:pt-8 md:p-12 md:w-sm xl:p-16 xl:w-md 2xl:w-xl">
+            <div className="bg-white p-8 pt-0 w-full justify-center md:justify-start md:rounded-br-4xl md:pt-8 md:p-12 md:w-sm xl:p-16 xl:w-md 2xl:w-lg">
               <h2 className="text-center md:text-left xl:text-right">
                 {t("reports")}
               </h2>
@@ -171,7 +175,7 @@ const Home = () => {
             <div className="flex-grow bg-white hidden md:flex">
               <div className="h-full w-full bg-custom-gray rounded-br-4xl"></div>
             </div>
-            <div className="flex justify-center bg-white p-5 pb-0 w-full md:rounded-tl-4xl md:pt-5 md:px-12 md:w-sm xl:w-md xl:p-12 xl:pb-0 xl:justify-start">
+            <div className="flex justify-center bg-white p-5 pb-0 w-full md:rounded-tl-4xl md:pt-5 md:px-12 md:w-sm xl:w-lg xl:p-12 xl:pb-0 xl:justify-start">
               <Link
                 to={routes.Reports.relative}
                 className="flex justify-between items-center gap-3 bg-secondary text-white cursor-pointer rounded-4xl p-3 ps-4 w-fit text-sm md:text-base md:w-[100%-48px] md:ps-6"

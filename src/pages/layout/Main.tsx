@@ -11,7 +11,7 @@ const Main = () => {
         <div className="fixed z-[99] top-0 left-0 w-full">
           <FrontNavbar />
         </div>
-        <div className="w-full absolute top-20 md:top-28 2xl:top-40">
+        <div className="w-full absolute top-20 md:top-28">
           <Outlet />
           <Footer />
         </div>
