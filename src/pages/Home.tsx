@@ -48,7 +48,7 @@ const Home = () => {
           <div className="flex flex-col w-full gap-0 md:w-1/2 md:gap-0">
             <div className="flex flex-col flex-grow gap-5 justify-between bg-primary p-8 rounded-t-2xl rounded-b-2xl md:gap-0 md:rounded-t-4xl md:rounded-br-none md:rounded-bl-4xl md:p-12 lg:p-12">
               <img src={amharicTextBlack} className="max-w-36" />
-              <h1 className="text-left text-6xl">Mereja Mahder</h1>
+              <h1 className="text-left text-3xl md:text-6xl">Mereja Mahder</h1>
               <p>{t("description")}</p>
               <div className="flex flex-col items-center md:hidden">
                 <img
