@@ -57,107 +57,109 @@ const SingleRadioShow = () => {
   if (!post) return <Loader />;
 
   return (
-    <div className="flex flex-col bg-white gap-5 p-5 pt-0 md:p-12 md:pt-0 md:gap-12">
-      <section className="flex flex-col gap-3 w-full md:w-4/5 md:gap-5">
-        <h2>{post.title}</h2>
-        <div className="flex gap-3 items-center flex-col md:flex-row md:gap-5">
-          <small className="text-[#0B121580]">
-            {formatDateTime(post.createdAt)}
-          </small>
-          <div className="flex gap-2 items-center">
-            {(post.tags || []).map((tag) => (
-              <Link
-                to={`${routes.RadioShows.absolute}?tag=${tag.title}`}
-                key={tag.id}
-                className="px-3 py-2 bg-primary rounded-2xl text-xs md:text-sm md:rounded-3xl md:px-4 md:py-1"
-              >
-                {tag.title}
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-      <section className="flex flex-col gap-5 md:gap-12 md:flex-row">
-        <div className="flex flex-col gap-5 w-full items-center md:items-start md:w-7/10 md:gap-16">
-          {parse(post.iframe)}
-          <RichTextReader data={post.content} />
-          <div className="flex flex-col gap-2">
-            <small>{t("sharePost")}</small>
-            <div className="flex gap-1">
-              {buttonList.map((Btn, index) => (
-                <Btn
-                  url={`${config.env.siteUrl}/posts/${id}`}
-                  title={post.title}
-                  withText={false}
-                  round={false}
-                  className="rounded-2xl"
-                  key={index}
-                  borderRadius={10}
-                />
+    <div className="flex justify-center">
+      <div className="flex flex-col bg-white gap-5 p-5 pt-0 max-w-[1400px] md:p-12 md:pt-0 md:gap-12">
+        <section className="flex flex-col gap-3 w-full md:w-4/5 md:gap-5">
+          <h2>{post.title}</h2>
+          <div className="flex gap-3 items-center flex-col md:flex-row md:gap-5">
+            <small className="text-[#0B121580]">
+              {formatDateTime(post.createdAt)}
+            </small>
+            <div className="flex gap-2 items-center">
+              {(post.tags || []).map((tag) => (
+                <Link
+                  to={`${routes.RadioShows.absolute}?tag=${tag.title}`}
+                  key={tag.id}
+                  className="px-3 py-2 bg-primary rounded-2xl text-xs md:text-sm md:rounded-3xl md:px-4 md:py-1"
+                >
+                  {tag.title}
+                </Link>
               ))}
             </div>
           </div>
-          <hr className="w-full h-[1px] border-0 bg-[#D5D5D5]" />
-        </div>
-        <div className="flex flex-col w-full gap-5 md:gap-12 md:w-3/10">
-          <div className="flex flex-col bg-primary rounded-md md:rounded-2xl">
-            <div className="bg-white rounded-t-md md:rounded-t-2xl">
-              <p className="bg-primary p-5 rounded-t-md rounded-bl-md md:rounded-bl-2xl md:rounded-t-2xl md:p-8">
-                {t("subscribeToListen")}{" "}
-                <strong className="font-poppins-semi-bold">#BeAware</strong>{" "}
-                {t("radioShows")}
-              </p>
-            </div>
-            <div className="flex">
-              <div className="bg-primary w-full md:w-4/5">
-                <div className="bg-white p-3 pb-0 ps-0 rounded-tr-md md:ps-0 md:rounded-tr-2xl md:pt-3 md:pb-0 md:px-3">
-                  <a
-                    href="#"
-                    target="_blank"
-                    className="flex justify-between items-center gap-3 bg-secondary text-primary cursor-pointer rounded-4xl p-1 ps-2 md:ps-4"
-                  >
-                    <span>{t("subscribe")}</span>
-                    <div className="flex justify-center items-center rounded-full p-1 bg-primary text-secondary">
-                      <ArrowUpRight />
-                    </div>
-                  </a>
-                </div>
-              </div>
-
-              <div className="hidden w-1/5 bg-white md:flex">
-                <div className="w-full h-full bg-primary rounded-b-md md:rounded-b-2xl"></div>
-              </div>
-            </div>
-          </div>
-          <p>
-            {t("getUpdates")} #BeAware {t("radioShows")}
-          </p>
-          <div className="flex flex-col gap-2 bg-[#F3F3F3] rounded-md p-5 md:p-8 md:rounded-2xl md:gap-6">
-            <h3 className="font-poppins-medium">{t("recentPosts")}</h3>
-            {posts && posts.docs.length ? (
-              <div className="grid grid-cols-1 gap-3 md:gap-6">
-                {posts.docs.map((doc) => (
-                  <Link
-                    key={doc.id}
-                    to={`${routes.RadioShows.absolute}/${doc.id}`}
-                    className="flex flex-col gap-2"
-                  >
-                    <h4 className="font-poppins-medium text-left text-xs md:text-sm">
-                      {doc.title}
-                    </h4>
-                    <small className="text-[#0B121580]">
-                      {formatDateTime(doc.createdAt)}
-                    </small>
-                    <hr className="w-full h-[1px] border-0 bg-[#D5D5D5]" />
-                  </Link>
+        </section>
+        <section className="flex flex-col gap-5 md:gap-12 md:flex-row">
+          <div className="flex flex-col gap-5 w-full items-center md:items-start md:w-7/10 md:gap-16">
+            {parse(post.iframe)}
+            <RichTextReader data={post.content} />
+            <div className="flex flex-col gap-2">
+              <small>{t("sharePost")}</small>
+              <div className="flex gap-1">
+                {buttonList.map((Btn, index) => (
+                  <Btn
+                    url={`${config.env.siteUrl}/posts/${id}`}
+                    title={post.title}
+                    withText={false}
+                    round={false}
+                    className="rounded-2xl"
+                    key={index}
+                    borderRadius={10}
+                  />
                 ))}
               </div>
-            ) : (
-              <p>{t("recentPosts")}</p>
-            )}
+            </div>
+            <hr className="w-full h-[1px] border-0 bg-[#D5D5D5]" />
           </div>
-        </div>
-      </section>
+          <div className="flex flex-col w-full gap-5 md:gap-12 md:w-3/10">
+            <div className="flex flex-col bg-primary rounded-md md:rounded-2xl">
+              <div className="bg-white rounded-t-md md:rounded-t-2xl">
+                <p className="bg-primary p-5 rounded-t-md rounded-bl-md md:rounded-bl-2xl md:rounded-t-2xl md:p-8">
+                  {t("subscribeToListen")}{" "}
+                  <strong className="font-poppins-semi-bold">#BeAware</strong>{" "}
+                  {t("radioShows")}
+                </p>
+              </div>
+              <div className="flex">
+                <div className="bg-primary w-full md:w-4/5">
+                  <div className="bg-white p-3 pb-0 ps-0 rounded-tr-md md:ps-0 md:rounded-tr-2xl md:pt-3 md:pb-0 md:px-3">
+                    <a
+                      href="#"
+                      target="_blank"
+                      className="flex justify-between items-center gap-3 bg-secondary text-primary cursor-pointer rounded-4xl p-1 ps-2 md:ps-4"
+                    >
+                      <span>{t("subscribe")}</span>
+                      <div className="flex justify-center items-center rounded-full p-1 bg-primary text-secondary">
+                        <ArrowUpRight />
+                      </div>
+                    </a>
+                  </div>
+                </div>
+
+                <div className="hidden w-1/5 bg-white md:flex">
+                  <div className="w-full h-full bg-primary rounded-b-md md:rounded-b-2xl"></div>
+                </div>
+              </div>
+            </div>
+            <p>
+              {t("getUpdates")} #BeAware {t("radioShows")}
+            </p>
+            <div className="flex flex-col gap-2 bg-[#F3F3F3] rounded-md p-5 md:p-8 md:rounded-2xl md:gap-6">
+              <h3 className="font-poppins-medium">{t("recentPosts")}</h3>
+              {posts && posts.docs.length ? (
+                <div className="grid grid-cols-1 gap-3 md:gap-6">
+                  {posts.docs.map((doc) => (
+                    <Link
+                      key={doc.id}
+                      to={`${routes.RadioShows.absolute}/${doc.id}`}
+                      className="flex flex-col gap-2"
+                    >
+                      <h4 className="font-poppins-medium text-left text-xs md:text-sm">
+                        {doc.title}
+                      </h4>
+                      <small className="text-[#0B121580]">
+                        {formatDateTime(doc.createdAt)}
+                      </small>
+                      <hr className="w-full h-[1px] border-0 bg-[#D5D5D5]" />
+                    </Link>
+                  ))}
+                </div>
+              ) : (
+                <p>{t("recentPosts")}</p>
+              )}
+            </div>
+          </div>
+        </section>
+      </div>
     </div>
   );
 };
