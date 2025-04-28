@@ -51,6 +51,7 @@ const SingleForum = () => {
     },
     {
       skip: !id,
+      pollingInterval: 2000,
     }
   );
 
