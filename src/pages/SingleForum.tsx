@@ -11,8 +11,9 @@ import { avatarPlaceholder } from "../assets/images";
 import { copyToClipboard, sometimeAgo } from "../utils";
 import { Copy, Send } from "../components/Icons";
 import { useMeQuery } from "../features/auth.api";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { toast } from "react-toastify";
+import { IMessage } from "../types/forums.types";
 
 const SingleForum = () => {
   const { t } = useTranslation();
@@ -20,6 +21,7 @@ const SingleForum = () => {
   const { data: userData } = useMeQuery();
   const [sendMessage] = useCreateMessageMutation();
   const [text, setText] = useState("");
+  const messageContainerRef = useRef<HTMLDivElement | null>(null);
 
   const { data: post, isLoading } = useGetSingleForumQuery(
     {
@@ -30,7 +32,11 @@ const SingleForum = () => {
     }
   );
 
-  const { data: messages } = useGetInfiniteMessagesInfiniteQuery(
+  const {
+    data: messages,
+    fetchNextPage,
+    fetchPreviousPage,
+  } = useGetInfiniteMessagesInfiniteQuery(
     {
       query: {
         where: {
@@ -47,6 +53,21 @@ const SingleForum = () => {
       skip: !id,
     }
   );
+
+  const handleScroll = async () => {
+    const container = messageContainerRef.current;
+    if (container) {
+      const { scrollTop, scrollHeight, clientHeight } = container;
+      if (Math.abs(scrollHeight - scrollTop - clientHeight) < 1) {
+        // Scrolled to the bottom (within a tolerance of 1 pixel to account for potential rounding errors)
+        await fetchNextPage();
+        // Perform your desired action here, e.g., loading more content
+      }
+      if (scrollTop === 0) {
+        await fetchPreviousPage();
+      }
+    }
+  };
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -68,6 +89,18 @@ const SingleForum = () => {
     }
   }
 
+  const mergeDocs = () => {
+    const conversation: IMessage[] = [];
+
+    if (messages) {
+      messages.pages.forEach((page) => {
+        conversation.push(...page.docs);
+      });
+    }
+
+    return conversation.reverse();
+  };
+
   if (isLoading) return <Loader />;
 
   if (!isLoading && !post)
@@ -85,49 +118,52 @@ const SingleForum = () => {
         <h2 className="bg-[#F3F3F3] p-5 border-b-1 border-[#D5D5D5] rounded-t-md text-sm md:px-8 md:text-lg md:rounded-t-2xl 2xl:px-12">
           {post.title}
         </h2>
-        <div className="flex flex-col gap-5 p-5 rounded-b-md md:rounded-b-2xl md:p-8 md:gap-8 2xl:p-12 2xl:gap-12">
+        <div
+          ref={messageContainerRef}
+          onScroll={handleScroll}
+          className="flex flex-col gap-5 p-5 rounded-b-md overflow-scroll h-[58vh] md:h-[63vh] md:rounded-b-2xl md:p-8 md:gap-8 2xl:p-12 2xl:gap-12"
+        >
           {messages ? (
-            Array.from(messages?.pages[0].docs)
-              .reverse()
-              .map((message) => (
-                <div
-                  key={message.id}
-                  className="flex flex-col gap-3 p-5 rounded-md shadow-lg md:gap-5 md:rounded-2xl"
-                >
-                  <div className="flex justify-between items-center">
-                    <div className="flex items-center gap-2">
-                      <div className="avatar">
-                        <div className="size-6 rounded-full md:size-12">
-                          <img
-                            src={
-                              typeof message.author !== "string"
-                                ? `${config.env.apiKey}${message.author.avatar?.thumbnailURL}`
-                                : avatarPlaceholder
-                            }
-                          />
-                        </div>
+            [...mergeDocs()].map((message) => (
+              <div
+                key={message.id}
+                className="flex flex-col gap-3 p-5 rounded-md shadow-lg md:gap-5 md:rounded-2xl"
+              >
+                <div className="flex justify-between items-center">
+                  <div className="flex items-center gap-2">
+                    <div className="avatar">
+                      <div className="size-6 rounded-full md:size-12">
+                        <img
+                          src={
+                            typeof message.author !== "string" &&
+                            message.author.avatar
+                              ? `${config.env.apiKey}${message.author.avatar.thumbnailURL}`
+                              : avatarPlaceholder
+                          }
+                        />
                       </div>
-                      <small>
-                        {typeof message.author !== "string" &&
-                          message.author.name}
-                      </small>
                     </div>
-                    <small className="text-[#2B3034]">
-                      {sometimeAgo(message.createdAt)}
+                    <small>
+                      {typeof message.author !== "string" &&
+                        message.author.name}
                     </small>
                   </div>
-                  <p>{message.text}</p>
-                  <div className="flex items-center gap-2 flex-wrap">
-                    <button
-                      className="flex gap-2 items-center cursor-pointer bg-primary py-1 px-2 rounded-md text-xs"
-                      onClick={() => copyToClipboard(message.text)}
-                    >
-                      <Copy className="size-3" />
-                      <span>Copy Text</span>
-                    </button>
-                  </div>
+                  <small className="text-[#2B3034]">
+                    {sometimeAgo(message.createdAt)}
+                  </small>
                 </div>
-              ))
+                <p>{message.text}</p>
+                <div className="flex items-center gap-2 flex-wrap">
+                  <button
+                    className="flex gap-2 items-center cursor-pointer bg-primary py-1 px-2 rounded-md text-xs"
+                    onClick={() => copyToClipboard(message.text)}
+                  >
+                    <Copy className="size-3" />
+                    <span>Copy Text</span>
+                  </button>
+                </div>
+              </div>
+            ))
           ) : (
             <p>No messages in this forum yet</p>
           )}
@@ -155,6 +191,7 @@ const SingleForum = () => {
               type="text"
               placeholder="Share your views..."
               className="input rounded-md w-full bg-[#EBEBEB]"
+              value={text}
               onChange={(e) => setText(e.target.value)}
             />
             <button
