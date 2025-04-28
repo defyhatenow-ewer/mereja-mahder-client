@@ -42,7 +42,7 @@ const LogoutButton = () => {
       <div className="flex items-end gap-3">
         <div className="avatar">
           <div className="w-8 rounded-full">
-            <img src={user.avatar ?? avatarPlaceholder} />
+            <img src={user.avatar?.thumbnailURL ?? avatarPlaceholder} />
           </div>
         </div>
         <p className="text-white">{formatName(user.name)}</p>
