@@ -35,7 +35,10 @@ const resourceApi = apiWithResourceTags.injectEndpoints({
         return {
           url: `resources${filters}`,
           method: "GET",
-          params: params.options,
+          params: {
+            sort: "-publishedAt",
+            ...params.options,
+          },
         };
       },
       providesTags: (data) =>

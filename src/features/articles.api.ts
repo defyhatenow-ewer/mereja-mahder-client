@@ -35,7 +35,10 @@ const articleApi = apiWithArticleTags.injectEndpoints({
         return {
           url: `articles${filters}`,
           method: "GET",
-          params: params.options,
+          params: {
+            sort: "-publishedAt",
+            ...params.options,
+          },
         };
       },
       providesTags: (data) =>

@@ -11,7 +11,6 @@ export const UserSchema = z.object({
   password: z.string(),
   isEmailVerified: z.boolean(),
   isApproved: z.boolean(),
-  avatar: z.string().optional(),
   createdAt: z.string().datetime().optional(),
   updatedAt: z.string().datetime().optional(),
   loginAttempts: z.number().min(0).optional(),

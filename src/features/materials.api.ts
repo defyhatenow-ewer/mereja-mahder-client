@@ -35,7 +35,10 @@ const materialApi = apiWithMaterialTags.injectEndpoints({
         return {
           url: `materials${filters}`,
           method: "GET",
-          params: params.options,
+          params: {
+            sort: "-publishedAt",
+            ...params.options,
+          },
         };
       },
       providesTags: (data) =>

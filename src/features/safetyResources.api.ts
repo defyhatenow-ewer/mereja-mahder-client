@@ -38,7 +38,10 @@ const safetyResourceApi = apiWithSafetyResourceTags.injectEndpoints({
         return {
           url: `safety-resources${filters}`,
           method: "GET",
-          params: params.options,
+          params: {
+            sort: "-publishedAt",
+            ...params.options,
+          },
         };
       },
       providesTags: (data) =>

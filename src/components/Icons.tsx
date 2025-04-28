@@ -173,6 +173,23 @@ export const User = () => {
   );
 };
 
+export const Send = ({ className }: { className?: string }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 24 24"
+    strokeWidth={1.5}
+    stroke="currentColor"
+    className={className ?? "size-6"}
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="M6 12 3.269 3.125A59.769 59.769 0 0 1 21.485 12 59.768 59.768 0 0 1 3.27 20.875L5.999 12Zm0 0h7.5"
+    />
+  </svg>
+);
+
 export const Speaker = () => {
   return (
     <svg
@@ -646,14 +663,14 @@ export const ChatBubble = () => (
   </svg>
 );
 
-export const Edit = () => (
+export const Edit = ({ className }: { className?: string }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
     viewBox="0 0 24 24"
     strokeWidth={1.5}
     stroke="currentColor"
-    className="size-4"
+    className={className ?? "size-4"}
   >
     <path
       strokeLinecap="round"
@@ -697,7 +714,7 @@ export const ClipboardIcon = () => (
   </svg>
 );
 
-export const Copy = () => (
+export const Copy = ({ className }: { className?: string }) => (
   <svg
     id="Layer_1"
     xmlns="http://www.w3.org/2000/svg"
@@ -707,7 +724,7 @@ export const Copy = () => (
     viewBox="0 0 115.77 122.88"
     enableBackground="new 0 0 115.77 122.88"
     xmlSpace="preserve"
-    className="size-4 text-white"
+    className={className ?? "size-4 text-white"}
   >
     <style type="text/css">
       {".st0{fill-rule:evenodd;clip-rule:evenodd;}"}

@@ -102,7 +102,7 @@ const Home = () => {
         {/* Reports */}
         <section className="flex flex-col items-center bg-custom-gray w-full gap-8 rounded-4xl md:rounded-none md:gap-12">
           <div className="flex w-full bg-custom-gray">
-            <div className="bg-white p-8 pt-0 w-full justify-center md:justify-start md:rounded-br-4xl md:pt-8 md:p-12 md:w-sm xl:p-16 xl:w-md 2xl:w-lg">
+            <div className="bg-white p-8 pt-0 w-full justify-center md:justify-start md:rounded-br-4xl md:pt-8 md:py-8 md:px-12 md:w-[16rem] 2xl:w-xs 2xl:p-16 3xl:w-lg">
               <h2 className="text-center md:text-left xl:text-right">
                 {t("reports")}
               </h2>
@@ -318,14 +318,14 @@ const Home = () => {
                   {typeof post.featuredImage === "string" && (
                     <img
                       src={`${config.env.apiKey}${post.featuredImage}`}
-                      className="w-full object-cover object-center h-full rounded-3xl md:rounded-none md:h-64"
+                      className="w-full object-cover object-center rounded-3xl md:rounded-none"
                     />
                   )}
                   {post.featuredImage &&
                     typeof post.featuredImage !== "string" && (
                       <img
                         src={`${config.env.apiKey}${post.featuredImage.url}`}
-                        className="w-full object-cover object-center h-full rounded-3xl md:rounded-none md:h-64"
+                        className="w-full object-cover object-center rounded-3xl md:rounded-none"
                       />
                     )}
                   <div className="flex flex-col gap-3 p-5 md:p-0 md:gap-5">

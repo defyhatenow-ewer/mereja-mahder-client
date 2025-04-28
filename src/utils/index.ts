@@ -9,6 +9,7 @@ import createImage from "./createImage";
 import { CustomLink, SpaceTypes } from "./CustomLink";
 import goToDashboard from "./goToDashboard";
 import formatDateTime from "./formatDateTime";
+import sometimeAgo from "./sometimeAgo";
 
 export {
   formatErrorMessage,
@@ -23,4 +24,5 @@ export {
   SpaceTypes,
   goToDashboard,
   formatDateTime,
+  sometimeAgo,
 };

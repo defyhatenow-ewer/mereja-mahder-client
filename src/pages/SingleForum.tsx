@@ -2,11 +2,24 @@ import { useParams } from "react-router-dom";
 import { Loader } from "../components";
 import { useTranslation } from "react-i18next";
 import { useGetSingleForumQuery } from "../features/forums.api";
-import { useGetMessagesQuery } from "../features/messages.api";
+import {
+  useCreateMessageMutation,
+  useGetInfiniteMessagesInfiniteQuery,
+} from "../features/messages.api";
+import { config } from "../config";
+import { avatarPlaceholder } from "../assets/images";
+import { copyToClipboard, sometimeAgo } from "../utils";
+import { Copy, Send } from "../components/Icons";
+import { useMeQuery } from "../features/auth.api";
+import { useState } from "react";
+import { toast } from "react-toastify";
 
 const SingleForum = () => {
   const { t } = useTranslation();
   const { id } = useParams();
+  const { data: userData } = useMeQuery();
+  const [sendMessage] = useCreateMessageMutation();
+  const [text, setText] = useState("");
 
   const { data: post, isLoading } = useGetSingleForumQuery(
     {
@@ -17,7 +30,7 @@ const SingleForum = () => {
     }
   );
 
-  const { data: messages } = useGetMessagesQuery(
+  const { data: messages } = useGetInfiniteMessagesInfiniteQuery(
     {
       query: {
         where: {
@@ -27,7 +40,6 @@ const SingleForum = () => {
         },
       },
       options: {
-        sort: "createdAt",
         limit: -1,
       },
     },
@@ -35,6 +47,26 @@ const SingleForum = () => {
       skip: !id,
     }
   );
+
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    if (text == "") {
+      toast.error("Type something first!");
+    } else if (!id || !userData) {
+      toast.error("Something went wrong. Please contact admin");
+    } else {
+      sendMessage({
+        text,
+        forum: id,
+        author: userData.user.id,
+      })
+        .unwrap()
+        .then(() => {
+          setText("");
+        });
+    }
+  }
 
   if (isLoading) return <Loader />;
 
@@ -47,15 +79,92 @@ const SingleForum = () => {
 
   if (!post) return <Loader />;
 
-  console.log(messages);
-
   return (
     <div className="flex flex-col bg-white gap-5 md:gap-12">
       <section className="flex flex-col border-1 border-[#D5D5D5] rounded-md md:rounded-2xl">
         <h2 className="bg-[#F3F3F3] p-5 border-b-1 border-[#D5D5D5] rounded-t-md text-sm md:px-8 md:text-lg md:rounded-t-2xl 2xl:px-12">
           {post.title}
         </h2>
-        <div className="flex flex-col gap-5 p-5 rounded-b-md md:rounded-b-2xl md:p-8 md:gap-8 2xl:p-12 2xl:gap-12"></div>
+        <div className="flex flex-col gap-5 p-5 rounded-b-md md:rounded-b-2xl md:p-8 md:gap-8 2xl:p-12 2xl:gap-12">
+          {messages ? (
+            Array.from(messages?.pages[0].docs)
+              .reverse()
+              .map((message) => (
+                <div
+                  key={message.id}
+                  className="flex flex-col gap-3 p-5 rounded-md shadow-lg md:gap-5 md:rounded-2xl"
+                >
+                  <div className="flex justify-between items-center">
+                    <div className="flex items-center gap-2">
+                      <div className="avatar">
+                        <div className="size-6 rounded-full md:size-12">
+                          <img
+                            src={
+                              typeof message.author !== "string"
+                                ? `${config.env.apiKey}${message.author.avatar?.thumbnailURL}`
+                                : avatarPlaceholder
+                            }
+                          />
+                        </div>
+                      </div>
+                      <small>
+                        {typeof message.author !== "string" &&
+                          message.author.name}
+                      </small>
+                    </div>
+                    <small className="text-[#2B3034]">
+                      {sometimeAgo(message.createdAt)}
+                    </small>
+                  </div>
+                  <p>{message.text}</p>
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <button
+                      className="flex gap-2 items-center cursor-pointer bg-primary py-1 px-2 rounded-md text-xs"
+                      onClick={() => copyToClipboard(message.text)}
+                    >
+                      <Copy className="size-3" />
+                      <span>Copy Text</span>
+                    </button>
+                  </div>
+                </div>
+              ))
+          ) : (
+            <p>No messages in this forum yet</p>
+          )}
+          <form
+            onSubmit={handleSubmit}
+            className="flex flex-col gap-3 p-5 rounded-md shadow-lg md:gap-5 md:rounded-2xl"
+          >
+            <div className="flex items-center gap-2">
+              {userData && (
+                <div className="avatar">
+                  <div className="size-6 rounded-full md:size-12">
+                    <img
+                      src={
+                        userData.user.avatar
+                          ? `${config.env.apiKey}${userData.user.avatar.thumbnailURL}`
+                          : avatarPlaceholder
+                      }
+                    />
+                  </div>
+                </div>
+              )}
+              <small>You</small>
+            </div>
+            <input
+              type="text"
+              placeholder="Share your views..."
+              className="input rounded-md w-full bg-[#EBEBEB]"
+              onChange={(e) => setText(e.target.value)}
+            />
+            <button
+              className="cursor-pointer bg-primary p-2 rounded-md text-xs w-fit"
+              type="submit"
+            >
+              <Send className="size-3" />
+            </button>
+          </form>
+        </div>
       </section>
     </div>
   );

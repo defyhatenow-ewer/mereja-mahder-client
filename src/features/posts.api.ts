@@ -35,7 +35,10 @@ const postApi = apiWithPostTags.injectEndpoints({
         return {
           url: `posts${filters}`,
           method: "GET",
-          params: params.options,
+          params: {
+            sort: "-publishedAt",
+            ...params.options,
+          },
         };
       },
       providesTags: (data) =>

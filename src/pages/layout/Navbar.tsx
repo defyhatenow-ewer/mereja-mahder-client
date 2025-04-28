@@ -1,7 +1,7 @@
 import { routes } from "../../routing";
 import HamburgerMenu from "../../components/HamburgerMenu";
 import { CustomLink, SpaceTypes } from "../../utils";
-import { Bell, ChevronDown, ChevronUp } from "../../components/Icons";
+import { Bell, ChevronDown, ChevronUp, Edit } from "../../components/Icons";
 import { useEffect, useState } from "react";
 import { useMeQuery } from "../../features/auth.api";
 import { avatarPlaceholder } from "../../assets/images";
@@ -160,9 +160,14 @@ const Navbar = () => {
               />
             </div>
           </div>
-          <div className="flex flex-col gap-1 text-sm">
+          <div className="flex flex-col gap-1 text-xs">
             <span>{data.user.name}</span>
-            <span className="capitalize">{data.user.role}</span>
+            <div className="flex justify-between items-center">
+              <span className="capitalize">{data.user.role}</span>
+              <div className="flex justify-center items-center rounded-full p-1 bg-primary text-secondary">
+                <Edit className="size-4" />
+              </div>
+            </div>
           </div>
         </a>
       )}

@@ -100,5 +100,7 @@
   "lastUpdated": "Last Updated",
   "views": "Views",
   "edit": "Edit",
-  "download": "Download"
+  "download": "Download",
+  "tag": "Tag",
+  "category": "Category"
 }

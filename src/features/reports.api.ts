@@ -35,7 +35,10 @@ const reportApi = apiWithReportTags.injectEndpoints({
         return {
           url: `reports${filters}`,
           method: "GET",
-          params: params.options,
+          params: {
+            sort: "-publishedAt",
+            ...params.options,
+          },
         };
       },
       providesTags: (data) =>

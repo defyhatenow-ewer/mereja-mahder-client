@@ -108,7 +108,7 @@ const FactChecks = () => {
         <section className="flex flex-col gap-5 md:justify-between md:items-center md:gap-8 md:flex-row">
           <input
             type="text"
-            placeholder="Search..."
+            placeholder={`${t("search")}...`}
             value={search}
             className="input border-0 w-full bg-[#EBEBEB] p-3 rounded-2xl md:rounded-4xl md:p-6"
             onChange={(e) => {
@@ -132,7 +132,7 @@ const FactChecks = () => {
               <summary className="list-none text-white h-full align-middle cursor-pointer">
                 <div className="h-full flex justify-between items-center text-black rounded-md">
                   <span>
-                    {tag === "" ? "Tag" : pickTitleUsingID(tag, tags.docs)}
+                    {tag === "" ? t("tag") : pickTitleUsingID(tag, tags.docs)}
                   </span>
                   {tagOpen ? (
                     <ChevronUp className="size-6" />
@@ -171,7 +171,7 @@ const FactChecks = () => {
                 <div className="h-full flex justify-between items-center text-black rounded-md">
                   <span>
                     {category === ""
-                      ? "Category"
+                      ? t("category")
                       : pickTitleUsingID(category, categories.docs)}
                   </span>
                   {open ? (

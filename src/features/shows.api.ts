@@ -35,7 +35,10 @@ const showApi = apiWithShowTags.injectEndpoints({
         return {
           url: `shows${filters}`,
           method: "GET",
-          params: params.options,
+          params: {
+            sort: "-publishedAt",
+            ...params.options,
+          },
         };
       },
       providesTags: (data) =>
