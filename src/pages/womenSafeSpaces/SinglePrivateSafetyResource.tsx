@@ -2,25 +2,31 @@ import { useParams } from "react-router-dom";
 import { Loader, RichTextReader } from "../../components";
 import { formatDateTime } from "../../utils";
 import { useTranslation } from "react-i18next";
-import { useGetSingleSafetyResourceQuery } from "../../features/safetyResources.api";
+import { useGetSafetyResourcesQuery } from "../../features/safetyResources.api";
 import { config } from "../../config";
 
 const SinglePrivateSafetyResource = () => {
   const { t } = useTranslation();
-  const { id } = useParams();
+  const { slug } = useParams();
 
-  const { data: post, isLoading } = useGetSingleSafetyResourceQuery(
+  const { data: post, isLoading } = useGetSafetyResourcesQuery(
     {
-      id: id as string,
+      query: {
+        where: {
+          slug: {
+            equals: slug,
+          },
+        },
+      },
     },
     {
-      skip: !id,
+      skip: !slug,
     }
   );
 
   if (isLoading) return <Loader />;
 
-  if (!isLoading && !post)
+  if (!isLoading && (!post || !post.docs.length))
     return (
       <div className="flex flex-col bg-white gap-5 p-5 pt-0 md:p-12 md:pt-0 md:gap-16">
         {t("postNotFound")}
@@ -32,25 +38,25 @@ const SinglePrivateSafetyResource = () => {
   return (
     <div className="flex flex-col bg-white gap-5 md:gap-12">
       <section className="flex flex-col gap-3 md:gap-5">
-        <h2>{post.title}</h2>
+        <h2>{post.docs[0].title}</h2>
         <div className="flex gap-3 items-center flex-col md:flex-row md:gap-5">
           <small className="text-[#0B121580]">
-            {formatDateTime(post.updatedAt)}
+            {formatDateTime(post.docs[0].updatedAt)}
           </small>
         </div>
       </section>
       <div className="flex flex-col gap-5 w-full items-center md:items-start md:gap-12">
-        {post.pdf && (
+        {post.docs[0].pdf && (
           <iframe
             src={
-              typeof post.pdf === "string"
-                ? `${config.env.apiKey}${post.pdf}`
-                : `${config.env.apiKey}${post.pdf.url}`
+              typeof post.docs[0].pdf === "string"
+                ? `${config.env.apiKey}${post.docs[0].pdf}`
+                : `${config.env.apiKey}${post.docs[0].pdf.url}`
             }
             className="w-full h-[800px] self-center"
           ></iframe>
         )}
-        <RichTextReader data={post.content} />
+        <RichTextReader data={post.docs[0].content} />
       </div>
     </div>
   );

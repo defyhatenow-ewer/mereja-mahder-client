@@ -219,7 +219,7 @@ const Reports = () => {
                     key={post.id}
                     className="flex flex-col justify-between gap-3 p-5 bg-[#E4E4E4] rounded-2xl md:gap-6 md:rounded-3xl"
                   >
-                    <Link to={`${routes.Reports.absolute}/${post.id}`}>
+                    <Link to={`${routes.Reports.absolute}/${post.slug}`}>
                       {typeof post.featuredImage === "string" && (
                         <img
                           src={`${config.env.apiKey}${post.featuredImage}`}
@@ -239,7 +239,7 @@ const Reports = () => {
                       <div className="flex justify-between items-center w-full gap-3 md:gap-6">
                         <Link
                           className="font-poppins-medium text-lg"
-                          to={`${routes.Reports.absolute}/${post.id}`}
+                          to={`${routes.Reports.absolute}/${post.slug}`}
                         >
                           {post.title}
                         </Link>

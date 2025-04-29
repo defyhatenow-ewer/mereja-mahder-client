@@ -87,7 +87,7 @@ const SafetyResources = () => {
                           className="rounded-md object-cover object-center md:rounded-2xl"
                         />
                         <Link
-                          to={`${routes.SafetyResources.absolute}/${post.id}`}
+                          to={`${routes.SafetyResources.absolute}/${post.slug}`}
                           className="absolute bottom-2 right-2 z-1 flex justify-center items-center rounded-full p-1 bg-primary text-secondary"
                         >
                           <ArrowUpRight className="size-5" />
@@ -102,7 +102,7 @@ const SafetyResources = () => {
                             className="rounded-md object-cover object-center md:rounded-2xl"
                           />
                           <Link
-                            to={`${routes.SafetyResources.absolute}/${post.id}`}
+                            to={`${routes.SafetyResources.absolute}/${post.slug}`}
                             className="absolute bottom-2 right-2 z-1 flex justify-center items-center rounded-full p-1 bg-primary text-secondary"
                           >
                             <ArrowUpRight className="size-5" />
@@ -123,7 +123,7 @@ const SafetyResources = () => {
                           ))}
                       </div>
                       <Link
-                        to={`${routes.SafetyResources.absolute}/${post.id}`}
+                        to={`${routes.SafetyResources.absolute}/${post.slug}`}
                         className="text-base font-poppins-semi-bold"
                       >
                         {post.title}

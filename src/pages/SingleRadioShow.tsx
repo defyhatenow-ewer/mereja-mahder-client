@@ -10,21 +10,27 @@ import {
 import { config } from "../config";
 import { ArrowUpRight } from "../components/Icons";
 import { routes } from "../routing";
-import { useGetShowsQuery, useGetSingleShowQuery } from "../features/shows.api";
+import { useGetShowsQuery } from "../features/shows.api";
 import { useTranslation } from "react-i18next";
 
 const buttonList = [FacebookButton, LinkedInButton, TwitterButton];
 
 const SingleRadioShow = () => {
   const { t } = useTranslation();
-  const { id } = useParams();
+  const { slug } = useParams();
 
-  const { data: post, isLoading } = useGetSingleShowQuery(
+  const { data: post, isLoading } = useGetShowsQuery(
     {
-      id: id as string,
+      query: {
+        where: {
+          slug: {
+            equals: slug,
+          },
+        },
+      },
     },
     {
-      skip: !id,
+      skip: !slug,
     }
   );
   const { data: posts, isLoading: isPostsLoading } = useGetShowsQuery(
@@ -32,7 +38,7 @@ const SingleRadioShow = () => {
       query: {
         where: {
           id: {
-            not_equals: id as string,
+            not_equals: post?.docs[0].id as string,
           },
         },
       },
@@ -41,13 +47,13 @@ const SingleRadioShow = () => {
       },
     },
     {
-      skip: !id,
+      skip: !slug || !post || !post.docs.length,
     }
   );
 
   if (isLoading || isPostsLoading) return <Loader />;
 
-  if (!isLoading && !post)
+  if (!isLoading && (!post || !post.docs.length))
     return (
       <div className="flex flex-col bg-white gap-5 p-5 pt-0 md:p-12 md:pt-0 md:gap-16">
         {t("postNotFound")}
@@ -60,13 +66,13 @@ const SingleRadioShow = () => {
     <div className="flex justify-center">
       <div className="flex flex-col bg-white gap-5 p-5 pt-0 max-w-[1400px] md:p-12 md:pt-0 md:gap-12">
         <section className="flex flex-col gap-3 w-full md:w-4/5 md:gap-5">
-          <h2>{post.title}</h2>
+          <h2>{post.docs[0].title}</h2>
           <div className="flex gap-3 items-center flex-col md:flex-row md:gap-5">
             <small className="text-[#0B121580]">
-              {formatDateTime(post.createdAt)}
+              {formatDateTime(post.docs[0].createdAt)}
             </small>
             <div className="flex gap-2 items-center">
-              {(post.tags || []).map((tag) => (
+              {(post.docs[0].tags || []).map((tag) => (
                 <Link
                   to={`${routes.RadioShows.absolute}?tag=${tag.title}`}
                   key={tag.id}
@@ -80,15 +86,15 @@ const SingleRadioShow = () => {
         </section>
         <section className="flex flex-col gap-5 md:gap-12 md:flex-row">
           <div className="flex flex-col gap-5 w-full items-center md:items-start md:w-7/10 md:gap-16">
-            {parse(post.iframe)}
-            <RichTextReader data={post.content} />
+            {parse(post.docs[0].iframe)}
+            <RichTextReader data={post.docs[0].content} />
             <div className="flex flex-col gap-2">
               <small>{t("sharePost")}</small>
               <div className="flex gap-1">
                 {buttonList.map((Btn, index) => (
                   <Btn
-                    url={`${config.env.siteUrl}/posts/${id}`}
-                    title={post.title}
+                    url={`${config.env.siteUrl}/posts/${slug}`}
+                    title={post.docs[0].title}
                     withText={false}
                     round={false}
                     className="rounded-2xl"

@@ -144,7 +144,7 @@ const FellowsOverview = () => {
                 <Link
                   key={material.id}
                   className="flex flex-col gap-5 relative snap-start min-w-fit p-3 rounded-2xl shadow-2xl"
-                  to={`${routes.Materials.absolute}/${material.id}`}
+                  to={`${routes.Materials.absolute}/${material.slug}`}
                 >
                   {typeof material.featuredImage === "string" && (
                     <img

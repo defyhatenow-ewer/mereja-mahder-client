@@ -220,7 +220,7 @@ const Resources = () => {
               <div className="grid grid-flow-row grid-cols-1 gap-5 md:gap-8 md:grid-cols-3">
                 {data.docs.map((post) => (
                   <Link
-                    to={`${routes.Resources.absolute}/${post.id}`}
+                    to={`${routes.Resources.absolute}/${post.slug}`}
                     key={post.id}
                     className="flex flex-col justify-between gap-0 rounded-md bg-[#E4E4E4]"
                   >

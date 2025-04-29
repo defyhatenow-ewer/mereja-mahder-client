@@ -20,7 +20,7 @@ const Data = () => {
         {data &&
           data.docs.map((chart) => (
             <Link
-              to={`${routes.Data.absolute}/${chart.id}`}
+              to={`${routes.Data.absolute}/${chart.slug}`}
               key={chart.id}
               className="flex flex-col justify-start gap-0 rounded-md bg-[#D9D9D9]"
             >

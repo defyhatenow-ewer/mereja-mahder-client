@@ -118,7 +118,7 @@ const Home = () => {
                   key={post.id}
                   className="flex flex-col justify-between gap-3 p-5 bg-[#E4E4E4] rounded-2xl md:gap-6 md:rounded-3xl"
                 >
-                  <Link to={`${routes.Reports.absolute}/${post.id}`}>
+                  <Link to={`${routes.Reports.absolute}/${post.slug}`}>
                     {typeof post.featuredImage === "string" && (
                       <img
                         src={`${config.env.apiKey}${post.featuredImage}`}
@@ -136,7 +136,7 @@ const Home = () => {
                   <div className="flex flex-col gap-2">
                     <small>PDF</small>
                     <div className="flex justify-between items-center w-full gap-3 md:gap-6">
-                      <Link to={`${routes.Reports.absolute}/${post.id}`}>
+                      <Link to={`${routes.Reports.absolute}/${post.slug}`}>
                         {post.title}
                       </Link>
                       {post.pdf && typeof post.pdf === "string" && (
@@ -259,7 +259,7 @@ const Home = () => {
                       ))}
                     </div>
                     <Link
-                      to={`${routes.FactChecks.absolute}/${post.id}`}
+                      to={`${routes.FactChecks.absolute}/${post.slug}`}
                       className="text-lg font-poppins-medium"
                     >
                       {post.title}
@@ -334,7 +334,7 @@ const Home = () => {
                     </small>
                     <a
                       className="text-left text-lg md:text-xl"
-                      href={`${routes.RadioShows.absolute}/${post.id}`}
+                      href={`${routes.RadioShows.absolute}/${post.slug}`}
                     >
                       {post.title}
                     </a>

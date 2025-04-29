@@ -28,15 +28,15 @@ export default {
   About: new Path("about"),
   ServerError: new Path("server-error"),
   Posts: new Path("posts"),
-  SinglePost: new Path("posts/:id"),
+  SinglePost: new Path("posts/:slug"),
   FactChecks: new Path("fact-checks"),
-  SingleFactCheck: new Path("fact-checks/:id"),
+  SingleFactCheck: new Path("fact-checks/:slug"),
   Reports: new Path("reports"),
-  SingleReport: new Path("reports/:id"),
+  SingleReport: new Path("reports/:slug"),
   Resources: new Path("resources"),
-  SingleResource: new Path("resources/:id"),
+  SingleResource: new Path("resources/:slug"),
   RadioShows: new Path("radio-shows"),
-  SingleRadioShow: new Path("radio-shows/:id"),
+  SingleRadioShow: new Path("radio-shows/:slug"),
   Auth: new Path("auth"),
   Login: new Path("login", "/auth/login"),
   Register: new Path("register", "/auth/register"),
@@ -53,7 +53,7 @@ export default {
   DashboardForbidden: new Path("forbidden", "/dashboard/forbidden"),
   Overview: new Path("overview", "/dashboard/overview"),
   Forum: new Path("forum", "/dashboard/forum"),
-  SingleForum: new Path("forum/:id", "/dashboard/forum/:id"),
+  SingleForum: new Path("forum/:slug", "/dashboard/forum/:slug"),
   Fellows: new Path("fellows", "/dashboard/fellows"),
   LearningResources: new Path(
     "learning-resources",
@@ -61,8 +61,8 @@ export default {
   ),
   Partners: new Path("partners", "/dashboard/partners"),
   Data: new Path("data", "/dashboard/partners/data"),
-  SingleChart: new Path("data/:id", "/dashboard/partners/data/:id"),
-  SinglePrivatePost: new Path("single/:id", "/dashboard/posts/single/:id"),
+  SingleChart: new Path("data/:slug", "/dashboard/partners/data/:slug"),
+  SinglePrivatePost: new Path("single/:slug", "/dashboard/posts/single/:slug"),
   ReportList: new Path("reports", "/dashboard/partners/reports"),
   WomenSafeSpace: new Path("women-safe-space", "/dashboard/women-safe-space"),
   SafetyResources: new Path(
@@ -70,24 +70,24 @@ export default {
     "/dashboard/women-safe-space/safety-resources"
   ),
   SinglePrivateReport: new Path(
-    "reports/:id",
-    "/dashboard/partners/reports/:id"
+    "reports/:slug",
+    "/dashboard/partners/reports/:slug"
   ),
   SinglePrivateLearningResource: new Path(
-    "learning-resources/:id",
-    "/dashboard/fellows/learning-resources/:id"
+    "learning-resources/:slug",
+    "/dashboard/fellows/learning-resources/:slug"
   ),
   Materials: new Path("materials", "/dashboard/fellows/materials"),
   SinglePrivateMaterial: new Path(
-    "materials/:id",
-    "/dashboard/fellows/materials/:id"
+    "materials/:slug",
+    "/dashboard/fellows/materials/:slug"
   ),
   SinglePrivateSafetyResource: new Path(
-    "safety-resources/:id",
-    "/dashboard/women-safe-space/safety-resources/:id"
+    "safety-resources/:slug",
+    "/dashboard/women-safe-space/safety-resources/:slug"
   ),
   SinglePrivateArticles: new Path(
-    "articles/:id",
-    "/dashboard/fellows/articles/:id"
+    "articles/:slug",
+    "/dashboard/fellows/articles/:slug"
   ),
 };

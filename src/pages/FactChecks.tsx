@@ -240,7 +240,7 @@ const FactChecks = () => {
                         ))}
                       </div>
                       <Link
-                        to={`${routes.FactChecks.absolute}/${post.id}`}
+                        to={`${routes.FactChecks.absolute}/${post.slug}`}
                         className="text-lg font-poppins-medium"
                       >
                         {post.title}

@@ -240,7 +240,7 @@ const Posts = () => {
                       </small>
                       <a
                         className="text-left text-lg md:text-xl"
-                        href={`${routes.RadioShows.absolute}/${post.id}`}
+                        href={`${routes.RadioShows.absolute}/${post.slug}`}
                       >
                         {post.title}
                       </a>

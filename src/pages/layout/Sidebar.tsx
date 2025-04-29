@@ -174,7 +174,7 @@ const Sidebar = () => {
           forums.docs.map((forum) => (
             <Link
               key={forum.id}
-              to={`${routes.Forum.absolute}/${forum.id}`}
+              to={`${routes.Forum.absolute}/${forum.slug}`}
               className="text-xs"
             >
               {forum.title}

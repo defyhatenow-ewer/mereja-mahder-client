@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import EmojiPicker from "emoji-picker-react";
 import { Loader } from "../components";
 import { useTranslation } from "react-i18next";
-import { useGetSingleForumQuery } from "../features/forums.api";
+import { useGetForumsQuery } from "../features/forums.api";
 import {
   useCreateMessageMutation,
   useGetInfiniteMessagesInfiniteQuery,
@@ -18,7 +18,7 @@ import { IMessage } from "../types/forums.types";
 
 const SingleForum = () => {
   const { t } = useTranslation();
-  const { id } = useParams();
+  const { slug } = useParams();
   const { data: userData } = useMeQuery();
   const [sendMessage] = useCreateMessageMutation();
   const [text, setText] = useState("");
@@ -27,12 +27,18 @@ const SingleForum = () => {
   const inputRef = useRef<HTMLFormElement | null>(null);
   const buttonRef = useRef<HTMLButtonElement | null>(null);
 
-  const { data: post, isLoading } = useGetSingleForumQuery(
+  const { data: post, isLoading } = useGetForumsQuery(
     {
-      id: id as string,
+      query: {
+        where: {
+          slug: {
+            equals: slug,
+          },
+        },
+      },
     },
     {
-      skip: !id,
+      skip: !slug,
     }
   );
 
@@ -45,7 +51,7 @@ const SingleForum = () => {
       query: {
         where: {
           forum: {
-            equals: id,
+            equals: post?.docs[0].id as string,
           },
         },
       },
@@ -54,7 +60,7 @@ const SingleForum = () => {
       },
     },
     {
-      skip: !id,
+      skip: !post || !post.docs.length,
       pollingInterval: 2000,
     }
   );
@@ -88,12 +94,12 @@ const SingleForum = () => {
 
     if (text == "") {
       toast.error("Type something first!");
-    } else if (!id || !userData) {
+    } else if (!slug || !userData || !post || !post.docs.length) {
       toast.error("Something went wrong. Please contact admin");
     } else {
       sendMessage({
         text,
-        forum: id,
+        forum: post.docs[0].id,
         author: userData.user.id,
       })
         .unwrap()
@@ -117,7 +123,7 @@ const SingleForum = () => {
 
   if (isLoading) return <Loader />;
 
-  if (!isLoading && !post)
+  if (!isLoading && (!post || !post.docs.length))
     return (
       <div className="flex flex-col bg-white gap-5 p-5 pt-0 md:p-12 md:pt-0 md:gap-16">
         {t("postNotFound")}
@@ -130,7 +136,7 @@ const SingleForum = () => {
     <div className="flex flex-col bg-white gap-5 md:gap-12">
       <section className="flex flex-col border-1 border-[#D5D5D5] rounded-md md:rounded-2xl">
         <h2 className="bg-[#F3F3F3] p-5 border-b-1 border-[#D5D5D5] rounded-t-md text-sm md:px-8 md:text-lg md:rounded-t-2xl 2xl:px-12">
-          {post.title}
+          {post.docs[0].title}
         </h2>
         <div
           ref={messageContainerRef}
