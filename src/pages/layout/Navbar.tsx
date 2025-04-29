@@ -148,6 +148,7 @@ const Navbar = () => {
         <a
           href={routes.Settings.absolute}
           className="flex gap-3 items-center md:gap-5"
+          target="_blank"
         >
           <div className="avatar">
             <div className="w-12 rounded-full">

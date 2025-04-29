@@ -11,7 +11,7 @@ import { avatarPlaceholder } from "../assets/images";
 import { copyToClipboard, sometimeAgo } from "../utils";
 import { Copy, Send } from "../components/Icons";
 import { useMeQuery } from "../features/auth.api";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
 import { IMessage } from "../types/forums.types";
 
@@ -22,6 +22,7 @@ const SingleForum = () => {
   const [sendMessage] = useCreateMessageMutation();
   const [text, setText] = useState("");
   const messageContainerRef = useRef<HTMLDivElement | null>(null);
+  const inputRef = useRef<HTMLFormElement | null>(null);
 
   const { data: post, isLoading } = useGetSingleForumQuery(
     {
@@ -54,6 +55,15 @@ const SingleForum = () => {
       pollingInterval: 2000,
     }
   );
+
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }
+  }, [messages]);
 
   const handleScroll = async () => {
     const container = messageContainerRef.current;
@@ -169,6 +179,7 @@ const SingleForum = () => {
             <p>No messages in this forum yet</p>
           )}
           <form
+            ref={inputRef}
             onSubmit={handleSubmit}
             className="flex flex-col gap-3 p-5 rounded-md shadow-lg md:gap-5 md:rounded-2xl"
           >
