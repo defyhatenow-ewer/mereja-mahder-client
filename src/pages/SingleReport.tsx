@@ -37,6 +37,8 @@ const SingleReport = () => {
 
   if (!post) return <Loader />;
 
+  console.log({ post });
+
   return (
     <div className="flex flex-col justify-center bg-white gap-5 p-5 pt-0 md:p-12 md:pt-0 md:gap-12">
       <section className="flex flex-col self-center items-center gap-5 w-full xl:w-4xl md:items-start md:gap-12 xl:gap-16">
@@ -66,10 +68,7 @@ const SingleReport = () => {
                 ? `${config.env.apiKey}${post.pdf}?content-type=application/pdf`
                 : `${config.env.apiKey}${post.pdf.url}?content-type=application/pdf`
             }
-            // className="w-full h-[800px] self-center"
-            // type="application/pdf"
-            height="100%"
-            width="100%"
+            className="w-full h-[800px] self-center"
           ></iframe>
         )}
         <RichTextReader data={post.content} />
