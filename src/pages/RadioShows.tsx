@@ -222,14 +222,14 @@ const RadioShows = () => {
                     {typeof post.featuredImage === "string" && (
                       <img
                         src={`${config.env.apiKey}${post.featuredImage}`}
-                        className="w-full object-cover object-center h-full rounded-3xl md:rounded-none md:h-64"
+                        className="w-full object-cover object-center rounded-3xl md:rounded-none"
                       />
                     )}
                     {post.featuredImage &&
                       typeof post.featuredImage !== "string" && (
                         <img
                           src={`${config.env.apiKey}${post.featuredImage.url}`}
-                          className="w-full object-cover object-center h-full rounded-3xl md:rounded-none md:h-64"
+                          className="w-full object-cover object-center rounded-3xl md:rounded-none"
                         />
                       )}
                     <div className="flex flex-col gap-3 p-5 md:p-0 md:gap-5">
