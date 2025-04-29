@@ -1,4 +1,5 @@
 import { useParams } from "react-router-dom";
+import EmojiPicker from "emoji-picker-react";
 import { Loader } from "../components";
 import { useTranslation } from "react-i18next";
 import { useGetSingleForumQuery } from "../features/forums.api";
@@ -9,7 +10,7 @@ import {
 import { config } from "../config";
 import { avatarPlaceholder } from "../assets/images";
 import { copyToClipboard, sometimeAgo } from "../utils";
-import { Copy, Send } from "../components/Icons";
+import { Copy, Send, Smile } from "../components/Icons";
 import { useMeQuery } from "../features/auth.api";
 import { useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
@@ -21,8 +22,10 @@ const SingleForum = () => {
   const { data: userData } = useMeQuery();
   const [sendMessage] = useCreateMessageMutation();
   const [text, setText] = useState("");
+  const [open, setOpen] = useState(false);
   const messageContainerRef = useRef<HTMLDivElement | null>(null);
   const inputRef = useRef<HTMLFormElement | null>(null);
+  const buttonRef = useRef<HTMLButtonElement | null>(null);
 
   const { data: post, isLoading } = useGetSingleForumQuery(
     {
@@ -199,16 +202,34 @@ const SingleForum = () => {
               )}
               <small>You</small>
             </div>
-            <input
-              type="text"
-              placeholder="Share your views..."
-              className="input rounded-md w-full bg-[#EBEBEB]"
-              value={text}
-              onChange={(e) => setText(e.target.value)}
+            <div className="flex items-center justify-between gap-2">
+              <input
+                type="text"
+                placeholder="Share your views..."
+                className="input rounded-md w-full bg-[#EBEBEB] flex-grow"
+                value={text}
+                onChange={(e) => setText(e.target.value)}
+              />
+              <div
+                className="cursor-pointer bg-primary p-2 rounded-md text-xs w-fit"
+                onClick={() => setOpen((prev) => !prev)}
+              >
+                <Smile className="size-6" />
+              </div>
+            </div>
+            <EmojiPicker
+              open={open}
+              height={400}
+              onEmojiClick={(emoji) =>
+                setText((prev) =>
+                  prev === "" ? emoji.emoji : `${prev} ${emoji.emoji}`
+                )
+              }
             />
             <button
               className="cursor-pointer bg-primary p-2 rounded-md text-xs w-fit"
               type="submit"
+              ref={buttonRef}
             >
               <Send className="size-3" />
             </button>
