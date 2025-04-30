@@ -71,9 +71,9 @@ const FrontNavbar = () => {
                     href={link.route}
                     className={`${
                       location.pathname === link.route
-                        ? "bg-[#D9D9D9]"
+                        ? "bg-primary"
                         : "bg-white"
-                    } text-sm rounded-2xl py-2 px-4`}
+                    } text-sm rounded-2xl py-2 px-4 hover:bg-[#D9D9D9]`}
                   >
                     {t(link.title)}
                   </a>
@@ -82,9 +82,9 @@ const FrontNavbar = () => {
                     to={link.route}
                     className={`${
                       location.pathname === link.route
-                        ? "bg-[#D9D9D9]"
+                        ? "bg-primary"
                         : "bg-white"
-                    } text-sm rounded-2xl py-2 px-4 hover:bg-primary`}
+                    } text-sm rounded-2xl py-2 px-4 hover:bg-[#D9D9D9]`}
                   >
                     {t(link.title)}
                   </Link>
@@ -126,20 +126,20 @@ const FrontNavbar = () => {
           {data && data.user ? (
             <Link
               to={goToDashboard(data.user)}
-              className="flex justify-between items-center gap-3 bg-secondary text-primary cursor-pointer rounded-4xl p-2 ps-3 w-full md:w-fit md:ps-5"
+              className="flex justify-between items-center gap-3 bg-secondary text-primary hover:text-white cursor-pointer rounded-4xl p-2 ps-3 w-full md:w-fit md:ps-5"
             >
               <span>{t("dashboard")}</span>
-              <div className="flex justify-center items-center rounded-full p-1 bg-primary text-secondary">
+              <div className="flex justify-center items-center rounded-full p-1 bg-primary text-secondary child-icon">
                 <ArrowUpRight />
               </div>
             </Link>
           ) : (
             <Link
               to={routes.Login.absolute}
-              className="flex justify-between items-center gap-3 bg-secondary text-primary cursor-pointer rounded-4xl p-2 ps-3 w-full md:w-fit md:ps-5"
+              className="flex justify-between items-center gap-3 bg-secondary text-primary hover:text-white cursor-pointer rounded-4xl p-2 ps-3 w-full md:w-fit md:ps-5"
             >
               <span>{t("login")}</span>
-              <div className="flex justify-center items-center rounded-full p-1 bg-primary text-secondary">
+              <div className="flex justify-center items-center rounded-full p-1 bg-primary text-secondary child-icon">
                 <ArrowUpRight />
               </div>
             </Link>

@@ -166,7 +166,7 @@ const Navbar = () => {
             <span>{data.user.name}</span>
             <div className="flex justify-between items-center">
               <span className="capitalize">{data.user.role}</span>
-              <div className="flex justify-center items-center rounded-full p-1 bg-primary text-secondary">
+              <div className="flex justify-center items-center rounded-full p-1 bg-primary text-secondary child-icon">
                 <Edit className="size-4" />
               </div>
             </div>

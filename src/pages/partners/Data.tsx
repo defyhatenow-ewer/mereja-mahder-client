@@ -43,10 +43,10 @@ const Data = () => {
                 <small className="text-secondary">
                   {formatDateTime(chart.updatedAt)}
                 </small>
-                <h3 className="font-poppins-semi-bold md:text-lg">
+                <h3 className="font-poppins-semi-bold child-title md:text-lg">
                   {chart.title}
                 </h3>
-                <button className="text-white bg-secondary py-2 px-5 rounded-3xl w-fit">
+                <button className="text-white hover:text-primary cursor-pointer bg-secondary py-2 px-5 rounded-3xl w-fit">
                   {t("seeMore")}
                 </button>
               </div>

@@ -202,10 +202,10 @@ const Reports = () => {
           <button
             onClick={clearSearch}
             aria-disabled={isPostsLoading}
-            className="flex justify-between items-center gap-3 bg-secondary text-primary cursor-pointer rounded-4xl p-2 ps-4 w-full md:max-w-[10rem] md:ps-6"
+            className="flex justify-between items-center gap-3 bg-secondary text-primary hover:text-white cursor-pointer rounded-4xl p-2 ps-4 w-full md:max-w-[10rem] md:ps-6"
           >
             <span>{t("clear")}</span>
-            <div className="flex justify-center items-center rounded-full p-1 bg-primary text-secondary">
+            <div className="flex justify-center items-center rounded-full p-1 bg-primary text-secondary child-icon">
               <Refresh />
             </div>
           </button>
@@ -217,7 +217,7 @@ const Reports = () => {
                 {data.docs.map((post) => (
                   <div
                     key={post.id}
-                    className="flex flex-col justify-between gap-3 p-5 bg-[#E4E4E4] rounded-2xl md:gap-6 md:rounded-3xl"
+                    className="flex flex-col justify-between gap-3 p-5 bg-[#E4E4E4] rounded-2xl md:gap-6 md:rounded-3xl hover:shadow-2xl"
                   >
                     <Link to={`${routes.Reports.absolute}/${post.slug}`}>
                       {typeof post.featuredImage === "string" && (
@@ -238,7 +238,7 @@ const Reports = () => {
                       <small>PDF</small>
                       <div className="flex justify-between items-center w-full gap-3 md:gap-6">
                         <Link
-                          className="font-poppins-medium text-lg"
+                          className="font-poppins-medium text-lg hover:text-light-red"
                           to={`${routes.Reports.absolute}/${post.slug}`}
                         >
                           {post.title}

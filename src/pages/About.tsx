@@ -38,7 +38,7 @@ const About = () => {
           <div className="flex flex-col gap-2">
             <h2 className="text-2xl font-poppins-extra-light">{t("about")}</h2>
             <h1 className="font-poppins-semi-bold">
-              Mareja
+              Mereja
               <br />
               Mahder
             </h1>

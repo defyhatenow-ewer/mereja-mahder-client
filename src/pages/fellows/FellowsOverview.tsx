@@ -90,7 +90,7 @@ const FellowsOverview = () => {
                 banners.docs[0].links[0].links?.length &&
                 banners.docs[0].links[0].links[0].link.url && (
                   <a
-                    className="bg-secondary text-white text-xs px-5 py-2 rounded-2xl w-fit"
+                    className="bg-secondary text-white hover:text-primary text-xs px-5 py-2 rounded-2xl w-fit"
                     href={banners.docs[0].links[0].links[0].link.url}
                     target={
                       banners.docs[0].links[0].links[0].link.newTab === true
@@ -122,14 +122,14 @@ const FellowsOverview = () => {
               <button
                 onClick={movePrev}
                 disabled={isDisabled("prev")}
-                className={`${isDisabled("prev") ? "cursor-not-allowed" : "cursor-pointer"} flex justify-center items-center text-[#9E9E9E] border-1 border-[#9E9E9E] rounded-full p-1`}
+                className={`${isDisabled("prev") ? "cursor-not-allowed" : "cursor-pointer hover:bg-secondary hover:text-primary hover:border-none"} flex justify-center items-center text-[#9E9E9E] border-1 border-[#9E9E9E] rounded-full p-1`}
               >
                 <ChevronLeft className="size-4" />
               </button>
               <button
                 onClick={moveNext}
                 // disabled={isDisabled("next")}
-                className="flex justify-center items-center cursor-pointer text-[#9E9E9E] border-1 border-[#9E9E9E] rounded-full p-1"
+                className="flex justify-center items-center cursor-pointer text-[#9E9E9E] border-1 border-[#9E9E9E] rounded-full p-1 hover:bg-secondary hover:text-primary hover:border-none"
               >
                 <ChevronRight className="size-4" />
               </button>
@@ -143,7 +143,7 @@ const FellowsOverview = () => {
               materials.docs.map((material) => (
                 <Link
                   key={material.id}
-                  className="flex flex-col gap-5 relative snap-start min-w-fit p-3 rounded-2xl shadow-2xl"
+                  className="flex flex-col gap-5 relative snap-start min-w-fit p-3 rounded-2xl hover:shadow-2xl"
                   to={`${routes.Materials.absolute}/${material.slug}`}
                 >
                   {typeof material.featuredImage === "string" && (
@@ -159,7 +159,7 @@ const FellowsOverview = () => {
                         className="rounded-md object-cover object-center h-40 w-64"
                       />
                     )}
-                  <h3 className="text-sm text-wrap max-w-64">
+                  <h3 className="text-sm text-wrap max-w-64 child-title">
                     {material.title}
                   </h3>
                 </Link>

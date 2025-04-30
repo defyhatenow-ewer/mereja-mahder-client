@@ -206,10 +206,10 @@ const Resources = () => {
           <button
             onClick={clearSearch}
             aria-disabled={isPostsLoading}
-            className="flex justify-between items-center gap-3 bg-secondary text-primary cursor-pointer rounded-4xl p-2 ps-4 w-full md:max-w-[10rem] md:ps-6"
+            className="flex justify-between items-center gap-3 bg-secondary text-primary hover:text-white cursor-pointer rounded-4xl p-2 ps-4 w-full md:max-w-[10rem] md:ps-6"
           >
             <span>{t("clear")}</span>
-            <div className="flex justify-center items-center rounded-full p-1 bg-primary text-secondary">
+            <div className="flex justify-center items-center rounded-full p-1 bg-primary text-secondary child-icon">
               <Refresh />
             </div>
           </button>
@@ -222,7 +222,7 @@ const Resources = () => {
                   <Link
                     to={`${routes.Resources.absolute}/${post.slug}`}
                     key={post.id}
-                    className="flex flex-col justify-between gap-0 rounded-md bg-[#E4E4E4]"
+                    className="flex flex-col justify-start gap-0 rounded-md bg-[#E4E4E4]"
                   >
                     {typeof post.featuredImage === "string" && (
                       <img
@@ -244,13 +244,13 @@ const Resources = () => {
                             <Link
                               to={`${routes.Resources.absolute}?tag=${tag.title}`}
                               key={index}
-                              className="px-3 py-2 bg-primary rounded-2xl text-xs md:rounded-3xl md:px-4 md:py-1"
+                              className="px-3 py-2 bg-primary rounded-2xl text-xs hover:bg-secondary hover:text-primary md:rounded-3xl md:px-4 md:py-1"
                             >
                               {tag.title}
                             </Link>
                           ))}
                       </div>
-                      <h3>{post.title}</h3>
+                      <h3 className="hover:text-light-red">{post.title}</h3>
                       <small className="text-[#555555]">PDF</small>
                       {post.excerpt && (
                         <RichTextReader
@@ -258,8 +258,8 @@ const Resources = () => {
                           className="text-[#555555]"
                         />
                       )}
-                      <div className="flex justify-end">
-                        <div className="flex justify-center items-center rounded-full p-3 bg-primary text-secondary">
+                      <div className="flex justify-end justify-self-end">
+                        <div className="flex justify-center items-center rounded-full p-3 bg-primary text-secondary hover:bg-secondary hover:text-primary">
                           <ArrowUpRight />
                         </div>
                       </div>

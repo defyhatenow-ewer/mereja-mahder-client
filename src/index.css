@@ -141,7 +141,7 @@
       @apply text-left;
     }
     h2 {
-      @apply text-4xl;
+      @apply text-3xl;
       @apply text-left;
     }
     h3 {
@@ -267,4 +267,13 @@
     position: absolute;
     inset-inline-end: 0.75em;
   }
+}
+
+a:hover .child-icon,
+button:hover .child-icon {
+  @apply bg-white;
+}
+
+a:hover .child-title {
+  @apply text-light-red;
 }

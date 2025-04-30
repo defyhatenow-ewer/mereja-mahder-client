@@ -61,10 +61,10 @@ const Home = () => {
                 />
                 <Link
                   to={routes.About.relative}
-                  className="flex justify-between items-center gap-3 outline-20 outline-primary bg-secondary text-white cursor-pointer rounded-4xl p-3 ps-4 w-fit"
+                  className="flex justify-between items-center gap-3 outline-20 outline-primary bg-secondary text-primary hover:text-white cursor-pointer rounded-4xl p-3 ps-4 w-fit"
                 >
                   <span>{t("learnMore")}</span>
-                  <div className="flex justify-center items-center rounded-full p-1 bg-primary text-secondary">
+                  <div className="flex justify-center items-center rounded-full p-1 bg-primary text-secondary child-icon">
                     <ArrowUpRight />
                   </div>
                 </Link>
@@ -74,10 +74,10 @@ const Home = () => {
               <div className="bg-white h-full w-full pt-5 pe-12 md:rounded-tr-4xl md:pt-4 md:pe-4">
                 <Link
                   to={routes.About.relative}
-                  className="flex justify-between items-center gap-3 bg-secondary text-white cursor-pointer rounded-4xl p-3 ps-4 w-[100%-20px] text-sm md:text-base md:w-[100%-48px] md:ps-6"
+                  className="flex justify-between items-center gap-3 bg-secondary text-primary hover:text-white cursor-pointer rounded-4xl p-3 ps-4 w-[100%-20px] text-sm md:text-base md:w-[100%-48px] md:ps-6"
                 >
                   <span>{t("learnMore")}</span>
-                  <div className="flex justify-center items-center rounded-full p-1 bg-primary text-secondary">
+                  <div className="flex justify-center items-center rounded-full p-1 bg-primary text-secondary child-icon">
                     <ArrowUpRight />
                   </div>
                 </Link>
@@ -116,7 +116,7 @@ const Home = () => {
               {reports.docs.map((post) => (
                 <div
                   key={post.id}
-                  className="flex flex-col justify-between gap-3 p-5 bg-[#E4E4E4] rounded-2xl md:gap-6 md:rounded-3xl"
+                  className="flex flex-col justify-between gap-3 p-5 bg-[#E4E4E4] rounded-2xl md:gap-6 md:rounded-3xl hover:shadow-2xl"
                 >
                   <Link to={`${routes.Reports.absolute}/${post.slug}`}>
                     {typeof post.featuredImage === "string" && (
@@ -136,7 +136,10 @@ const Home = () => {
                   <div className="flex flex-col gap-2">
                     <small>PDF</small>
                     <div className="flex justify-between items-center w-full gap-3 md:gap-6">
-                      <Link to={`${routes.Reports.absolute}/${post.slug}`}>
+                      <Link
+                        className="font-poppins-medium text-lg hover:text-light-red"
+                        to={`${routes.Reports.absolute}/${post.slug}`}
+                      >
                         {post.title}
                       </Link>
                       {post.pdf && typeof post.pdf === "string" && (
@@ -178,16 +181,17 @@ const Home = () => {
             <div className="flex justify-center bg-white p-5 pb-0 w-full md:rounded-tl-4xl md:pt-5 md:px-12 md:w-sm xl:w-lg xl:p-12 xl:pb-0 xl:justify-start">
               <Link
                 to={routes.Reports.relative}
-                className="flex justify-between items-center gap-3 bg-secondary text-white cursor-pointer rounded-4xl p-3 ps-4 w-fit text-sm md:text-base md:w-[100%-48px] md:ps-6"
+                className="flex justify-between items-center gap-3 bg-secondary text-primary hover:text-white cursor-pointer rounded-4xl p-3 ps-4 w-fit text-sm md:text-base md:w-[100%-48px] md:ps-6"
               >
                 <span>{t("viewMore")}</span>
-                <div className="flex justify-center items-center rounded-full p-1 bg-primary text-secondary">
+                <div className="flex justify-center items-center rounded-full p-1 bg-primary text-secondary child-icon">
                   <ChevronRight />
                 </div>
               </Link>
             </div>
           </div>
         </section>
+        {/* Field Guide */}
         <section className="flex flex-col w-full gap-8 md:min-h-96 md:gap-0 md:flex-row">
           <div className="flex flex-col bg-light-red text-white m-5 md:m-0 md:w-1/2">
             <div className="bg-white flex-grow">
@@ -208,10 +212,10 @@ const Home = () => {
             <div className="bg-white px-5 pt-16 w-full flex justify-end md:rounded-tr-4xl md:pt-8 md:px-12">
               <Link
                 to={routes.Resources.relative}
-                className="flex justify-between items-center gap-3 bg-secondary text-white cursor-pointer rounded-4xl p-3 ps-4 w-[100%-20px] text-sm max-w-[600px] md:text-base md:w-full md:ps-6"
+                className="flex justify-between items-center gap-3 bg-secondary text-primary hover:text-white cursor-pointer rounded-4xl p-3 ps-4 w-[100%-20px] text-sm max-w-[600px] md:text-base md:w-full md:ps-6"
               >
                 <span>{t("viewFieldGuide")}</span>
-                <div className="flex justify-center items-center rounded-full p-1 bg-primary text-secondary">
+                <div className="flex justify-center items-center rounded-full p-1 bg-primary text-secondary child-icon">
                   <ChevronRight />
                 </div>
               </Link>
@@ -224,6 +228,7 @@ const Home = () => {
             </div>
           </div>
         </section>
+        {/* Fact Checks */}
         <section className="flex flex-col gap-8 p-8 pt-0 max-w-[1400px] md:gap-12 md:pt-0 md:p-12">
           <h2>{t("recentFactChecks")}</h2>
           {factChecks && factChecks.docs ? (
@@ -252,7 +257,7 @@ const Home = () => {
                         <Link
                           to={`${routes.FactChecks.absolute}?tag=${tag.title}`}
                           key={tag.id}
-                          className="px-3 py-2 bg-primary rounded-2xl text-xs md:text-sm md:rounded-3xl md:px-4 md:py-1"
+                          className="px-3 py-2 bg-primary rounded-2xl text-xs hover:bg-secondary hover:text-primary md:text-sm md:rounded-3xl md:px-4 md:py-1"
                         >
                           {tag.title}
                         </Link>
@@ -260,7 +265,7 @@ const Home = () => {
                     </div>
                     <Link
                       to={`${routes.FactChecks.absolute}/${post.slug}`}
-                      className="text-lg font-poppins-medium"
+                      className="text-lg font-poppins-medium hover:text-light-red"
                     >
                       {post.title}
                     </Link>
@@ -275,14 +280,15 @@ const Home = () => {
           )}
           <Link
             to={routes.FactChecks.relative}
-            className="flex justify-between items-center gap-3 bg-secondary text-white cursor-pointer rounded-4xl p-3 ps-4 w-full text-sm md:text-base md:max-w-sm md:ps-6"
+            className="flex justify-between items-center gap-3 bg-secondary text-primary hover:text-white cursor-pointer rounded-4xl p-3 ps-4 w-full text-sm md:text-base md:max-w-sm md:ps-6"
           >
             <span>{t("readMoreArticles")}</span>
-            <div className="flex justify-center items-center rounded-full p-1 bg-primary text-secondary">
+            <div className="flex justify-center items-center rounded-full p-1 bg-primary text-secondary child-icon">
               <ChevronRight />
             </div>
           </Link>
         </section>
+        {/* Access Resources CTA */}
         <section className="flex bg-primary mx-8 rounded-4xl justify-center md:rounded-none md:mx-0 md:w-full">
           <div className="flex flex-col bg-primary p-8 rounded-4xl max-w-[1400px] md:rounded-none md:mx-0 md:pt-0 md:p-12 md:flex-row">
             <img src={graphic1} className="w-full hidden md:inline md:w-1/3" />
@@ -294,10 +300,10 @@ const Home = () => {
               <p>{t("accessResourcesDescription")}</p>
               <Link
                 to={routes.Resources.relative}
-                className="flex justify-between items-center gap-3 bg-secondary text-white cursor-pointer rounded-4xl p-3 ps-4 w-full text-sm md:text-base md:max-w-sm md:ps-6"
+                className="flex justify-between items-center gap-3 bg-secondary text-primary hover:text-white cursor-pointer rounded-4xl p-3 ps-4 w-full text-sm md:text-base md:max-w-sm md:ps-6"
               >
                 <span>{t("viewResources")}</span>
-                <div className="flex justify-center items-center rounded-full p-1 bg-primary text-secondary">
+                <div className="flex justify-center items-center rounded-full p-1 bg-primary text-secondary child-icon">
                   <ChevronRight />
                 </div>
               </Link>
@@ -305,6 +311,7 @@ const Home = () => {
             <img src={graphic2} className="w-full hidden md:inline md:w-1/3" />
           </div>
         </section>
+        {/* Media Productions */}
         <section className="flex flex-col gap-8 p-8 pt-0 max-w-[1400px] md:pt-0 md:gap-12 md:p-12">
           <h2 className="hidden md:block">{t("mediaProductions")}</h2>
           <h2 className="block md:hidden">{t("radioShows")}</h2>
@@ -333,7 +340,7 @@ const Home = () => {
                       {formatDateTime(post.createdAt)}
                     </small>
                     <a
-                      className="text-left text-lg md:text-xl"
+                      className="text-left text-lg hover:text-light-red md:text-xl"
                       href={`${routes.RadioShows.absolute}/${post.slug}`}
                     >
                       {post.title}
@@ -343,7 +350,7 @@ const Home = () => {
                         <Link
                           to={`${routes.RadioShows.absolute}?tag=${tag.title}`}
                           key={tag.id}
-                          className="px-3 py-2 bg-primary rounded-2xl text-xs md:text-sm md:rounded-3xl md:px-4 md:py-1"
+                          className="px-3 py-2 bg-primary rounded-2xl text-xs hover:bg-secondary hover:text-primary md:text-sm md:rounded-3xl md:px-4 md:py-1"
                         >
                           {tag.title}
                         </Link>
@@ -358,10 +365,10 @@ const Home = () => {
           )}
           <Link
             to={routes.RadioShows.relative}
-            className="flex justify-between items-center self-center gap-8 bg-secondary text-white cursor-pointer rounded-4xl p-3 ps-4 w-fit text-sm md:self-start md:text-base md:w-sm md:ps-6"
+            className="flex justify-between items-center self-center gap-8 bg-secondary text-primary hover:text-white cursor-pointer rounded-4xl p-3 ps-4 w-fit text-sm md:self-start md:text-base md:w-sm md:ps-6"
           >
             <span>{t("moreShows")}</span>
-            <div className="flex justify-center items-center rounded-full p-1 bg-primary text-secondary">
+            <div className="flex justify-center items-center rounded-full p-1 bg-primary text-secondary child-icon">
               <ChevronRight />
             </div>
           </Link>

@@ -40,7 +40,7 @@ const ReportList = () => {
                 banners.docs[0].links[0].links?.length &&
                 banners.docs[0].links[0].links[0].link.url && (
                   <a
-                    className="bg-secondary text-white text-xs px-5 py-2 rounded-2xl w-fit"
+                    className="bg-secondary text-white hover:text-primary text-xs px-5 py-2 rounded-2xl w-fit"
                     href={banners.docs[0].links[0].links[0].link.url}
                     target={
                       banners.docs[0].links[0].links[0].link.newTab === true
@@ -82,7 +82,7 @@ const ReportList = () => {
                     <td className="max-w-32">
                       <Link
                         to={`${routes.ReportList.absolute}/${report.slug}`}
-                        className="text-wrap text-sm font-poppins-semi-bold"
+                        className="text-wrap text-sm font-poppins-semi-bold hover:text-light-red"
                       >
                         {report.title}
                       </Link>

@@ -46,7 +46,7 @@ const LearningResources = () => {
                 banners.docs[0].links[0].links?.length &&
                 banners.docs[0].links[0].links[0].link.url && (
                   <a
-                    className="bg-secondary text-white text-xs px-5 py-2 rounded-2xl w-fit"
+                    className="bg-secondary text-white hover:text-primary text-xs px-5 py-2 rounded-2xl w-fit"
                     href={banners.docs[0].links[0].links[0].link.url}
                     target={
                       banners.docs[0].links[0].links[0].link.newTab === true
@@ -88,7 +88,7 @@ const LearningResources = () => {
                         />
                         <Link
                           to={`${routes.LearningResources.absolute}/${post.slug}`}
-                          className="absolute bottom-2 right-2 z-1 flex justify-center items-center rounded-full p-1 bg-primary text-secondary"
+                          className="absolute bottom-2 right-2 z-1 flex justify-center items-center rounded-full p-1 bg-primary text-secondary hover:bg-secondary hover:text-primary"
                         >
                           <ArrowUpRight className="size-5" />
                         </Link>
@@ -103,7 +103,7 @@ const LearningResources = () => {
                           />
                           <Link
                             to={`${routes.LearningResources.absolute}/${post.slug}`}
-                            className="absolute bottom-2 right-2 z-1 flex justify-center items-center rounded-full p-1 bg-primary text-secondary"
+                            className="absolute bottom-2 right-2 z-1 flex justify-center items-center rounded-full p-1 bg-primary text-secondary child-icon"
                           >
                             <ArrowUpRight className="size-5" />
                           </Link>
@@ -116,7 +116,7 @@ const LearningResources = () => {
                             <Link
                               to={`${routes.LearningResources.absolute}?tag=${tag.title}`}
                               key={index}
-                              className="px-3 py-2 bg-primary rounded-2xl text-xs md:rounded-3xl md:px-4 md:py-1"
+                              className="px-3 py-2 bg-primary rounded-2xl text-xs hover:bg-secondary hover:text-primary md:rounded-3xl md:px-4 md:py-1"
                             >
                               {tag.title}
                             </Link>
@@ -124,7 +124,7 @@ const LearningResources = () => {
                       </div>
                       <Link
                         to={`${routes.LearningResources.absolute}/${post.slug}`}
-                        className="text-base font-poppins-semi-bold"
+                        className="text-base font-poppins-semi-bold hover:text-light-red"
                       >
                         {post.title}
                       </Link>

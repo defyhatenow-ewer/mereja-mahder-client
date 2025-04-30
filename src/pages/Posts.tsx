@@ -204,10 +204,10 @@ const Posts = () => {
           <button
             onClick={clearSearch}
             aria-disabled={isLoading}
-            className="flex justify-between items-center gap-3 bg-secondary text-primary cursor-pointer rounded-4xl p-2 ps-4 w-full md:max-w-[8rem] md:ps-6"
+            className="flex justify-between items-center gap-3 bg-secondary text-primary hover:text-white cursor-pointer rounded-4xl p-2 ps-4 w-full md:max-w-[8rem] md:ps-6"
           >
             <span>{t("clear")}</span>
-            <div className="flex justify-center items-center rounded-full p-1 bg-primary text-secondary">
+            <div className="flex justify-center items-center rounded-full p-1 bg-primary text-secondary child-icon">
               <Refresh />
             </div>
           </button>
@@ -239,7 +239,7 @@ const Posts = () => {
                         {formatDateTime(post.createdAt)}
                       </small>
                       <a
-                        className="text-left text-lg md:text-xl"
+                        className="text-left text-lg hover:text-light-red md:text-xl"
                         href={`${routes.RadioShows.absolute}/${post.slug}`}
                       >
                         {post.title}
@@ -249,7 +249,7 @@ const Posts = () => {
                           <Link
                             to={`${routes.Posts.absolute}?tag=${tag.title}`}
                             key={tag.id}
-                            className="px-3 py-2 bg-primary rounded-2xl text-xs md:text-sm md:rounded-3xl md:px-4 md:py-1"
+                            className="px-3 py-2 bg-primary rounded-2xl text-xs hover:bg-secondary hover:text-primary md:text-sm md:rounded-3xl md:px-4 md:py-1"
                           >
                             {tag.title}
                           </Link>

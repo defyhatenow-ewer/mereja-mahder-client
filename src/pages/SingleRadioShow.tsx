@@ -76,7 +76,7 @@ const SingleRadioShow = () => {
                 <Link
                   to={`${routes.RadioShows.absolute}?tag=${tag.title}`}
                   key={tag.id}
-                  className="px-3 py-2 bg-primary rounded-2xl text-xs md:text-sm md:rounded-3xl md:px-4 md:py-1"
+                  className="px-3 py-2 bg-primary rounded-2xl text-xs hover:bg-secondary hover:text-primary md:text-sm md:rounded-3xl md:px-4 md:py-1"
                 >
                   {tag.title}
                 </Link>
@@ -121,10 +121,10 @@ const SingleRadioShow = () => {
                     <a
                       href="#"
                       target="_blank"
-                      className="flex justify-between items-center gap-3 bg-secondary text-primary cursor-pointer rounded-4xl p-1 ps-2 md:ps-4"
+                      className="flex justify-between items-center gap-3 bg-secondary text-primary hover:text-white cursor-pointer rounded-4xl p-1 ps-2 md:ps-4"
                     >
                       <span>{t("subscribe")}</span>
-                      <div className="flex justify-center items-center rounded-full p-1 bg-primary text-secondary">
+                      <div className="flex justify-center items-center rounded-full p-1 bg-primary text-secondary child-icon">
                         <ArrowUpRight />
                       </div>
                     </a>
@@ -146,10 +146,10 @@ const SingleRadioShow = () => {
                   {posts.docs.map((doc) => (
                     <Link
                       key={doc.id}
-                      to={`${routes.RadioShows.absolute}/${doc.id}`}
+                      to={`${routes.RadioShows.absolute}/${doc.slug}`}
                       className="flex flex-col gap-2"
                     >
-                      <h4 className="font-poppins-medium text-left text-xs md:text-sm">
+                      <h4 className="font-poppins-medium text-left text-xs hover:text-light-red md:text-sm">
                         {doc.title}
                       </h4>
                       <small className="text-[#0B121580]">
