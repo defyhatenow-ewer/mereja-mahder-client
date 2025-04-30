@@ -9,6 +9,22 @@ import { useTranslation } from "react-i18next";
 const Data = () => {
   const { t } = useTranslation();
   const { data, isLoading } = useGetChartsQuery({
+    query: {
+      where: {
+        and: [
+          {
+            _status: {
+              equals: "published",
+            },
+          },
+          {
+            privacy: {
+              equals: "private",
+            },
+          },
+        ],
+      },
+    },
     options: {
       limit: 6,
     },
@@ -17,7 +33,7 @@ const Data = () => {
     <>
       <Loader show={isLoading} />
       <section className="grid grid-flow-row grid-cols-1 gap-5 md:gap-8 md:grid-cols-3">
-        {data &&
+        {data && data.docs.length ? (
           data.docs.map((chart) => (
             <Link
               to={`${routes.Data.absolute}/${chart.slug}`}
@@ -51,7 +67,19 @@ const Data = () => {
                 </button>
               </div>
             </Link>
-          ))}
+          ))
+        ) : (
+          <p>
+            {t("noDataFound")}{" "}
+            <a
+              href={`${config.dashboardUrl}collections/charts/create`}
+              target="_blank"
+              className="font-poppins-semi-bold hover:text-light-red"
+            >
+              {t("here")}
+            </a>
+          </p>
+        )}
       </section>
     </>
   );

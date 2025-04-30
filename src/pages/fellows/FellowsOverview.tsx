@@ -25,6 +25,22 @@ const FellowsOverview = () => {
   });
   const { data: materials, isLoading: isMaterialsLoading } =
     useGetMaterialsQuery({
+      query: {
+        where: {
+          and: [
+            {
+              _status: {
+                equals: "published",
+              },
+            },
+            {
+              privacy: {
+                equals: "private",
+              },
+            },
+          ],
+        },
+      },
       options: {
         limit: 6,
       },
@@ -121,15 +137,17 @@ const FellowsOverview = () => {
             <div className="flex items-center gap-2">
               <button
                 onClick={movePrev}
-                disabled={isDisabled("prev")}
-                className={`${isDisabled("prev") ? "cursor-not-allowed" : "cursor-pointer hover:bg-secondary hover:text-primary hover:border-none"} flex justify-center items-center text-[#9E9E9E] border-1 border-[#9E9E9E] rounded-full p-1`}
+                disabled={
+                  isDisabled("prev") || !materials || !materials.docs.length
+                }
+                className={`${isDisabled("prev") || !materials || !materials.docs.length ? "cursor-not-allowed" : "cursor-pointer hover:bg-secondary hover:text-primary hover:border-none"} flex justify-center items-center text-[#9E9E9E] border-1 border-[#9E9E9E] rounded-full p-1`}
               >
                 <ChevronLeft className="size-4" />
               </button>
               <button
                 onClick={moveNext}
-                // disabled={isDisabled("next")}
-                className="flex justify-center items-center cursor-pointer text-[#9E9E9E] border-1 border-[#9E9E9E] rounded-full p-1 hover:bg-secondary hover:text-primary hover:border-none"
+                disabled={!materials || !materials.docs.length}
+                className={`${!materials || !materials.docs.length ? "cursor-not-allowed" : "cursor-pointer hover:bg-secondary hover:text-primary hover:border-none"} flex justify-center items-center text-[#9E9E9E] border-1 border-[#9E9E9E] rounded-full p-1`}
               >
                 <ChevronRight className="size-4" />
               </button>
@@ -139,7 +157,7 @@ const FellowsOverview = () => {
             ref={carousel}
             className="flex gap-10 overflow-hidden scroll-smooth snap-x snap-mandatory touch-pan-x z-0 items-end"
           >
-            {materials &&
+            {materials && materials.docs.length ? (
               materials.docs.map((material) => (
                 <Link
                   key={material.id}
@@ -163,7 +181,19 @@ const FellowsOverview = () => {
                     {material.title}
                   </h3>
                 </Link>
-              ))}
+              ))
+            ) : (
+              <p>
+                {t("noMaterialsFound")}{" "}
+                <a
+                  href={`${config.dashboardUrl}collections/materials/create`}
+                  target="_blank"
+                  className="font-poppins-semi-bold hover:text-light-red"
+                >
+                  {t("here")}
+                </a>
+              </p>
+            )}
           </div>
         </section>
       </div>

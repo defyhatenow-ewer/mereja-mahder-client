@@ -20,18 +20,66 @@ import { useGetShowsQuery } from "../features/shows.api";
 const Home = () => {
   const { t } = useTranslation();
   const { data: reports, isLoading: isReportsLoading } = useGetReportsQuery({
+    query: {
+      where: {
+        and: [
+          {
+            _status: {
+              equals: "published",
+            },
+          },
+          {
+            privacy: {
+              equals: "public",
+            },
+          },
+        ],
+      },
+    },
     options: {
       limit: 3,
     },
   });
   const { data: factChecks, isLoading: isFactChecksLoading } =
     useGetArticlesQuery({
+      query: {
+        where: {
+          and: [
+            {
+              _status: {
+                equals: "published",
+              },
+            },
+            {
+              privacy: {
+                equals: "public",
+              },
+            },
+          ],
+        },
+      },
       options: {
         limit: 4,
       },
     });
   const { data: radioShows, isLoading: isRadioShowsLoading } = useGetShowsQuery(
     {
+      query: {
+        where: {
+          and: [
+            {
+              _status: {
+                equals: "published",
+              },
+            },
+            {
+              privacy: {
+                equals: "public",
+              },
+            },
+          ],
+        },
+      },
       options: {
         limit: 3,
       },

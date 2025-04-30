@@ -20,6 +20,22 @@ const WomenOverview = () => {
     },
   });
   const { data: reports, isLoading: isReportsLoading } = useGetReportsQuery({
+    query: {
+      where: {
+        and: [
+          {
+            _status: {
+              equals: "published",
+            },
+          },
+          {
+            privacy: {
+              equals: "private",
+            },
+          },
+        ],
+      },
+    },
     options: {
       limit: 4,
     },
@@ -66,18 +82,18 @@ const WomenOverview = () => {
           </section>
         )}
         <section className="overflow-x-auto">
-          <table className="table">
-            <thead className="border-0 bg-primary text-secondary rounded-md p-5 md:p-8 md:rounded-3xl">
-              <tr className="rounded-3xl font-poppins-semi-bold">
-                <th>{t("title")}</th>
-                <th>{t("lastUpdated")}</th>
-                <th>{t("views")}</th>
-                <th>{t("edit")}</th>
-              </tr>
-            </thead>
-            <tbody>
-              {reports &&
-                reports.docs.map((report) => (
+          {reports && reports.docs.length ? (
+            <table className="table">
+              <thead className="border-0 bg-primary text-secondary rounded-md p-5 md:p-8 md:rounded-3xl">
+                <tr className="rounded-3xl font-poppins-semi-bold">
+                  <th>{t("title")}</th>
+                  <th>{t("lastUpdated")}</th>
+                  <th>{t("views")}</th>
+                  <th>{t("edit")}</th>
+                </tr>
+              </thead>
+              <tbody>
+                {reports.docs.map((report) => (
                   <tr key={report.id} className="text-sm">
                     <td className="max-w-32">
                       <Link
@@ -104,8 +120,20 @@ const WomenOverview = () => {
                     </td>
                   </tr>
                 ))}
-            </tbody>
-          </table>
+              </tbody>
+            </table>
+          ) : (
+            <p>
+              {t("noPrivateReportsFound")}{" "}
+              <a
+                href={`${config.dashboardUrl}collections/reports/create`}
+                target="_blank"
+                className="font-poppins-semi-bold hover:text-light-red"
+              >
+                {t("here")}
+              </a>
+            </p>
+          )}
         </section>
       </div>
     </>

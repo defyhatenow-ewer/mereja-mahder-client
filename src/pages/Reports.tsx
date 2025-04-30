@@ -61,6 +61,16 @@ const Reports = () => {
               like: search,
             },
           },
+          {
+            _status: {
+              equals: "published",
+            },
+          },
+          {
+            privacy: {
+              equals: "public",
+            },
+          },
         ],
       },
     },

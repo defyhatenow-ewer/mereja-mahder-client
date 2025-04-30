@@ -21,9 +21,18 @@ const SafetyResources = () => {
   const { data, isLoading: isResourcesLoading } = useGetSafetyResourcesQuery({
     query: {
       where: {
-        _status: {
-          equals: "published",
-        },
+        and: [
+          {
+            _status: {
+              equals: "published",
+            },
+          },
+          {
+            privacy: {
+              equals: "private",
+            },
+          },
+        ],
       },
     },
     options: {
@@ -72,7 +81,7 @@ const SafetyResources = () => {
           </section>
         )}
         <section>
-          {data && data.docs ? (
+          {data && data.docs.length ? (
             <div className="flex flex-col gap-5 md:gap-8">
               <div className="grid grid-flow-row grid-cols-1 gap-5 md:gap-8 md:grid-cols-3">
                 {data.docs.map((post) => (
@@ -141,7 +150,16 @@ const SafetyResources = () => {
               </div>
             </div>
           ) : (
-            <p>{t("resourcesNotFound")}</p>
+            <p>
+              {t("nosafetyResourcesFound")}{" "}
+              <a
+                href={`${config.dashboardUrl}collections/safety-resources/create`}
+                target="_blank"
+                className="font-poppins-semi-bold hover:text-light-red"
+              >
+                {t("here")}
+              </a>
+            </p>
           )}
         </section>
       </div>

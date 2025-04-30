@@ -56,6 +56,16 @@ const RadioShows = () => {
               like: search,
             },
           },
+          {
+            _status: {
+              equals: "published",
+            },
+          },
+          {
+            privacy: {
+              equals: "public",
+            },
+          },
         ],
       },
     },

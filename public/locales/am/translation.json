@@ -102,5 +102,11 @@
   "edit": "አስተካክል",
   "download": "ተላከል",
   "tag": "መለያ",
-  "category": "ምድብ"
+  "category": "ምድብ",
+  "noMaterialsFound": "የመማሪያ ቁሳቁሶችን ገና ልንጨምር ነው። ለማበርከት ነፃነት ይሰማህ",
+  "noLearningResourcesFound": "ገና የመማር መርጃዎችን ልንጨምር ነው። ለማበርከት ነፃነት ይሰማህ",
+  "nosafetyResourcesFound": "የደህንነት ምንጮችን ገና ልንጨምር ነው። ለማበርከት ነፃነት ይሰማህ",
+  "noDataFound": "እኛ ገና የውሂብ ትንታኔዎችን ማከል አለብን። ለማበርከት ነፃነት ይሰማህ",
+  "noPrivateReportsFound": "እኛ ገና ሪፖርቶችን ልንጨምር ነው። ለማበርከት ነፃነት ይሰማህ",
+  "here": "እዚህ"
 }
