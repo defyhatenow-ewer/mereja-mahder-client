@@ -65,9 +65,9 @@ const About = () => {
         </div>
       </section>
       {/* {t("focusAreas")} */}
-      <section className="flex flex-col bg-custom-gray w-full gap-5 md:gap-12">
+      <section className="flex flex-col bg-custom-gray w-full gap-5 md:gap-12 lg:gap-8">
         <div className="flex w-full bg-custom-gray">
-          <div className="bg-white p-5 pt-0 w-full justify-center md:justify-start md:rounded-br-4xl md:pt-8 md:p-12 md:w-md xl:p-16 xl:w-md 2xl:w-xl">
+          <div className="bg-white p-5 pt-0 w-full justify-center md:justify-start md:rounded-br-4xl md:pt-8 md:py-8 md:px-12 md:w-[20rem] 2xl:w-xs 2xl:p-16 3xl:w-lg">
             <h3 className="text-center md:text-left xl:text-right">
               #defyhatenowEthiopia
             </h3>
@@ -79,17 +79,17 @@ const About = () => {
             <div className="h-full w-full bg-custom-gray md:rounded-tl-4xl"></div>
           </div>
         </div>
-        <div className="grid grid-cols-1 gap-5 p-5 self-center max-w-[1400px] md:py-12 md:px-32 md:gap-32 md:grid-cols-2">
+        <div className="grid grid-cols-1 gap-5 p-5 self-center max-w-[1400px] md:py-12 md:px-32 md:gap-32 md:grid-cols-2 lg:px-8 lg:py-8 lg:gap-8 lg:grid-cols-4">
           {focusAreas.map((area, index) => (
             <div
               key={index}
-              className="flex flex-col gap-3 justify-between md:gap-12 xl:gap-16"
+              className="flex flex-col gap-3 justify-between md:gap-12 lg:gap-8"
             >
               <img
                 src={area.image}
                 className="h-full object-cover object-center md:h-96"
               />
-              <h3 className="text-3xl">{area.title}</h3>
+              <h3 className="">{area.title}</h3>
             </div>
           ))}
         </div>
