@@ -108,5 +108,12 @@
   "nosafetyResourcesFound": "We are yet to add safety resources. Feel free to contribute",
   "noDataFound": "We are yet to add data analytics. Feel free to contribute",
   "noPrivateReportsFound": "We are yet to add reports. Feel free to contribute",
-  "here": "here"
+  "here": "here",
+  "submitArticle": "Submit Article",
+  "loading": "Loading",
+  "noForumsFound": "We don't have a forum yet. Feel free to contribute",
+  "addNew": "Add New",
+  "copyText": "Copy Text",
+  "noMessagesFound": "No one has contributed to this forum. Feel free to be the first",
+  "you": "You"
 }

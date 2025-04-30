@@ -133,7 +133,7 @@ const SingleForum = () => {
   if (!post) return <Loader />;
 
   return (
-    <div className="flex flex-col bg-white gap-5 md:gap-12">
+    <div className="flex flex-col bg-white gap-5 md:gap-8">
       <section className="flex flex-col border-1 border-[#D5D5D5] rounded-md md:rounded-2xl">
         <h2 className="bg-[#F3F3F3] p-5 border-b-1 border-[#D5D5D5] rounded-t-md text-sm md:px-8 md:text-lg md:rounded-t-2xl 2xl:px-12">
           {post.docs[0].title}
@@ -143,7 +143,7 @@ const SingleForum = () => {
           onScroll={handleScroll}
           className="flex flex-col gap-5 p-5 rounded-b-md overflow-scroll h-[58vh] md:h-[63vh] md:rounded-b-2xl md:p-8 md:gap-8 2xl:p-12 2xl:gap-12"
         >
-          {messages ? (
+          {messages && messages.pages[0].docs.length ? (
             [...mergeDocs()].map((message) => (
               <div
                 key={message.id}
@@ -175,17 +175,17 @@ const SingleForum = () => {
                 <p>{message.text}</p>
                 <div className="flex items-center gap-2 flex-wrap">
                   <button
-                    className="flex gap-2 items-center cursor-pointer bg-primary py-1 px-2 rounded-md text-xs"
+                    className="flex gap-2 items-center cursor-pointer bg-primary hover:bg-secondary hover:text-primary py-1 px-2 rounded-md text-xs"
                     onClick={() => copyToClipboard(message.text)}
                   >
                     <Copy className="size-3" />
-                    <span>Copy Text</span>
+                    <span>{t("copyText")}</span>
                   </button>
                 </div>
               </div>
             ))
           ) : (
-            <p>No messages in this forum yet</p>
+            <p>{t("noMessagesFound")}</p>
           )}
           <form
             ref={inputRef}
@@ -206,7 +206,7 @@ const SingleForum = () => {
                   </div>
                 </div>
               )}
-              <small>You</small>
+              <small>{t("you")}</small>
             </div>
             <div className="flex items-center justify-between gap-2">
               <input

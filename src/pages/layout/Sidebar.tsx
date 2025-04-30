@@ -1,13 +1,15 @@
-import { ReactNode } from "react";
+import { HTMLAttributeAnchorTarget, ReactNode } from "react";
 import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import { routes } from "../../routing";
 import {
   ArchiveBox,
   ArrowLeftRectangle,
   Chart,
+  ChevronRight,
   DocumentCheck,
   FolderOpen,
   HomeIcon,
+  Inbox,
   OpenBook,
   UserPlus,
   Users,
@@ -28,6 +30,8 @@ type NavItemProps = {
   space?: SpaceTypes;
   alt?: string;
   altIcon?: ReactNode;
+  anchor?: boolean;
+  target?: HTMLAttributeAnchorTarget;
 };
 
 const navLinks: NavItemProps[] = [
@@ -56,6 +60,14 @@ const navLinks: NavItemProps[] = [
     altIcon: <UserPlus className="size-4" />,
   },
   {
+    title: "submitArticle",
+    icon: <Inbox className="size-4" />,
+    route: routes.SubmitArticle.absolute,
+    space: SpaceTypes.AFF,
+    anchor: true,
+    target: "_blank",
+  },
+  {
     title: "learningResources",
     icon: <OpenBook className="size-4" />,
     route: routes.LearningResources.absolute,
@@ -81,10 +93,25 @@ const navLinks: NavItemProps[] = [
   },
 ];
 
-const NavItem = ({ title, icon, route }: NavItemProps) => {
+const NavItem = ({ title, icon, route, anchor, target }: NavItemProps) => {
   const { t } = useTranslation();
   const location = useLocation();
   const isActive = location.pathname.includes(route);
+
+  if (anchor) {
+    return (
+      <a
+        href={route}
+        target={target}
+        className={`${
+          isActive ? "text-[#D15334]" : "text-secondary"
+        } hover:bg-primary flex gap-3 py-1 pe-3 items-center w-full text-xs`}
+      >
+        {icon}
+        <span>{t(title)}</span>
+      </a>
+    );
+  }
   return (
     <Link
       to={route}
@@ -101,7 +128,11 @@ const NavItem = ({ title, icon, route }: NavItemProps) => {
 const Sidebar = () => {
   const { t } = useTranslation();
   const { data, isFetching } = useMeQuery();
-  const { data: forums } = useGetForumsQuery({});
+  const { data: forums } = useGetForumsQuery({
+    options: {
+      limit: 3,
+    },
+  });
   const [logoutUser] = useLogoutMutation();
   const navigate = useNavigate();
 
@@ -118,8 +149,6 @@ const Sidebar = () => {
 
   if (!data) return <Loader />;
 
-  console.log(forums);
-
   return (
     <div className="bg-white flex flex-col justify-between items-start p-5 gap-5">
       <nav className="flex flex-col gap-1">
@@ -135,6 +164,8 @@ const Sidebar = () => {
                 title={navLink.title}
                 icon={navLink.icon}
                 route={navLink.route}
+                anchor={navLink.anchor}
+                target={navLink.target}
               />
             );
           } else if (navLink.admin) {
@@ -162,24 +193,38 @@ const Sidebar = () => {
                     : (navLink.altIcon ?? navLink.icon)
                 }
                 route={navLink.route}
+                anchor={navLink.anchor}
+                target={navLink.target}
               />
             );
           }
           return null;
         })}
       </nav>
-      <div>
-        <h2 className="text-base font-poppins">{t("forumsCaps")}</h2>
+      <div className="flex flex-col gap-2">
+        <Link
+          to={routes.Forum.absolute}
+          className="text-base font-poppins block"
+        >
+          {t("forumsCaps")}
+        </Link>
         {forums &&
           forums.docs.map((forum) => (
             <Link
               key={forum.id}
               to={`${routes.Forum.absolute}/${forum.slug}`}
-              className="text-xs"
+              className="text-xs hover:text-light-red"
             >
               {forum.title}
             </Link>
           ))}
+        <Link
+          to={routes.Forum.absolute}
+          className="bg-white cursor-pointer hover:bg-primary text-secondary flex gap-3 py-1 pe-3 items-center w-full font-poppins-medium"
+        >
+          <span>{t("viewMore")}</span>
+          <ChevronRight className="size-3" />
+        </Link>
       </div>
       <div className="flex flex-col gap-2">
         {/* <Link

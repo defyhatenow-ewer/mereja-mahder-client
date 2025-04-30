@@ -48,6 +48,10 @@ export default {
     `${config.dashboardUrl}account`,
     `${config.dashboardUrl}account`
   ),
+  SubmitArticle: new Path(
+    `${config.dashboardUrl}collections/articles/create`,
+    `${config.dashboardUrl}collections/articles/create`
+  ),
   ResetPassword: new Path("reset-password", "/auth/reset-password"),
   Dashboard: new Path("dashboard"),
   DashboardForbidden: new Path("forbidden", "/dashboard/forbidden"),
