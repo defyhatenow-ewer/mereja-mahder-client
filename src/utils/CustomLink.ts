@@ -1,3 +1,5 @@
+import { HTMLAttributeAnchorTarget } from "react";
+
 export enum SpaceTypes {
   General = "general",
   AFF = "aff",
@@ -12,18 +14,21 @@ export class CustomLink {
   route: string;
   anchor?: boolean;
   space: SpaceTypes;
+  target?: HTMLAttributeAnchorTarget;
 
   constructor(
     title: string,
     route: string,
     space = SpaceTypes.General,
     alt = "",
-    anchor = false
+    anchor = false,
+    target = "_self"
   ) {
     this.title = title;
     this.route = route;
     this.anchor = anchor;
     this.space = space;
     this.alt = alt;
+    this.target = target;
   }
 }

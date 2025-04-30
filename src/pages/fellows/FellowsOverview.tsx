@@ -81,7 +81,7 @@ const FellowsOverview = () => {
       <div className="flex flex-col gap-5 md:gap-10">
         {banners && banners.docs.length && (
           <section className="flex flex-col justify-between items-center gap-5 bg-primary p-5 rounded-md md:rounded-4xl md:p-8 md:flex-row">
-            <div className="flex flex-col gap-5 w-full md:w-1/2 md:gap-5">
+            <div className="flex flex-col gap-5 w-full items-center md:items-start md:w-1/2 md:gap-5">
               <p>{t("upcomingActivity")}</p>
               <h2 className="text-lg font-poppins-semi-bold md:text-2xl">
                 {banners.docs[0].title}

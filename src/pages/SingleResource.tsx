@@ -72,7 +72,7 @@ const SingleResource = () => {
                 ? `${config.env.apiKey}${post.docs[0].pdf}`
                 : `${config.env.apiKey}${post.docs[0].pdf.url}`
             }
-            className="w-full h-[800px] self-center"
+            className="w-full h-screen self-center"
           ></iframe>
         )}
         <RichTextReader data={post.docs[0].content} />

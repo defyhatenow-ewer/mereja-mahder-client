@@ -57,7 +57,7 @@ const Dashboard = () => {
         <div className="fixed top-0 left-0 pt-5 w-full px-5 z-[999] bg-white md:left-64 md:w-[calc(100%-256px)] md:pt-5 md:px-8">
           <Navbar />
         </div>
-        <div className="absolute top-28 left-0 px-5 w-full z-0 bg-white pb-16 md:w-[calc(100%-256px)] md:px-8 md:pb-20 md:left-64 md:top-24">
+        <div className="absolute top-20 left-0 px-5 w-full z-0 bg-white pb-16 md:w-[calc(100%-256px)] md:px-8 md:pb-20 md:left-64 md:top-24">
           <Outlet />
         </div>
         <div className="fixed top-0 left-0 w-64 h-screen z-[999] justify-between hidden md:flex">

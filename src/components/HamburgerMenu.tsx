@@ -28,11 +28,15 @@ const MenuItem = ({ user, link, t }: MenuItemProps) => {
     if (user.role === "admin") {
       return link.anchor ? (
         <li>
-          <a href={link.route}>{title}</a>
+          <a href={link.route} target={link.target}>
+            {title}
+          </a>
         </li>
       ) : (
         <li>
-          <Link to={link.route}>{title}</Link>
+          <Link to={link.route} target={link.target}>
+            {title}
+          </Link>
         </li>
       );
     } else {
@@ -45,11 +49,15 @@ const MenuItem = ({ user, link, t }: MenuItemProps) => {
   ) {
     return link.anchor ? (
       <li>
-        <a href={link.route}>{title}</a>
+        <a href={link.route} target={link.target}>
+          {title}
+        </a>
       </li>
     ) : (
       <li>
-        <Link to={link.route}>{title}</Link>
+        <Link to={link.route} target={link.target}>
+          {title}
+        </Link>
       </li>
     );
   }
@@ -146,7 +154,9 @@ const HamburgerMenu = ({
           : links.map((link) => (
               <li key={t(link.title)}>
                 {link.anchor ? (
-                  <a href={link.route}>{t(link.title)}</a>
+                  <a href={link.route} target={link.target}>
+                    {t(link.title)}
+                  </a>
                 ) : (
                   <Link to={link.route}>{t(link.title)}</Link>
                 )}

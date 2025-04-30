@@ -56,9 +56,13 @@ const FrontNavbar = () => {
     <div className="flex justify-center bg-white">
       <nav className="bg-white w-full flex justify-between items-center max-w-[1400px] gap-5 p-5 md:p-5 md:px-12">
         <Link to={routes.Home.absolute}>
-          <img className="w-1/2 md:w-auto md:max-h-16" src={logo} alt="logo" />
+          <img
+            className="w-1/2 max-h-16 md:w-auto md:max-h-16"
+            src={logo}
+            alt="logo"
+          />
         </Link>
-        <div className="hidden flex-row gap-8 items-center justify-end md:flex">
+        <div className="hidden flex-row gap-8 items-center justify-end mdl:flex">
           <ul className="menu menu-horizontal gap-3">
             {links.map((link) => (
               <li key={link.title}>
@@ -141,7 +145,7 @@ const FrontNavbar = () => {
             </Link>
           )}
         </div>
-        <div className="flex items-center justify-end md:hidden">
+        <div className="flex items-center justify-end mdl:hidden">
           <HamburgerMenu links={links} />
         </div>
       </nav>

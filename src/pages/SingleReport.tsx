@@ -74,7 +74,7 @@ const SingleReport = () => {
                 ? `${config.env.apiKey}${post.docs[0].pdf}?content-type=application/pdf`
                 : `${config.env.apiKey}${post.docs[0].pdf.url}?content-type=application/pdf`
             }
-            className="w-full h-[800px] self-center"
+            className="w-full h-screen self-center"
           ></iframe>
         )}
         <RichTextReader data={post.docs[0].content} />

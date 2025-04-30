@@ -46,7 +46,8 @@ const links = [
     routes.Settings.absolute,
     SpaceTypes.General,
     "",
-    true
+    true,
+    "_blank"
   ),
 ];
 
@@ -112,7 +113,7 @@ const Navbar = () => {
       </div>
       <details
         id="language-menu"
-        className="dropdown dropdown-end text-sm z-[99]"
+        className="dropdown dropdown-end text-sm z-[99] hidden md:inline-block"
         onToggle={(e) => {
           if (e.currentTarget.open) {
             setOpen(true);
@@ -147,7 +148,7 @@ const Navbar = () => {
       {data && (
         <a
           href={routes.Settings.absolute}
-          className="flex gap-3 items-center md:gap-5"
+          className="gap-3 items-center hidden md:flex md:gap-5"
           target="_blank"
         >
           <div className="avatar">
