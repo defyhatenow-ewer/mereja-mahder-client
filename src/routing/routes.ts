@@ -56,7 +56,10 @@ export default {
   Dashboard: new Path("dashboard"),
   DashboardForbidden: new Path("forbidden", "/dashboard/forbidden"),
   Overview: new Path("overview", "/dashboard/overview"),
-  Forum: new Path("forum", "/dashboard/forum"),
+  Forum: new Path(
+    "https://forum.openculture.agency/",
+    "https://forum.openculture.agency/"
+  ),
   SingleForum: new Path("forum/:slug", "/dashboard/forum/:slug"),
   Fellows: new Path("fellows", "/dashboard/fellows"),
   LearningResources: new Path(

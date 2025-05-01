@@ -28,7 +28,14 @@ const links = [
     SpaceTypes.Women,
     "overview"
   ),
-  new CustomLink("forum", routes.Forum.absolute),
+  new CustomLink(
+    "forum",
+    routes.Forum.absolute,
+    SpaceTypes.General,
+    "",
+    true,
+    "_blank"
+  ),
   new CustomLink(
     "learningResources",
     routes.LearningResources.absolute,

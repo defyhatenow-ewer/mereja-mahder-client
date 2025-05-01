@@ -93,7 +93,7 @@ const navLinks: NavItemProps[] = [
   {
     title: "forum",
     icon: <ChatBubble className="size-4" />,
-    route: "https://forum.openculture.agency/",
+    route: routes.Forum.absolute,
     space: SpaceTypes.General,
     anchor: true,
     target: "_blank",
