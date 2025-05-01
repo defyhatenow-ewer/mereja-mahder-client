@@ -14,7 +14,7 @@ import {
   Resources,
   SingleChart,
   SingleFactCheck,
-  SingleForum,
+  // SingleForum,
   SinglePost,
   SinglePrivatePost,
   SingleRadioShow,
@@ -31,7 +31,7 @@ import {
   Register,
   NotFound,
 } from "../pages/auth";
-import { Forum } from "../pages/dashboard";
+// import { Forum } from "../pages/dashboard";
 import {
   FellowsOverview,
   LearningResources,
@@ -179,24 +179,24 @@ const AppRouter = createBrowserRouter([
               />
             ),
           },
-          {
-            path: routes.Forum.relative,
-            element: (
-              <ProtectedRoute
-                children={<Forum />}
-                restrictedTo={restrictions.none}
-              />
-            ),
-          },
-          {
-            path: routes.SingleForum.relative,
-            element: (
-              <ProtectedRoute
-                children={<SingleForum />}
-                restrictedTo={restrictions.none}
-              />
-            ),
-          },
+          // {
+          //   path: routes.Forum.relative,
+          //   element: (
+          //     <ProtectedRoute
+          //       children={<Forum />}
+          //       restrictedTo={restrictions.none}
+          //     />
+          //   ),
+          // },
+          // {
+          //   path: routes.SingleForum.relative,
+          //   element: (
+          //     <ProtectedRoute
+          //       children={<SingleForum />}
+          //       restrictedTo={restrictions.none}
+          //     />
+          //   ),
+          // },
           {
             path: routes.SinglePrivatePost.relative,
             element: (
