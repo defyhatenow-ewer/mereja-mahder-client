@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import EmojiPicker from "emoji-picker-react";
+import EmojiPicker, { EmojiStyle } from "emoji-picker-react";
 import { Loader } from "../components";
 import { useTranslation } from "react-i18next";
 import { useGetForumsQuery } from "../features/forums.api";
@@ -226,6 +226,7 @@ const SingleForum = () => {
             <EmojiPicker
               open={open}
               height={400}
+              emojiStyle={EmojiStyle.NATIVE}
               onEmojiClick={(emoji) =>
                 setText((prev) =>
                   prev === "" ? emoji.emoji : `${prev} ${emoji.emoji}`

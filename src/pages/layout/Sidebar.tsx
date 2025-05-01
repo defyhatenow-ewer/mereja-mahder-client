@@ -5,7 +5,7 @@ import {
   ArchiveBox,
   ArrowLeftRectangle,
   Chart,
-  ChevronRight,
+  ChatBubble,
   DocumentCheck,
   FolderOpen,
   HomeIcon,
@@ -20,7 +20,6 @@ import { SpaceTypes } from "../../utils";
 import { logo } from "../../assets/images";
 import { resetAuth } from "../../app/api";
 import { useTranslation } from "react-i18next";
-import { useGetForumsQuery } from "../../features/forums.api";
 
 type NavItemProps = {
   title: string;
@@ -91,6 +90,14 @@ const navLinks: NavItemProps[] = [
     route: routes.SafetyResources.absolute,
     space: SpaceTypes.Women,
   },
+  {
+    title: "forum",
+    icon: <ChatBubble className="size-4" />,
+    route: "https://forum.openculture.agency/",
+    space: SpaceTypes.General,
+    anchor: true,
+    target: "_blank",
+  },
 ];
 
 const NavItem = ({ title, icon, route, anchor, target }: NavItemProps) => {
@@ -128,11 +135,6 @@ const NavItem = ({ title, icon, route, anchor, target }: NavItemProps) => {
 const Sidebar = () => {
   const { t } = useTranslation();
   const { data, isFetching } = useMeQuery();
-  const { data: forums } = useGetForumsQuery({
-    options: {
-      limit: 3,
-    },
-  });
   const [logoutUser] = useLogoutMutation();
   const navigate = useNavigate();
 
@@ -201,7 +203,7 @@ const Sidebar = () => {
           return null;
         })}
       </nav>
-      <div className="flex flex-col gap-2">
+      {/* <div className="flex flex-col gap-2">
         <Link
           to={routes.Forum.absolute}
           className="text-base font-poppins block"
@@ -225,7 +227,7 @@ const Sidebar = () => {
           <span>{t("viewMore")}</span>
           <ChevronRight className="size-3" />
         </Link>
-      </div>
+      </div> */}
       <div className="flex flex-col gap-2">
         {/* <Link
           to={routes.Settings.absolute}
