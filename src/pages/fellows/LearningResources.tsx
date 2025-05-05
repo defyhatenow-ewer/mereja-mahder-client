@@ -153,7 +153,7 @@ const LearningResources = () => {
             <p>
               {t("noLearningResourcesFound")}{" "}
               <a
-                href={`${config.dashboardUrl}collections/resources/create`}
+                href={`${config.dashboardUrl}collections/learning-resources/create`}
                 target="_blank"
                 className="font-poppins-semi-bold hover:text-light-red"
               >
