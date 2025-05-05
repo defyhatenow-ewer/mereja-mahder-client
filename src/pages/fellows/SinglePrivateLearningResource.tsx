@@ -1,15 +1,15 @@
 import { useParams } from "react-router-dom";
 import { Loader, RichTextReader } from "../../components";
 import { formatDateTime } from "../../utils";
-import { useGetResourcesQuery } from "../../features/resources.api";
 import { useTranslation } from "react-i18next";
 import { config } from "../../config";
+import { useGetLearningResourcesQuery } from "../../features/learningResources.api";
 
 const SinglePrivateLearningResource = () => {
   const { t } = useTranslation();
   const { slug } = useParams();
 
-  const { data: post, isLoading } = useGetResourcesQuery(
+  const { data: post, isLoading } = useGetLearningResourcesQuery(
     {
       query: {
         where: {
