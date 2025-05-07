@@ -119,16 +119,19 @@ const Home = () => {
               </div>
             </div>
             <div className="bg-primary hidden md:flex">
-              <div className="bg-white h-full w-full pt-5 pe-12 md:rounded-tr-4xl md:pt-4 md:pe-4">
+              <div className="bg-white h-full w-1/2 pt-5 pe-12 md:rounded-tr-4xl md:pt-4 md:pe-4">
                 <Link
                   to={routes.About.relative}
-                  className="flex justify-between items-center gap-3 bg-secondary hover:bg-primary text-primary hover:text-secondary cursor-pointer rounded-4xl p-3 ps-4 w-[100%-20px] text-sm md:text-base md:w-xs md:ps-6"
+                  className="flex justify-between items-center gap-3 bg-secondary hover:bg-primary text-primary hover:text-secondary cursor-pointer rounded-4xl p-3 ps-4 w-[100%-20px] text-sm md:text-base md:w-full md:ps-6"
                 >
                   <span>{t("learnMore")}</span>
                   <div className="flex justify-center items-center rounded-full p-1 bg-primary text-secondary child-icon">
                     <ArrowUpRight />
                   </div>
                 </Link>
+              </div>
+              <div className="bg-white w-1/2 h-full">
+                <div className="w-full h-full bg-primary rounded-bl-4xl"></div>
               </div>
             </div>
           </div>
@@ -140,7 +143,7 @@ const Home = () => {
               />
             </div>
             <div className="flex bg-white flex-row gap-0 w-full flex-grow">
-              <div className="h-full w-1/2 bg-primary rounded-b-2xl rounded-tr-2xl hidden md:flex md:rounded-b-4xl md:rounded-tr-4xl"></div>
+              <div className="h-full w-1/2 bg-primary rounded-br-2xl rounded-tr-2xl hidden md:flex md:rounded-br-4xl md:rounded-tr-4xl"></div>
               <div className="flex justify-center items-center bg-white h-full w-full pt-5 md:pt-0 md:w-1/2">
                 <img src={mmdhn} className="w-48 h-48" />
               </div>
@@ -257,11 +260,11 @@ const Home = () => {
               </div>
             </div>
 
-            <div className="bg-white px-5 pt-16 w-full flex justify-end md:rounded-tr-4xl md:pt-8 md:px-12">
-              <div className="w-full max-w-[600px]">
+            <div className="w-full hidden md:flex">
+              <div className="bg-white px-5 pt-12 w-full max-w-[calc(100%-300px)] flex justify-end md:rounded-tr-4xl md:pt-8 md:px-12">
                 <Link
                   to={routes.Resources.relative}
-                  className="flex justify-between items-center gap-3 bg-secondary hover:bg-primary text-primary hover:text-secondary cursor-pointer rounded-4xl p-3 ps-4 w-[100%-20px] text-sm max-w-[600px] md:text-base md:w-xs md:ps-6"
+                  className="flex justify-between items-center gap-3 bg-secondary hover:bg-primary text-primary hover:text-secondary cursor-pointer rounded-4xl p-3 ps-4 w-full text-sm max-w-[300px] md:text-base md:w-full md:ps-6"
                 >
                   <span>{t("viewFieldGuide")}</span>
                   <div className="flex justify-center items-center rounded-full p-1 bg-primary text-secondary child-icon">
@@ -269,9 +272,23 @@ const Home = () => {
                   </div>
                 </Link>
               </div>
+              <div className="bg-white flex-grow">
+                <div className="bg-light-red w-full h-full rounded-bl-4xl"></div>
+              </div>
+            </div>
+            <div className="bg-white px-5 pt-16 w-full flex justify-center md:hidden md:rounded-tr-4xl md:pt-8 md:px-12">
+              <Link
+                to={routes.Resources.relative}
+                className="flex justify-between items-center gap-3 bg-secondary text-primary hover:text-white cursor-pointer rounded-4xl p-3 ps-4 w-[100%-20px] text-sm max-w-[600px] md:text-base md:w-full md:ps-6"
+              >
+                <span>{t("viewFieldGuide")}</span>
+                <div className="flex justify-center items-center rounded-full p-1 bg-primary text-secondary child-icon">
+                  <ChevronRight />
+                </div>
+              </Link>
             </div>
           </div>
-          <div className="bg-light-red h-full w-full relative min-h-72 rounded-bl-2xl hidden md:flex md:rounded-bl-4xl md:min-h-96 md:w-1/2">
+          <div className="bg-light-red h-full w-full relative min-h-72 hidden md:flex md:min-h-96 md:w-1/2">
             <div className="h-1/3 w-full bg-white rounded-bl-2xl hidden md:block md:min-h-32 md:rounded-bl-4xl"></div>
             <div className="absolute bg-transparent inset-0 z-1 min-h-64 flex justify-center items-center max-w-[700px] md:min-h-96">
               <img src={fieldGuides} className="max-h-64 md:max-h-96" />

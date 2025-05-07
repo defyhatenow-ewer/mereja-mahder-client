@@ -67,7 +67,7 @@ const About = () => {
       {/* {t("focusAreas")} */}
       <section className="flex flex-col bg-custom-gray w-full gap-5 md:gap-12 lg:gap-8">
         <div className="flex w-full bg-custom-gray">
-          <div className="bg-white p-5 pt-0 w-full justify-center md:justify-start md:rounded-br-4xl md:pt-8 md:py-8 md:px-12 md:w-[20rem] 2xl:w-xs 2xl:p-16 3xl:w-lg">
+          <div className="bg-white p-5 pt-0 w-full justify-center md:justify-start md:rounded-br-4xl md:pt-8 md:py-8 md:px-12 md:w-[20rem] 2xl:w-sm 2xl:p-12 3xl:w-xl">
             <h3 className="text-center md:text-left xl:text-right">
               #defyhatenowEthiopia
             </h3>
