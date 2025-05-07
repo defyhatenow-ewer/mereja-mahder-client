@@ -46,6 +46,7 @@ const SinglePrivateReport = () => {
         </div>
       </section>
       <div className="flex flex-col gap-5 w-full items-center md:items-start md:gap-12">
+        <RichTextReader data={post.docs[0].content} />
         {post.docs[0].pdf && (
           <iframe
             src={
@@ -56,7 +57,6 @@ const SinglePrivateReport = () => {
             className="w-full h-screen self-center"
           ></iframe>
         )}
-        <RichTextReader data={post.docs[0].content} />
       </div>
     </div>
   );

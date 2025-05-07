@@ -212,7 +212,7 @@ const RadioShows = () => {
           <button
             onClick={clearSearch}
             aria-disabled={isPostsLoading}
-            className="flex justify-between items-center gap-3 bg-secondary text-primary hover:text-white cursor-pointer rounded-4xl p-2 ps-4 w-full md:max-w-[10rem] md:ps-6"
+            className="flex justify-between items-center gap-3 bg-secondary hover:bg-primary text-primary hover:text-secondary cursor-pointer rounded-4xl p-2 ps-4 w-full md:max-w-[10rem] md:ps-6"
           >
             <span>{t("clear")}</span>
             <div className="flex justify-center items-center rounded-full p-1 bg-primary text-secondary child-icon">
@@ -225,33 +225,34 @@ const RadioShows = () => {
             <div className="flex flex-col gap-5 md:gap-8">
               <div className="grid grid-flow-row grid-cols-1 gap-5 md:gap-8 md:grid-cols-3">
                 {data.docs.map((post) => (
-                  <div
+                  <Link
+                    to={`${routes.RadioShows.absolute}/${post.slug}`}
                     key={post.id}
-                    className="flex flex-col justify-between gap-3 border-1 border-[#D5D5D5] rounded-3xl md:rounded-none md:border-0 md:gap-5"
+                    className="flex flex-col justify-between gap-3 border-1 border-[#D5D5D5] rounded-2xl md:rounded-3xl md:p-5 md:gap-5 hover:shadow-xl"
                   >
                     {typeof post.featuredImage === "string" && (
                       <img
                         src={`${config.env.apiKey}${post.featuredImage}`}
-                        className="w-full object-cover object-center rounded-3xl md:rounded-none"
+                        className="w-full object-cover object-center rounded-2xl md:rounded-3xl"
                       />
                     )}
                     {post.featuredImage &&
                       typeof post.featuredImage !== "string" && (
                         <img
                           src={`${config.env.apiKey}${post.featuredImage.url}`}
-                          className="w-full object-cover object-center rounded-3xl md:rounded-none"
+                          className="w-full object-cover object-center rounded-2xl md:rounded-3xl"
                         />
                       )}
                     <div className="flex flex-col gap-3 p-5 md:p-0 md:gap-5">
                       <small className="text-[#0B121580]">
                         {formatDateTime(post.createdAt)}
                       </small>
-                      <a
+                      <Link
                         className="text-left text-lg hover:text-light-red md:text-xl"
-                        href={`${routes.RadioShows.absolute}/${post.slug}`}
+                        to={`${routes.RadioShows.absolute}/${post.slug}`}
                       >
                         {post.title}
-                      </a>
+                      </Link>
                       <div className="flex gap-2 items-center flex-wrap md:hidden">
                         {(post.tags || []).map((tag) => (
                           <Link
@@ -264,7 +265,7 @@ const RadioShows = () => {
                         ))}
                       </div>
                     </div>
-                  </div>
+                  </Link>
                 ))}
               </div>
               <Pagination

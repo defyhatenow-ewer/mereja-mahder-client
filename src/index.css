@@ -271,7 +271,14 @@
 
 a:hover .child-icon,
 button:hover .child-icon {
-  @apply bg-white;
+  @apply bg-secondary;
+  @apply text-primary;
+}
+
+a:hover .inverse-child-icon,
+button:hover .inverse-child-icon {
+  @apply bg-primary;
+  @apply text-secondary;
 }
 
 a:hover .child-title {

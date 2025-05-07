@@ -20,7 +20,6 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [space, setSpace] = useState("");
-  const [acceptTerms, setAcceptTerms] = useState(false);
 
   const clearForm = () => {
     setName("");
@@ -30,26 +29,17 @@ const Register = () => {
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const rememberMe = localStorage.getItem("rememberMe");
 
     if (!space) {
       toast.error(translate("selectSpace"));
-    } else if (!acceptTerms) {
-      toast.error(translate("acceptT&C"));
     } else {
       await registerUser({ name, email, password })
         .unwrap()
         .then((payload) => {
           clearForm();
-          if (rememberMe === "true") {
-            localStorage.setItem("token", payload.token);
-            localStorage.setItem("exp", payload.exp.toString());
-            localStorage.setItem("userId", payload.user.id);
-          } else {
-            sessionStorage.setItem("token", payload.token);
-            sessionStorage.setItem("exp", payload.exp.toString());
-            sessionStorage.setItem("userId", payload.user.id);
-          }
+          localStorage.setItem("token", payload.token);
+          localStorage.setItem("exp", payload.exp.toString());
+          localStorage.setItem("userId", payload.user.id);
           navigate("/");
         });
     }
@@ -123,41 +113,7 @@ const Register = () => {
             </div>
           </div>
 
-          <div className="flex justify-between items-center">
-            <label className="label cursor-pointer">
-              <input
-                type="checkbox"
-                className="checkbox checkbox-xs checkbox-secondary mr-2"
-                onChange={(e) => {
-                  if (e.target.checked) {
-                    setAcceptTerms(true);
-                  } else {
-                    setAcceptTerms(false);
-                  }
-                }}
-              />
-              <span className="label-text text-[#202224] text-sm">
-                {t("IAcceptT&C")}
-              </span>
-            </label>
-          </div>
           <div className="flex flex-wrap justify-between items-center">
-            <label className="label cursor-pointer">
-              <input
-                type="checkbox"
-                className="checkbox checkbox-xs checkbox-secondary mr-2"
-                onChange={(e) => {
-                  if (e.target.checked) {
-                    localStorage.setItem("rememberMe", "true");
-                  } else {
-                    localStorage.setItem("rememberMe", "false");
-                  }
-                }}
-              />
-              <span className="label-text text-black text-sm">
-                {t("rememberMe")}
-              </span>
-            </label>
             <Link
               to={routes.ForgotPassword.absolute}
               className="text-secondary text-sm font-poppins-semi-bold"
@@ -168,10 +124,10 @@ const Register = () => {
           <button
             type="submit"
             aria-disabled={isLoading}
-            className="flex cursor-pointer justify-between items-center bg-primary rounded-4xl p-2 ps-5 w-full md:max-w-[200px] md:ps-8"
+            className="flex cursor-pointer justify-between items-center bg-primary hover:bg-secondary hover:text-primary rounded-4xl p-2 ps-5 w-full md:max-w-[200px] md:ps-8"
           >
             <span>{t("register")}</span>
-            <div className="flex justify-center items-center rounded-full p-1 bg-secondary text-primary">
+            <div className="flex justify-center items-center rounded-full p-1 bg-secondary text-primary inverse-child-icon">
               <ArrowUpRight />
             </div>
           </button>

@@ -8,6 +8,7 @@ import { avatarPlaceholder } from "../../assets/images";
 import { config } from "../../config";
 import { useTranslation } from "react-i18next";
 import { lngs } from "../../config";
+import { pickLanguageToDisplay } from "../../i18n";
 
 const links = [
   new CustomLink(
@@ -63,9 +64,7 @@ const Navbar = () => {
   const { data } = useMeQuery();
   const [open, setOpen] = useState(false);
   const [language, setLanguage] = useState(
-    i18n.resolvedLanguage
-      ? lngs[i18n.resolvedLanguage as keyof typeof lngs].nativeName
-      : "English"
+    pickLanguageToDisplay(i18n.resolvedLanguage)
   );
 
   useEffect(() => {
@@ -83,7 +82,7 @@ const Navbar = () => {
 
   const changeLanguage = (lng: string) => {
     i18n.changeLanguage(lng);
-    setLanguage(lngs[lng as keyof typeof lngs].nativeName);
+    setLanguage(pickLanguageToDisplay(lng));
     setOpen(false);
     const DropDown = document.getElementById("language-menu");
     if (DropDown) {
@@ -120,7 +119,7 @@ const Navbar = () => {
       </div>
       <details
         id="language-menu"
-        className="dropdown dropdown-end text-sm z-[99] hidden md:inline-block"
+        className="dropdown dropdown-end text-sm z-[99] rounded-2xl p-1 hover:bg-primary border-1 hidden md:inline-block"
         onToggle={(e) => {
           if (e.currentTarget.open) {
             setOpen(true);
@@ -129,7 +128,7 @@ const Navbar = () => {
           }
         }}
       >
-        <summary className="list-none text-secondary h-full align-middle cursor-pointer">
+        <summary className="list-none text-secondary h-full align-middle cursor-pointer rounded-2xl">
           <div className="h-full flex justify-between gap-2 items-center text-black p-1 rounded-md">
             <span>{language}</span>
             {open ? (

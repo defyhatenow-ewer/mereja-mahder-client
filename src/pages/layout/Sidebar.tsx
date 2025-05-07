@@ -112,7 +112,7 @@ const NavItem = ({ title, icon, route, anchor, target }: NavItemProps) => {
         target={target}
         className={`${
           isActive ? "text-[#D15334]" : "text-secondary"
-        } hover:bg-primary flex gap-3 py-1 pe-3 items-center w-full text-xs`}
+        } hover:bg-primary flex gap-3 py-1 px-3 items-center w-full text-xs`}
       >
         {icon}
         <span>{t(title)}</span>
@@ -124,7 +124,7 @@ const NavItem = ({ title, icon, route, anchor, target }: NavItemProps) => {
       to={route}
       className={`${
         isActive ? "text-[#D15334]" : "text-secondary"
-      } hover:bg-primary flex gap-3 py-1 pe-3 items-center w-full text-xs`}
+      } hover:bg-primary flex gap-3 py-1 px-3 items-center w-full text-xs`}
     >
       {icon}
       <span>{t(title)}</span>

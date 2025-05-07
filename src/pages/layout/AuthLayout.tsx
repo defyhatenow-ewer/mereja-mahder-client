@@ -44,12 +44,11 @@ const AuthLayout = () => {
           <div className="absolute top-0 right-0 bg-primary h-40 rounded-bl-4xl w-1/8"></div>
           <div className="flex bg-primary mt-12 h-[calc(100%-112px)] w-full">
             <div className="flex flex-col justify-center items-center gap-5 bg-white h-full w-full rounded-bl-4xl md:gap-8">
-              <Link
-                to={routes.Home.absolute}
-                className="w-1/2 cursor-pointer md:w-1/4"
-              >
-                <img src={logo} />
-              </Link>
+              <div className="w-full max-w-sm">
+                <Link to={routes.Home.absolute} className="cursor-pointer">
+                  <img src={logo} className="h-12 md:h-14 2xl:h-16" />
+                </Link>
+              </div>
 
               <Outlet />
             </div>

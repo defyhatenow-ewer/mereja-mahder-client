@@ -204,7 +204,7 @@ const Posts = () => {
           <button
             onClick={clearSearch}
             aria-disabled={isLoading}
-            className="flex justify-between items-center gap-3 bg-secondary text-primary hover:text-white cursor-pointer rounded-4xl p-2 ps-4 w-full md:max-w-[8rem] md:ps-6"
+            className="flex justify-between items-center gap-3 bg-secondary hover:bg-primary text-primary hover:text-secondary cursor-pointer rounded-4xl p-2 ps-4 w-full md:max-w-[8rem] md:ps-6"
           >
             <span>{t("clear")}</span>
             <div className="flex justify-center items-center rounded-full p-1 bg-primary text-secondary child-icon">

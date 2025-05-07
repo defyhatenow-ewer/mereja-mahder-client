@@ -52,10 +52,10 @@ const ForgotPassword = () => {
           <button
             type="submit"
             aria-disabled={isLoading}
-            className="flex justify-between items-center bg-primary cursor-pointer rounded-4xl p-2 ps-5 w-full md:max-w-[200px] md:ps-8"
+            className="flex justify-between items-center bg-primary hover:bg-secondary hover:text-primary cursor-pointer rounded-4xl p-2 ps-5 w-full md:max-w-[200px] md:ps-8"
           >
             <span>{t("send")}</span>
-            <div className="flex justify-center items-center rounded-full p-1 bg-secondary text-primary">
+            <div className="flex justify-center items-center rounded-full p-1 bg-secondary text-primary inverse-child-icon">
               <ArrowUpRight />
             </div>
           </button>

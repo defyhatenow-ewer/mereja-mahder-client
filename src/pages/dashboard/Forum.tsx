@@ -20,7 +20,7 @@ const Forum = () => {
         <a
           href={`${config.dashboardUrl}collections/forums/create`}
           target="_blank"
-          className="flex justify-between items-center gap-3 bg-secondary text-primary hover:text-white cursor-pointer rounded-4xl p-2 ps-3 w-fit md:w-fit md:ps-5"
+          className="flex justify-between items-center gap-3 bg-secondary hover:bg-primary text-primary hover:text-secondary cursor-pointer rounded-4xl p-2 ps-3 w-fit md:w-fit md:ps-5"
         >
           <span>{t("addNew")}</span>
           <div className="flex justify-center items-center rounded-full p-1 bg-primary text-secondary child-icon">

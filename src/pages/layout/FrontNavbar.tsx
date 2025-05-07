@@ -8,6 +8,7 @@ import { CustomLink, goToDashboard } from "../../utils";
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { lngs } from "../../config";
+import { pickLanguageToDisplay } from "../../i18n";
 
 const links: CustomLink[] = [
   new CustomLink("home", routes.Home.absolute),
@@ -24,9 +25,7 @@ const FrontNavbar = () => {
   const { data } = useMeQuery();
   const [open, setOpen] = useState(false);
   const [language, setLanguage] = useState(
-    i18n.resolvedLanguage
-      ? lngs[i18n.resolvedLanguage as keyof typeof lngs].nativeName
-      : "English"
+    pickLanguageToDisplay(i18n.resolvedLanguage)
   );
 
   useEffect(() => {
@@ -44,7 +43,7 @@ const FrontNavbar = () => {
 
   const changeLanguage = (lng: string) => {
     i18n.changeLanguage(lng);
-    setLanguage(lngs[lng as keyof typeof lngs].nativeName);
+    setLanguage(pickLanguageToDisplay(lng));
     setOpen(false);
     const DropDown = document.getElementById("language-menu");
     if (DropDown) {
@@ -94,7 +93,7 @@ const FrontNavbar = () => {
             <li>
               <details
                 id="language-menu"
-                className="dropdown dropdown-end text-sm z-[99]"
+                className="dropdown dropdown-end text-sm z-[99] rounded-2xl border-1"
                 onToggle={(e) => {
                   if (e.currentTarget.open) {
                     setOpen(true);
@@ -103,7 +102,7 @@ const FrontNavbar = () => {
                   }
                 }}
               >
-                <summary className="list-none text-secondary h-full align-middle cursor-pointer">
+                <summary className="list-none text-secondary h-full align-middle cursor-pointer rounded-2xl">
                   <div className="h-full flex justify-between gap-2 items-center text-black p-1 rounded-md">
                     {language}
                   </div>
@@ -126,7 +125,7 @@ const FrontNavbar = () => {
           {data && data.user ? (
             <Link
               to={goToDashboard(data.user)}
-              className="flex justify-between items-center gap-3 bg-secondary text-primary hover:text-white cursor-pointer rounded-4xl p-2 ps-3 w-full md:w-fit md:ps-5"
+              className="flex justify-between items-center gap-3 bg-secondary hover:bg-primary text-primary hover:text-secondary cursor-pointer rounded-4xl p-2 ps-3 w-full md:w-fit md:ps-5"
             >
               <span>{t("dashboard")}</span>
               <div className="flex justify-center items-center rounded-full p-1 bg-primary text-secondary child-icon">
@@ -136,7 +135,7 @@ const FrontNavbar = () => {
           ) : (
             <Link
               to={routes.Login.absolute}
-              className="flex justify-between items-center gap-3 bg-secondary text-primary hover:text-white cursor-pointer rounded-4xl p-2 ps-3 w-full md:w-fit md:ps-5"
+              className="flex justify-between items-center gap-3 bg-secondary hover:bg-primary text-primary hover:text-secondary cursor-pointer rounded-4xl p-2 ps-3 w-full md:w-fit md:ps-5"
             >
               <span>{t("login")}</span>
               <div className="flex justify-center items-center rounded-full p-1 bg-primary text-secondary child-icon">

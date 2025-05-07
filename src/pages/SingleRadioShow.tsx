@@ -121,7 +121,7 @@ const SingleRadioShow = () => {
                     <a
                       href="#"
                       target="_blank"
-                      className="flex justify-between items-center gap-3 bg-secondary text-primary hover:text-white cursor-pointer rounded-4xl p-1 ps-2 md:ps-4"
+                      className="flex justify-between items-center gap-3 bg-secondary hover:bg-primary text-primary hover:text-secondary cursor-pointer rounded-4xl p-1 ps-2 md:ps-4"
                     >
                       <span>{t("subscribe")}</span>
                       <div className="flex justify-center items-center rounded-full p-1 bg-primary text-secondary child-icon">

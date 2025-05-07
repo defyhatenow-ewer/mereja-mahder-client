@@ -65,6 +65,7 @@ const SingleResource = () => {
             </div>
           </div>
         </div>
+        <RichTextReader data={post.docs[0].content} />
         {post.docs[0].pdf && (
           <iframe
             src={
@@ -75,7 +76,6 @@ const SingleResource = () => {
             className="w-full h-screen self-center"
           ></iframe>
         )}
-        <RichTextReader data={post.docs[0].content} />
         <div className="flex flex-col gap-2">
           <small>{t("sharePost")}</small>
           <div className="flex gap-1">

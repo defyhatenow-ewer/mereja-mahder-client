@@ -3,10 +3,8 @@ import { useLocation, useNavigate, Link } from "react-router-dom";
 import { useLoginMutation } from "../../features/auth.api";
 import { Loader } from "../../components";
 import { routes } from "../../routing";
-import { toast } from "react-toastify";
 import { ArrowUpRight } from "../../components/Icons";
 import { goToDashboard } from "../../utils";
-import { translate } from "../../i18n";
 import { useTranslation } from "react-i18next";
 
 interface IdealLocationState {
@@ -26,7 +24,6 @@ const Login = () => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [acceptTerms, setAcceptTerms] = useState(false);
 
   const previousLocationState = location.state as LocationState;
 
@@ -37,32 +34,21 @@ const Login = () => {
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const rememberMe = localStorage.getItem("rememberMe");
 
-    if (!acceptTerms) {
-      toast.error(translate("acceptT&C"));
-    } else {
-      await loginUser({ email, password })
-        .unwrap()
-        .then((payload) => {
-          clearForm();
-          if (rememberMe === "true") {
-            localStorage.setItem("token", payload.token);
-            localStorage.setItem("exp", payload.exp.toString());
-            localStorage.setItem("userId", payload.user.id);
-          } else {
-            sessionStorage.setItem("token", payload.token);
-            sessionStorage.setItem("exp", payload.exp.toString());
-            sessionStorage.setItem("userId", payload.user.id);
+    await loginUser({ email, password })
+      .unwrap()
+      .then((payload) => {
+        clearForm();
+        localStorage.setItem("token", payload.token);
+        localStorage.setItem("exp", payload.exp.toString());
+        localStorage.setItem("userId", payload.user.id);
+        navigate(
+          previousLocationState?.from.pathname || goToDashboard(payload.user),
+          {
+            replace: true,
           }
-          navigate(
-            previousLocationState?.from.pathname || goToDashboard(payload.user),
-            {
-              replace: true,
-            }
-          );
-        });
-    }
+        );
+      });
   }
 
   return (
@@ -93,55 +79,22 @@ const Login = () => {
               required
             />
           </div>
-          <div className="flex justify-between items-center">
-            <label className="label cursor-pointer">
-              <input
-                type="checkbox"
-                className="checkbox checkbox-xs checkbox-secondary mr-2"
-                onChange={(e) => {
-                  if (e.target.checked) {
-                    setAcceptTerms(true);
-                  } else {
-                    setAcceptTerms(false);
-                  }
-                }}
-              />
-              <span className="label-text text-[#202224] text-sm">
-                {t("IAcceptT&C")}
-              </span>
-            </label>
-          </div>
+
           <div className="flex flex-wrap justify-between items-center">
-            <label className="label cursor-pointer">
-              <input
-                type="checkbox"
-                className="checkbox checkbox-xs checkbox-secondary mr-2"
-                onChange={(e) => {
-                  if (e.target.checked) {
-                    localStorage.setItem("rememberMe", "true");
-                  } else {
-                    localStorage.setItem("rememberMe", "false");
-                  }
-                }}
-              />
-              <span className="label-text text-black text-sm">
-                {t("rememberMe")}
-              </span>
-            </label>
             <Link
               to={routes.ForgotPassword.absolute}
               className="text-secondary text-sm font-poppins-semi-bold"
             >
-              {t("forgotPassword")}
+              {t("forgotPassword")}?
             </Link>
           </div>
           <button
             type="submit"
             aria-disabled={isLoading}
-            className="flex justify-between items-center bg-primary cursor-pointer rounded-4xl p-2 ps-5 w-full md:max-w-[200px] md:ps-8"
+            className="flex justify-between items-center bg-primary hover:bg-secondary hover:text-primary cursor-pointer rounded-4xl p-2 ps-5 w-full md:max-w-[200px] md:ps-8"
           >
             <span>{t("login")}</span>
-            <div className="flex justify-center items-center rounded-full p-1 bg-secondary text-primary">
+            <div className="flex justify-center items-center rounded-full p-1 bg-secondary text-primary inverse-child-icon">
               <ArrowUpRight />
             </div>
           </button>

@@ -207,7 +207,7 @@ const FactChecks = () => {
           <button
             onClick={clearSearch}
             aria-disabled={isLoading}
-            className="flex justify-between items-center gap-3 bg-secondary text-primary hover:text-white cursor-pointer rounded-4xl p-2 ps-4 w-full md:max-w-[10rem] md:ps-6"
+            className="flex justify-between items-center gap-3 bg-secondary hover:bg-primary text-primary hover:text-secondary cursor-pointer rounded-4xl p-2 ps-4 w-full md:max-w-[10rem] md:ps-6"
           >
             <span>{t("clear")}</span>
             <div className="flex justify-center items-center rounded-full p-1 bg-primary text-secondary child-icon">
@@ -220,9 +220,9 @@ const FactChecks = () => {
             <div className="flex flex-col gap-5 md:gap-8">
               <div className="grid grid-flow-row grid-cols-1 gap-5 md:gap-8 md:grid-cols-2">
                 {data.docs.map((post) => (
-                  <div
-                    key={post.id}
-                    className="flex flex-col gap-5 md:gap-0 md:flex-row"
+                  <Link
+                    to={`${routes.FactChecks.absolute}/${post.slug}`}
+                    className="flex flex-col gap-5 hover:shadow-xl md:gap-0 md:flex-row"
                   >
                     {typeof post.featuredImage === "string" && (
                       <img
@@ -258,7 +258,7 @@ const FactChecks = () => {
                       <small className="text-[#0B121580]">8 min read</small>
                       {post.excerpt && <RichTextReader data={post.excerpt} />}
                     </div>
-                  </div>
+                  </Link>
                 ))}
               </div>
               <Pagination
