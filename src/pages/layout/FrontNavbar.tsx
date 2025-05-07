@@ -2,7 +2,7 @@ import { Link, useLocation } from "react-router-dom";
 import { logo } from "../../assets/images";
 import { routes } from "../../routing";
 import HamburgerMenu from "../../components/HamburgerMenu";
-import { ArrowUpRight } from "../../components/Icons";
+import { ArrowUpRight, ChevronDown, ChevronUp } from "../../components/Icons";
 import { useMeQuery } from "../../features/auth.api";
 import { CustomLink, goToDashboard } from "../../utils";
 import { useState, useEffect } from "react";
@@ -90,38 +90,41 @@ const FrontNavbar = () => {
                 )}
               </li>
             ))}
-            <li>
-              <details
-                id="language-menu"
-                className="dropdown dropdown-end text-sm z-[99] rounded-2xl border-1"
-                onToggle={(e) => {
-                  if (e.currentTarget.open) {
-                    setOpen(true);
-                  } else {
-                    setOpen(false);
-                  }
-                }}
-              >
-                <summary className="list-none text-secondary h-full align-middle cursor-pointer rounded-2xl">
-                  <div className="h-full flex justify-between gap-2 items-center text-black p-1 rounded-md">
-                    {language}
-                  </div>
-                </summary>
-                <ul className="p-3 gap-2 shadow menu dropdown-content z-[1] rounded-sm w-32 text-sm bg-white">
-                  {Object.keys(lngs).map((lng) => (
-                    <li
-                      key={lng}
-                      className="cursor-pointer p-1 text-sm hover:bg-primary"
-                      onClick={() => changeLanguage(lng)}
-                      aria-disabled={i18n.resolvedLanguage === lng}
-                    >
-                      {lngs[lng as keyof typeof lngs].nativeName}
-                    </li>
-                  ))}
-                </ul>
-              </details>
-            </li>
           </ul>
+          <details
+            id="language-menu"
+            className="dropdown dropdown-end text-sm z-[99] rounded-2xl p-1 px-2 hover:bg-[#D9D9D9] border-1 hidden md:inline-block"
+            onToggle={(e) => {
+              if (e.currentTarget.open) {
+                setOpen(true);
+              } else {
+                setOpen(false);
+              }
+            }}
+          >
+            <summary className="list-none text-secondary h-full align-middle cursor-pointer rounded-2xl">
+              <div className="h-full flex justify-between gap-2 items-center text-black p-1 rounded-md">
+                <span>{language}</span>
+                {open ? (
+                  <ChevronUp className="size-4" />
+                ) : (
+                  <ChevronDown className="size-4" />
+                )}
+              </div>
+            </summary>
+            <ul className="p-3 gap-2 shadow menu dropdown-content z-[1] rounded-sm w-32 text-sm bg-white">
+              {Object.keys(lngs).map((lng) => (
+                <li
+                  key={lng}
+                  className="cursor-pointer p-1 text-sm hover:bg-primary"
+                  onClick={() => changeLanguage(lng)}
+                  aria-disabled={i18n.resolvedLanguage === lng}
+                >
+                  {lngs[lng as keyof typeof lngs].nativeName}
+                </li>
+              ))}
+            </ul>
+          </details>
           {data && data.user ? (
             <Link
               to={goToDashboard(data.user)}

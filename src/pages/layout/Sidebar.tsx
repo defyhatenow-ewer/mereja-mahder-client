@@ -147,7 +147,8 @@ const Sidebar = () => {
 
   if (isFetching) return <Loader />;
 
-  if (!isFetching && !data) return <Navigate to={routes.Login.absolute} />;
+  if (!isFetching && (!data || !data.user))
+    return <Navigate to={routes.Login.absolute} />;
 
   if (!data) return <Loader />;
 

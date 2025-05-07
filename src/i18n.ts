@@ -19,14 +19,12 @@ export const translate = async (key: string) => {
 };
 
 export const pickLanguageToDisplay = (resolvedLanguage?: string) => {
-  console.log({ resolvedLanguage });
   if (resolvedLanguage && resolvedLanguage !== "en")
     return lngs["en"].nativeName;
   const browserLanguage = navigator.language.substring(
     0,
     2
   ) as keyof typeof lngs;
-  console.log({ browserLanguage });
   if (browserLanguage in lngs) return lngs[browserLanguage].nativeName;
   return lngs["en"].nativeName;
 };

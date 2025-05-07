@@ -14,25 +14,17 @@ const Dashboard = () => {
 
   useEffect(() => {
     const checkAndRefreshToken = async () => {
-      const rememberMe = localStorage.getItem("rememberMe");
-      const token =
-        sessionStorage.getItem("token") || localStorage.getItem("token");
-      const exp = sessionStorage.getItem("exp") || localStorage.getItem("exp");
+      const token = localStorage.getItem("token");
+      const exp = localStorage.getItem("exp");
       if (token && exp) {
         const timeUntilExpiry = Number(exp) * 1000 - Date.now();
         if (timeUntilExpiry < 600000) {
           refresh()
             .unwrap()
             .then((payload) => {
-              if (rememberMe === "true") {
-                localStorage.setItem("token", payload.refreshedToken);
-                localStorage.setItem("exp", payload.exp.toString());
-                localStorage.setItem("userId", payload.user.id);
-              } else {
-                sessionStorage.setItem("token", payload.refreshedToken);
-                sessionStorage.setItem("exp", payload.exp.toString());
-                sessionStorage.setItem("userId", payload.user.id);
-              }
+              localStorage.setItem("token", payload.refreshedToken);
+              localStorage.setItem("exp", payload.exp.toString());
+              localStorage.setItem("userId", payload.user.id);
             })
             .catch(() => {
               navigate(routes.Login.absolute);

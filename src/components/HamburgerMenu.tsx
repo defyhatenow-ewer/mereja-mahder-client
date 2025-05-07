@@ -147,7 +147,7 @@ const HamburgerMenu = ({
         </div>
       </summary>
       <ul className="p-3 shadow menu dropdown-content z-[1] rounded-sm bg-primary text-black font-[500] font-roboto w-[60vw]">
-        {dashboard && data
+        {dashboard && data && data.user
           ? links.map((link) => (
               <MenuItem key={link.title} user={data.user} link={link} t={t} />
             ))

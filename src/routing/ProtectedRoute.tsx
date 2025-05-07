@@ -14,7 +14,8 @@ const ProtectedRoute = ({ restrictedTo, children }: Props) => {
   const { data, isFetching } = useMeQuery();
   if (!restrictedTo) return children;
   if (isFetching) return <Loader />;
-  if (!isFetching && !data) return <Navigate to={routes.Login.absolute} />;
+  if (!isFetching && (!data || !data.user))
+    return <Navigate to={routes.Login.absolute} />;
 
   if (
     !isFetching &&

@@ -151,7 +151,7 @@ const Navbar = () => {
           ))}
         </ul>
       </details>
-      {data && (
+      {data && data.user && (
         <a
           href={routes.Settings.absolute}
           className="gap-3 items-center hidden md:flex md:gap-5"

@@ -15,16 +15,12 @@ export const resetAuth = (): void => {
   localStorage.removeItem("token");
   localStorage.removeItem("exp");
   localStorage.removeItem("userId");
-  sessionStorage.removeItem("token");
-  sessionStorage.removeItem("exp");
-  sessionStorage.removeItem("userId");
 };
 
 const baseQuery = fetchBaseQuery({
   baseUrl: config.apiUrl,
   prepareHeaders: (headers) => {
-    const token =
-      sessionStorage.getItem("token") || localStorage.getItem("token");
+    const token = localStorage.getItem("token");
     if (token) {
       headers.set("authorization", `Bearer ${token}`);
     }
@@ -43,9 +39,7 @@ const baseQueryWithReauth: BaseQueryFn<
     if (!mutex.isLocked()) {
       const release = await mutex.acquire();
       try {
-        const rememberMe = localStorage.getItem("rememberMe");
-        const token =
-          sessionStorage.getItem("token") || localStorage.getItem("token");
+        const token = localStorage.getItem("token");
 
         if (token) {
           // try to get a new token
@@ -61,17 +55,10 @@ const baseQueryWithReauth: BaseQueryFn<
             extraOptions
           );
           if (refreshResult.data) {
-            console.log({ result: refreshResult.data });
             const userWithTokens = refreshResult.data as IUserWithRefreshToken;
-            if (rememberMe === "true") {
-              localStorage.setItem("token", userWithTokens.refreshedToken);
-              localStorage.setItem("exp", userWithTokens.exp.toString());
-              localStorage.setItem("userId", userWithTokens.user.id);
-            } else {
-              sessionStorage.setItem("token", userWithTokens.refreshedToken);
-              sessionStorage.setItem("exp", userWithTokens.exp.toString());
-              sessionStorage.setItem("userId", userWithTokens.user.id);
-            }
+            localStorage.setItem("token", userWithTokens.refreshedToken);
+            localStorage.setItem("exp", userWithTokens.exp.toString());
+            localStorage.setItem("userId", userWithTokens.user.id);
           } else {
             resetAuth();
           }
