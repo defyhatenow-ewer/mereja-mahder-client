@@ -408,12 +408,9 @@ const Home = () => {
                     <small className="text-[#0B121580]">
                       {formatDateTime(post.createdAt)}
                     </small>
-                    <Link
-                      className="text-left text-lg hover:text-light-red md:text-xl"
-                      to={`${routes.RadioShows.absolute}/${post.slug}`}
-                    >
+                    <h3 className="text-left text-lg child-title md:text-xl">
                       {post.title}
-                    </Link>
+                    </h3>
                     <div className="flex gap-2 items-center flex-wrap md:hidden">
                       {(post.tags || []).map((tag) => (
                         <Link
