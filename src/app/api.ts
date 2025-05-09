@@ -6,10 +6,21 @@ import {
   FetchBaseQueryError,
 } from "@reduxjs/toolkit/query/react";
 import { Mutex } from "async-mutex";
+import { REHYDRATE } from "redux-persist";
 import { IUserWithRefreshToken } from "../types/auth.types";
 import { config } from "../config";
+import { RootState } from "./store";
+import { Action } from "@reduxjs/toolkit";
 
 const mutex = new Mutex();
+
+function isHydrateAction(action: Action): action is Action<typeof REHYDRATE> & {
+  key: string;
+  payload: RootState;
+  err: unknown;
+} {
+  return action.type === REHYDRATE;
+}
 
 export const resetAuth = (): void => {
   localStorage.removeItem("token");
@@ -77,6 +88,20 @@ const api = createApi({
   reducerPath: "rootApi",
   baseQuery: baseQueryWithReauth,
   endpoints: () => ({}),
+  extractRehydrationInfo(
+    action
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  ): any {
+    if (isHydrateAction(action)) {
+      // when persisting the api reducer
+      if (action.key === "root") {
+        return action.payload;
+      }
+
+      // When persisting the root reducer
+      return action.payload[api.reducerPath];
+    }
+  },
 });
 
 export default api;

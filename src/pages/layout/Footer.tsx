@@ -20,7 +20,7 @@ const Footer = () => {
   const { t } = useTranslation();
   return (
     <footer className="flex flex-col items-center gap-8 w-full md:gap-12">
-      <section className="flex flex-col gap-5 px-5 items-center max-w-[1400px] md:items-start md:px-12 md:gap-3 2xl:w-[1400px]">
+      <section className="flex flex-col gap-5 px-5 items-center w-full max-w-[1400px] md:items-start md:px-12 md:gap-3 2xl:w-[1400px]">
         <p>{t("implementedBy")}</p>
         <div className="flex flex-col justify-between items-center w-full md:flex-row">
           <div className="grid grid-flow-row grid-cols-1 gap-5 md:w-3/6 md:gap-0 md:grid-cols-3">
@@ -38,7 +38,7 @@ const Footer = () => {
           <a
             href="https://european-union.europa.eu/index_en"
             target="_blank"
-            className="flex justify-center items-center self-end md:w-1/6"
+            className="flex justify-center items-center md:self-end md:w-1/6"
           >
             <img src={euLogo} className="bg-white" />
           </a>

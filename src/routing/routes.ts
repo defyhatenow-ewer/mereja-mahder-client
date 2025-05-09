@@ -57,8 +57,8 @@ export default {
   DashboardForbidden: new Path("forbidden", "/dashboard/forbidden"),
   Overview: new Path("overview", "/dashboard/overview"),
   Forum: new Path(
-    "https://forum.openculture.agency/",
-    "https://forum.openculture.agency/"
+    "https://forum.merejamahder.net/",
+    "https://forum.merejamahder.net/"
   ),
   SingleForum: new Path("forum/:slug", "/dashboard/forum/:slug"),
   Fellows: new Path("fellows", "/dashboard/fellows"),
