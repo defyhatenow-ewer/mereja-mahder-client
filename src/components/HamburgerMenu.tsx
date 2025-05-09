@@ -44,7 +44,9 @@ const MenuItem = ({ user, link, t }: MenuItemProps) => {
     }
   } else if (
     user.role === "admin" ||
-    (user.space && user.space.title === link.space) ||
+    (user.space &&
+      typeof user.space !== "string" &&
+      user.space.title === link.space) ||
     link.space === SpaceTypes.General
   ) {
     return link.anchor ? (

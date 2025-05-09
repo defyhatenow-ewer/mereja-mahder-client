@@ -175,8 +175,11 @@ const Sidebar = () => {
             return null;
           } else if (
             data.user.role === "admin" ||
-            (data.user.space && data.user.space.title === navLink.space) ||
             (data.user.space &&
+              typeof data.user.space !== "string" &&
+              data.user.space.title === navLink.space) ||
+            (data.user.space &&
+              typeof data.user.space !== "string" &&
               data.user.space.title === SpaceTypes.Women &&
               navLink.space === SpaceTypes.Partner &&
               navLink.route !== routes.Partners.absolute) ||

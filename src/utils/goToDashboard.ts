@@ -3,7 +3,7 @@ import { IUserWithoutPassword } from "../types/users.types";
 import { SpaceTypes } from "./CustomLink";
 
 const goToDashboard = (user: IUserWithoutPassword) => {
-  if (user.space) {
+  if (user.space && typeof user.space !== "string") {
     switch (user.space.title) {
       case SpaceTypes.AFF:
         return routes.Fellows.absolute;
