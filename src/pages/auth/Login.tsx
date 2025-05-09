@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useLocation, useNavigate, Link } from "react-router-dom";
 import { useLoginMutation } from "../../features/auth.api";
-import { Loader } from "../../components";
 import { routes } from "../../routing";
 import { ArrowUpRight } from "../../components/Icons";
 import { goToDashboard } from "../../utils";
@@ -17,7 +16,6 @@ type LocationState = IdealLocationState | null;
 
 const Login = () => {
   const { t } = useTranslation();
-  localStorage.setItem("rememberMe", "false");
   const navigate = useNavigate();
   const location = useLocation();
   const [loginUser, { isLoading }] = useLoginMutation();
@@ -53,7 +51,6 @@ const Login = () => {
 
   return (
     <>
-      <Loader show={isLoading} />
       <section className="flex flex-col justify-center items-center gap-5 w-full overflow-hidden md:gap-8">
         <form
           className="flex flex-col gap-3 w-full mb-0 text-[#202224] md:max-w-sm"
@@ -94,9 +91,13 @@ const Login = () => {
             className="flex justify-between items-center bg-primary hover:bg-secondary hover:text-primary cursor-pointer rounded-4xl p-2 ps-5 w-full md:max-w-[200px] md:ps-8"
           >
             <span>{t("login")}</span>
-            <div className="flex justify-center items-center rounded-full p-1 bg-secondary text-primary inverse-child-icon">
-              <ArrowUpRight />
-            </div>
+            {isLoading ? (
+              <span className="loading loading-spinner loading-md"></span>
+            ) : (
+              <div className="flex justify-center items-center rounded-full p-1 bg-secondary text-primary inverse-child-icon">
+                <ArrowUpRight />
+              </div>
+            )}
           </button>
           <p>
             {t("dontHaveAccount")}?{" "}

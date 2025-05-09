@@ -17,7 +17,7 @@ export const UserSchema = z.object({
 });
 
 export type IUser = z.infer<typeof UserSchema> & {
-  space?: ISpace;
+  space?: ISpace | string;
   avatar?: IMedia;
 };
 

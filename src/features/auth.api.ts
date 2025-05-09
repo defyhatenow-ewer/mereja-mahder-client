@@ -5,7 +5,7 @@ import {
   IUserWithRefreshToken,
   IUserWithToken,
 } from "../types/auth.types";
-import { IUser } from "../types/users.types";
+import { IUser, IUserWithoutPassword } from "../types/users.types";
 
 const apiWithAuthTags = api.enhanceEndpoints({ addTagTypes: ["Auth", "Me"] });
 
@@ -20,7 +20,7 @@ const authApi = apiWithAuthTags.injectEndpoints({
       }),
       invalidatesTags: ["Auth", "Me"],
     }),
-    register: builder.mutation<IUserWithToken, IRegisterRequest>({
+    register: builder.mutation<IUserWithoutPassword, IRegisterRequest>({
       query: (body) => ({
         url: "users/register",
         method: "POST",

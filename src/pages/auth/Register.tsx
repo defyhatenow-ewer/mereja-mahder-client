@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useRegisterMutation } from "../../features/auth.api";
 import { Loader } from "../../components";
 import { routes } from "../../routing";
@@ -11,8 +11,6 @@ import { useTranslation } from "react-i18next";
 
 const Register = () => {
   const { t } = useTranslation();
-  localStorage.setItem("rememberMe", "false");
-  const navigate = useNavigate();
   const [registerUser, { isLoading }] = useRegisterMutation();
   const { data, isLoading: isSpacesLoading } = useGetSpacesQuery({});
 
@@ -33,14 +31,13 @@ const Register = () => {
     if (!space) {
       toast.error(translate("selectSpace"));
     } else {
-      await registerUser({ name, email, password })
+      await registerUser({ name, email, password, space })
         .unwrap()
-        .then((payload) => {
+        .then(() => {
           clearForm();
-          localStorage.setItem("token", payload.token);
-          localStorage.setItem("exp", payload.exp.toString());
-          localStorage.setItem("userId", payload.user.id);
-          navigate("/");
+          toast.success(
+            "Welcome to Mereja Mahder. Please wait for an admin to verify and approve your account"
+          );
         });
     }
   }
@@ -51,7 +48,7 @@ const Register = () => {
 
   return (
     <>
-      <Loader show={isLoading || isSpacesLoading} />
+      <Loader show={isSpacesLoading} />
       <section className="flex flex-col justify-center items-center gap-5 w-full overflow-hidden md:gap-8">
         <form
           className="flex flex-col gap-3 w-full mb-0 text-[#202224] md:max-w-sm"
@@ -127,9 +124,13 @@ const Register = () => {
             className="flex cursor-pointer justify-between items-center bg-primary hover:bg-secondary hover:text-primary rounded-4xl p-2 ps-5 w-full md:max-w-[200px] md:ps-8"
           >
             <span>{t("register")}</span>
-            <div className="flex justify-center items-center rounded-full p-1 bg-secondary text-primary inverse-child-icon">
-              <ArrowUpRight />
-            </div>
+            {isLoading ? (
+              <span className="loading loading-spinner loading-md"></span>
+            ) : (
+              <div className="flex justify-center items-center rounded-full p-1 bg-secondary text-primary inverse-child-icon">
+                <ArrowUpRight />
+              </div>
+            )}
           </button>
           <p className="text-sm text-secondary font-normal">
             {t("doHaveAccount")}?{" "}

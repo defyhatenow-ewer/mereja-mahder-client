@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useForgotPasswordMutation } from "../../features/auth.api";
-import { Loader } from "../../components";
 import { routes } from "../../routing";
 import { toast } from "react-toastify";
 import { ArrowUpRight } from "../../components/Icons";
@@ -32,8 +31,6 @@ const ForgotPassword = () => {
 
   return (
     <>
-      <Loader show={isLoading} />
-
       <section className="flex flex-col justify-center items-center gap-5 w-full overflow-hidden">
         <form
           className="flex flex-col gap-3 w-full mb-0 text-[#202224] md:max-w-sm"
@@ -55,9 +52,13 @@ const ForgotPassword = () => {
             className="flex justify-between items-center bg-primary hover:bg-secondary hover:text-primary cursor-pointer rounded-4xl p-2 ps-5 w-full md:max-w-[200px] md:ps-8"
           >
             <span>{t("send")}</span>
-            <div className="flex justify-center items-center rounded-full p-1 bg-secondary text-primary inverse-child-icon">
-              <ArrowUpRight />
-            </div>
+            {isLoading ? (
+              <span className="loading loading-spinner loading-md"></span>
+            ) : (
+              <div className="flex justify-center items-center rounded-full p-1 bg-secondary text-primary inverse-child-icon">
+                <ArrowUpRight />
+              </div>
+            )}
           </button>
           <p>
             {t("dontHaveAccount")}?{" "}
