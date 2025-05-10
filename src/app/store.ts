@@ -1,20 +1,13 @@
 import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/query";
-import { persistStore, persistReducer } from "redux-persist";
-import storage from "redux-persist/lib/storage";
 import api from "./api";
 
 // middleware
 import { rtkQueryErrorLogger } from "./middleware";
 
-const persistConfig = {
-  key: "root",
-  storage,
-};
-
 export const store = configureStore({
   reducer: {
-    [api.reducerPath]: persistReducer(persistConfig, api.reducer),
+    [api.reducerPath]: api.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(api.middleware, rtkQueryErrorLogger),
@@ -30,5 +23,3 @@ export type AppThunk<ReturnType = void> = ThunkAction<
   unknown,
   Action<string>
 >;
-
-export const persistor = persistStore(store);

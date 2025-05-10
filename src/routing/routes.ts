@@ -45,8 +45,8 @@ export default {
   ForgotPassword: new Path("forgot-password", "/auth/forgot-password"),
   Profile: new Path("profile", "/dashboard/profile"),
   Settings: new Path(
-    `${config.dashboardUrl}account`,
-    `${config.dashboardUrl}account`
+    `${config.dashboardUrl}account?hide=true`,
+    `${config.dashboardUrl}account?hide=true`
   ),
   SubmitArticle: new Path(
     `${config.dashboardUrl}collections/articles/create`,
