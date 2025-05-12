@@ -40,7 +40,7 @@ const Login = () => {
         localStorage.setItem("token", payload.token);
         localStorage.setItem("exp", payload.exp.toString());
         localStorage.setItem("userId", payload.user.id);
-        setLoginCookie(payload.user);
+        await setLoginCookie(payload.user);
         navigate(
           previousLocationState?.from.pathname || goToDashboard(payload.user),
           {
