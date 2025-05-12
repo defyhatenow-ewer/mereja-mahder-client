@@ -10,6 +10,7 @@ import { CustomLink, SpaceTypes } from "./CustomLink";
 import goToDashboard from "./goToDashboard";
 import formatDateTime from "./formatDateTime";
 import sometimeAgo from "./sometimeAgo";
+import setLoginCookie from "./setLoginCookie";
 
 export {
   formatErrorMessage,
@@ -25,4 +26,5 @@ export {
   goToDashboard,
   formatDateTime,
   sometimeAgo,
+  setLoginCookie,
 };

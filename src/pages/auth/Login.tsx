@@ -3,7 +3,7 @@ import { useLocation, useNavigate, Link } from "react-router-dom";
 import { useLoginMutation } from "../../features/auth.api";
 import { routes } from "../../routing";
 import { ArrowUpRight } from "../../components/Icons";
-import { goToDashboard } from "../../utils";
+import { goToDashboard, setLoginCookie } from "../../utils";
 import { useTranslation } from "react-i18next";
 
 interface IdealLocationState {
@@ -35,11 +35,12 @@ const Login = () => {
 
     await loginUser({ email, password })
       .unwrap()
-      .then((payload) => {
+      .then(async (payload) => {
         clearForm();
         localStorage.setItem("token", payload.token);
         localStorage.setItem("exp", payload.exp.toString());
         localStorage.setItem("userId", payload.user.id);
+        setLoginCookie(payload.user);
         navigate(
           previousLocationState?.from.pathname || goToDashboard(payload.user),
           {
