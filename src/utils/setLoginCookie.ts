@@ -8,8 +8,8 @@ const setLoginCookie = async (user: IUserWithoutPassword) => {
     .setProtectedHeader({ alg: "HS256" })
     .sign(new TextEncoder().encode(config.env.jwtSecret));
 
-  document.cookie = `nodebb-token=${nodebbToken}; domain=${config.env.domain}; HttpOnly;`;
-  Cookies.set("nbb-token", nodebbToken, {
+  document.cookie = `${config.env.nodebbTokenName}=${nodebbToken}; domain=${config.env.domain}; HttpOnly;`;
+  Cookies.set(config.env.nodebbTokenName, nodebbToken, {
     domain: config.env.domain,
     secure: true,
   });

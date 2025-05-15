@@ -6,6 +6,7 @@ import {
   FetchBaseQueryError,
 } from "@reduxjs/toolkit/query/react";
 import { Mutex } from "async-mutex";
+import Cookies from "js-cookie";
 import { IUserWithRefreshToken } from "../types/auth.types";
 import { config } from "../config";
 
@@ -21,6 +22,8 @@ const baseQuery = fetchBaseQuery({
   baseUrl: config.apiUrl,
   prepareHeaders: (headers) => {
     const token = localStorage.getItem("token");
+    const cookieToken = Cookies.get("payload-token");
+    console.log({ cookieToken });
     if (token) {
       headers.set("authorization", `Bearer ${token}`);
     }

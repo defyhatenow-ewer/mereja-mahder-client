@@ -9,6 +9,7 @@ const envSchema = z.object({
   siteUrl: z.string().url(),
   jwtSecret: z.string(),
   domain: z.string(),
+  nodebbTokenName: z.string(),
 });
 
 const env = envSchema.parse({
@@ -20,6 +21,7 @@ const env = envSchema.parse({
   siteUrl: import.meta.env.VITE_SITE_URL,
   jwtSecret: import.meta.env.VITE_JWT_SECRET,
   domain: import.meta.env.VITE_DOMAIN,
+  nodebbTokenName: import.meta.env.VITE_NBB_TOKEN_NAME,
 });
 
 const config = {
