@@ -3,6 +3,7 @@ import { Loader, RichTextReader } from "../../components";
 import { formatDateTime } from "../../utils";
 import { useGetMaterialsQuery } from "../../features/materials.api";
 import { useTranslation } from "react-i18next";
+import { config } from "../../config";
 
 const SinglePrivateMaterial = () => {
   const { slug } = useParams();
@@ -46,6 +47,16 @@ const SinglePrivateMaterial = () => {
       </section>
       <div className="flex flex-col gap-5 w-full items-center md:items-start md:gap-12">
         <RichTextReader data={post.docs[0].content} />
+        {post.docs[0].pdf && (
+          <iframe
+            src={
+              typeof post.docs[0].pdf === "string"
+                ? `${config.env.apiKey}${post.docs[0].pdf}`
+                : `${config.env.apiKey}${post.docs[0].pdf.url}`
+            }
+            className="w-full h-screen self-center"
+          ></iframe>
+        )}
       </div>
     </div>
   );
