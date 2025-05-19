@@ -1,4 +1,5 @@
 import { Navigate, Outlet, useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
 import { CustomToast, Loader } from "../../components";
 import Navbar from "./Navbar";
 import Sidebar from "./Sidebar";
@@ -14,17 +15,18 @@ const Dashboard = () => {
 
   useEffect(() => {
     const checkAndRefreshToken = async () => {
-      const token = localStorage.getItem("token");
-      const exp = localStorage.getItem("exp");
+      const token = Cookies.get("token");
+      const exp = Cookies.get("exp");
       if (token && exp) {
         const timeUntilExpiry = Number(exp) * 1000 - Date.now();
         if (timeUntilExpiry < 600000) {
           refresh()
             .unwrap()
             .then((payload) => {
-              localStorage.setItem("token", payload.refreshedToken);
-              localStorage.setItem("exp", payload.exp.toString());
-              localStorage.setItem("userId", payload.user.id);
+              Cookies.set("token", payload.refreshedToken, {
+                expires: 1 / 12,
+              });
+              Cookies.set("exp", payload.exp.toString());
             })
             .catch(() => {
               navigate(routes.Login.absolute);

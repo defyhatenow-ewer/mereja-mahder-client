@@ -1,9 +1,10 @@
 import React, { useState } from "react";
+import Cookies from "js-cookie";
 import { useLocation, useNavigate, Link } from "react-router-dom";
 import { useLoginMutation } from "../../features/auth.api";
 import { routes } from "../../routing";
 import { ArrowUpRight } from "../../components/Icons";
-import { goToDashboard, setLoginCookie } from "../../utils";
+import { goToDashboard } from "../../utils";
 import { useTranslation } from "react-i18next";
 
 interface IdealLocationState {
@@ -37,10 +38,8 @@ const Login = () => {
       .unwrap()
       .then(async (payload) => {
         clearForm();
-        localStorage.setItem("token", payload.token);
-        localStorage.setItem("exp", payload.exp.toString());
-        localStorage.setItem("userId", payload.user.id);
-        await setLoginCookie(payload.user);
+        Cookies.set("token", payload.token, { expires: 1 / 12 });
+        Cookies.set("exp", payload.exp.toString());
         navigate(
           previousLocationState?.from.pathname || goToDashboard(payload.user),
           {

@@ -13,6 +13,8 @@ import { config } from "../config";
 const mutex = new Mutex();
 
 export const resetAuth = (): void => {
+  Cookies.remove("token");
+  Cookies.remove("exp");
   localStorage.removeItem("token");
   localStorage.removeItem("exp");
   localStorage.removeItem("userId");
@@ -21,9 +23,7 @@ export const resetAuth = (): void => {
 const baseQuery = fetchBaseQuery({
   baseUrl: config.apiUrl,
   prepareHeaders: (headers) => {
-    const token = localStorage.getItem("token");
-    const cookieToken = Cookies.get("payload-token");
-    console.log({ cookieToken });
+    const token = Cookies.get("token");
     if (token) {
       headers.set("authorization", `Bearer ${token}`);
     }
@@ -42,7 +42,7 @@ const baseQueryWithReauth: BaseQueryFn<
     if (!mutex.isLocked()) {
       const release = await mutex.acquire();
       try {
-        const token = localStorage.getItem("token");
+        const token = Cookies.get("token");
 
         if (token) {
           // try to get a new token
@@ -59,6 +59,10 @@ const baseQueryWithReauth: BaseQueryFn<
           );
           if (refreshResult.data) {
             const userWithTokens = refreshResult.data as IUserWithRefreshToken;
+            Cookies.set("token", userWithTokens.refreshedToken, {
+              expires: 1 / 12,
+            });
+            Cookies.set("exp", userWithTokens.exp.toString());
             localStorage.setItem("token", userWithTokens.refreshedToken);
             localStorage.setItem("exp", userWithTokens.exp.toString());
             localStorage.setItem("userId", userWithTokens.user.id);

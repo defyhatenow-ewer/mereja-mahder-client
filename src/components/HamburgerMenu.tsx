@@ -172,9 +172,13 @@ const HamburgerMenu = ({
                 <Link to={goToDashboard(data.user)}>{t("dashboard")}</Link>
               </li>
             )}
-        {includeLogout && (
+        {includeLogout ? (
           <li>
             <a onClick={logout}>{t("logout")}</a>
+          </li>
+        ) : (
+          <li>
+            <Link to={routes.Login.absolute}>{t("login")}</Link>
           </li>
         )}
         {/* <li>
