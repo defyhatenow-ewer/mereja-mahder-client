@@ -123,5 +123,6 @@
   "cancel": "ሰርዝ",
   "yourAccount": "የእርስዎን መለያ",
   "profileUpdated": "መገለጫ በተሳካ ሁኔታ ተቀይሯል።",
-  "accountDeleted": "መለያ በተሳካ ሁኔታ ተሰርዟል።"
+  "accountDeleted": "መለያ በተሳካ ሁኔታ ተሰርዟል።",
+  "profile": "መገለጫ"
 }

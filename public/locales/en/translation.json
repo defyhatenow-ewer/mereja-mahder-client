@@ -123,5 +123,6 @@
   "cancel": "Cancel",
   "yourAccount": "your account",
   "profileUpdated": "Profile was changed successfully",
-  "accountDeleted": "Account deleted successfully"
+  "accountDeleted": "Account deleted successfully",
+  "profile": "Profile"
 }

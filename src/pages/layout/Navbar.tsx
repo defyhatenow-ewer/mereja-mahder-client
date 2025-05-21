@@ -54,7 +54,7 @@ const links = [
 ];
 
 const Navbar = () => {
-  const { i18n } = useTranslation();
+  const { i18n, t } = useTranslation();
   const { data } = useMeQuery();
   const [open, setOpen] = useState(false);
   const [language, setLanguage] = useState(
@@ -164,7 +164,7 @@ const Navbar = () => {
           <div className="flex flex-col gap-1 text-xs">
             <span>{data.user.name}</span>
             <div className="flex justify-between items-center">
-              <span className="capitalize">{data.user.role}</span>
+              <span className="capitalize">{t("profile")}</span>
               <div className="flex justify-center items-center rounded-full p-1 bg-primary text-secondary child-icon">
                 <Edit className="size-4" />
               </div>

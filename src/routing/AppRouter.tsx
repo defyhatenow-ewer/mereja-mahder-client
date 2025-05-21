@@ -53,6 +53,7 @@ import {
 import ProtectedRoute from "./ProtectedRoute";
 import restrictions from "./restrictions";
 import Posts from "../pages/Posts";
+import { Overview } from "../pages/dashboard";
 
 const AppRouter = createBrowserRouter([
   {
@@ -160,7 +161,7 @@ const AppRouter = createBrowserRouter([
         children: [
           {
             index: true,
-            element: <Profile />,
+            element: <Overview />,
           },
           {
             path: routes.Profile.relative,
@@ -172,12 +173,7 @@ const AppRouter = createBrowserRouter([
           },
           {
             path: routes.Overview.relative,
-            element: (
-              <ProtectedRoute
-                children={<PartnerOverview />}
-                restrictedTo={restrictions.partner}
-              />
-            ),
+            element: <Overview />,
           },
           // {
           //   path: routes.Forum.relative,
