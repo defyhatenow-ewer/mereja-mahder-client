@@ -9,6 +9,7 @@ import { config } from "../../config";
 import { useTranslation } from "react-i18next";
 import { lngs } from "../../config";
 import { pickLanguageToDisplay } from "../../i18n";
+import { Link } from "react-router-dom";
 
 const links = [
   new CustomLink(
@@ -49,14 +50,7 @@ const links = [
     routes.SafetyResources.absolute,
     SpaceTypes.Women
   ),
-  new CustomLink(
-    "settings",
-    routes.Settings.absolute,
-    SpaceTypes.General,
-    "",
-    true,
-    "_blank"
-  ),
+  new CustomLink("settings", routes.Profile.absolute, SpaceTypes.General),
 ];
 
 const Navbar = () => {
@@ -152,10 +146,9 @@ const Navbar = () => {
         </ul>
       </details>
       {data && data.user && (
-        <a
-          href={routes.Settings.absolute}
+        <Link
+          to={routes.Profile.absolute}
           className="gap-3 items-center hidden md:flex md:gap-5"
-          target="_blank"
         >
           <div className="avatar">
             <div className="w-12 rounded-full">
@@ -177,7 +170,7 @@ const Navbar = () => {
               </div>
             </div>
           </div>
-        </a>
+        </Link>
       )}
       <div className="block md:hidden">
         <HamburgerMenu links={links} includeLogout dashboard />

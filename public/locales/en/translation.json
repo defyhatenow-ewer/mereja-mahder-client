@@ -115,5 +115,13 @@
   "addNew": "Add New",
   "copyText": "Copy Text",
   "noMessagesFound": "No one has contributed to this forum. Feel free to be the first",
-  "you": "You"
+  "you": "You",
+  "save": "Save",
+  "delete": "Delete",
+  "lastCheck": "Last Check",
+  "confirmDelete": "Are you sure you want to delete",
+  "cancel": "Cancel",
+  "yourAccount": "your account",
+  "profileUpdated": "Profile was changed successfully",
+  "accountDeleted": "Account deleted successfully"
 }

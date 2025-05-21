@@ -6,6 +6,7 @@ import {
   ArrowLeftRectangle,
   Chart,
   ChatBubble,
+  Cog,
   DocumentCheck,
   FolderOpen,
   HomeIcon,
@@ -233,13 +234,13 @@ const Sidebar = () => {
         </Link>
       </div> */}
       <div className="flex flex-col gap-2">
-        {/* <Link
-          to={routes.Settings.absolute}
+        <Link
+          to={routes.Profile.absolute}
           className={`bg-white hover:bg-primary text-secondary flex gap-3 py-1 pe-3 items-center w-full`}
         >
           <Cog />
           <span>Settings</span>
-        </Link> */}
+        </Link>
         <button
           onClick={logout}
           className={`bg-white cursor-pointer hover:bg-primary text-secondary flex gap-3 py-1 pe-3 items-center w-full`}

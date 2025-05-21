@@ -11,6 +11,7 @@ import goToDashboard from "./goToDashboard";
 import formatDateTime from "./formatDateTime";
 import sometimeAgo from "./sometimeAgo";
 import setLoginCookie from "./setLoginCookie";
+import uploadImage, { useUploadImage } from "./uploadImage";
 
 export {
   formatErrorMessage,
@@ -27,4 +28,6 @@ export {
   formatDateTime,
   sometimeAgo,
   setLoginCookie,
+  uploadImage,
+  useUploadImage,
 };

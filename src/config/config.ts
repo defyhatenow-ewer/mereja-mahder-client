@@ -10,6 +10,9 @@ const envSchema = z.object({
   jwtSecret: z.string(),
   domain: z.string(),
   nodebbTokenName: z.string(),
+  cloudinaryName: z.string(),
+  cloudinaryApiKey: z.string(),
+  cloudinaryApiSecret: z.string(),
 });
 
 const env = envSchema.parse({
@@ -22,6 +25,9 @@ const env = envSchema.parse({
   jwtSecret: import.meta.env.VITE_JWT_SECRET,
   domain: import.meta.env.VITE_DOMAIN,
   nodebbTokenName: import.meta.env.VITE_NBB_TOKEN_NAME,
+  cloudinaryName: import.meta.env.VITE_CLOUDINARY_CLOUD_NAME,
+  cloudinaryApiKey: import.meta.env.VITE_CLOUDINARY_API_KEY,
+  cloudinaryApiSecret: import.meta.env.VITE_CLOUDINARY_API_SECRET,
 });
 
 const config = {

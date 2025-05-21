@@ -30,6 +30,7 @@ import {
   Login,
   Register,
   NotFound,
+  Profile,
 } from "../pages/auth";
 // import { Forum } from "../pages/dashboard";
 import {
@@ -159,12 +160,11 @@ const AppRouter = createBrowserRouter([
         children: [
           {
             index: true,
-            element: (
-              <ProtectedRoute
-                children={<PartnerOverview />}
-                restrictedTo={restrictions.partner}
-              />
-            ),
+            element: <Profile />,
+          },
+          {
+            path: routes.Profile.relative,
+            element: <Profile />,
           },
           {
             path: routes.DashboardForbidden.relative,

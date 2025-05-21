@@ -115,5 +115,13 @@
   "addNew": "አዲስ ያክሉ",
   "copyText": "ጽሑፍ ቅዳ",
   "noMessagesFound": "ማንም ለዚህ መድረክ አስተዋፅዖ አላደረገም። የመጀመሪያው ለመሆን ነፃነት ይሰማህ",
-  "you": "አንተ"
+  "you": "አንተ",
+  "save": "አስቀምጥ",
+  "delete": "ሰርዝ",
+  "lastCheck": "የመጨረሻው ቼክ",
+  "confirmDelete": "እርግጠኛ ነህ መሰረዝ ትፈልጋለህ",
+  "cancel": "ሰርዝ",
+  "yourAccount": "የእርስዎን መለያ",
+  "profileUpdated": "መገለጫ በተሳካ ሁኔታ ተቀይሯል።",
+  "accountDeleted": "መለያ በተሳካ ሁኔታ ተሰርዟል።"
 }
