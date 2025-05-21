@@ -11,10 +11,10 @@ type Restrictions = {
 
 const restrictions: Restrictions = {
   none: ["admin", "editor", "fellow", "partner", "curator", "basic"],
-  fellow: ["fellow", "editor", "admin"],
-  partner: ["partner", "editor", "admin"],
-  partnerAndCurator: ["partner", "curator", "editor", "admin"],
-  curator: ["curator", "editor", "admin"],
+  fellow: ["fellow", "editor", "admin", "basic"],
+  partner: ["partner", "editor", "admin", "basic"],
+  partnerAndCurator: ["partner", "curator", "editor", "admin", "basic"],
+  curator: ["curator", "editor", "admin", "basic"],
   admin: ["admin"],
 };
 
