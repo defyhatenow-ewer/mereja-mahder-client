@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useRegisterMutation } from "../../features/auth.api";
 import { Loader } from "../../components";
 import { routes } from "../../routing";
@@ -11,6 +11,7 @@ import { useTranslation } from "react-i18next";
 
 const Register = () => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
   const [registerUser, { isLoading }] = useRegisterMutation();
   const { data, isLoading: isSpacesLoading } = useGetSpacesQuery({});
 
@@ -38,6 +39,7 @@ const Register = () => {
           toast.success(
             "Welcome to Mereja Mahder. Please wait for an admin to verify and approve your account"
           );
+          navigate("/");
         });
     }
   }

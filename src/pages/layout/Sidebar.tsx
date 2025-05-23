@@ -95,7 +95,6 @@ const navLinks: NavItemProps[] = [
     title: "forum",
     icon: <ChatBubble className="size-4" />,
     route: routes.Forum.absolute,
-    space: SpaceTypes.General,
     anchor: true,
     target: "_blank",
   },

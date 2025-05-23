@@ -161,7 +161,7 @@ const FellowsOverview = () => {
               materials.docs.map((material) => (
                 <Link
                   key={material.id}
-                  className="flex flex-col gap-5 relative snap-start min-w-fit p-3 rounded-2xl hover:shadow-xl"
+                  className="flex flex-col gap-5 relative snap-start min-w-fit p-3 rounded-2xl border-1 border-[#D5D5D5] hover:shadow-xl"
                   to={`${routes.Materials.absolute}/${material.slug}`}
                 >
                   {typeof material.featuredImage === "string" && (
