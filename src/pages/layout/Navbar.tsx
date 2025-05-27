@@ -1,7 +1,7 @@
 import { routes } from "../../routing";
 import HamburgerMenu from "../../components/HamburgerMenu";
 import { CustomLink, SpaceTypes } from "../../utils";
-import { Bell, ChevronDown, ChevronUp, Edit } from "../../components/Icons";
+import { ChevronDown, ChevronUp, Edit } from "../../components/Icons";
 import { useEffect, useState } from "react";
 import { useMeQuery } from "../../features/auth.api";
 import { avatarPlaceholder } from "../../assets/images";
@@ -85,8 +85,8 @@ const Navbar = () => {
   };
 
   return (
-    <div className="flex flex-row justify-between items-center w-full pb-5 md:pb-0">
-      <label className="input rounded-2xl md:!w-112">
+    <div className="flex flex-row justify-end gap-12 items-center w-full pb-5 md:pb-0">
+      {/* <label className="input rounded-2xl md:!w-112">
         <svg
           className="h-[1em] opacity-50"
           xmlns="http://www.w3.org/2000/svg"
@@ -110,7 +110,7 @@ const Navbar = () => {
         <div className="absolute top-0 right-0 flex justify-center items-center w-4 h-4 rounded-full bg-primary text-secondary text-[10px]">
           6
         </div>
-      </div>
+      </div> */}
       <details
         id="language-menu"
         className="dropdown dropdown-end text-sm z-[99] rounded-2xl p-1 hover:bg-primary border-1 hidden md:inline-block"
