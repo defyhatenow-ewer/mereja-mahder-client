@@ -13,6 +13,9 @@ import "react-toastify/dist/ReactToastify.css";
 import "./i18n";
 import { Loader } from "./components";
 
+// sw cache
+import "./register-sw";
+
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <Suspense fallback={<Loader />}>

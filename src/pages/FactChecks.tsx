@@ -223,6 +223,7 @@ const FactChecks = () => {
                   <Link
                     to={`${routes.FactChecks.absolute}/${post.slug}`}
                     className="flex flex-col gap-5 hover:shadow-xl md:gap-0 md:flex-row"
+                    key={post.id}
                   >
                     {typeof post.featuredImage === "string" && (
                       <img
