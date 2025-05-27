@@ -150,16 +150,7 @@ const LearningResources = () => {
               </div>
             </div>
           ) : (
-            <p>
-              {t("noLearningResourcesFound")}{" "}
-              <a
-                href={`${config.dashboardUrl}collections/learning-resources/create`}
-                target="_blank"
-                className="font-poppins-semi-bold hover:text-light-red"
-              >
-                {t("here")}
-              </a>
-            </p>
+            <p>{t("noLearningResourcesFound")}</p>
           )}
         </section>
       </div>

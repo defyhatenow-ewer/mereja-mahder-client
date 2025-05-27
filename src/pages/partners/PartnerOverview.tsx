@@ -123,16 +123,7 @@ const PartnerOverview = () => {
               </tbody>
             </table>
           ) : (
-            <p>
-              {t("noPrivateReportsFound")}{" "}
-              <a
-                href={`${config.dashboardUrl}collections/reports/create`}
-                target="_blank"
-                className="font-poppins-semi-bold hover:text-light-red"
-              >
-                {t("here")}
-              </a>
-            </p>
+            <p>{t("noPrivateReportsFound")}</p>
           )}
         </section>
       </div>

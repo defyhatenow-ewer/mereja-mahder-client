@@ -150,16 +150,7 @@ const SafetyResources = () => {
               </div>
             </div>
           ) : (
-            <p>
-              {t("nosafetyResourcesFound")}{" "}
-              <a
-                href={`${config.dashboardUrl}collections/safety-resources/create`}
-                target="_blank"
-                className="font-poppins-semi-bold hover:text-light-red"
-              >
-                {t("here")}
-              </a>
-            </p>
+            <p>{t("nosafetyResourcesFound")}</p>
           )}
         </section>
       </div>

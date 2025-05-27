@@ -183,16 +183,7 @@ const FellowsOverview = () => {
                 </Link>
               ))
             ) : (
-              <p>
-                {t("noMaterialsFound")}{" "}
-                <a
-                  href={`${config.dashboardUrl}collections/materials/create`}
-                  target="_blank"
-                  className="font-poppins-semi-bold hover:text-light-red"
-                >
-                  {t("here")}
-                </a>
-              </p>
+              <p>{t("noMaterialsFound")}</p>
             )}
           </div>
         </section>

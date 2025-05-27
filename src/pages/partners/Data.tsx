@@ -69,16 +69,7 @@ const Data = () => {
             </Link>
           ))
         ) : (
-          <p>
-            {t("noDataFound")}{" "}
-            <a
-              href={`${config.dashboardUrl}collections/charts/create`}
-              target="_blank"
-              className="font-poppins-semi-bold hover:text-light-red"
-            >
-              {t("here")}
-            </a>
-          </p>
+          <p>{t("noDataFound")}</p>
         )}
       </section>
     </>
