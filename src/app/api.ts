@@ -15,9 +15,6 @@ const mutex = new Mutex();
 export const resetAuth = (): void => {
   Cookies.remove("token");
   Cookies.remove("exp");
-  localStorage.removeItem("token");
-  localStorage.removeItem("exp");
-  localStorage.removeItem("userId");
 };
 
 const baseQuery = fetchBaseQuery({
@@ -63,9 +60,6 @@ const baseQueryWithReauth: BaseQueryFn<
               expires: 1 / 12,
             });
             Cookies.set("exp", userWithTokens.exp.toString());
-            localStorage.setItem("token", userWithTokens.refreshedToken);
-            localStorage.setItem("exp", userWithTokens.exp.toString());
-            localStorage.setItem("userId", userWithTokens.user.id);
           } else {
             resetAuth();
           }
@@ -84,7 +78,7 @@ const api = createApi({
   reducerPath: "rootApi",
   baseQuery: baseQueryWithReauth,
   endpoints: () => ({}),
-  keepUnusedDataFor: 60, // Keeps data for an hour in cache (in seconds)
+  keepUnusedDataFor: 60,
   refetchOnMountOrArgChange: false,
   refetchOnReconnect: true,
   refetchOnFocus: false,
