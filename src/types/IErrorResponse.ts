@@ -4,7 +4,8 @@ export type IError = {
 
 export default interface IErrorResponse {
   status: number;
-  data: {
+  data?: {
     errors: IError[];
   };
+  error?: string;
 }

@@ -133,7 +133,7 @@ const NavItem = ({ title, icon, route, anchor, target }: NavItemProps) => {
 
 const Sidebar = () => {
   const { t } = useTranslation();
-  const { data, isFetching } = useMeQuery();
+  const { data, isLoading } = useMeQuery();
   const [logoutUser] = useLogoutMutation();
   const navigate = useNavigate();
 
@@ -144,9 +144,9 @@ const Sidebar = () => {
     });
   }
 
-  if (isFetching) return <Loader />;
+  if (isLoading) return <Loader />;
 
-  if (!isFetching && (!data || !data.user))
+  if (!isLoading && (!data || !data.user))
     return <Navigate to={routes.Login.absolute} />;
 
   if (!data) return <Loader />;

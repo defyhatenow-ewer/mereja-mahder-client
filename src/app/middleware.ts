@@ -11,9 +11,13 @@ export const rtkQueryErrorLogger: Middleware =
   // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any
   (_api: MiddlewareAPI) => (next) => (action: any) => {
     if (isRejectedWithValue(action)) {
-      (action.payload as IErrorResponse).data.errors.forEach((err) => {
-        toast.error(formatErrorMessage(err));
-      });
+      if ((action.payload as IErrorResponse).error) {
+        toast.error(action.payload.error);
+      } else {
+        (action.payload as IErrorResponse).data?.errors.forEach((err) => {
+          toast.error(formatErrorMessage(err));
+        });
+      }
     }
 
     return next(action);

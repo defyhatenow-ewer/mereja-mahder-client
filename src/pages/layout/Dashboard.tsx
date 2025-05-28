@@ -10,7 +10,7 @@ import DashboardFooter from "./DashboardFooter";
 
 const Dashboard = () => {
   const navigate = useNavigate();
-  const { data, isFetching } = useMeQuery();
+  const { data, isLoading } = useMeQuery();
   const [refresh] = useRefreshTokenMutation();
 
   useEffect(() => {
@@ -40,9 +40,9 @@ const Dashboard = () => {
     checkAndRefreshToken();
   }, [navigate, refresh]);
 
-  if (isFetching) return <Loader />;
+  if (isLoading) return <Loader />;
 
-  if (!isFetching && !data) return <Navigate to={routes.Login.absolute} />;
+  if (!isLoading && !data) return <Navigate to={routes.Login.absolute} />;
 
   return (
     <main className="min-h-screen">
