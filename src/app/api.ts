@@ -84,10 +84,10 @@ const api = createApi({
   reducerPath: "rootApi",
   baseQuery: baseQueryWithReauth,
   endpoints: () => ({}),
-  keepUnusedDataFor: 3600, // Keeps data for an hour in cache (in seconds)
-  refetchOnMountOrArgChange: 60,
+  keepUnusedDataFor: 60, // Keeps data for an hour in cache (in seconds)
+  refetchOnMountOrArgChange: false,
   refetchOnReconnect: true,
-  refetchOnFocus: true,
+  refetchOnFocus: false,
 });
 
 export default api;
