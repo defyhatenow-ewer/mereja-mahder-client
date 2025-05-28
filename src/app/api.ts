@@ -85,7 +85,7 @@ const api = createApi({
   baseQuery: baseQueryWithReauth,
   endpoints: () => ({}),
   keepUnusedDataFor: 3600, // Keeps data for an hour in cache (in seconds)
-  refetchOnMountOrArgChange: true,
+  refetchOnMountOrArgChange: 60,
   refetchOnReconnect: true,
   refetchOnFocus: true,
 });
