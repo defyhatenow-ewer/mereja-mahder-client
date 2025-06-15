@@ -284,3 +284,7 @@ button:hover .inverse-child-icon {
 a:hover .child-title {
   @apply text-light-red;
 }
+
+.wrap a {
+  @apply text-wrap;
+}

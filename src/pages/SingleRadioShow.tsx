@@ -64,7 +64,7 @@ const SingleRadioShow = () => {
 
   return (
     <div className="flex justify-center">
-      <div className="flex flex-col bg-white gap-5 p-5 pt-0 max-w-[1400px] md:p-12 md:pt-0 md:gap-12">
+      <div className="flex flex-col bg-white gap-5 p-5 pt-0 w-full md:max-w-[1400px] md:p-12 md:pt-0 md:gap-12">
         <section className="flex flex-col gap-3 w-full md:w-4/5 md:gap-5">
           <h2>{post.docs[0].title}</h2>
           <div className="flex gap-3 items-center flex-col md:flex-row md:gap-5">
@@ -86,7 +86,9 @@ const SingleRadioShow = () => {
         </section>
         <section className="flex flex-col gap-5 md:gap-12 md:flex-row">
           <div className="flex flex-col gap-5 w-full items-center md:items-start md:w-7/10 md:gap-16">
-            {parse(post.docs[0].iframe)}
+            <div className="w-[calc(100vw-40px)] wrap md:w-fit">
+              {parse(post.docs[0].iframe)}
+            </div>
             <RichTextReader data={post.docs[0].content} />
             <div className="flex flex-col gap-2">
               <small>{t("sharePost")}</small>
@@ -109,19 +111,19 @@ const SingleRadioShow = () => {
           <div className="flex flex-col w-full gap-5 md:gap-12 md:w-3/10">
             <div className="flex flex-col bg-primary rounded-md md:rounded-2xl">
               <div className="bg-white rounded-t-md md:rounded-t-2xl">
-                <p className="bg-primary p-5 rounded-t-md rounded-bl-md md:rounded-bl-2xl md:rounded-t-2xl md:p-8">
+                <p className="bg-primary p-5 rounded-t-md rounded-b-md md:rounded-bl-2xl md:rounded-t-2xl md:p-8">
                   {t("subscribeToListen")}{" "}
                   <strong className="font-poppins-semi-bold">#BeAware</strong>{" "}
                   {t("radioShows")}
                 </p>
               </div>
               <div className="flex">
-                <div className="bg-primary w-full md:w-4/5">
-                  <div className="bg-white p-3 pb-0 ps-0 rounded-tr-md md:ps-0 md:rounded-tr-2xl md:pt-3 md:pb-0 md:px-3">
+                <div className="md:bg-primary w-full md:w-4/5">
+                  <div className="bg-white p-3 pb-0 md:ps-0 md:rounded-tr-2xl md:pt-3 md:pb-0 md:px-3">
                     <a
                       href="#"
                       target="_blank"
-                      className="flex justify-between items-center gap-3 bg-secondary hover:bg-primary text-primary hover:text-secondary cursor-pointer rounded-4xl p-1 ps-2 md:ps-4"
+                      className="flex justify-between items-center gap-3 bg-secondary hover:bg-primary text-primary hover:text-secondary cursor-pointer rounded-4xl p-1 ps-4 md:ps-4"
                     >
                       <span>{t("subscribe")}</span>
                       <div className="flex justify-center items-center rounded-full p-1 bg-primary text-secondary child-icon">
