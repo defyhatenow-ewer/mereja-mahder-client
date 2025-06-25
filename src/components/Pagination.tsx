@@ -1,4 +1,5 @@
 import { ReactNode, useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 
 type Props = {
   totalPages: number;
@@ -72,6 +73,7 @@ const Pagination = ({
   setPage,
   color = "#0B1215",
 }: Props) => {
+  const { t } = useTranslation();
   const [pageList, setPageList] = useState<number[]>([]);
 
   useEffect(() => {
@@ -103,7 +105,7 @@ const Pagination = ({
   return (
     <div className="w-full flex flex-wrap justify-center items-center gap-4">
       <PaginationButton
-        label={<span>Previous</span>}
+        label={<span>{t("previous")}</span>}
         value="prev"
         currentPage={currentPage}
         totalPages={totalPages}
@@ -127,7 +129,7 @@ const Pagination = ({
         return <Ellipsis color={color} />;
       })}
       <PaginationButton
-        label={<span>Next</span>}
+        label={<span>{t("next")}</span>}
         value="next"
         currentPage={currentPage}
         totalPages={totalPages}

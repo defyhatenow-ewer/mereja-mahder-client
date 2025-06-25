@@ -237,7 +237,7 @@ const Sidebar = () => {
           className={`bg-white hover:bg-primary text-secondary flex gap-3 py-1 pe-3 items-center w-full`}
         >
           <Cog />
-          <span>Settings</span>
+          <span>{t("settings")}</span>
         </Link>
         <button
           onClick={logout}
