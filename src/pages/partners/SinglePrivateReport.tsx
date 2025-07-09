@@ -41,7 +41,11 @@ const SinglePrivateReport = () => {
         <h2>{post.docs[0].title}</h2>
         <div className="flex gap-3 items-center flex-col md:flex-row md:gap-5">
           <small className="text-[#0B121580]">
-            {formatDateTime(post.docs[0].updatedAt)}
+            {post.docs[0].publishedAt
+              ? formatDateTime(
+                  post.docs[0].publishedAt || new Date().toISOString()
+                )
+              : "Draft"}
           </small>
         </div>
       </section>
