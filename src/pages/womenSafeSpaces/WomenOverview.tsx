@@ -1,20 +1,19 @@
-import { Link } from "react-router-dom";
-import { Loader } from "../../components";
-import { Edit } from "../../components/Icons";
-import { config } from "../../config";
-import { useGetBannersQuery } from "../../features/banners.api";
-import { useGetReportsQuery } from "../../features/reports.api";
-import { routes } from "../../routing";
-import { formatDateTime } from "../../utils";
-import { useTranslation } from "react-i18next";
+import { Link } from 'react-router-dom';
+import { Loader } from '../../components';
+import { config } from '../../config';
+import { useGetBannersQuery } from '../../features/banners.api';
+import { useGetReportsQuery } from '../../features/reports.api';
+import { routes } from '../../routing';
+import { formatDateTime } from '../../utils';
+import { useTranslation } from 'react-i18next';
 
 const WomenOverview = () => {
   const { t } = useTranslation();
   const { data: banners, isLoading: isLoadingBanner } = useGetBannersQuery({
     query: {
       where: {
-        "space.title": {
-          equals: "women_safe_space",
+        'space.title': {
+          equals: 'women_safe_space',
         },
       },
     },
@@ -25,12 +24,12 @@ const WomenOverview = () => {
         and: [
           {
             _status: {
-              equals: "published",
+              equals: 'published',
             },
           },
           {
             privacy: {
-              equals: "private",
+              equals: 'private',
             },
           },
         ],
@@ -48,7 +47,7 @@ const WomenOverview = () => {
         {banners && banners.docs.length && (
           <section className="flex flex-col justify-between items-center gap-5 bg-primary p-5 rounded-md md:rounded-4xl md:p-8 md:flex-row">
             <div className="flex flex-col gap-5 w-full items-center md:items-start md:w-1/2 md:gap-5">
-              <p>{t("upcomingActivity")}</p>
+              <p>{t('upcomingActivity')}</p>
               <h2 className="text-lg font-poppins-semi-bold md:text-2xl">
                 {banners.docs[0].title}
               </h2>
@@ -60,15 +59,15 @@ const WomenOverview = () => {
                     href={banners.docs[0].links[0].links[0].link.url}
                     target={
                       banners.docs[0].links[0].links[0].link.newTab === true
-                        ? "_blank"
-                        : "_self"
+                        ? '_blank'
+                        : '_self'
                     }
                   >
                     {banners.docs[0].links[0].links[0].link.label}
                   </a>
                 )}
             </div>
-            {typeof banners.docs[0].image === "string" ? (
+            {typeof banners.docs[0].image === 'string' ? (
               <img
                 className="max-h-64 md:-mb-16"
                 src={`${config.env.apiKey}${banners.docs[0].image}`}
@@ -86,10 +85,9 @@ const WomenOverview = () => {
             <table className="table">
               <thead className="border-0 bg-primary text-secondary rounded-md p-5 md:p-8 md:rounded-3xl">
                 <tr className="rounded-3xl font-poppins-semi-bold">
-                  <th>{t("title")}</th>
-                  <th>{t("lastUpdated")}</th>
-                  <th>{t("views")}</th>
-                  <th>{t("edit")}</th>
+                  <th>{t('title')}</th>
+                  <th>{t('lastUpdated')}</th>
+                  <th>{t('views')}</th>
                 </tr>
               </thead>
               <tbody>
@@ -111,19 +109,12 @@ const WomenOverview = () => {
                     <td>
                       <small className="text-[#555555]">{report.views}</small>
                     </td>
-                    <td>
-                      <a
-                        href={`${config.dashboardUrl}collections/reports/${report.id}`}
-                      >
-                        <Edit />
-                      </a>
-                    </td>
                   </tr>
                 ))}
               </tbody>
             </table>
           ) : (
-            <p>{t("noPrivateReportsFound")}</p>
+            <p>{t('noPrivateReportsFound')}</p>
           )}
         </section>
       </div>
