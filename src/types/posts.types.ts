@@ -1,11 +1,11 @@
-import { z } from "zod";
-import { RelatedSchema } from "./IDoc";
-import { CategorySchema, ICategory } from "./categories.types";
-import { ITag, TagSchema } from "./tags.types";
-import { IUser, UserSchema } from "./users.types";
-import { ISpace, SpaceSchemaRelated } from "./space.types";
-import { IMedia } from "./media.types";
-import { SerializedEditorState } from "@payloadcms/richtext-lexical/lexical";
+import { z } from 'zod';
+import { RelatedSchema } from './IDoc';
+import { CategorySchema, ICategory } from './categories.types';
+import { ITag, TagSchema } from './tags.types';
+import { IUser, UserSchema } from './users.types';
+import { ISpace, SpaceSchemaRelated } from './space.types';
+import { IMedia } from './media.types';
+import { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical';
 
 export const PopulatedAuthors = z.array(
   z.object({
@@ -35,7 +35,7 @@ export const PostSchema = z.object({
   views: z.number(),
   space: SpaceSchemaRelated,
   slugLock: z.boolean(),
-  _status: z.enum(["draft", "published"]),
+  _status: z.enum(['draft', 'published']),
   populatedAuthors: PopulatedAuthors,
   createdAt: z.string().datetime(),
   updatedAt: z.string().datetime().optional(),
@@ -71,12 +71,12 @@ export interface IPost {
     | null;
   views?: number | null;
   space?: (string | null) | ISpace;
-  privacy?: ("private" | "public") | null;
+  privacy?: ('private' | 'public') | null;
   slug?: string | null;
   slugLock?: boolean | null;
   updatedAt: string;
   createdAt: string;
-  _status?: ("draft" | "published") | null;
+  _status?: ('draft' | 'published') | null;
 }
 
 export interface IReport {
@@ -107,12 +107,12 @@ export interface IReport {
     | null;
   views?: number | null;
   space?: (string | null) | ISpace;
-  privacy?: ("private" | "public") | null;
+  privacy?: ('private' | 'public') | null;
   slug?: string | null;
   slugLock?: boolean | null;
   updatedAt: string;
   createdAt: string;
-  _status?: ("draft" | "published") | null;
+  _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -145,12 +145,12 @@ export interface IArticle {
     | null;
   views?: number | null;
   space?: (string | null) | ISpace;
-  privacy?: ("private" | "public") | null;
+  privacy?: ('private' | 'public') | null;
   slug?: string | null;
   slugLock?: boolean | null;
   updatedAt: string;
   createdAt: string;
-  _status?: ("draft" | "published") | null;
+  _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -184,12 +184,12 @@ export interface IMaterial {
     | null;
   views?: number | null;
   space?: (string | null) | ISpace;
-  privacy?: ("private" | "public") | null;
+  privacy?: ('private' | 'public') | null;
   slug?: string | null;
   slugLock?: boolean | null;
   updatedAt: string;
   createdAt: string;
-  _status?: ("draft" | "published") | null;
+  _status?: ('draft' | 'published') | null;
 }
 export interface IResource {
   id: string;
@@ -219,12 +219,12 @@ export interface IResource {
     | null;
   views?: number | null;
   space?: (string | null) | ISpace;
-  privacy?: ("private" | "public") | null;
+  privacy?: ('private' | 'public') | null;
   slug?: string | null;
   slugLock?: boolean | null;
   updatedAt: string;
   createdAt: string;
-  _status?: ("draft" | "published") | null;
+  _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -258,12 +258,12 @@ export interface ISafetyResource {
     | null;
   views?: number | null;
   space?: (string | null) | ISpace;
-  privacy?: ("private" | "public") | null;
+  privacy?: ('private' | 'public') | null;
   slug?: string | null;
   slugLock?: boolean | null;
   updatedAt: string;
   createdAt: string;
-  _status?: ("draft" | "published") | null;
+  _status?: ('draft' | 'published') | null;
 }
 
 export interface ILearningResource {
@@ -294,12 +294,12 @@ export interface ILearningResource {
     | null;
   views?: number | null;
   space?: (string | null) | ISpace;
-  privacy?: ("private" | "public") | null;
+  privacy?: ('private' | 'public') | null;
   slug?: string | null;
   slugLock?: boolean | null;
   updatedAt: string;
   createdAt: string;
-  _status?: ("draft" | "published") | null;
+  _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -333,12 +333,12 @@ export interface IShow {
     | null;
   views?: number | null;
   space?: (string | null) | ISpace;
-  privacy?: ("private" | "public") | null;
+  privacy?: ('private' | 'public') | null;
   slug?: string | null;
   slugLock?: boolean | null;
   updatedAt: string;
   createdAt: string;
-  _status?: ("draft" | "published") | null;
+  _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -372,12 +372,19 @@ export interface IChart {
     | null;
   views?: number | null;
   space?: (string | null) | ISpace;
-  privacy?: ("private" | "public") | null;
+  privacy?: ('private' | 'public') | null;
   slug?: string | null;
   slugLock?: boolean | null;
   updatedAt: string;
   createdAt: string;
-  _status?: ("draft" | "published") | null;
+  _status?: ('draft' | 'published') | null;
+}
+
+export interface ISuggestion {
+  id: string;
+  title: string;
+  content: string;
+  featuredImage?: string | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -399,10 +406,10 @@ export interface LinkBlock {
   links?:
     | {
         link: {
-          type?: ("reference" | "custom") | null;
+          type?: ('reference' | 'custom') | null;
           newTab?: boolean | null;
           reference?: {
-            relationTo: "posts";
+            relationTo: 'posts';
             value: string | IPost;
           } | null;
           url?: string | null;
@@ -410,12 +417,12 @@ export interface LinkBlock {
           /**
            * Choose how the link should be rendered.
            */
-          appearance?: ("default" | "outline") | null;
+          appearance?: ('default' | 'outline') | null;
         };
         id?: string | null;
       }[]
     | null;
   id?: string | null;
   blockName?: string | null;
-  blockType: "link";
+  blockType: 'link';
 }

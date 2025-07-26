@@ -126,5 +126,18 @@
   "accountDeleted": "መለያ በተሳካ ሁኔታ ተሰርዟል።",
   "profile": "መገለጫ",
   "previous": "ቀዳሚ",
-  "next": "ቀጥሎ"
+  "next": "ቀጥሎ",
+  "readMoreResources": "ተጨማሪ መገልገያዎችን ይመልከቱ",
+  "learningMaterials": "የመማሪያ ቁሳቁሶች",
+  "no": "አይ",
+  "available": "ይገኛል።",
+  "charts": "Cገበታዎች",
+  "submit": "አስገባ",
+  "submitSuggestion": "አስተያየት አስገባ",
+  "content": "ይዘት",
+  "enterTitle": "ርዕስ አስገባ",
+  "addContent": "ይዘትዎን ያክሉ",
+  "uploading": "በመስቀል ላይ",
+  "featuredImage": "ተለይቶ የቀረበ ምስል",
+  "uploadingFeaturedImage": "ተለይቶ የቀረበ ምስል በመስቀል ላይ"
 }

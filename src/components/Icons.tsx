@@ -6,7 +6,7 @@ export const Plus = ({ className }: { className?: string }) => {
       viewBox="0 0 24 24"
       strokeWidth={1.5}
       stroke="currentColor"
-      className={className ?? "w-6 h-6"}
+      className={className ?? 'w-6 h-6'}
     >
       <path
         strokeLinecap="round"
@@ -101,7 +101,7 @@ export const ArrowUpRight = ({ className }: { className?: string }) => {
       viewBox="0 0 24 24"
       strokeWidth={1.5}
       stroke="currentColor"
-      className={className ?? "size-6"}
+      className={className ?? 'size-6'}
     >
       <path
         strokeLinecap="round"
@@ -139,11 +139,11 @@ export const Bell = ({
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      fill={fill ?? "none"}
+      fill={fill ?? 'none'}
       viewBox="0 0 24 24"
       strokeWidth={1.5}
       stroke="currentColor"
-      className={className ?? "size-6"}
+      className={className ?? 'size-6'}
     >
       <path
         strokeLinecap="round"
@@ -180,7 +180,7 @@ export const Send = ({ className }: { className?: string }) => (
     viewBox="0 0 24 24"
     strokeWidth={1.5}
     stroke="currentColor"
-    className={className ?? "size-6"}
+    className={className ?? 'size-6'}
   >
     <path
       strokeLinecap="round"
@@ -197,7 +197,7 @@ export const Smile = ({ className }: { className?: string }) => (
     viewBox="0 0 24 24"
     strokeWidth={1.5}
     stroke="currentColor"
-    className={className ?? "size-6"}
+    className={className ?? 'size-6'}
   >
     <path
       strokeLinecap="round"
@@ -253,7 +253,7 @@ export const Trash = ({ className }: { className?: string }) => {
       viewBox="0 0 24 24"
       strokeWidth={1.5}
       stroke="currentColor"
-      className={className ?? "w-6 h-6"}
+      className={className ?? 'w-6 h-6'}
     >
       <path
         strokeLinecap="round"
@@ -311,7 +311,7 @@ export const HomeIcon = ({ className }: { className?: string }) => {
       viewBox="0 0 24 24"
       strokeWidth={1.5}
       stroke="currentColor"
-      className={className ?? "w-6 h-6"}
+      className={className ?? 'w-6 h-6'}
     >
       <path
         strokeLinecap="round"
@@ -329,7 +329,7 @@ export const ArrowDown = ({ className }: { className?: string }) => (
     viewBox="0 0 24 24"
     strokeWidth={1.5}
     stroke="currentColor"
-    className={className ?? "size-6"}
+    className={className ?? 'size-6'}
   >
     <path
       strokeLinecap="round"
@@ -365,7 +365,7 @@ export const ChevronUp = ({ className }: { className?: string }) => (
     viewBox="0 0 24 24"
     strokeWidth={1.5}
     stroke="currentColor"
-    className={className ?? "size-5"}
+    className={className ?? 'size-5'}
   >
     <path
       strokeLinecap="round"
@@ -382,7 +382,7 @@ export const ChevronDown = ({ className }: { className?: string }) => (
     viewBox="0 0 24 24"
     strokeWidth={1.5}
     stroke="currentColor"
-    className={className ?? "size-5"}
+    className={className ?? 'size-5'}
   >
     <path
       strokeLinecap="round"
@@ -399,7 +399,7 @@ export const ChevronLeft = ({ className }: { className?: string }) => (
     viewBox="0 0 24 24"
     strokeWidth={1.5}
     stroke="currentColor"
-    className={className ?? "size-6"}
+    className={className ?? 'size-6'}
   >
     <path
       strokeLinecap="round"
@@ -416,7 +416,7 @@ export const ChevronRight = ({ className }: { className?: string }) => (
     viewBox="0 0 24 24"
     strokeWidth={1.5}
     stroke="currentColor"
-    className={className ?? "w-6 h-6"}
+    className={className ?? 'w-6 h-6'}
   >
     <path
       strokeLinecap="round"
@@ -433,7 +433,7 @@ export const Inbox = ({ className }: { className?: string }) => (
     viewBox="0 0 24 24"
     strokeWidth={1.5}
     stroke="currentColor"
-    className={className ?? "size-6"}
+    className={className ?? 'size-6'}
   >
     <path
       strokeLinecap="round"
@@ -451,7 +451,7 @@ export const OpenBook = ({ className }: { className?: string }) => {
       viewBox="0 0 24 24"
       strokeWidth={1.5}
       stroke="currentColor"
-      className={className ?? "w-6 h-6"}
+      className={className ?? 'w-6 h-6'}
     >
       <path
         strokeLinecap="round"
@@ -470,7 +470,7 @@ export const FolderOpen = ({ className }: { className?: string }) => {
       viewBox="0 0 24 24"
       strokeWidth={1.5}
       stroke="currentColor"
-      className={className ?? "w-6 h-6"}
+      className={className ?? 'w-6 h-6'}
     >
       <path
         strokeLinecap="round"
@@ -481,6 +481,23 @@ export const FolderOpen = ({ className }: { className?: string }) => {
   );
 };
 
+export const PaperAirplane = ({ className }: { className?: string }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 24 24"
+    strokeWidth={1.5}
+    stroke="currentColor"
+    className={className ?? 'w-6 h-6'}
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="M6 12 3.269 3.125A59.769 59.769 0 0 1 21.485 12 59.768 59.768 0 0 1 3.27 20.875L5.999 12Zm0 0h7.5"
+    />
+  </svg>
+);
+
 export const Chart = ({ className }: { className?: string }) => {
   return (
     <svg
@@ -489,7 +506,7 @@ export const Chart = ({ className }: { className?: string }) => {
       viewBox="0 0 24 24"
       strokeWidth={1.5}
       stroke="currentColor"
-      className={className ?? "w-6 h-6"}
+      className={className ?? 'w-6 h-6'}
     >
       <path
         strokeLinecap="round"
@@ -508,7 +525,7 @@ export const ArchiveBox = ({ className }: { className?: string }) => {
       viewBox="0 0 24 24"
       strokeWidth={1.5}
       stroke="currentColor"
-      className={className ?? "w-6 h-6"}
+      className={className ?? 'w-6 h-6'}
     >
       <path
         strokeLinecap="round"
@@ -527,7 +544,7 @@ export const DocumentCheck = ({ className }: { className?: string }) => {
       viewBox="0 0 24 24"
       strokeWidth={1.5}
       stroke="currentColor"
-      className={className ?? "w-6 h-6"}
+      className={className ?? 'w-6 h-6'}
     >
       <path
         strokeLinecap="round"
@@ -602,7 +619,7 @@ export const Users = ({ className }: { className?: string }) => (
     viewBox="0 0 24 24"
     strokeWidth={1.5}
     stroke="currentColor"
-    className={className ?? "w-6 h-6"}
+    className={className ?? 'w-6 h-6'}
   >
     <path
       strokeLinecap="round"
@@ -619,7 +636,7 @@ export const UserPlus = ({ className }: { className?: string }) => (
     viewBox="0 0 24 24"
     strokeWidth={1.5}
     stroke="currentColor"
-    className={className ?? "w-6 h-6"}
+    className={className ?? 'w-6 h-6'}
   >
     <path
       strokeLinecap="round"
@@ -687,7 +704,7 @@ export const ChatBubble = ({ className }: { className?: string }) => (
     viewBox="0 0 24 24"
     strokeWidth={1.5}
     stroke="currentColor"
-    className={className ?? "w-6 h-6"}
+    className={className ?? 'w-6 h-6'}
   >
     <path
       strokeLinecap="round"
@@ -704,7 +721,7 @@ export const Edit = ({ className }: { className?: string }) => (
     viewBox="0 0 24 24"
     strokeWidth={1.5}
     stroke="currentColor"
-    className={className ?? "size-4"}
+    className={className ?? 'size-4'}
   >
     <path
       strokeLinecap="round"
@@ -758,10 +775,10 @@ export const Copy = ({ className }: { className?: string }) => (
     viewBox="0 0 115.77 122.88"
     enableBackground="new 0 0 115.77 122.88"
     xmlSpace="preserve"
-    className={className ?? "size-4 text-white"}
+    className={className ?? 'size-4 text-white'}
   >
     <style type="text/css">
-      {".st0{fill-rule:evenodd;clip-rule:evenodd;}"}
+      {'.st0{fill-rule:evenodd;clip-rule:evenodd;}'}
     </style>
     <g>
       <path

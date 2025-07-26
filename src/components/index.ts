@@ -1,12 +1,13 @@
-import CustomToast from "./CustomToast";
-import Loader from "./Loader";
-import LogoutButton from "./LogoutButton";
-import Pagination from "./Pagination";
-import * as ShareButtons from "./ShareButtons";
-import ConfirmDelete from "./ConfirmDelete";
-import Menu from "./Menu";
-import ImageLightbox from "./ImageLightbox";
-import RichTextReader from "./RichTextReader";
+import CustomToast from './CustomToast';
+import Loader from './Loader';
+import LogoutButton from './LogoutButton';
+import Pagination from './Pagination';
+import * as ShareButtons from './ShareButtons';
+import ConfirmDelete from './ConfirmDelete';
+import Menu from './Menu';
+import ImageLightbox from './ImageLightbox';
+import RichTextReader from './RichTextReader';
+import Carousel from './Carousel';
 
 export {
   CustomToast,
@@ -18,4 +19,5 @@ export {
   Menu,
   ImageLightbox,
   RichTextReader,
+  Carousel,
 };

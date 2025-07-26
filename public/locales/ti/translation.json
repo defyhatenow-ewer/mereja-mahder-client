@@ -126,5 +126,18 @@
   "accountDeleted": "ኣካውንት ብዓወት ተደምሲሱ",
   "profile": "መግለፂ",
   "previous": "ዝሓለፈ",
-  "next": "ቀፃሊ"
+  "next": "ቀፃሊ",
+  "readMoreResources": "ተወሳኺ ጸጋታት ርኣዩ።",
+  "learningMaterials": "መምሃሪ ናውቲ",
+  "no": "አይኮንን",
+  "available": "ቅሩብ",
+  "charts": "ሰንጠረዥ",
+  "submit": "ኣእትው",
+  "submitSuggestion": "አስተያየት አስገባ",
+  "content": "ትሕዝቶ",
+  "enterTitle": "ኣርእስቲ ኣእቱ",
+  "addContent": "ትሕዝቶኻ ወስኸሉ።",
+  "uploading": "ምጽዓን",
+  "featuredImage": "ፍሉይ ምስሊ",
+  "uploadingFeaturedImage": "ፍሉይ ምስሊ ምጽዓን"
 }

@@ -1,6 +1,6 @@
-import { HTMLAttributeAnchorTarget, ReactNode } from "react";
-import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
-import { routes } from "../../routing";
+import { HTMLAttributeAnchorTarget, ReactNode } from 'react';
+import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom';
+import { routes } from '../../routing';
 import {
   ArchiveBox,
   ArrowLeftRectangle,
@@ -11,15 +11,16 @@ import {
   FolderOpen,
   HomeIcon,
   OpenBook,
+  PaperAirplane,
   UserPlus,
   Users,
-} from "../../components/Icons";
-import { Loader } from "../../components";
-import { useLogoutMutation, useMeQuery } from "../../features/auth.api";
-import { SpaceTypes } from "../../utils";
-import { logo } from "../../assets/images";
-import { resetAuth } from "../../app/api";
-import { useTranslation } from "react-i18next";
+} from '../../components/Icons';
+import { Loader } from '../../components';
+import { useLogoutMutation, useMeQuery } from '../../features/auth.api';
+import { SpaceTypes } from '../../utils';
+import { logo } from '../../assets/images';
+import { resetAuth } from '../../app/api';
+import { useTranslation } from 'react-i18next';
 
 type NavItemProps = {
   title: string;
@@ -35,27 +36,27 @@ type NavItemProps = {
 
 const navLinks: NavItemProps[] = [
   {
-    title: "fellows",
+    title: 'fellows',
     icon: <HomeIcon className="size-4" />,
     route: routes.Fellows.absolute,
     space: SpaceTypes.AFF,
-    alt: "overview",
+    alt: 'overview',
     altIcon: <DocumentCheck className="size-4" />,
   },
   {
-    title: "partners",
+    title: 'partners',
     icon: <HomeIcon className="size-4" />,
     route: routes.Partners.absolute,
     space: SpaceTypes.Partner,
-    alt: "overview",
+    alt: 'overview',
     altIcon: <Users className="size-4" />,
   },
   {
-    title: "womenSafeSpace",
+    title: 'womenSafeSpace',
     icon: <HomeIcon className="size-4" />,
     route: routes.WomenSafeSpace.absolute,
     space: SpaceTypes.Women,
-    alt: "overview",
+    alt: 'overview',
     altIcon: <UserPlus className="size-4" />,
   },
   // {
@@ -67,35 +68,40 @@ const navLinks: NavItemProps[] = [
   //   target: "_blank",
   // },
   {
-    title: "learningResources",
+    title: 'learningResources',
     icon: <OpenBook className="size-4" />,
     route: routes.LearningResources.absolute,
     space: SpaceTypes.AFF,
   },
   {
-    title: "reports",
+    title: 'reports',
     icon: <FolderOpen className="size-4" />,
     route: routes.ReportList.absolute,
     space: SpaceTypes.Partner,
   },
   {
-    title: "data",
+    title: 'data',
     icon: <Chart className="size-4" />,
     route: routes.Data.absolute,
     space: SpaceTypes.Partner,
   },
   {
-    title: "safetyResources",
+    title: 'safetyResources',
     icon: <ArchiveBox className="size-4" />,
     route: routes.SafetyResources.absolute,
     space: SpaceTypes.Women,
   },
   {
-    title: "forum",
+    title: 'forum',
     icon: <ChatBubble className="size-4" />,
     route: routes.Forum.absolute,
     anchor: true,
-    target: "_blank",
+    target: '_blank',
+  },
+  {
+    title: 'submit',
+    icon: <PaperAirplane className="size-4" />,
+    route: routes.Submit.absolute,
   },
 ];
 
@@ -110,7 +116,7 @@ const NavItem = ({ title, icon, route, anchor, target }: NavItemProps) => {
         href={route}
         target={target}
         className={`${
-          isActive ? "text-[#D15334]" : "text-secondary"
+          isActive ? 'text-[#D15334]' : 'text-secondary'
         } hover:bg-primary flex gap-3 py-1 px-3 items-center w-full text-xs`}
       >
         {icon}
@@ -122,7 +128,7 @@ const NavItem = ({ title, icon, route, anchor, target }: NavItemProps) => {
     <Link
       to={route}
       className={`${
-        isActive ? "text-[#D15334]" : "text-secondary"
+        isActive ? 'text-[#D15334]' : 'text-secondary'
       } hover:bg-primary flex gap-3 py-1 px-3 items-center w-full text-xs`}
     >
       {icon}
@@ -157,9 +163,9 @@ const Sidebar = () => {
         <Link to={routes.Home.absolute}>
           <img src={logo} className="max-h-12 mb-3" />
         </Link>
-        <h2 className="text-base font-poppins">{t("overviewCaps")}</h2>
+        <h2 className="text-base font-poppins">{t('overviewCaps')}</h2>
         {navLinks.map((navLink) => {
-          if (navLink.admin && data.user.role === "admin") {
+          if (navLink.admin && data.user.role === 'admin') {
             return (
               <NavItem
                 key={navLink.title}
@@ -173,12 +179,12 @@ const Sidebar = () => {
           } else if (navLink.admin) {
             return null;
           } else if (
-            data.user.role === "admin" ||
+            data.user.role === 'admin' ||
             (data.user.space &&
-              typeof data.user.space !== "string" &&
+              typeof data.user.space !== 'string' &&
               data.user.space.title === navLink.space) ||
             (data.user.space &&
-              typeof data.user.space !== "string" &&
+              typeof data.user.space !== 'string' &&
               data.user.space.title === SpaceTypes.Women &&
               navLink.space === SpaceTypes.Partner &&
               navLink.route !== routes.Partners.absolute) ||
@@ -188,12 +194,12 @@ const Sidebar = () => {
               <NavItem
                 key={navLink.title}
                 title={
-                  data.user.role === "admin"
+                  data.user.role === 'admin'
                     ? navLink.title
                     : (navLink.alt ?? navLink.title)
                 }
                 icon={
-                  data.user.role !== "admin"
+                  data.user.role !== 'admin'
                     ? navLink.icon
                     : (navLink.altIcon ?? navLink.icon)
                 }
@@ -237,14 +243,14 @@ const Sidebar = () => {
           className={`bg-white hover:bg-primary text-secondary flex gap-3 py-1 pe-3 items-center w-full`}
         >
           <Cog />
-          <span>{t("settings")}</span>
+          <span>{t('settings')}</span>
         </Link>
         <button
           onClick={logout}
           className={`bg-white cursor-pointer hover:bg-primary text-secondary flex gap-3 py-1 pe-3 items-center w-full`}
         >
           <ArrowLeftRectangle />
-          <span>{t("logout")}</span>
+          <span>{t('logout')}</span>
         </button>
       </div>
     </div>

@@ -126,5 +126,18 @@
   "accountDeleted": "Account milkaa'inaan haqame",
   "profile": "Ibsama",
   "previous": "Kan duraa",
-  "next": "Kan itti aanu"
+  "next": "Kan itti aanu",
+  "readMoreResources": "Qabeenya dabalataa ilaalaa",
+  "learningMaterials": "Meeshaalee Barnootaa",
+  "no": "Lakki",
+  "available": "Jira",
+  "charts": "Chaartiiwwan",
+  "submit": "Galchuu",
+  "submitSuggestion": "Yaada dhiheessaa",
+  "content": "Qabiyyee",
+  "enterTitle": "Mata duree galchi",
+  "addContent": "Qabiyyee keessan itti dabalaa",
+  "uploading": "Olkaa'aa jira",
+  "featuredImage": "Fakkii Mul'ataa",
+  "uploadingFeaturedImage": "Fakkii mul'ate olkaa'aa jira"
 }

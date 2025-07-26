@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom";
-import { useTranslation } from "react-i18next";
+import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import {
   mobilizingCivicAction,
   amharicTextBlack,
@@ -7,15 +7,15 @@ import {
   graphic1,
   graphic2,
   mmdhn,
-} from "../assets/images";
-import { routes } from "../routing";
-import { ArrowDown, ArrowUpRight, ChevronRight } from "../components/Icons";
-import { Loader, RichTextReader } from "../components";
-import { config } from "../config";
-import { formatDateTime, makeDownloadable } from "../utils";
-import { useGetReportsQuery } from "../features/reports.api";
-import { useGetArticlesQuery } from "../features/articles.api";
-import { useGetShowsQuery } from "../features/shows.api";
+} from '../assets/images';
+import { routes } from '../routing';
+import { ArrowDown, ArrowUpRight, ChevronRight } from '../components/Icons';
+import { Loader, RichTextReader } from '../components';
+import { config } from '../config';
+import { formatDateTime, makeDownloadable } from '../utils';
+import { useGetReportsQuery } from '../features/reports.api';
+import { useGetShowsQuery } from '../features/shows.api';
+import { useGetResourcesQuery } from '../features/resources.api';
 
 const Home = () => {
   const { t } = useTranslation();
@@ -25,12 +25,12 @@ const Home = () => {
         and: [
           {
             _status: {
-              equals: "published",
+              equals: 'published',
             },
           },
           {
             privacy: {
-              equals: "public",
+              equals: 'public',
             },
           },
         ],
@@ -40,19 +40,19 @@ const Home = () => {
       limit: 3,
     },
   });
-  const { data: factChecks, isLoading: isFactChecksLoading } =
-    useGetArticlesQuery({
+  const { data: resources, isLoading: isResourcesLoading } =
+    useGetResourcesQuery({
       query: {
         where: {
           and: [
             {
               _status: {
-                equals: "published",
+                equals: 'published',
               },
             },
             {
               privacy: {
-                equals: "public",
+                equals: 'public',
               },
             },
           ],
@@ -69,12 +69,12 @@ const Home = () => {
           and: [
             {
               _status: {
-                equals: "published",
+                equals: 'published',
               },
             },
             {
               privacy: {
-                equals: "public",
+                equals: 'public',
               },
             },
           ],
@@ -89,7 +89,7 @@ const Home = () => {
   return (
     <>
       <Loader
-        show={isReportsLoading || isFactChecksLoading || isRadioShowsLoading}
+        show={isReportsLoading || isResourcesLoading || isRadioShowsLoading}
       />
       <div className="flex flex-col items-center bg-white gap-8 md:gap-16">
         <section className="flex flex-col px-5 gap-5 max-w-[1400px] md:gap-0 md:h-[400px] md:px-12 md:flex-row xl:h-[500px] 2xl:h-[500px]">
@@ -101,7 +101,7 @@ const Home = () => {
                 <br />
                 Mahder
               </h1>
-              <p>{t("description")}</p>
+              <p>{t('description')}</p>
               <div className="flex flex-col items-center md:hidden">
                 <img
                   src={mobilizingCivicAction}
@@ -111,7 +111,7 @@ const Home = () => {
                   to={routes.About.relative}
                   className="flex justify-between items-center gap-3 outline-20 outline-primary bg-secondary hover:bg-primary text-primary hover:text-secondary cursor-pointer rounded-4xl p-3 ps-4 w-fit"
                 >
-                  <span>{t("learnMore")}</span>
+                  <span>{t('learnMore')}</span>
                   <div className="flex justify-center items-center rounded-full p-1 bg-primary text-secondary child-icon">
                     <ArrowUpRight />
                   </div>
@@ -124,7 +124,7 @@ const Home = () => {
                   to={routes.About.relative}
                   className="flex justify-between items-center gap-3 bg-secondary hover:bg-primary text-primary hover:text-secondary cursor-pointer rounded-4xl p-3 ps-4 w-[100%-20px] text-sm md:text-base md:w-full md:ps-6"
                 >
-                  <span>{t("learnMore")}</span>
+                  <span>{t('learnMore')}</span>
                   <div className="flex justify-center items-center rounded-full p-1 bg-primary text-secondary child-icon">
                     <ArrowUpRight />
                   </div>
@@ -155,7 +155,7 @@ const Home = () => {
           <div className="flex w-full bg-custom-gray">
             <div className="bg-white p-8 pt-0 w-full justify-center md:justify-start md:rounded-br-4xl md:pt-8 md:py-8 md:px-12 md:w-[16rem] 2xl:w-xs 2xl:p-16 2xl:py-12 3xl:w-lg">
               <h2 className="text-center md:text-left xl:text-right">
-                {t("reports")}
+                {t('reports')}
               </h2>
             </div>
             <div className="flex-grow bg-white hidden md:flex">
@@ -170,14 +170,14 @@ const Home = () => {
                   className="flex flex-col justify-between gap-3 p-5 bg-[#E4E4E4] rounded-2xl md:gap-6 md:rounded-3xl hover:shadow-xl"
                 >
                   <Link to={`${routes.Reports.absolute}/${post.slug}`}>
-                    {typeof post.featuredImage === "string" && (
+                    {typeof post.featuredImage === 'string' && (
                       <img
                         src={`${config.env.apiKey}${post.featuredImage}`}
                         className="rounded-2xl object-cover object-center h-full md:h-96 md:rounded-3xl"
                       />
                     )}
                     {post.featuredImage &&
-                      typeof post.featuredImage !== "string" && (
+                      typeof post.featuredImage !== 'string' && (
                         <img
                           src={`${config.env.apiKey}${post.featuredImage.url}`}
                           className="rounded-2xl object-cover object-center md:rounded-3xl"
@@ -193,7 +193,7 @@ const Home = () => {
                       >
                         {post.title}
                       </Link>
-                      {post.pdf && typeof post.pdf === "string" && (
+                      {post.pdf && typeof post.pdf === 'string' && (
                         <a
                           href={makeDownloadable(
                             `${config.env.apiKey}${post.pdf}`
@@ -205,7 +205,7 @@ const Home = () => {
                         </a>
                       )}
                       {post.pdf &&
-                        typeof post.pdf !== "string" &&
+                        typeof post.pdf !== 'string' &&
                         post.pdf.url && (
                           <a
                             href={makeDownloadable(
@@ -223,7 +223,7 @@ const Home = () => {
               ))}
             </div>
           ) : (
-            <div className="p-5 md:p-12">{t("reportsNotFound")}</div>
+            <div className="p-5 md:p-12">{t('reportsNotFound')}</div>
           )}
           <div className="flex w-full">
             <div className="flex-grow bg-white hidden md:flex">
@@ -234,7 +234,7 @@ const Home = () => {
                 to={routes.Reports.relative}
                 className="flex justify-between items-center gap-3 bg-secondary hover:bg-primary text-primary hover:text-secondary cursor-pointer rounded-4xl p-3 ps-4 w-fit text-sm md:text-base md:w-[100%-48px] md:ps-6"
               >
-                <span>{t("viewMore")}</span>
+                <span>{t('viewMore')}</span>
                 <div className="flex justify-center items-center rounded-full p-1 bg-primary text-secondary child-icon">
                   <ChevronRight />
                 </div>
@@ -248,9 +248,9 @@ const Home = () => {
             <div className="bg-white flex-grow">
               <div className="flex flex-col flex-grow h-full bg-light-red rounded-4xl justify-center items-center gap-8 pt-8 p-8 pb-0 md:rounded-none md:rounded-tr-4xl md:items-start md:py-12 md:gap-12 md:p-12">
                 <div className="flex flex-col gap-8 max-w-[600px] self-end md:gap-12">
-                  <h2 className="font-poppins">{t("fieldGuide")}</h2>
+                  <h2 className="font-poppins">{t('fieldGuide')}</h2>
                   <p className="text-center md:text-left">
-                    {t("fieldGuideDescription")}
+                    {t('fieldGuideDescription')}
                   </p>
                 </div>
                 <img
@@ -266,7 +266,7 @@ const Home = () => {
                   to={routes.Resources.relative}
                   className="flex justify-between items-center gap-3 bg-secondary hover:bg-primary text-primary hover:text-secondary cursor-pointer rounded-4xl p-3 ps-4 w-full text-sm max-w-[300px] md:text-base md:w-full md:ps-6"
                 >
-                  <span>{t("viewFieldGuide")}</span>
+                  <span>{t('viewFieldGuide')}</span>
                   <div className="flex justify-center items-center rounded-full p-1 bg-primary text-secondary child-icon">
                     <ChevronRight />
                   </div>
@@ -281,7 +281,7 @@ const Home = () => {
                 to={routes.Resources.relative}
                 className="flex justify-between items-center gap-3 bg-secondary text-primary hover:text-white cursor-pointer rounded-4xl p-3 ps-4 w-[100%-20px] text-sm max-w-[600px] md:text-base md:w-full md:ps-6"
               >
-                <span>{t("viewFieldGuide")}</span>
+                <span>{t('viewFieldGuide')}</span>
                 <div className="flex justify-center items-center rounded-full p-1 bg-primary text-secondary child-icon">
                   <ChevronRight />
                 </div>
@@ -295,25 +295,25 @@ const Home = () => {
             </div>
           </div>
         </section>
-        {/* Fact Checks */}
+        {/* Resources */}
         <section className="flex flex-col gap-8 p-8 pt-0 max-w-[1400px] md:gap-12 md:pt-0 md:p-12">
-          <h2>{t("recentFactChecks")}</h2>
-          {factChecks && factChecks.docs ? (
+          <h2>{t('resources')}</h2>
+          {resources && resources.docs ? (
             <div className="grid grid-flow-row grid-cols-1 gap-3 md:gap-8 md:grid-cols-2">
-              {factChecks.docs.map((post) => (
+              {resources.docs.map((post) => (
                 <Link
                   to={`${routes.FactChecks.absolute}/${post.slug}`}
                   key={post.id}
                   className="flex flex-col gap-5 hover:shadow-xl md:gap-0 md:flex-row"
                 >
-                  {typeof post.featuredImage === "string" && (
+                  {typeof post.featuredImage === 'string' && (
                     <img
                       src={`${config.env.apiKey}${post.featuredImage}`}
                       className="w-full  object-cover object-center rounded-2xl md:rounded-none md:w-1/2"
                     />
                   )}
                   {post.featuredImage &&
-                    typeof post.featuredImage !== "string" && (
+                    typeof post.featuredImage !== 'string' && (
                       <img
                         src={`${config.env.apiKey}${post.featuredImage.url}`}
                         className="w-full  object-cover object-center rounded-2xl md:rounded-none md:w-1/2"
@@ -344,13 +344,13 @@ const Home = () => {
               ))}
             </div>
           ) : (
-            <div className="p-5 md:p-12">{t("articlesNotFound")}</div>
+            <div className="p-5 md:p-12">{t('articlesNotFound')}</div>
           )}
           <Link
             to={routes.FactChecks.relative}
             className="flex justify-between items-center gap-3 bg-secondary hover:bg-primary text-primary hover:text-secondary cursor-pointer rounded-4xl p-3 ps-4 w-full text-sm md:text-base md:max-w-sm md:ps-6"
           >
-            <span>{t("readMoreArticles")}</span>
+            <span>{t('readMoreResources')}</span>
             <div className="flex justify-center items-center rounded-full p-1 bg-primary text-secondary child-icon">
               <ChevronRight />
             </div>
@@ -361,16 +361,16 @@ const Home = () => {
           <div className="flex flex-col bg-primary p-8 rounded-4xl max-w-[1400px] md:rounded-none md:mx-0 md:pt-0 md:p-12 md:flex-row">
             <img src={graphic1} className="w-full hidden md:inline md:w-1/3" />
             <div className="flex flex-col justify-center items-center text-center gap-3 md:pt-12 md:gap-5">
-              <h2 className="text-center">{t("accessResources")}</h2>
+              <h2 className="text-center">{t('accessResources')}</h2>
               <h3 className="font-poppins-regular">
-                {t("cybersecurity&safety")}
+                {t('cybersecurity&safety')}
               </h3>
-              <p>{t("accessResourcesDescription")}</p>
+              <p>{t('accessResourcesDescription')}</p>
               <Link
                 to={routes.Resources.relative}
                 className="flex justify-between items-center gap-3 bg-secondary hover:bg-white text-primary hover:text-secondary cursor-pointer rounded-4xl p-3 ps-4 w-full text-sm md:text-base md:max-w-sm md:ps-6"
               >
-                <span>{t("viewResources")}</span>
+                <span>{t('viewResources')}</span>
                 <div className="flex justify-center items-center rounded-full p-1 bg-primary text-secondary child-icon">
                   <ChevronRight />
                 </div>
@@ -381,8 +381,8 @@ const Home = () => {
         </section>
         {/* Media Productions */}
         <section className="flex flex-col gap-8 p-8 pt-0 max-w-[1400px] md:pt-0 md:gap-12 md:p-12">
-          <h2 className="hidden md:block">{t("mediaProductions")}</h2>
-          <h2 className="block md:hidden">{t("radioShows")}</h2>
+          <h2 className="hidden md:block">{t('mediaProductions')}</h2>
+          <h2 className="block md:hidden">{t('radioShows')}</h2>
           {radioShows && radioShows.docs ? (
             <div className="grid grid-flow-row grid-cols-1 gap-8 md:gap-8 md:grid-cols-3">
               {radioShows.docs.map((post) => (
@@ -391,14 +391,14 @@ const Home = () => {
                   key={post.id}
                   className="flex flex-col justify-between gap-3 border-1 border-[#D5D5D5] rounded-2xl md:rounded-3xl md:p-5 md:gap-5 hover:shadow-xl"
                 >
-                  {typeof post.featuredImage === "string" && (
+                  {typeof post.featuredImage === 'string' && (
                     <img
                       src={`${config.env.apiKey}${post.featuredImage}`}
                       className="w-full object-cover object-center rounded-2xl md:rounded-3xl"
                     />
                   )}
                   {post.featuredImage &&
-                    typeof post.featuredImage !== "string" && (
+                    typeof post.featuredImage !== 'string' && (
                       <img
                         src={`${config.env.apiKey}${post.featuredImage.url}`}
                         className="w-full object-cover object-center rounded-2xl md:rounded-3xl"
@@ -427,13 +427,13 @@ const Home = () => {
               ))}
             </div>
           ) : (
-            <div className="p-5 md:p-12">{t("showsNotFound")}</div>
+            <div className="p-5 md:p-12">{t('showsNotFound')}</div>
           )}
           <Link
             to={routes.RadioShows.relative}
             className="flex justify-between items-center self-center gap-8 bg-secondary hover:bg-primary text-primary hover:text-secondary cursor-pointer rounded-4xl p-3 ps-4 w-fit text-sm md:self-start md:text-base md:w-sm md:ps-6"
           >
-            <span>{t("moreShows")}</span>
+            <span>{t('moreShows')}</span>
             <div className="flex justify-center items-center rounded-full p-1 bg-primary text-secondary child-icon">
               <ChevronRight />
             </div>

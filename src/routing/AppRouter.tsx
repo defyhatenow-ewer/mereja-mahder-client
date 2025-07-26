@@ -1,8 +1,8 @@
-import { createBrowserRouter } from "react-router-dom";
-import routes from "./routes";
+import { createBrowserRouter } from 'react-router-dom';
+import routes from './routes';
 
 // Layouts
-import { Main, Dashboard, AuthLayout } from "../pages/layout";
+import { Main, Dashboard, AuthLayout } from '../pages/layout';
 
 // Main pages
 import {
@@ -20,7 +20,7 @@ import {
   SingleRadioShow,
   SingleReport,
   SingleResource,
-} from "../pages";
+} from '../pages';
 
 // Auth pages
 import {
@@ -31,29 +31,29 @@ import {
   Register,
   NotFound,
   Profile,
-} from "../pages/auth";
+} from '../pages/auth';
 // import { Forum } from "../pages/dashboard";
 import {
   FellowsOverview,
   LearningResources,
   SinglePrivateLearningResource,
   SinglePrivateMaterial,
-} from "../pages/fellows";
+} from '../pages/fellows';
 import {
   Data,
   PartnerOverview,
   ReportList,
   SinglePrivateReport,
-} from "../pages/partners";
+} from '../pages/partners';
 import {
   SafetyResources,
   SinglePrivateSafetyResource,
   WomenOverview,
-} from "../pages/womenSafeSpaces";
-import ProtectedRoute from "./ProtectedRoute";
-import restrictions from "./restrictions";
-import Posts from "../pages/Posts";
-import { Overview } from "../pages/dashboard";
+} from '../pages/womenSafeSpaces';
+import ProtectedRoute from './ProtectedRoute';
+import restrictions from './restrictions';
+import Posts from '../pages/Posts';
+import { Overview, Submit } from '../pages/dashboard';
 
 const AppRouter = createBrowserRouter([
   {
@@ -174,6 +174,10 @@ const AppRouter = createBrowserRouter([
           {
             path: routes.Overview.relative,
             element: <Overview />,
+          },
+          {
+            path: routes.Submit.relative,
+            element: <Submit />,
           },
           // {
           //   path: routes.Forum.relative,

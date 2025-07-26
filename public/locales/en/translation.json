@@ -126,5 +126,18 @@
   "accountDeleted": "Account deleted successfully",
   "profile": "Profile",
   "previous": "Previous",
-  "next": "Next"
+  "next": "Next",
+  "readMoreResources": "Check out more resources",
+  "learningMaterials": "Learning Materials",
+  "no": "No",
+  "available": "available",
+  "charts": "Charts",
+  "submit": "Submit",
+  "submitSuggestion": "Submit a suggestion",
+  "content": "Content",
+  "enterTitle": "Enter title",
+  "addContent": "Add your content",
+  "uploading": "Uploading",
+  "featuredImage": "Featured Image",
+  "uploadingFeaturedImage": "Uploading featured image"
 }
