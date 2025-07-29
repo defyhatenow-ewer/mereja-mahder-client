@@ -139,5 +139,11 @@
   "addContent": "Qabiyyee keessan itti dabalaa",
   "uploading": "Olkaa'aa jira",
   "featuredImage": "Fakkii Mul'ataa",
-  "uploadingFeaturedImage": "Fakkii mul'ate olkaa'aa jira"
+  "uploadingFeaturedImage": "Fakkii mul'ate olkaa'aa jira",
+  "factCheck": "Dhugaa Sakatta'uu",
+  "accessFactChecks": "Barreeffamoota Dhiheenya Kana Dhugaa Irratti Sakatta’aman Argachuu",
+  "viewFactChecks": "Sakatta'iinsa Dhugaa Ilaali",
+  "attachment": "Walitti hidhamiinsa",
+  "uploadingAttachment": "Dabalata olkaa'aa jira",
+  "womenReports": "Gabaasa Dubartootaa"
 }

@@ -139,5 +139,11 @@
   "addContent": "ይዘትዎን ያክሉ",
   "uploading": "በመስቀል ላይ",
   "featuredImage": "ተለይቶ የቀረበ ምስል",
-  "uploadingFeaturedImage": "ተለይቶ የቀረበ ምስል በመስቀል ላይ"
+  "uploadingFeaturedImage": "ተለይቶ የቀረበ ምስል በመስቀል ላይ",
+  "factCheck": "የእውነታ ማረጋገጫ",
+  "accessFactChecks": "በቅርብ ጊዜ በእውነታ የተረጋገጡ መጣጥፎችን ይድረሱ",
+  "viewFactChecks": "የእውነታ ፍተሻዎችን ይመልከቱ",
+  "attachment": "አባሪ",
+  "uploadingAttachment": "አባሪ በመስቀል ላይ",
+  "womenReports": "የሴቶች ሪፖርቶች"
 }

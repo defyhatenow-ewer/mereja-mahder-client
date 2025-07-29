@@ -80,6 +80,13 @@ const navLinks: NavItemProps[] = [
     space: SpaceTypes.Partner,
   },
   {
+    title: 'womenReports',
+    icon: <FolderOpen className="size-4" />,
+    route: routes.WomenReport.absolute,
+    space: SpaceTypes.Women,
+    alt: 'reports',
+  },
+  {
     title: 'data',
     icon: <Chart className="size-4" />,
     route: routes.Data.absolute,
@@ -183,11 +190,6 @@ const Sidebar = () => {
             (data.user.space &&
               typeof data.user.space !== 'string' &&
               data.user.space.title === navLink.space) ||
-            (data.user.space &&
-              typeof data.user.space !== 'string' &&
-              data.user.space.title === SpaceTypes.Women &&
-              navLink.space === SpaceTypes.Partner &&
-              navLink.route !== routes.Partners.absolute) ||
             !navLink.space
           ) {
             return (

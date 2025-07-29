@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { config } from '../config';
-import { useEffect, useState } from 'react';
+import { sha1 } from '.';
 
 /**
  * Uploads an image to cloudinary
@@ -9,19 +9,20 @@ import { useEffect, useState } from 'react';
  */
 const uploadImage = async (file: File) => {
   try {
-    const timestamp = Math.round(new Date().getTime() / 1000);
-    const signature = await generateSignature(timestamp);
+    const timestamp = Math.floor(Date.now() / 1000).toString();
 
-    const uploadData = new FormData();
-    uploadData.append('file', file);
-    uploadData.append('api_key', config.env.cloudinaryApiKey);
-    uploadData.append('timestamp', timestamp.toString());
-    uploadData.append('signature', signature);
-    uploadData.append('cloud_name', config.env.cloudinaryName);
-    uploadData.append('asset_folder', 'payload-media');
+    const signatureString = `timestamp=${timestamp}${config.env.cloudinaryApiSecret}`;
+    const signature = await sha1(signatureString);
+
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('timestamp', timestamp);
+    formData.append('api_key', config.env.cloudinaryApiKey);
+    formData.append('signature', signature);
+
     const { data } = await axios.post(
       `https://api.cloudinary.com/v1_1/${config.env.cloudinaryName}/image/upload`,
-      uploadData
+      formData
     );
     return data.secure_url as string;
   } catch (error) {
@@ -31,85 +32,6 @@ const uploadImage = async (file: File) => {
     );
     return null;
   }
-};
-
-export const useUploadImage = (file: File | null): [string | null, boolean] => {
-  const [url, setUrl] = useState<string | null>(null);
-  const [isUploading, setIsUploading] = useState<boolean>(false);
-
-  useEffect(() => {
-    if (file) {
-      setIsUploading(true);
-      const uploadImage = async (file: File) => {
-        try {
-          const timestamp = Math.floor(Date.now() / 1000).toString();
-
-          const signatureString = `timestamp=${timestamp}${config.env.cloudinaryApiSecret}`;
-          const signature = await sha1(signatureString);
-
-          const formData = new FormData();
-          formData.append('file', file);
-          formData.append('timestamp', timestamp);
-          formData.append('api_key', config.env.cloudinaryApiKey);
-          formData.append('signature', signature);
-
-          const { data } = await axios.post(
-            `https://api.cloudinary.com/v1_1/${config.env.cloudinaryName}/image/upload`,
-            formData
-          );
-
-          setUrl(data.secure_url as string);
-        } catch (error) {
-          console.error(error);
-          toast.error(
-            'It seems there is a problem with the image uploader. Contact admin'
-          );
-        } finally {
-          setIsUploading(false);
-        }
-      };
-      uploadImage(file);
-    }
-  }, [file]);
-
-  return [url, isUploading];
-};
-
-// Helper function to generate signature
-const generateSignature = async (timestamp: number): Promise<string> => {
-  const stringToSign = `timestamp=${timestamp}`;
-  const encoder = new TextEncoder();
-  const data = encoder.encode(stringToSign);
-
-  // Use crypto.subtle for secure signing
-  const key = await crypto.subtle.importKey(
-    'raw',
-    encoder.encode(config.env.cloudinaryApiSecret),
-    { name: 'HMAC', hash: 'SHA-1' },
-    false,
-    ['sign']
-  );
-
-  const signatureArray = await crypto.subtle.sign('HMAC', key, data);
-
-  // Convert the signature array to base64 using browser APIs
-  const signatureString = Array.from(new Uint8Array(signatureArray))
-    .map((b) => b.toString(16).padStart(2, '0'))
-    .join('');
-
-  return btoa(signatureString);
-};
-
-const toHex = (buffer: ArrayBuffer): string =>
-  [...new Uint8Array(buffer)]
-    .map((b) => b.toString(16).padStart(2, '0'))
-    .join('');
-
-const sha1 = async (input: string): Promise<string> => {
-  const encoder = new TextEncoder();
-  const data = encoder.encode(input);
-  const hashBuffer = await crypto.subtle.digest('SHA-1', data);
-  return toHex(hashBuffer);
 };
 
 export default uploadImage;

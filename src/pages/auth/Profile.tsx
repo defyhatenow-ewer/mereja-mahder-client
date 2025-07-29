@@ -1,27 +1,28 @@
-import { useState } from "react";
-import { deleteEmptyProps, useUploadImage } from "../../utils";
-import { ConfirmDelete, Loader } from "../../components";
-import { Navigate, useNavigate } from "react-router-dom";
-import { routes } from "../../routing";
-import { avatarPlaceholder } from "../../assets/images";
+import { useState } from 'react';
+import { deleteEmptyProps } from '../../utils';
+import { ConfirmDelete, Loader } from '../../components';
+import { Navigate, useNavigate } from 'react-router-dom';
+import { routes } from '../../routing';
+import { avatarPlaceholder } from '../../assets/images';
 import {
   useDeleteUserMutation,
   useUpdateUserMutation,
-} from "../../features/users.api";
-import { toast } from "react-toastify";
-import { resetAuth } from "../../app/api";
-import useCurrentUser from "../../hooks/useCurrentUser";
-import { IUserWithToken } from "../../types/auth.types";
-import { config } from "../../config";
-import { Save, Trash } from "../../components/Icons";
-import { useTranslation } from "react-i18next";
+} from '../../features/users.api';
+import { toast } from 'react-toastify';
+import { resetAuth } from '../../app/api';
+import useCurrentUser from '../../hooks/useCurrentUser';
+import { IUserWithToken } from '../../types/auth.types';
+import { config } from '../../config';
+import { Save, Trash } from '../../components/Icons';
+import { useTranslation } from 'react-i18next';
+import useUploadImage from '../../hooks/useUploadImage';
 
 const Profile = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [user, isFetching] = useCurrentUser();
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
   const [uploadedImage, setUploadedImage] = useState<File | null>(null);
   const [url, isUploading] = useUploadImage(uploadedImage);
   const [updateUser, { isLoading: isUpdatingUser }] = useUpdateUserMutation();
@@ -46,7 +47,7 @@ const Profile = () => {
     await updateUser({ id: (user as IUserWithToken).user.id, body })
       .unwrap()
       .then(() => {
-        toast.success(t("profileUpdated"));
+        toast.success(t('profileUpdated'));
       });
   }
 
@@ -57,7 +58,7 @@ const Profile = () => {
         .then(() => {
           navigate(routes.Login.absolute);
           resetAuth();
-          toast.success(t("accountDeleted"));
+          toast.success(t('accountDeleted'));
         });
     }
   }
@@ -131,7 +132,7 @@ const Profile = () => {
             aria-disabled={isUpdatingUser}
             className="flex justify-between items-center gap-3 bg-secondary hover:bg-primary text-primary hover:text-secondary cursor-pointer rounded-4xl p-2 ps-4 w-full md:max-w-[10rem] md:ps-6"
           >
-            <span>{t("save")}</span>
+            <span>{t('save')}</span>
             {isUpdatingUser ? (
               <span className="loading loading-spinner loading-md"></span>
             ) : (
@@ -144,12 +145,12 @@ const Profile = () => {
             type="button"
             onClick={() =>
               (
-                document.getElementById("delete-modal") as HTMLDialogElement
+                document.getElementById('delete-modal') as HTMLDialogElement
               ).showModal()
             }
             className="flex justify-between items-center gap-3 bg-red-800 hover:bg-primary text-primary hover:text-secondary cursor-pointer rounded-4xl p-2 ps-4 w-full md:max-w-[10rem] md:ps-6"
           >
-            {t("delete")}
+            {t('delete')}
             {isDeletingUser ? (
               <span className="loading loading-spinner loading-md"></span>
             ) : (
@@ -160,7 +161,7 @@ const Profile = () => {
           </button>
         </div>
       </form>
-      <ConfirmDelete name={t("yourAccount")} handleDelete={handleDeleteUser} />
+      <ConfirmDelete name={t('yourAccount')} handleDelete={handleDeleteUser} />
     </div>
   );
 };

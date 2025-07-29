@@ -34,6 +34,7 @@ import {
 } from '../pages/auth';
 // import { Forum } from "../pages/dashboard";
 import {
+  FellowsLayout,
   FellowsOverview,
   LearningResources,
   SinglePrivateLearningResource,
@@ -42,13 +43,17 @@ import {
 import {
   Data,
   PartnerOverview,
+  PartnersLayout,
   ReportList,
   SinglePrivateReport,
 } from '../pages/partners';
 import {
   SafetyResources,
   SinglePrivateSafetyResource,
+  SinglePrivateWomenReport,
+  WomenLayout,
   WomenOverview,
+  WomenReport,
 } from '../pages/womenSafeSpaces';
 import ProtectedRoute from './ProtectedRoute';
 import restrictions from './restrictions';
@@ -209,6 +214,7 @@ const AppRouter = createBrowserRouter([
           {
             path: routes.Fellows.relative,
             errorElement: <NotFound />,
+            element: <FellowsLayout />,
             children: [
               {
                 index: true,
@@ -251,6 +257,7 @@ const AppRouter = createBrowserRouter([
           {
             path: routes.Partners.relative,
             errorElement: <NotFound />,
+            element: <PartnersLayout />,
             children: [
               {
                 index: true,
@@ -284,7 +291,7 @@ const AppRouter = createBrowserRouter([
                 element: (
                   <ProtectedRoute
                     children={<ReportList />}
-                    restrictedTo={restrictions.partnerAndCurator}
+                    restrictedTo={restrictions.partner}
                   />
                 ),
               },
@@ -293,7 +300,7 @@ const AppRouter = createBrowserRouter([
                 element: (
                   <ProtectedRoute
                     children={<SinglePrivateReport />}
-                    restrictedTo={restrictions.partnerAndCurator}
+                    restrictedTo={restrictions.partner}
                   />
                 ),
               },
@@ -302,6 +309,7 @@ const AppRouter = createBrowserRouter([
           {
             path: routes.WomenSafeSpace.relative,
             errorElement: <NotFound />,
+            element: <WomenLayout />,
             children: [
               {
                 index: true,
@@ -326,6 +334,24 @@ const AppRouter = createBrowserRouter([
                 element: (
                   <ProtectedRoute
                     children={<SinglePrivateSafetyResource />}
+                    restrictedTo={restrictions.curator}
+                  />
+                ),
+              },
+              {
+                path: routes.WomenReport.relative,
+                element: (
+                  <ProtectedRoute
+                    children={<WomenReport />}
+                    restrictedTo={restrictions.curator}
+                  />
+                ),
+              },
+              {
+                path: routes.SinglePrivateWomenReport.relative,
+                element: (
+                  <ProtectedRoute
+                    children={<SinglePrivateWomenReport />}
                     restrictedTo={restrictions.curator}
                   />
                 ),

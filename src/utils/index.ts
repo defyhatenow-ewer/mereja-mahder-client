@@ -1,17 +1,18 @@
-import formatErrorMessage from "./formatErrorMessage";
-import deleteEmptyProps from "./deleteEmptyProps";
-import shortenString from "./shortenString";
-import makeDownloadable from "./makeDownloadable";
-import slugify from "./slugify";
-import getBreakpoint from "./getBreakpoint";
-import copyToClipboard from "./copyToClipboard";
-import createImage from "./createImage";
-import { CustomLink, SpaceTypes } from "./CustomLink";
-import goToDashboard from "./goToDashboard";
-import formatDateTime from "./formatDateTime";
-import sometimeAgo from "./sometimeAgo";
-import setLoginCookie from "./setLoginCookie";
-import uploadImage, { useUploadImage } from "./uploadImage";
+import formatErrorMessage from './formatErrorMessage';
+import deleteEmptyProps from './deleteEmptyProps';
+import shortenString from './shortenString';
+import makeDownloadable from './makeDownloadable';
+import slugify from './slugify';
+import getBreakpoint from './getBreakpoint';
+import copyToClipboard from './copyToClipboard';
+import createImage from './createImage';
+import { CustomLink, SpaceTypes } from './CustomLink';
+import goToDashboard from './goToDashboard';
+import formatDateTime from './formatDateTime';
+import sometimeAgo from './sometimeAgo';
+import setLoginCookie from './setLoginCookie';
+import uploadImage from './uploadImage';
+import { sha1, toHex } from './crypto';
 
 export {
   formatErrorMessage,
@@ -29,5 +30,6 @@ export {
   sometimeAgo,
   setLoginCookie,
   uploadImage,
-  useUploadImage,
+  toHex,
+  sha1,
 };

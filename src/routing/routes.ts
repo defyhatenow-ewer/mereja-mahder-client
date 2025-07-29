@@ -73,6 +73,11 @@ export default {
   SinglePrivatePost: new Path('single/:slug', '/dashboard/posts/single/:slug'),
   ReportList: new Path('reports', '/dashboard/partners/reports'),
   WomenSafeSpace: new Path('women-safe-space', '/dashboard/women-safe-space'),
+  WomenReport: new Path('reports', '/dashboard/women-safe-space/reports'),
+  SinglePrivateWomenReport: new Path(
+    'reports/:slug',
+    '/dashboard/women-safe-space/reports/:slug'
+  ),
   SafetyResources: new Path(
     'safety-resources',
     '/dashboard/women-safe-space/safety-resources'

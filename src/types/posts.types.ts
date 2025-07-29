@@ -61,7 +61,7 @@ export interface IPost {
     image?: (string | null) | IMedia;
     description?: string | null;
   };
-  publishedAt?: string | null;
+  publishedAt?: string;
   authors?: (string | IUser)[] | null;
   populatedAuthors?:
     | {
@@ -97,7 +97,7 @@ export interface IReport {
     image?: (string | null) | IMedia;
     description?: string | null;
   };
-  publishedAt?: string | null;
+  publishedAt?: string;
   authors?: (string | IUser)[] | null;
   populatedAuthors?:
     | {
@@ -135,7 +135,7 @@ export interface IArticle {
     image?: (string | null) | IMedia;
     description?: string | null;
   };
-  publishedAt?: string | null;
+  publishedAt?: string;
   authors?: (string | IUser)[] | null;
   populatedAuthors?:
     | {
@@ -174,7 +174,7 @@ export interface IMaterial {
     image?: (string | null) | IMedia;
     description?: string | null;
   };
-  publishedAt?: string | null;
+  publishedAt?: string;
   authors?: (string | IUser)[] | null;
   populatedAuthors?:
     | {
@@ -209,7 +209,7 @@ export interface IResource {
     image?: (string | null) | IMedia;
     description?: string | null;
   };
-  publishedAt?: string | null;
+  publishedAt?: string;
   authors?: (string | IUser)[] | null;
   populatedAuthors?:
     | {
@@ -248,7 +248,7 @@ export interface ISafetyResource {
     image?: (string | null) | IMedia;
     description?: string | null;
   };
-  publishedAt?: string | null;
+  publishedAt?: string;
   authors?: (string | IUser)[] | null;
   populatedAuthors?:
     | {
@@ -284,7 +284,7 @@ export interface ILearningResource {
     image?: (string | null) | IMedia;
     description?: string | null;
   };
-  publishedAt?: string | null;
+  publishedAt?: string;
   authors?: (string | IUser)[] | null;
   populatedAuthors?:
     | {
@@ -323,7 +323,7 @@ export interface IShow {
     image?: (string | null) | IMedia;
     description?: string | null;
   };
-  publishedAt?: string | null;
+  publishedAt?: string;
   authors?: (string | IUser)[] | null;
   populatedAuthors?:
     | {
@@ -362,7 +362,7 @@ export interface IChart {
     image?: (string | null) | IMedia;
     description?: string | null;
   };
-  publishedAt?: string | null;
+  publishedAt?: string;
   authors?: (string | IUser)[] | null;
   populatedAuthors?:
     | {
@@ -384,7 +384,7 @@ export interface ISuggestion {
   id: string;
   title: string;
   content: string;
-  featuredImage?: string | null;
+  attachment?: string | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

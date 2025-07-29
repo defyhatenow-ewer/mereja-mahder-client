@@ -1,27 +1,27 @@
-import { useParams } from "react-router-dom";
-import EmojiPicker, { EmojiStyle } from "emoji-picker-react";
-import { Loader } from "../components";
-import { useTranslation } from "react-i18next";
-import { useGetForumsQuery } from "../features/forums.api";
+import { useParams } from 'react-router-dom';
+import EmojiPicker, { EmojiStyle } from 'emoji-picker-react';
+import { Loader } from '../components';
+import { useTranslation } from 'react-i18next';
+import { useGetForumsQuery } from '../features/forums.api';
 import {
   useCreateMessageMutation,
   useGetInfiniteMessagesInfiniteQuery,
-} from "../features/messages.api";
-import { config } from "../config";
-import { avatarPlaceholder } from "../assets/images";
-import { copyToClipboard, sometimeAgo } from "../utils";
-import { Copy, Send, Smile } from "../components/Icons";
-import { useMeQuery } from "../features/auth.api";
-import { useEffect, useRef, useState } from "react";
-import { toast } from "react-toastify";
-import { IMessage } from "../types/forums.types";
+} from '../features/messages.api';
+import { config } from '../config';
+import { avatarPlaceholder } from '../assets/images';
+import { copyToClipboard, sometimeAgo } from '../utils';
+import { Copy, Send, Smile } from '../components/Icons';
+import { useMeQuery } from '../features/auth.api';
+import { useEffect, useRef, useState } from 'react';
+import { toast } from 'react-toastify';
+import { IMessage } from '../types/forums.types';
 
 const SingleForum = () => {
   const { t } = useTranslation();
   const { slug } = useParams();
   const { data: userData } = useMeQuery();
   const [sendMessage] = useCreateMessageMutation();
-  const [text, setText] = useState("");
+  const [text, setText] = useState('');
   const [open, setOpen] = useState(false);
   const messageContainerRef = useRef<HTMLDivElement | null>(null);
   const inputRef = useRef<HTMLFormElement | null>(null);
@@ -68,8 +68,8 @@ const SingleForum = () => {
   useEffect(() => {
     if (inputRef.current) {
       inputRef.current.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
+        behavior: 'smooth',
+        block: 'start',
       });
     }
   }, [messages]);
@@ -92,10 +92,10 @@ const SingleForum = () => {
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    if (text == "") {
-      toast.error("Type something first!");
+    if (text == '') {
+      toast.error('Type something first!');
     } else if (!slug || !userData || !post || !post.docs.length) {
-      toast.error("Something went wrong. Please contact admin");
+      toast.error('Something went wrong. Please contact admin');
     } else {
       sendMessage({
         text,
@@ -104,7 +104,7 @@ const SingleForum = () => {
       })
         .unwrap()
         .then(() => {
-          setText("");
+          setText('');
         });
     }
   }
@@ -126,7 +126,7 @@ const SingleForum = () => {
   if (!isLoading && (!post || !post.docs.length))
     return (
       <div className="flex flex-col bg-white gap-5 p-5 pt-0 md:p-12 md:pt-0 md:gap-16">
-        {t("postNotFound")}
+        {t('postNotFound')}
       </div>
     );
 
@@ -155,7 +155,7 @@ const SingleForum = () => {
                       <div className="size-6 rounded-full md:size-12">
                         <img
                           src={
-                            typeof message.author !== "string" &&
+                            typeof message.author !== 'string' &&
                             message.author.avatar
                               ? `${config.env.apiKey}${message.author.avatar.thumbnailURL}`
                               : avatarPlaceholder
@@ -164,12 +164,12 @@ const SingleForum = () => {
                       </div>
                     </div>
                     <small>
-                      {typeof message.author !== "string" &&
+                      {typeof message.author !== 'string' &&
                         message.author.name}
                     </small>
                   </div>
                   <small className="text-[#2B3034]">
-                    {sometimeAgo(message.createdAt)}
+                    {sometimeAgo(message.publishedAt)}
                   </small>
                 </div>
                 <p>{message.text}</p>
@@ -179,13 +179,13 @@ const SingleForum = () => {
                     onClick={() => copyToClipboard(message.text)}
                   >
                     <Copy className="size-3" />
-                    <span>{t("copyText")}</span>
+                    <span>{t('copyText')}</span>
                   </button>
                 </div>
               </div>
             ))
           ) : (
-            <p>{t("noMessagesFound")}</p>
+            <p>{t('noMessagesFound')}</p>
           )}
           <form
             ref={inputRef}
@@ -206,7 +206,7 @@ const SingleForum = () => {
                   </div>
                 </div>
               )}
-              <small>{t("you")}</small>
+              <small>{t('you')}</small>
             </div>
             <div className="flex items-center justify-between gap-2">
               <input
@@ -229,7 +229,7 @@ const SingleForum = () => {
               emojiStyle={EmojiStyle.NATIVE}
               onEmojiClick={(emoji) =>
                 setText((prev) =>
-                  prev === "" ? emoji.emoji : `${prev} ${emoji.emoji}`
+                  prev === '' ? emoji.emoji : `${prev} ${emoji.emoji}`
                 )
               }
             />

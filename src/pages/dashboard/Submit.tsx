@@ -1,31 +1,30 @@
 import { useState } from 'react';
-import { useUploadImage } from '../../utils';
 import { useCreateSuggestionMutation } from '../../features/suggestions.api';
 import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
+import { useUploadFile } from '../../hooks/useUploadFile';
 
 const Submit = () => {
   const { t } = useTranslation();
   const [createSuggestion] = useCreateSuggestionMutation();
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
-  const [uploadedFeaturedImage, setUploadedFeaturedImage] =
-    useState<File | null>(null);
-  const [featuredImage, isUploadingFeaturedImage] = useUploadImage(
-    uploadedFeaturedImage
+  const [uploadedAttachment, setUploadedAttachment] = useState<File | null>(
+    null
   );
+  const [attachment, isUploadingAttachment] = useUploadFile(uploadedAttachment);
 
   const clearForm = () => {
     setTitle('');
     setContent('');
-    setUploadedFeaturedImage(null);
+    setUploadedAttachment(null);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.stopPropagation();
     e.preventDefault();
 
-    await createSuggestion({ title, content, featuredImage })
+    await createSuggestion({ title, content, attachment })
       .unwrap()
       .then(() => {
         clearForm();
@@ -80,24 +79,20 @@ const Submit = () => {
 
       <div className="">
         <label
-          htmlFor="featuredImage"
+          htmlFor="attachment"
           className="block text-sm uppercase tracking-wide mb-2"
         >
-          {isUploadingFeaturedImage
-            ? `${t('uploading')}...`
-            : t('featuredImage')}
+          {isUploadingAttachment ? `${t('uploading')}...` : t('attachment')}
         </label>
         <input
           type="file"
-          name="featuredImage"
-          id="featuredImage"
-          accept="image/*"
+          name="attachment"
+          id="attachment"
           onChange={(e) => {
             if (e.target.files) {
-              setUploadedFeaturedImage(e.target.files[0]);
+              setUploadedAttachment(e.target.files[0]);
             }
           }}
-          required
           className="block w-full text-sm file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-secondary file:text-primary hover:file:bg-primary hover:file:text-secondary cursor-pointer"
         />
       </div>
@@ -105,11 +100,11 @@ const Submit = () => {
       <button
         type="submit"
         className="w-full bg-primary text-[#0e0e0e] font-semibold py-2 px-4 rounded-md hover:bg-secondary hover:text-primary transition cursor-pointer"
-        disabled={isUploadingFeaturedImage}
+        disabled={isUploadingAttachment}
       >
-        {isUploadingFeaturedImage ? (
+        {isUploadingAttachment ? (
           <div>
-            <span>{t('uploadingFeaturedImage')}</span>{' '}
+            <span>{t('uploadingAttachment')}</span>{' '}
             <span className="loading loading-spinner loading-xs"></span>
           </div>
         ) : (

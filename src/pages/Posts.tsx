@@ -1,43 +1,43 @@
-import { useEffect, useState } from "react";
-import { Loader, Pagination } from "../components";
-import { useGetPostsQuery } from "../features/posts.api";
-import { ChevronUp, ChevronDown, Refresh } from "../components/Icons";
-import { Link, useSearchParams } from "react-router-dom";
-import { config } from "../config";
-import { routes } from "../routing";
+import { useEffect, useState } from 'react';
+import { Loader, Pagination } from '../components';
+import { useGetPostsQuery } from '../features/posts.api';
+import { ChevronUp, ChevronDown, Refresh } from '../components/Icons';
+import { Link, useSearchParams } from 'react-router-dom';
+import { config } from '../config';
+import { routes } from '../routing';
 import {
   createSelect,
   pickIdUsingTitle,
   pickTitleUsingID,
-} from "../utils/filters";
-import { useGetCategoriesQuery } from "../features/categories.api";
-import { formatDateTime } from "../utils";
-import { useGetTagsQuery } from "../features/tag.api";
-import { useTranslation } from "react-i18next";
+} from '../utils/filters';
+import { useGetCategoriesQuery } from '../features/categories.api';
+import { formatDateTime } from '../utils';
+import { useGetTagsQuery } from '../features/tag.api';
+import { useTranslation } from 'react-i18next';
 
 const Posts = () => {
   const { t } = useTranslation();
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState('');
   const [open, setOpen] = useState(false);
   const [tagOpen, setTagOpen] = useState(false);
-  const [category, setCategory] = useState("");
-  const [tag, setTag] = useState("");
+  const [category, setCategory] = useState('');
+  const [tag, setTag] = useState('');
   const [page, setPage] = useState(1);
   const [searchParams] = useSearchParams();
 
   const { data: categories, isLoading } = useGetCategoriesQuery({
     query: {
-      select: createSelect(["id", "title"]),
+      select: createSelect(['id', 'title']),
     },
   });
 
   const { data: tags, isLoading: isTagsLoading } = useGetTagsQuery({
     query: {
-      select: createSelect(["id", "title"]),
+      select: createSelect(['id', 'title']),
     },
   });
 
-  const reportId = pickIdUsingTitle("report", categories?.docs);
+  const reportId = pickIdUsingTitle('report', categories?.docs);
 
   const { data, isLoading: isPostsLoading } = useGetPostsQuery(
     {
@@ -73,7 +73,7 @@ const Posts = () => {
   );
 
   useEffect(() => {
-    const tagFromParams = searchParams.get("tag");
+    const tagFromParams = searchParams.get('tag');
     if (tagFromParams && tags) {
       const tagId = pickIdUsingTitle(tagFromParams, tags.docs);
       if (tagId) {
@@ -83,27 +83,27 @@ const Posts = () => {
   }, [searchParams, tags]);
 
   const clearSearch = () => {
-    setSearch("");
+    setSearch('');
     setPage(1);
-    setCategory("");
-    setTag("");
+    setCategory('');
+    setTag('');
   };
 
   const closeTagDropdown = (id: string) => {
     setTag(id);
     setTagOpen(false);
-    const DropDown = document.getElementById("tag-menu");
+    const DropDown = document.getElementById('tag-menu');
     if (DropDown) {
-      DropDown.removeAttribute("open");
+      DropDown.removeAttribute('open');
     }
   };
 
   const closeCategoryDropdown = (id: string) => {
     setCategory(id);
     setOpen(false);
-    const DropDown = document.getElementById("category-menu");
+    const DropDown = document.getElementById('category-menu');
     if (DropDown) {
-      DropDown.removeAttribute("open");
+      DropDown.removeAttribute('open');
     }
   };
 
@@ -111,11 +111,11 @@ const Posts = () => {
     <div className="flex justify-center">
       <Loader show={isLoading || isTagsLoading || isPostsLoading} />
       <div className="flex flex-col bg-white gap-5 p-5 pt-0 max-w-[1400px] md:p-12 md:pt-0 md:gap-16">
-        <h2>{t("archive")}</h2>
+        <h2>{t('archive')}</h2>
         <section className="flex flex-col gap-5 md:justify-between md:items-center md:gap-8 md:flex-row">
           <input
             type="text"
-            placeholder={`${t("search")}...`}
+            placeholder={`${t('search')}...`}
             value={search}
             className="input border-0 w-full bg-[#EBEBEB] p-3 rounded-2xl md:rounded-4xl md:p-6"
             onChange={(e) => {
@@ -139,7 +139,7 @@ const Posts = () => {
               <summary className="list-none text-white h-full align-middle cursor-pointer">
                 <div className="h-full flex justify-between items-center text-black rounded-md">
                   <span>
-                    {tag === "" ? t("tag") : pickTitleUsingID(tag, tags.docs)}
+                    {tag === '' ? t('tag') : pickTitleUsingID(tag, tags.docs)}
                   </span>
                   {tagOpen ? (
                     <ChevronUp className="size-6" />
@@ -177,8 +177,8 @@ const Posts = () => {
               <summary className="list-none text-white h-full align-middle cursor-pointer">
                 <div className="h-full flex justify-between items-center text-black rounded-md">
                   <span>
-                    {category === ""
-                      ? t("category")
+                    {category === ''
+                      ? t('category')
                       : pickTitleUsingID(category, categories.docs)}
                   </span>
                   {open ? (
@@ -206,7 +206,7 @@ const Posts = () => {
             aria-disabled={isLoading}
             className="flex justify-between items-center gap-3 bg-secondary hover:bg-primary text-primary hover:text-secondary cursor-pointer rounded-4xl p-2 ps-4 w-full md:max-w-[8rem] md:ps-6"
           >
-            <span>{t("clear")}</span>
+            <span>{t('clear')}</span>
             <div className="flex justify-center items-center rounded-full p-1 bg-primary text-secondary child-icon">
               <Refresh />
             </div>
@@ -221,14 +221,14 @@ const Posts = () => {
                     key={post.id}
                     className="flex flex-col justify-between gap-3 border-1 border-[#D5D5D5] rounded-3xl md:rounded-none md:border-0 md:gap-5"
                   >
-                    {typeof post.featuredImage === "string" && (
+                    {typeof post.featuredImage === 'string' && (
                       <img
                         src={`${config.env.apiKey}${post.featuredImage}`}
                         className="w-full object-cover object-center h-full rounded-3xl md:rounded-none md:h-64"
                       />
                     )}
                     {post.featuredImage &&
-                      typeof post.featuredImage !== "string" && (
+                      typeof post.featuredImage !== 'string' && (
                         <img
                           src={`${config.env.apiKey}${post.featuredImage.url}`}
                           className="w-full object-cover object-center h-full rounded-3xl md:rounded-none md:h-64"
@@ -236,7 +236,7 @@ const Posts = () => {
                       )}
                     <div className="flex flex-col gap-3 p-5 md:p-0 md:gap-5">
                       <small className="text-[#0B121580]">
-                        {formatDateTime(post.createdAt)}
+                        {formatDateTime(post.publishedAt)}
                       </small>
                       <a
                         className="text-left text-lg hover:text-light-red md:text-xl"
@@ -266,7 +266,7 @@ const Posts = () => {
               />
             </div>
           ) : (
-            <p>{t("postsNotFound")}</p>
+            <p>{t('postsNotFound')}</p>
           )}
         </section>
       </div>

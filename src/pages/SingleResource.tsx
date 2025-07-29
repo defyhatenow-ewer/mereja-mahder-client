@@ -1,15 +1,15 @@
-import { Link, useParams } from "react-router-dom";
-import { Loader, RichTextReader } from "../components";
-import { formatDateTime } from "../utils";
+import { Link, useParams } from 'react-router-dom';
+import { Loader, RichTextReader } from '../components';
+import { formatDateTime } from '../utils';
 import {
   FacebookButton,
   LinkedInButton,
   TwitterButton,
-} from "../components/ShareButtons";
-import { config } from "../config";
-import { routes } from "../routing";
-import { useGetResourcesQuery } from "../features/resources.api";
-import { useTranslation } from "react-i18next";
+} from '../components/ShareButtons';
+import { config } from '../config';
+import { routes } from '../routing';
+import { useGetResourcesQuery } from '../features/resources.api';
+import { useTranslation } from 'react-i18next';
 
 const buttonList = [FacebookButton, LinkedInButton, TwitterButton];
 
@@ -37,7 +37,7 @@ const SingleResource = () => {
   if (!isLoading && (!post || !post.docs.length))
     return (
       <div className="flex flex-col bg-white gap-5 p-5 pt-0 md:p-12 md:pt-0 md:gap-16">
-        {t("postNotFound")}
+        {t('postNotFound')}
       </div>
     );
 
@@ -50,7 +50,7 @@ const SingleResource = () => {
           <h2 className="">{post.docs[0].title}</h2>
           <div className="flex gap-3 items-center flex-col md:flex-row md:gap-5">
             <small className="text-[#0B121580]">
-              {formatDateTime(post.docs[0].createdAt)}
+              {formatDateTime(post.docs[0].publishedAt)}
             </small>
             <div className="flex gap-2 items-center">
               {(post.docs[0].tags || []).map((tag) => (
@@ -69,7 +69,7 @@ const SingleResource = () => {
         {post.docs[0].pdf && (
           <iframe
             src={
-              typeof post.docs[0].pdf === "string"
+              typeof post.docs[0].pdf === 'string'
                 ? `${config.env.apiKey}${post.docs[0].pdf}`
                 : `${config.env.apiKey}${post.docs[0].pdf.url}`
             }
@@ -77,7 +77,7 @@ const SingleResource = () => {
           ></iframe>
         )}
         <div className="flex flex-col gap-2">
-          <small>{t("sharePost")}</small>
+          <small>{t('sharePost')}</small>
           <div className="flex gap-1">
             {buttonList.map((Btn, index) => (
               <Btn

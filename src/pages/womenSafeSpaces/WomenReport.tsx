@@ -5,7 +5,7 @@ import { routes } from '../../routing';
 import { formatDateTime } from '../../utils';
 import { useTranslation } from 'react-i18next';
 
-const ReportList = () => {
+const WomenReport = () => {
   const { t } = useTranslation();
   const { data: reports, isLoading: isReportsLoading } = useGetReportsQuery({
     query: {
@@ -47,7 +47,7 @@ const ReportList = () => {
                 <tr key={report.id} className="text-sm">
                   <td className="max-w-32">
                     <Link
-                      to={`${routes.ReportList.absolute}/${report.slug}`}
+                      to={`${routes.WomenReport.absolute}/${report.slug}`}
                       className="text-wrap text-sm font-poppins-semi-bold hover:text-light-red"
                     >
                       {report.title}
@@ -73,4 +73,4 @@ const ReportList = () => {
   );
 };
 
-export default ReportList;
+export default WomenReport;

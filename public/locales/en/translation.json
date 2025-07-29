@@ -139,5 +139,11 @@
   "addContent": "Add your content",
   "uploading": "Uploading",
   "featuredImage": "Featured Image",
-  "uploadingFeaturedImage": "Uploading featured image"
+  "uploadingFeaturedImage": "Uploading featured image",
+  "factCheck": "Fact Check",
+  "accessFactChecks": "Access Recently Fact-Checked Articles",
+  "viewFactChecks": "View Fact Checks",
+  "attachment": "Attachment",
+  "uploadingAttachment": "Uploading attachment",
+  "womenReports": "Women Reports"
 }

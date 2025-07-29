@@ -59,7 +59,7 @@ const Home = () => {
         },
       },
       options: {
-        limit: 4,
+        limit: 3,
       },
     });
   const { data: radioShows, isLoading: isRadioShowsLoading } = useGetShowsQuery(
@@ -261,31 +261,33 @@ const Home = () => {
             </div>
 
             <div className="w-full hidden md:flex">
-              <div className="bg-white px-5 pt-12 w-full max-w-[calc(100%-300px)] flex justify-end md:rounded-tr-4xl md:pt-8 md:px-12">
-                <Link
-                  to={routes.Resources.relative}
-                  className="flex justify-between items-center gap-3 bg-secondary hover:bg-primary text-primary hover:text-secondary cursor-pointer rounded-4xl p-3 ps-4 w-full text-sm max-w-[300px] md:text-base md:w-full md:ps-6"
+              <div className="bg-white px-5 pt-12 w-full max-w-[calc(100%-216px)] flex justify-end md:rounded-tr-4xl md:pt-8 md:px-12">
+                <a
+                  href="https://defyhatenow.org/ethiopia/defyhatenow-field-guide-ethiopia/"
+                  target="_blank"
+                  className="flex justify-between items-center gap-3 bg-secondary hover:bg-primary text-primary hover:text-secondary cursor-pointer rounded-4xl p-3 ps-4 w-full text-sm max-w-sm md:text-base md:w-full md:ps-6"
                 >
                   <span>{t('viewFieldGuide')}</span>
                   <div className="flex justify-center items-center rounded-full p-1 bg-primary text-secondary child-icon">
                     <ChevronRight />
                   </div>
-                </Link>
+                </a>
               </div>
               <div className="bg-white flex-grow">
                 <div className="bg-light-red w-full h-full rounded-bl-4xl"></div>
               </div>
             </div>
             <div className="bg-white px-5 pt-16 w-full flex justify-center md:hidden md:rounded-tr-4xl md:pt-8 md:px-12">
-              <Link
-                to={routes.Resources.relative}
+              <a
+                href="https://defyhatenow.org/ethiopia/defyhatenow-field-guide-ethiopia/"
+                target="_blank"
                 className="flex justify-between items-center gap-3 bg-secondary text-primary hover:text-white cursor-pointer rounded-4xl p-3 ps-4 w-[100%-20px] text-sm max-w-[600px] md:text-base md:w-full md:ps-6"
               >
                 <span>{t('viewFieldGuide')}</span>
                 <div className="flex justify-center items-center rounded-full p-1 bg-primary text-secondary child-icon">
                   <ChevronRight />
                 </div>
-              </Link>
+              </a>
             </div>
           </div>
           <div className="bg-light-red h-full w-full relative min-h-72 hidden md:flex md:min-h-96 md:w-1/2">
@@ -299,52 +301,58 @@ const Home = () => {
         <section className="flex flex-col gap-8 p-8 pt-0 max-w-[1400px] md:gap-12 md:pt-0 md:p-12">
           <h2>{t('resources')}</h2>
           {resources && resources.docs ? (
-            <div className="grid grid-flow-row grid-cols-1 gap-3 md:gap-8 md:grid-cols-2">
+            <div className="grid grid-flow-row grid-cols-1 gap-5 md:gap-8 md:grid-cols-3">
               {resources.docs.map((post) => (
                 <Link
-                  to={`${routes.FactChecks.absolute}/${post.slug}`}
+                  to={`${routes.Resources.absolute}/${post.slug}`}
                   key={post.id}
-                  className="flex flex-col gap-5 hover:shadow-xl md:gap-0 md:flex-row"
+                  className="flex flex-col justify-start gap-0 rounded-md bg-[#E4E4E4]"
                 >
                   {typeof post.featuredImage === 'string' && (
                     <img
                       src={`${config.env.apiKey}${post.featuredImage}`}
-                      className="w-full  object-cover object-center rounded-2xl md:rounded-none md:w-1/2"
+                      className="rounded-md object-cover object-center"
                     />
                   )}
                   {post.featuredImage &&
                     typeof post.featuredImage !== 'string' && (
                       <img
                         src={`${config.env.apiKey}${post.featuredImage.url}`}
-                        className="w-full  object-cover object-center rounded-2xl md:rounded-none md:w-1/2"
+                        className="rounded-md object-cover object-center"
                       />
                     )}
-                  <div className="flex flex-col gap-3 p-5 px-0 bg-white w-full md:bg-[#F4F4F4] md:w-1/2 md:p-8 md:gap-6">
-                    <div className="flex gap-2 items-center flex-wrap">
-                      {(post.tags || []).map((tag) => (
-                        <Link
-                          to={`${routes.FactChecks.absolute}?tag=${tag.title}`}
-                          key={tag.id}
-                          className="px-3 py-2 bg-primary rounded-2xl text-xs hover:bg-secondary hover:text-primary md:text-sm md:rounded-3xl md:px-4 md:py-1"
-                        >
-                          {tag.title}
-                        </Link>
-                      ))}
+                  <div className="flex flex-col gap-2 p-5 md:p-8">
+                    <div className="flex gap-3 items-center">
+                      {post.tags &&
+                        post.tags.map((tag, index) => (
+                          <Link
+                            to={`${routes.Resources.absolute}?tag=${tag.title}`}
+                            key={index}
+                            className="px-3 py-2 bg-primary rounded-2xl text-xs hover:bg-secondary hover:text-primary md:rounded-3xl md:px-4 md:py-1"
+                          >
+                            {tag.title}
+                          </Link>
+                        ))}
                     </div>
-                    <Link
-                      to={`${routes.FactChecks.absolute}/${post.slug}`}
-                      className="text-lg font-poppins-medium hover:text-light-red"
-                    >
-                      {post.title}
-                    </Link>
-                    <small className="text-[#0B121580]">8 min read</small>
-                    {post.excerpt && <RichTextReader data={post.excerpt} />}
+                    <h3 className="hover:text-light-red">{post.title}</h3>
+                    <small className="text-[#555555]">PDF</small>
+                    {post.excerpt && (
+                      <RichTextReader
+                        data={post.excerpt}
+                        className="text-[#555555]"
+                      />
+                    )}
+                    <div className="flex justify-end justify-self-end">
+                      <div className="flex justify-center items-center rounded-full p-3 bg-primary text-secondary hover:bg-secondary hover:text-primary">
+                        <ArrowUpRight />
+                      </div>
+                    </div>
                   </div>
                 </Link>
               ))}
             </div>
           ) : (
-            <div className="p-5 md:p-12">{t('articlesNotFound')}</div>
+            <p>{t('resourcesNotFound')}</p>
           )}
           <Link
             to={routes.FactChecks.relative}
@@ -361,16 +369,14 @@ const Home = () => {
           <div className="flex flex-col bg-primary p-8 rounded-4xl max-w-[1400px] md:rounded-none md:mx-0 md:pt-0 md:p-12 md:flex-row">
             <img src={graphic1} className="w-full hidden md:inline md:w-1/3" />
             <div className="flex flex-col justify-center items-center text-center gap-3 md:pt-12 md:gap-5">
-              <h2 className="text-center">{t('accessResources')}</h2>
-              <h3 className="font-poppins-regular">
-                {t('cybersecurity&safety')}
-              </h3>
+              <h2 className="text-center">{t('factCheck')}</h2>
+              <h3 className="font-poppins-regular">{t('accessFactChecks')}</h3>
               <p>{t('accessResourcesDescription')}</p>
               <Link
-                to={routes.Resources.relative}
+                to={routes.FactChecks.relative}
                 className="flex justify-between items-center gap-3 bg-secondary hover:bg-white text-primary hover:text-secondary cursor-pointer rounded-4xl p-3 ps-4 w-full text-sm md:text-base md:max-w-sm md:ps-6"
               >
-                <span>{t('viewResources')}</span>
+                <span>{t('viewFactChecks')}</span>
                 <div className="flex justify-center items-center rounded-full p-1 bg-primary text-secondary child-icon">
                   <ChevronRight />
                 </div>
@@ -406,7 +412,7 @@ const Home = () => {
                     )}
                   <div className="flex flex-col gap-3 p-5 md:p-0 md:gap-5">
                     <small className="text-[#0B121580]">
-                      {formatDateTime(post.createdAt)}
+                      {formatDateTime(post.publishedAt)}
                     </small>
                     <h3 className="text-left text-lg child-title md:text-xl">
                       {post.title}

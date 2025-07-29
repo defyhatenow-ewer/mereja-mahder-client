@@ -139,5 +139,11 @@
   "addContent": "ትሕዝቶኻ ወስኸሉ።",
   "uploading": "ምጽዓን",
   "featuredImage": "ፍሉይ ምስሊ",
-  "uploadingFeaturedImage": "ፍሉይ ምስሊ ምጽዓን"
+  "uploadingFeaturedImage": "ፍሉይ ምስሊ ምጽዓን",
+  "factCheck": "ሓቂ ምፍታሽ",
+  "accessFactChecks": "ኣብ ቀረባ እዋን ብጭብጢ ዝተፈተሹ ጽሑፋት ምርካብ",
+  "viewFactChecks": "ሓቂ ምፍታሽ ርአ",
+  "attachment": "ዝተሓሓዝ",
+  "uploadingAttachment": "ምትሕሓዝ ምጽዓን",
+  "womenReports": "ጸብጻባት ደቂ ኣንስትዮ"
 }

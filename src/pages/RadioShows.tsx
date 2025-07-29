@@ -1,39 +1,39 @@
-import { useEffect, useState } from "react";
-import { Loader, Pagination } from "../components";
-import { ChevronUp, ChevronDown, Refresh } from "../components/Icons";
-import { Link, useSearchParams } from "react-router-dom";
-import { config } from "../config";
-import { routes } from "../routing";
-import { formatDateTime } from "../utils";
-import { useGetShowsQuery } from "../features/shows.api";
-import { useGetCategoriesQuery } from "../features/categories.api";
-import { useGetTagsQuery } from "../features/tag.api";
+import { useEffect, useState } from 'react';
+import { Loader, Pagination } from '../components';
+import { ChevronUp, ChevronDown, Refresh } from '../components/Icons';
+import { Link, useSearchParams } from 'react-router-dom';
+import { config } from '../config';
+import { routes } from '../routing';
+import { formatDateTime } from '../utils';
+import { useGetShowsQuery } from '../features/shows.api';
+import { useGetCategoriesQuery } from '../features/categories.api';
+import { useGetTagsQuery } from '../features/tag.api';
 import {
   createSelect,
   pickIdUsingTitle,
   pickTitleUsingID,
-} from "../utils/filters";
-import { useTranslation } from "react-i18next";
+} from '../utils/filters';
+import { useTranslation } from 'react-i18next';
 
 const RadioShows = () => {
   const { t } = useTranslation();
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState('');
   const [open, setOpen] = useState(false);
   const [tagOpen, setTagOpen] = useState(false);
-  const [category, setCategory] = useState("");
-  const [tag, setTag] = useState("");
+  const [category, setCategory] = useState('');
+  const [tag, setTag] = useState('');
   const [page, setPage] = useState(1);
   const [searchParams] = useSearchParams();
 
   const { data: categories, isLoading } = useGetCategoriesQuery({
     query: {
-      select: createSelect(["id", "title"]),
+      select: createSelect(['id', 'title']),
     },
   });
 
   const { data: tags, isLoading: isTagsLoading } = useGetTagsQuery({
     query: {
-      select: createSelect(["id", "title"]),
+      select: createSelect(['id', 'title']),
     },
   });
 
@@ -58,12 +58,12 @@ const RadioShows = () => {
           },
           {
             _status: {
-              equals: "published",
+              equals: 'published',
             },
           },
           {
             privacy: {
-              equals: "public",
+              equals: 'public',
             },
           },
         ],
@@ -76,7 +76,7 @@ const RadioShows = () => {
   });
 
   useEffect(() => {
-    const tagFromParams = searchParams.get("tag");
+    const tagFromParams = searchParams.get('tag');
     if (tagFromParams && tags) {
       const tagId = pickIdUsingTitle(tagFromParams, tags.docs);
       if (tagId) {
@@ -86,27 +86,27 @@ const RadioShows = () => {
   }, [searchParams, tags]);
 
   const clearSearch = () => {
-    setSearch("");
+    setSearch('');
     setPage(1);
-    setCategory("");
-    setTag("");
+    setCategory('');
+    setTag('');
   };
 
   const closeTagDropdown = (id: string) => {
     setTag(id);
     setTagOpen(false);
-    const DropDown = document.getElementById("tag-menu");
+    const DropDown = document.getElementById('tag-menu');
     if (DropDown) {
-      DropDown.removeAttribute("open");
+      DropDown.removeAttribute('open');
     }
   };
 
   const closeCategoryDropdown = (id: string) => {
     setCategory(id);
     setOpen(false);
-    const DropDown = document.getElementById("category-menu");
+    const DropDown = document.getElementById('category-menu');
     if (DropDown) {
-      DropDown.removeAttribute("open");
+      DropDown.removeAttribute('open');
     }
   };
 
@@ -115,15 +115,15 @@ const RadioShows = () => {
       <Loader show={isPostsLoading || isLoading || isTagsLoading} />
       <div className="flex flex-col bg-white gap-8 p-5 pt-0 max-w-[1400px] md:p-12 md:pt-0 md:gap-16">
         <div className="flex flex-col gap-3">
-          <h2>{t("mediaProductions")}</h2>
+          <h2>{t('mediaProductions')}</h2>
           <h3 className="text-[#D5D5D5] text-2xl font-poppins">
-            {t("podcasts&Shows")}
+            {t('podcasts&Shows')}
           </h3>
         </div>
         <section className="flex flex-col gap-5 md:justify-between md:items-center md:gap-8 md:flex-row">
           <input
             type="text"
-            placeholder={`${t("search")}...`}
+            placeholder={`${t('search')}...`}
             value={search}
             className="input border-0 w-full bg-[#EBEBEB] p-3 rounded-2xl md:rounded-4xl md:p-6"
             onChange={(e) => {
@@ -147,7 +147,7 @@ const RadioShows = () => {
               <summary className="list-none text-white h-full align-middle cursor-pointer">
                 <div className="h-full flex justify-between items-center text-black rounded-md">
                   <span>
-                    {tag === "" ? t("tag") : pickTitleUsingID(tag, tags.docs)}
+                    {tag === '' ? t('tag') : pickTitleUsingID(tag, tags.docs)}
                   </span>
                   {tagOpen ? (
                     <ChevronUp className="size-6" />
@@ -185,8 +185,8 @@ const RadioShows = () => {
               <summary className="list-none text-white h-full align-middle cursor-pointer">
                 <div className="h-full flex justify-between items-center text-black rounded-md">
                   <span>
-                    {category === ""
-                      ? t("category")
+                    {category === ''
+                      ? t('category')
                       : pickTitleUsingID(category, categories.docs)}
                   </span>
                   {open ? (
@@ -214,7 +214,7 @@ const RadioShows = () => {
             aria-disabled={isPostsLoading}
             className="flex justify-between items-center gap-3 bg-secondary hover:bg-primary text-primary hover:text-secondary cursor-pointer rounded-4xl p-2 ps-4 w-full md:max-w-[10rem] md:ps-6"
           >
-            <span>{t("clear")}</span>
+            <span>{t('clear')}</span>
             <div className="flex justify-center items-center rounded-full p-1 bg-primary text-secondary child-icon">
               <Refresh />
             </div>
@@ -230,14 +230,14 @@ const RadioShows = () => {
                     key={post.id}
                     className="flex flex-col justify-between gap-3 border-1 border-[#D5D5D5] rounded-2xl md:rounded-3xl md:p-5 md:gap-5 hover:shadow-xl"
                   >
-                    {typeof post.featuredImage === "string" && (
+                    {typeof post.featuredImage === 'string' && (
                       <img
                         src={`${config.env.apiKey}${post.featuredImage}`}
                         className="w-full object-cover object-center rounded-2xl md:rounded-3xl"
                       />
                     )}
                     {post.featuredImage &&
-                      typeof post.featuredImage !== "string" && (
+                      typeof post.featuredImage !== 'string' && (
                         <img
                           src={`${config.env.apiKey}${post.featuredImage.url}`}
                           className="w-full object-cover object-center rounded-2xl md:rounded-3xl"
@@ -245,7 +245,7 @@ const RadioShows = () => {
                       )}
                     <div className="flex flex-col gap-3 p-5 md:p-0 md:gap-5">
                       <small className="text-[#0B121580]">
-                        {formatDateTime(post.createdAt)}
+                        {formatDateTime(post.publishedAt)}
                       </small>
                       <Link
                         className="text-left text-lg hover:text-light-red md:text-xl"
@@ -275,7 +275,7 @@ const RadioShows = () => {
               />
             </div>
           ) : (
-            <p>{t("showsNotFound")}</p>
+            <p>{t('showsNotFound')}</p>
           )}
         </section>
       </div>

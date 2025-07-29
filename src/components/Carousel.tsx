@@ -11,7 +11,6 @@ import {
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { config } from '../config';
-import { routes } from '../routing';
 import { ChevronLeft, ChevronRight } from './Icons';
 
 type Props = {
@@ -26,9 +25,16 @@ type Props = {
     | ILearningResource
     | ISafetyResource
   >;
+  parentRoute: string;
 };
 
-const Carousel = ({ title, currentIndex, setCurrentIndex, posts }: Props) => {
+const Carousel = ({
+  title,
+  currentIndex,
+  setCurrentIndex,
+  posts,
+  parentRoute,
+}: Props) => {
   const { t } = useTranslation();
   const maxScrollWidth = useRef(0);
   const carousel = useRef<HTMLDivElement>(null);
@@ -103,27 +109,26 @@ const Carousel = ({ title, currentIndex, setCurrentIndex, posts }: Props) => {
         className="flex gap-10 overflow-hidden scroll-smooth snap-x snap-mandatory touch-pan-x z-0 items-end"
       >
         {posts && posts.docs.length ? (
-          posts.docs.map((material) => (
+          posts.docs.map((post) => (
             <Link
-              key={material.id}
+              key={post.id}
               className="flex flex-col gap-5 relative snap-start min-w-fit p-3 rounded-2xl border-1 border-[#D5D5D5] hover:shadow-xl"
-              to={`${routes.Materials.absolute}/${material.slug}`}
+              to={`${parentRoute}/${post.slug}`}
             >
-              {typeof material.featuredImage === 'string' && (
+              {typeof post.featuredImage === 'string' && (
                 <img
-                  src={`${config.env.apiKey}${material.featuredImage}`}
+                  src={`${config.env.apiKey}${post.featuredImage}`}
                   className="rounded-md object-cover object-center h-40 w-64"
                 />
               )}
-              {material.featuredImage &&
-                typeof material.featuredImage !== 'string' && (
-                  <img
-                    src={`${config.env.apiKey}${material.featuredImage.url}`}
-                    className="rounded-md object-cover object-center h-40 w-64"
-                  />
-                )}
+              {post.featuredImage && typeof post.featuredImage !== 'string' && (
+                <img
+                  src={`${config.env.apiKey}${post.featuredImage.url}`}
+                  className="rounded-md object-cover object-center h-40 w-64"
+                />
+              )}
               <h3 className="text-sm text-wrap max-w-64 child-title">
-                {material.title}
+                {post.title}
               </h3>
             </Link>
           ))
