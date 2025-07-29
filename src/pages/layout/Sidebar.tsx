@@ -106,7 +106,7 @@ const navLinks: NavItemProps[] = [
     target: '_blank',
   },
   {
-    title: 'submit',
+    title: 'submitOrUpload',
     icon: <PaperAirplane className="size-4" />,
     route: routes.Submit.absolute,
   },

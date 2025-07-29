@@ -145,5 +145,6 @@
   "viewFactChecks": "View fact-checks",
   "attachment": "Attachment",
   "uploadingAttachment": "Uploading attachment",
-  "womenReports": "Women Reports"
+  "womenReports": "Women Reports",
+  "submitOrUpload": "Submit/Upload"
 }

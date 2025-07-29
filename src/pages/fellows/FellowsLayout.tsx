@@ -51,7 +51,7 @@ const FellowsLayout = () => {
                   to={routes.Submit.absolute}
                   className="bg-secondary text-white hover:text-primary text-xs px-5 py-2 rounded-2xl w-fit"
                 >
-                  {t('submit')}
+                  {t('submitOrUpload')}
                 </Link>
               </div>
             </div>
