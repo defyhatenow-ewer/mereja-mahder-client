@@ -355,10 +355,10 @@ const Home = () => {
             <p>{t('resourcesNotFound')}</p>
           )}
           <Link
-            to={routes.FactChecks.relative}
+            to={routes.Resources.relative}
             className="flex justify-between items-center gap-3 bg-secondary hover:bg-primary text-primary hover:text-secondary cursor-pointer rounded-4xl p-3 ps-4 w-full text-sm md:text-base md:max-w-sm md:ps-6"
           >
-            <span>{t('readMoreResources')}</span>
+            <span>{t('viewResources')}</span>
             <div className="flex justify-center items-center rounded-full p-1 bg-primary text-secondary child-icon">
               <ChevronRight />
             </div>
@@ -369,7 +369,7 @@ const Home = () => {
           <div className="flex flex-col bg-primary p-8 rounded-4xl max-w-[1400px] md:rounded-none md:mx-0 md:pt-0 md:p-12 md:flex-row">
             <img src={graphic1} className="w-full hidden md:inline md:w-1/3" />
             <div className="flex flex-col justify-center items-center text-center gap-3 md:pt-12 md:gap-5">
-              <h2 className="text-center">{t('factCheck')}</h2>
+              <h2 className="text-center">{t('factChecks')}</h2>
               <h3 className="font-poppins-regular">{t('accessFactChecks')}</h3>
               <p>{t('accessResourcesDescription')}</p>
               <Link
