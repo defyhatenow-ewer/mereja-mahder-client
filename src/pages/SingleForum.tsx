@@ -169,7 +169,7 @@ const SingleForum = () => {
                     </small>
                   </div>
                   <small className="text-[#2B3034]">
-                    {sometimeAgo(message.publishedAt)}
+                    {sometimeAgo(message.createdAt)}
                   </small>
                 </div>
                 <p>{message.text}</p>
