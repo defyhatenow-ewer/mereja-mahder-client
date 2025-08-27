@@ -7,14 +7,14 @@ import { translate } from "../../i18n";
 const AuthLayout = () => {
   const location = useLocation();
 
-  const setPageTitle = (): Promise<string> | string => {
+  const setPageTitle = async (): Promise<string> => {
     switch (location.pathname) {
       case routes.Login.absolute:
         return translate("login");
       case routes.Register.absolute:
         return translate("register");
       case routes.ForgotPassword.absolute:
-        return `${translate("forgotPassword")}?`;
+        return `${await translate('forgotPassword')}?`;
       case routes.ResetPassword.absolute:
         return translate("resetPassword");
       default:

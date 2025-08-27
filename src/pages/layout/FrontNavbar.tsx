@@ -12,7 +12,7 @@ import { pickLanguageToDisplay } from "../../i18n";
 
 const links: CustomLink[] = [
   new CustomLink("home", routes.Home.absolute),
-  new CustomLink("reports", routes.Reports.absolute),
+  // new CustomLink("reports", routes.Reports.absolute),
   new CustomLink("resources", routes.Resources.absolute),
   new CustomLink("radioShows", routes.RadioShows.absolute),
   new CustomLink("factChecks", routes.FactChecks.absolute),

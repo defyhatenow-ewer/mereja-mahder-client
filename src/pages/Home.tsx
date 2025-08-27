@@ -37,7 +37,7 @@ const Home = () => {
       },
     },
     options: {
-      limit: 3,
+      limit: 4,
     },
   });
   const { data: resources, isLoading: isResourcesLoading } =
@@ -163,65 +163,77 @@ const Home = () => {
             </div>
           </div>
           {reports && reports.docs ? (
-            <div className="grid grid-flow-row grid-cols-1 gap-8 px-5 max-w-[1400px] md:gap-8 md:px-12 md:grid-cols-3">
-              {reports.docs.map((post) => (
-                <div
-                  key={post.id}
-                  className="flex flex-col justify-between gap-3 p-5 bg-[#E4E4E4] rounded-2xl md:gap-6 md:rounded-3xl hover:shadow-xl"
+            <div className="grid grid-flow-row grid-cols-1 gap-4 px-4 max-w-[1400px] sm:grid-cols-2 sm:gap-6 sm:px-6 md:gap-8 md:px-8 lg:grid-cols-3 lg:px-12 xl:grid-cols-4">
+            {reports.docs.map((post) => (
+              <div
+                key={post.id}
+                className="flex flex-col bg-[#E4E4E4] rounded-2xl overflow-hidden hover:shadow-xl transition-shadow duration-300 md:rounded-3xl"
+              >
+                <Link 
+                  to={`${routes.Reports.absolute}/${post.slug}`}
+                  className="block w-full"
                 >
-                  <Link to={`${routes.Reports.absolute}/${post.slug}`}>
-                    {typeof post.featuredImage === 'string' && (
+                  {typeof post.featuredImage === 'string' && (
+                    <img
+                      src={`${config.env.apiKey}${post.featuredImage}`}
+                      className="w-full h-auto object-contain"
+                      alt={post.title}
+                    />
+                  )}
+                  {post.featuredImage &&
+                    typeof post.featuredImage !== 'string' && (
                       <img
-                        src={`${config.env.apiKey}${post.featuredImage}`}
-                        className="rounded-2xl object-cover object-center h-full md:h-96 md:rounded-3xl"
+                        src={`${config.env.apiKey}${post.featuredImage.url}`}
+                        className="w-full h-auto object-contain"
+                        alt={post.title}
                       />
                     )}
-                    {post.featuredImage &&
-                      typeof post.featuredImage !== 'string' && (
-                        <img
-                          src={`${config.env.apiKey}${post.featuredImage.url}`}
-                          className="rounded-2xl object-cover object-center md:rounded-3xl"
-                        />
-                      )}
-                  </Link>
+                </Link>
+
+                <div className="flex flex-col justify-between flex-1 p-4 gap-3 sm:p-5 md:gap-4 lg:p-6">
                   <div className="flex flex-col gap-2">
-                    <small>PDF</small>
-                    <div className="flex justify-between items-center w-full gap-3 md:gap-6">
-                      <Link
-                        className="font-poppins-medium text-lg hover:text-light-red"
-                        to={`${routes.Reports.absolute}/${post.slug}`}
+                    <small className="text-xs text-gray-600 font-medium uppercase tracking-wide">PDF</small>
+                    
+                    <Link
+                      className="font-poppins-medium text-base sm:text-lg hover:text-light-red transition-colors duration-200 line-clamp-2"
+                      to={`${routes.Reports.absolute}/${post.slug}`}
+                    >
+                      {post.title}
+                    </Link>
+                  </div>
+
+                  <div className="flex justify-end items-center mt-auto">
+                    {post.pdf && typeof post.pdf === 'string' && (
+                      <a
+                        href={makeDownloadable(
+                          `${config.env.apiKey}${post.pdf}`
+                        )}
+                        download
+                        className="flex justify-center items-center bg-primary hover:bg-secondary hover:text-primary rounded-full w-10 h-10 sm:w-12 sm:h-12 transition-colors duration-200 shrink-0"
+                        aria-label="Download PDF"
                       >
-                        {post.title}
-                      </Link>
-                      {post.pdf && typeof post.pdf === 'string' && (
+                        <ArrowDown className="size-4 sm:size-5" />
+                      </a>
+                    )}
+                    {post.pdf &&
+                      typeof post.pdf !== 'string' &&
+                      post.pdf.url && (
                         <a
                           href={makeDownloadable(
-                            `${config.env.apiKey}${post.pdf}`
+                            `${config.env.apiKey}${post.pdf.url}`
                           )}
                           download
-                          className="flex justify-center items-center bg-primary hover:bg-secondary hover:text-primary rounded-full min-w-12 min-h-12"
+                          className="flex justify-center items-center bg-primary hover:bg-secondary hover:text-primary rounded-full w-10 h-10 sm:w-12 sm:h-12 transition-colors duration-200 shrink-0"
+                          aria-label="Download PDF"
                         >
-                          <ArrowDown className="size-5" />
+                          <ArrowDown className="size-4 sm:size-5" />
                         </a>
                       )}
-                      {post.pdf &&
-                        typeof post.pdf !== 'string' &&
-                        post.pdf.url && (
-                          <a
-                            href={makeDownloadable(
-                              `${config.env.apiKey}${post.pdf.url}`
-                            )}
-                            download
-                            className="flex justify-center items-center bg-primary hover:bg-secondary hover:text-primary rounded-full min-w-12 min-h-12"
-                          >
-                            <ArrowDown className="size-5" />
-                          </a>
-                        )}
-                    </div>
                   </div>
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
+          </div>
           ) : (
             <div className="p-5 md:p-12">{t('reportsNotFound')}</div>
           )}
@@ -364,7 +376,7 @@ const Home = () => {
             </div>
           </Link>
         </section>
-        {/* Access Resources CTA */}
+        {/* Access Fact Checks CTA */}
         <section className="flex bg-primary mx-8 rounded-4xl justify-center md:rounded-none md:mx-0 md:w-full">
           <div className="flex flex-col bg-primary p-8 rounded-4xl max-w-[1400px] md:rounded-none md:mx-0 md:pt-0 md:p-12 md:flex-row">
             <img src={graphic1} className="w-full hidden md:inline md:w-1/3" />
@@ -390,43 +402,64 @@ const Home = () => {
           <h2 className="hidden md:block">{t('mediaProductions')}</h2>
           <h2 className="block md:hidden">{t('radioShows')}</h2>
           {radioShows && radioShows.docs ? (
-            <div className="grid grid-flow-row grid-cols-1 gap-8 md:gap-8 md:grid-cols-3">
+            <div className="grid grid-flow-row grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-6 md:gap-8 md:grid-cols-2 lg:grid-cols-3">
               {radioShows.docs.map((post) => (
                 <Link
                   to={`${routes.RadioShows.absolute}/${post.slug}`}
                   key={post.id}
-                  className="flex flex-col justify-between gap-3 border-1 border-[#D5D5D5] rounded-2xl md:rounded-3xl md:p-5 md:gap-5 hover:shadow-xl"
+                  className="flex flex-col border border-[#D5D5D5] rounded-2xl overflow-hidden hover:shadow-xl transition-all duration-300 hover:scale-[1.02] md:rounded-3xl group"
                 >
-                  {typeof post.featuredImage === 'string' && (
-                    <img
-                      src={`${config.env.apiKey}${post.featuredImage}`}
-                      className="w-full object-cover object-center rounded-2xl md:rounded-3xl"
-                    />
-                  )}
-                  {post.featuredImage &&
-                    typeof post.featuredImage !== 'string' && (
+                  {/* Featured Image Section */}
+                  <div className="w-full">
+                    {typeof post.featuredImage === 'string' && (
                       <img
-                        src={`${config.env.apiKey}${post.featuredImage.url}`}
-                        className="w-full object-cover object-center rounded-2xl md:rounded-3xl"
+                        src={`${config.env.apiKey}${post.featuredImage}`}
+                        className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-300"
+                        alt={post.title}
                       />
                     )}
-                  <div className="flex flex-col gap-3 p-5 md:p-0 md:gap-5">
-                    <small className="text-[#0B121580]">
+                    {post.featuredImage &&
+                      typeof post.featuredImage !== 'string' && (
+                        <img
+                          src={`${config.env.apiKey}${post.featuredImage.url}`}
+                          className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-300"
+                          alt={post.title}
+                        />
+                      )}
+                  </div>
+
+                  {/* Content Section */}
+                  <div className="flex flex-col gap-3 p-4 flex-1 sm:p-5 md:gap-4 lg:p-6">
+                    {/* Date */}
+                    <small className="text-[#0B121580] text-xs font-medium">
                       {formatDateTime(post.publishedAt)}
                     </small>
-                    <h3 className="text-left text-lg child-title md:text-xl">
+
+                    {/* Title */}
+                    <h3 className="text-left text-lg font-medium line-clamp-2 group-hover:text-light-red transition-colors duration-200 md:text-xl">
                       {post.title}
                     </h3>
-                    <div className="flex gap-2 items-center flex-wrap md:hidden">
-                      {(post.tags || []).map((tag) => (
-                        <Link
-                          to={`${routes.RadioShows.absolute}?tag=${tag.title}`}
+
+                    {/* Tags - Show on all devices but with responsive styling */}
+                    <div className="flex gap-2 items-center flex-wrap mt-auto">
+                      {(post.tags || []).slice(0, 3).map((tag) => (
+                        <span
                           key={tag.id}
-                          className="px-3 py-2 bg-primary rounded-2xl text-xs hover:bg-secondary hover:text-primary md:text-sm md:rounded-3xl md:px-4 md:py-1"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            // Navigate to filtered view
+                            window.location.href = `${routes.RadioShows.absolute}?tag=${tag.title}`;
+                          }}
+                          className="px-2 py-1 bg-primary text-white rounded-full text-xs hover:bg-secondary hover:text-primary transition-colors duration-200 cursor-pointer sm:px-3 sm:py-1.5 md:text-sm md:rounded-2xl lg:px-4 lg:py-2"
                         >
                           {tag.title}
-                        </Link>
+                        </span>
                       ))}
+                      {(post.tags || []).length > 3 && (
+                        <span className="px-2 py-1 bg-gray-200 text-gray-600 rounded-full text-xs sm:px-3 sm:py-1.5 md:text-sm md:rounded-2xl lg:px-4 lg:py-2">
+                          +{(post.tags || []).length - 3}
+                        </span>
+                      )}
                     </div>
                   </div>
                 </Link>

@@ -10,6 +10,7 @@ import { Link, useSearchParams } from "react-router-dom";
 import { config } from "../config";
 import { routes } from "../routing";
 import { useGetResourcesQuery } from "../features/resources.api";
+import { useGetReportsQuery } from "../features/reports.api";
 import { useGetCategoriesQuery } from "../features/categories.api";
 import { useGetTagsQuery } from "../features/tag.api";
 import {
@@ -41,7 +42,7 @@ const Resources = () => {
     },
   });
 
-  const { data, isLoading: isPostsLoading } = useGetResourcesQuery({
+  const { data: resourcesData, isLoading: isResourcesLoading } = useGetResourcesQuery({
     query: {
       where: {
         and: [
@@ -78,6 +79,55 @@ const Resources = () => {
       page,
     },
   });
+  //added a reports query
+  const { data: reportsData, isLoading: isReportsLoading } = useGetReportsQuery({
+    query: {
+      where: {
+        and: [
+          {
+            tags: {
+              contains: tag,
+            },
+          },
+          {
+            categories: {
+              contains: category,
+            },
+          },
+          {
+            title: {
+              like: search,
+            },
+          },
+          {
+            _status: {
+              equals: "published",
+            },
+          },
+          {
+            privacy: {
+              equals: "public",
+            },
+          },
+        ],
+      },
+    },
+    options: {
+      limit: 6,
+      page,
+    },
+  });
+
+  //combined queries with type to map single itemss
+  const data = {
+    docs: [
+      ...(resourcesData?.docs || []).map(item => ({ ...item, type: 'resource' })),
+      ...(reportsData?.docs || []).map(item => ({ ...item, type: 'report' }))
+    ],
+    totalDocs: (resourcesData?.totalDocs || 0) + (reportsData?.totalDocs || 0),
+  };
+
+  const isPostsLoading = isResourcesLoading || isReportsLoading;
 
   useEffect(() => {
     const tagFromParams = searchParams.get("tag");
@@ -120,9 +170,11 @@ const Resources = () => {
       <div className="flex flex-col bg-white gap-5 p-5 pt-0 max-w-[1400px] md:p-12 md:pt-0 md:gap-16">
         <div className="flex flex-col gap-3">
           <h2>{t("resources")}</h2>
-          <h3 className="text-[#D5D5D5] text-2xl font-poppins">
+
+          
+          {/* <h3 className="text-[#D5D5D5] text-2xl font-poppins"> // removed the sub-title section
             {t("cybersecurity&onlineSafety")}
-          </h3>
+          </h3> */}
         </div>
         <section className="flex flex-col gap-5 md:justify-between md:items-center md:gap-8 md:flex-row">
           <input
@@ -173,7 +225,10 @@ const Resources = () => {
               </ul>
             </details>
           )}
-          {categories && (
+
+
+         
+          {/* {categories && (  // removed categories filter
             <details
               id="categories-menu"
               className="dropdown dropdown-end bg-[#EBEBEB] text-sm w-full p-2 rounded-2xl md:rounded-4xl md:py-3 md:px-5 md:max-w-[10rem]"
@@ -212,7 +267,7 @@ const Resources = () => {
                 ))}
               </ul>
             </details>
-          )}
+          )} */}
           <button
             onClick={clearSearch}
             aria-disabled={isPostsLoading}
@@ -227,10 +282,11 @@ const Resources = () => {
         <section>
           {data && data.docs ? (
             <div className="flex flex-col gap-5 md:gap-8">
-              <div className="grid grid-flow-row grid-cols-1 gap-5 md:gap-8 md:grid-cols-3">
+              <div className="grid grid-cols-1 gap-5 md:gap-8 md:grid-cols-3 auto-rows-min items-start">
                 {data.docs.map((post) => (
                   <Link
-                    to={`${routes.Resources.absolute}/${post.slug}`}
+                  // link to map both categories
+                    to={post.type === 'report' ? `${routes.Reports.absolute}/${post.slug}` : `${routes.Resources.absolute}/${post.slug}`}
                     key={post.id}
                     className="flex flex-col justify-start gap-0 rounded-md bg-[#E4E4E4]"
                   >
@@ -252,7 +308,7 @@ const Resources = () => {
                         {post.tags &&
                           post.tags.map((tag, index) => (
                             <Link
-                              to={`${routes.Resources.absolute}?tag=${tag.title}`}
+                              to={post.type === 'report' ? `${routes.Reports.absolute}/${post.slug}` : `${routes.Resources.absolute}/${post.slug}`}
                               key={index}
                               className="px-3 py-2 bg-primary rounded-2xl text-xs hover:bg-secondary hover:text-primary md:rounded-3xl md:px-4 md:py-1"
                             >
