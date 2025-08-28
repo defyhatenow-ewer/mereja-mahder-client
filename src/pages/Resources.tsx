@@ -10,7 +10,6 @@ import { Link, useSearchParams } from "react-router-dom";
 import { config } from "../config";
 import { routes } from "../routing";
 import { useGetResourcesQuery } from "../features/resources.api";
-import { useGetCategoriesQuery } from "../features/categories.api";
 import { useGetTagsQuery } from "../features/tag.api";
 import {
   createSelect,
@@ -22,18 +21,17 @@ import { useTranslation } from "react-i18next";
 const Resources = () => {
   const { t } = useTranslation();
   const [search, setSearch] = useState("");
-  const [open, setOpen] = useState(false);
+  // const [open, setOpen] = useState(false);
   const [tagOpen, setTagOpen] = useState(false);
   const [category, setCategory] = useState("");
   const [tag, setTag] = useState("");
   const [page, setPage] = useState(1);
   const [searchParams] = useSearchParams();
-
-  const { data: categories, isLoading } = useGetCategoriesQuery({
-    query: {
-      select: createSelect(["id", "title"]),
-    },
-  });
+  // const { data: categories, isLoading } = useGetCategoriesQuery({
+  //   query: {
+  //     select: createSelect(["id", "title"]),
+  //   },
+  // });
 
   const { data: tags, isLoading: isTagsLoading } = useGetTagsQuery({
     query: {
@@ -105,18 +103,18 @@ const Resources = () => {
     }
   };
 
-  const closeCategoryDropdown = (id: string) => {
-    setCategory(id);
-    setOpen(false);
-    const DropDown = document.getElementById("category-menu");
-    if (DropDown) {
-      DropDown.removeAttribute("open");
-    }
-  };
+  // const closeCategoryDropdown = (id: string) => {
+  //   setCategory(id);
+  //   setOpen(false);
+  //   const DropDown = document.getElementById("category-menu");
+  //   if (DropDown) {
+  //     DropDown.removeAttribute("open");
+  //   }
+  // };
 
   return (
     <div className="flex justify-center">
-      <Loader show={isPostsLoading || isLoading || isTagsLoading} />
+      <Loader show={isPostsLoading || isTagsLoading} />
       <div className="flex flex-col bg-white gap-5 p-5 pt-0 max-w-[1400px] md:p-12 md:pt-0 md:gap-16">
         <div className="flex flex-col gap-3">
           <h2>{t("resources")}</h2>
