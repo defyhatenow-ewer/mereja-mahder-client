@@ -120,9 +120,9 @@ const Resources = () => {
       <div className="flex flex-col bg-white gap-5 p-5 pt-0 max-w-[1400px] md:p-12 md:pt-0 md:gap-16">
         <div className="flex flex-col gap-3">
           <h2>{t("resources")}</h2>
-          <h3 className="text-[#D5D5D5] text-2xl font-poppins">
+          {/* <h3 className="text-[#D5D5D5] text-2xl font-poppins">
             {t("cybersecurity&onlineSafety")}
-          </h3>
+          </h3> */}
         </div>
         <section className="flex flex-col gap-5 md:justify-between md:items-center md:gap-8 md:flex-row">
           <input
@@ -173,7 +173,7 @@ const Resources = () => {
               </ul>
             </details>
           )}
-          {categories && (
+          {/* {categories && (
             <details
               id="categories-menu"
               className="dropdown dropdown-end bg-[#EBEBEB] text-sm w-full p-2 rounded-2xl md:rounded-4xl md:py-3 md:px-5 md:max-w-[10rem]"
@@ -212,7 +212,7 @@ const Resources = () => {
                 ))}
               </ul>
             </details>
-          )}
+          )} */}
           <button
             onClick={clearSearch}
             aria-disabled={isPostsLoading}
