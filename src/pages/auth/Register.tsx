@@ -102,7 +102,7 @@ const Register = () => {
                     {space.title === 'aff'
                       ? t('affFellow')
                       : space.title === 'community'
-                        ? t('community')
+                        ? t('dhnCommunity')
                         : space.title === 'women_safe_space'
                           ? t('womenSafeSpaces')
                           : space.title}
