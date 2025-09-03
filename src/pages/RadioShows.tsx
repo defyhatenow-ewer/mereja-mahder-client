@@ -6,7 +6,6 @@ import { config } from '../config';
 import { routes } from '../routing';
 import { formatDateTime } from '../utils';
 import { useGetShowsQuery } from '../features/shows.api';
-import { useGetCategoriesQuery } from '../features/categories.api';
 import { useGetTagsQuery } from '../features/tag.api';
 import {
   createSelect,
@@ -18,18 +17,10 @@ import { useTranslation } from 'react-i18next';
 const RadioShows = () => {
   const { t } = useTranslation();
   const [search, setSearch] = useState('');
-  const [open, setOpen] = useState(false);
   const [tagOpen, setTagOpen] = useState(false);
-  const [category, setCategory] = useState('');
   const [tag, setTag] = useState('');
   const [page, setPage] = useState(1);
   const [searchParams] = useSearchParams();
-
-  const { data: categories, isLoading } = useGetCategoriesQuery({
-    query: {
-      select: createSelect(['id', 'title']),
-    },
-  });
 
   const { data: tags, isLoading: isTagsLoading } = useGetTagsQuery({
     query: {
@@ -44,11 +35,6 @@ const RadioShows = () => {
           {
             tags: {
               contains: tag,
-            },
-          },
-          {
-            categories: {
-              contains: category,
             },
           },
           {
@@ -88,7 +74,6 @@ const RadioShows = () => {
   const clearSearch = () => {
     setSearch('');
     setPage(1);
-    setCategory('');
     setTag('');
   };
 
@@ -101,18 +86,9 @@ const RadioShows = () => {
     }
   };
 
-  const closeCategoryDropdown = (id: string) => {
-    setCategory(id);
-    setOpen(false);
-    const DropDown = document.getElementById('category-menu');
-    if (DropDown) {
-      DropDown.removeAttribute('open');
-    }
-  };
-
   return (
     <div className="flex justify-center">
-      <Loader show={isPostsLoading || isLoading || isTagsLoading} />
+      <Loader show={isPostsLoading || isTagsLoading} />
       <div className="flex flex-col bg-white gap-8 p-5 pt-0 max-w-[1400px] md:p-12 md:pt-0 md:gap-16">
         <div className="flex flex-col gap-3">
           <h2>{t('mediaProductions')}</h2>
@@ -164,46 +140,6 @@ const RadioShows = () => {
                     onClick={() => closeTagDropdown(t.id)}
                   >
                     {t.title}
-                  </li>
-                ))}
-              </ul>
-            </details>
-          )}
-          {categories && (
-            <details
-              id="categories-menu"
-              className="dropdown dropdown-end bg-[#EBEBEB] text-sm w-full p-2 rounded-2xl md:rounded-4xl md:py-3 md:px-5 md:max-w-[10rem]"
-              onToggle={(e) => {
-                if (e.currentTarget.open) {
-                  setOpen(true);
-                } else {
-                  setOpen(false);
-                }
-              }}
-              open={open}
-            >
-              <summary className="list-none text-white h-full align-middle cursor-pointer">
-                <div className="h-full flex justify-between items-center text-black rounded-md">
-                  <span>
-                    {category === ''
-                      ? t('category')
-                      : pickTitleUsingID(category, categories.docs)}
-                  </span>
-                  {open ? (
-                    <ChevronUp className="size-6" />
-                  ) : (
-                    <ChevronDown className="size-6" />
-                  )}
-                </div>
-              </summary>
-              <ul className="p-3 gap-2 shadow bg-white menu dropdown-content z-[1] rounded-sm w-32 text-sm">
-                {categories.docs.map((cat) => (
-                  <li
-                    key={cat.id}
-                    className="cursor-pointer p-1 hover:bg-primary"
-                    onClick={() => closeCategoryDropdown(cat.id)}
-                  >
-                    {cat.title}
                   </li>
                 ))}
               </ul>
