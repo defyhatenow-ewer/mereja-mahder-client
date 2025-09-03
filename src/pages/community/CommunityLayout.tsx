@@ -5,7 +5,7 @@ import { config } from '../../config';
 import { useGetBannersQuery } from '../../features/banners.api';
 import { routes } from '../../routing';
 
-const PartnersLayout = () => {
+const CommunitysLayout = () => {
   const location = useLocation();
   const path = location.pathname;
   const depth = path.split('/').filter(Boolean);
@@ -14,7 +14,7 @@ const PartnersLayout = () => {
     query: {
       where: {
         'space.title': {
-          equals: 'partners',
+          equals: 'community',
         },
       },
     },
@@ -74,4 +74,4 @@ const PartnersLayout = () => {
   );
 };
 
-export default PartnersLayout;
+export default CommunitysLayout;

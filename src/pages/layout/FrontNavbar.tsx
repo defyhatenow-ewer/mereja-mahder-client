@@ -1,22 +1,30 @@
-import { Link, useLocation } from "react-router-dom";
-import { logo } from "../../assets/images";
-import { routes } from "../../routing";
-import HamburgerMenu from "../../components/HamburgerMenu";
-import { ArrowUpRight, ChevronDown, ChevronUp } from "../../components/Icons";
-import { useMeQuery } from "../../features/auth.api";
-import { CustomLink, goToDashboard } from "../../utils";
-import { useState, useEffect } from "react";
-import { useTranslation } from "react-i18next";
-import { lngs } from "../../config";
-import { pickLanguageToDisplay } from "../../i18n";
+import { Link, useLocation } from 'react-router-dom';
+import { logo } from '../../assets/images';
+import { routes } from '../../routing';
+import HamburgerMenu from '../../components/HamburgerMenu';
+import { ArrowUpRight, ChevronDown, ChevronUp } from '../../components/Icons';
+import { useMeQuery } from '../../features/auth.api';
+import { CustomLink, goToDashboard, SpaceTypes } from '../../utils';
+import { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
+import { lngs } from '../../config';
+import { pickLanguageToDisplay } from '../../i18n';
 
 const links: CustomLink[] = [
-  new CustomLink("home", routes.Home.absolute),
+  new CustomLink('home', routes.Home.absolute),
   // new CustomLink("reports", routes.Reports.absolute),
-  new CustomLink("resources", routes.Resources.absolute),
-  new CustomLink("radioShows", routes.RadioShows.absolute),
-  new CustomLink("factChecks", routes.FactChecks.absolute),
-  new CustomLink("about", routes.About.absolute),
+  new CustomLink('resources', routes.Resources.absolute),
+  new CustomLink('radioShows', routes.RadioShows.absolute),
+  new CustomLink('factChecks', routes.FactChecks.absolute),
+  new CustomLink('about', routes.About.absolute),
+  new CustomLink(
+    'forum',
+    routes.Forum.absolute,
+    SpaceTypes.General,
+    '',
+    true,
+    '_blank'
+  ),
 ];
 
 const FrontNavbar = () => {
@@ -29,13 +37,13 @@ const FrontNavbar = () => {
   );
 
   useEffect(() => {
-    const Menu = document.getElementById("language-menu");
+    const Menu = document.getElementById('language-menu');
     if (Menu) {
-      document.addEventListener("click", (e) => {
+      document.addEventListener('click', (e) => {
         const withinBoundaries = e.composedPath().includes(Menu);
         if (!withinBoundaries && open) {
           setOpen(false);
-          Menu.removeAttribute("open");
+          Menu.removeAttribute('open');
         }
       });
     }
@@ -45,9 +53,9 @@ const FrontNavbar = () => {
     i18n.changeLanguage(lng);
     setLanguage(pickLanguageToDisplay(lng));
     setOpen(false);
-    const DropDown = document.getElementById("language-menu");
+    const DropDown = document.getElementById('language-menu');
     if (DropDown) {
-      DropDown.removeAttribute("open");
+      DropDown.removeAttribute('open');
     }
   };
 
@@ -56,13 +64,13 @@ const FrontNavbar = () => {
       <nav className="bg-white w-full flex justify-between items-center max-w-[1400px] gap-5 p-5 md:p-5 md:px-12">
         <Link to={routes.Home.absolute}>
           <img
-            className="w-1/2 max-h-16 md:w-auto md:max-h-16"
+            className={`w-1/2 md:w-auto ${i18n.resolvedLanguage === 'om' ? 'max-h-16' : 'max-h-16'}`}
             src={logo}
             alt="logo"
           />
         </Link>
-        <div className="hidden flex-row gap-8 items-center justify-end mdl:flex">
-          <ul className="menu menu-horizontal gap-3">
+        <div className="hidden flex-row gap-5 items-center justify-end mdl:flex">
+          <ul className="menu menu-horizontal gap-2">
             {links.map((link) => (
               <li key={link.title}>
                 {link.anchor ? (
@@ -70,9 +78,10 @@ const FrontNavbar = () => {
                     href={link.route}
                     className={`${
                       location.pathname === link.route
-                        ? "bg-primary"
-                        : "bg-white"
-                    } text-sm rounded-2xl py-2 px-4 hover:bg-[#D9D9D9]`}
+                        ? 'bg-primary'
+                        : 'bg-white'
+                    } text-sm rounded-2xl py-2 px-2 hover:bg-[#D9D9D9]`}
+                    target={link.target}
                   >
                     {t(link.title)}
                   </a>
@@ -81,9 +90,9 @@ const FrontNavbar = () => {
                     to={link.route}
                     className={`${
                       location.pathname === link.route
-                        ? "bg-primary"
-                        : "bg-white"
-                    } text-sm rounded-2xl py-2 px-4 hover:bg-[#D9D9D9]`}
+                        ? 'bg-primary'
+                        : 'bg-white'
+                    } text-sm rounded-2xl py-2 px-2 hover:bg-[#D9D9D9]`}
                   >
                     {t(link.title)}
                   </Link>
@@ -130,7 +139,7 @@ const FrontNavbar = () => {
               to={goToDashboard(data.user)}
               className="flex justify-between items-center gap-3 bg-secondary hover:bg-primary text-primary hover:text-secondary cursor-pointer rounded-4xl p-2 ps-3 w-full md:w-fit md:ps-5"
             >
-              <span>{t("dashboard")}</span>
+              <span>{t('dashboard')}</span>
               <div className="flex justify-center items-center rounded-full p-1 bg-primary text-secondary child-icon">
                 <ArrowUpRight />
               </div>
@@ -140,7 +149,7 @@ const FrontNavbar = () => {
               to={routes.Login.absolute}
               className="flex justify-between items-center gap-3 bg-secondary hover:bg-primary text-primary hover:text-secondary cursor-pointer rounded-4xl p-2 ps-3 w-full md:w-fit md:ps-5"
             >
-              <span>{t("login")}</span>
+              <span>{t('login')}</span>
               <div className="flex justify-center items-center rounded-full p-1 bg-primary text-secondary child-icon">
                 <ArrowUpRight />
               </div>

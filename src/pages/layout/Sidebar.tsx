@@ -44,10 +44,10 @@ const navLinks: NavItemProps[] = [
     altIcon: <DocumentCheck className="size-4" />,
   },
   {
-    title: 'partners',
+    title: 'community',
     icon: <HomeIcon className="size-4" />,
-    route: routes.Partners.absolute,
-    space: SpaceTypes.Partner,
+    route: routes.Community.absolute,
+    space: SpaceTypes.Community,
     alt: 'overview',
     altIcon: <Users className="size-4" />,
   },
@@ -77,7 +77,7 @@ const navLinks: NavItemProps[] = [
     title: 'reports',
     icon: <FolderOpen className="size-4" />,
     route: routes.ReportList.absolute,
-    space: SpaceTypes.Partner,
+    space: SpaceTypes.Community,
   },
   {
     title: 'womenReports',
@@ -90,7 +90,7 @@ const navLinks: NavItemProps[] = [
     title: 'data',
     icon: <Chart className="size-4" />,
     route: routes.Data.absolute,
-    space: SpaceTypes.Partner,
+    space: SpaceTypes.Community,
   },
   {
     title: 'safetyResources',

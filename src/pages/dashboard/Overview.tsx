@@ -4,7 +4,7 @@ import { Loader } from '../../components';
 import { routes } from '../../routing';
 import ProtectedRoute from '../../routing/ProtectedRoute';
 import restrictions from '../../routing/restrictions';
-import { PartnerOverview } from '../partners';
+import { CommunityOverview } from '../community';
 import { FellowsOverview } from '../fellows';
 import { WomenOverview } from '../womenSafeSpaces';
 import { SpaceTypes } from '../../utils';
@@ -13,20 +13,31 @@ import { Profile } from '../auth';
 const Overview = () => {
   const { data, isFetching } = useMeQuery();
 
+  console.log({
+    data,
+    isAllowed:
+      data?.user.role === 'community' ||
+      data?.user.role === 'partner' ||
+      (data?.user.space &&
+        typeof data?.user.space !== 'string' &&
+        data.user.space.title === SpaceTypes.Community),
+  });
+
   if (isFetching) return <Loader />;
 
   if (!isFetching && !data) return <Navigate to={routes.Login.absolute} />;
 
   if (
+    data?.user.role === 'community' ||
     data?.user.role === 'partner' ||
     (data?.user.space &&
       typeof data?.user.space !== 'string' &&
-      data.user.space.title === SpaceTypes.Partner)
+      data.user.space.title === SpaceTypes.Community)
   ) {
     return (
       <ProtectedRoute
-        children={<PartnerOverview />}
-        restrictedTo={restrictions.partner}
+        children={<CommunityOverview />}
+        restrictedTo={restrictions.community}
       />
     );
   }

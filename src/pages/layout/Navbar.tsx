@@ -1,56 +1,56 @@
-import { routes } from "../../routing";
-import HamburgerMenu from "../../components/HamburgerMenu";
-import { CustomLink, SpaceTypes } from "../../utils";
-import { ChevronDown, ChevronUp, Edit } from "../../components/Icons";
-import { useEffect, useState } from "react";
-import { useMeQuery } from "../../features/auth.api";
-import { avatarPlaceholder } from "../../assets/images";
-import { config } from "../../config";
-import { useTranslation } from "react-i18next";
-import { lngs } from "../../config";
-import { pickLanguageToDisplay } from "../../i18n";
-import { Link } from "react-router-dom";
+import { routes } from '../../routing';
+import HamburgerMenu from '../../components/HamburgerMenu';
+import { CustomLink, SpaceTypes } from '../../utils';
+import { ChevronDown, ChevronUp, Edit } from '../../components/Icons';
+import { useEffect, useState } from 'react';
+import { useMeQuery } from '../../features/auth.api';
+import { avatarPlaceholder } from '../../assets/images';
+import { config } from '../../config';
+import { useTranslation } from 'react-i18next';
+import { lngs } from '../../config';
+import { pickLanguageToDisplay } from '../../i18n';
+import { Link } from 'react-router-dom';
 
 const links = [
   new CustomLink(
-    "fellows",
+    'fellows',
     routes.Fellows.absolute,
     SpaceTypes.AFF,
-    "overview"
+    'overview'
   ),
   new CustomLink(
-    "partners",
-    routes.Partners.absolute,
-    SpaceTypes.Partner,
-    "overview"
+    'community',
+    routes.Community.absolute,
+    SpaceTypes.Community,
+    'overview'
   ),
   new CustomLink(
-    "womenSafeSpace",
+    'womenSafeSpace',
     routes.WomenSafeSpace.absolute,
     SpaceTypes.Women,
-    "overview"
+    'overview'
   ),
   new CustomLink(
-    "forum",
+    'forum',
     routes.Forum.absolute,
     SpaceTypes.General,
-    "",
+    '',
     true,
-    "_blank"
+    '_blank'
   ),
   new CustomLink(
-    "learningResources",
+    'learningResources',
     routes.LearningResources.absolute,
     SpaceTypes.AFF
   ),
-  new CustomLink("data", routes.Data.absolute, SpaceTypes.Partner),
-  new CustomLink("reports", routes.ReportList.absolute, SpaceTypes.Partner),
+  new CustomLink('data', routes.Data.absolute, SpaceTypes.Community),
+  new CustomLink('reports', routes.ReportList.absolute, SpaceTypes.Community),
   new CustomLink(
-    "safetyResources",
+    'safetyResources',
     routes.SafetyResources.absolute,
     SpaceTypes.Women
   ),
-  new CustomLink("settings", routes.Profile.absolute, SpaceTypes.General),
+  new CustomLink('settings', routes.Profile.absolute, SpaceTypes.General),
 ];
 
 const Navbar = () => {
@@ -62,13 +62,13 @@ const Navbar = () => {
   );
 
   useEffect(() => {
-    const Menu = document.getElementById("language-menu");
+    const Menu = document.getElementById('language-menu');
     if (Menu) {
-      document.addEventListener("click", (e) => {
+      document.addEventListener('click', (e) => {
         const withinBoundaries = e.composedPath().includes(Menu);
         if (!withinBoundaries && open) {
           setOpen(false);
-          Menu.removeAttribute("open");
+          Menu.removeAttribute('open');
         }
       });
     }
@@ -78,9 +78,9 @@ const Navbar = () => {
     i18n.changeLanguage(lng);
     setLanguage(pickLanguageToDisplay(lng));
     setOpen(false);
-    const DropDown = document.getElementById("language-menu");
+    const DropDown = document.getElementById('language-menu');
     if (DropDown) {
-      DropDown.removeAttribute("open");
+      DropDown.removeAttribute('open');
     }
   };
 
@@ -164,7 +164,7 @@ const Navbar = () => {
           <div className="flex flex-col gap-1 text-xs">
             <span>{data.user.name}</span>
             <div className="flex justify-between items-center">
-              <span className="capitalize">{t("profile")}</span>
+              <span className="capitalize">{t('profile')}</span>
               <div className="flex justify-center items-center rounded-full p-1 bg-primary text-secondary child-icon">
                 <Edit className="size-4" />
               </div>

@@ -67,11 +67,11 @@ export default {
     'learning-resources',
     '/dashboard/fellows/learning-resources'
   ),
-  Partners: new Path('partners', '/dashboard/partners'),
-  Data: new Path('data', '/dashboard/partners/data'),
-  SingleChart: new Path('data/:slug', '/dashboard/partners/data/:slug'),
+  Community: new Path('community', '/dashboard/community'),
+  Data: new Path('data', '/dashboard/community/data'),
+  SingleChart: new Path('data/:slug', '/dashboard/community/data/:slug'),
   SinglePrivatePost: new Path('single/:slug', '/dashboard/posts/single/:slug'),
-  ReportList: new Path('reports', '/dashboard/partners/reports'),
+  ReportList: new Path('reports', '/dashboard/community/reports'),
   WomenSafeSpace: new Path('women-safe-space', '/dashboard/women-safe-space'),
   WomenReport: new Path('reports', '/dashboard/women-safe-space/reports'),
   SinglePrivateWomenReport: new Path(
@@ -84,7 +84,7 @@ export default {
   ),
   SinglePrivateReport: new Path(
     'reports/:slug',
-    '/dashboard/partners/reports/:slug'
+    '/dashboard/community/reports/:slug'
   ),
   SinglePrivateLearningResource: new Path(
     'learning-resources/:slug',

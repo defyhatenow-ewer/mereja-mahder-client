@@ -57,7 +57,7 @@
   "noRecentPosts": "No recent posts",
   "overview": "Overview",
   "overviewCaps": "OVERVIEW",
-  "partner": "#defyhatenow Community",
+  "partner": "partner",
   "partners": "Partners",
   "password": "Password",
   "pleaseAddMail": "Please add an email",
@@ -146,5 +146,6 @@
   "attachment": "Attachment",
   "uploadingAttachment": "Uploading attachment",
   "womenReports": "Women Reports",
-  "submitOrUpload": "Submit/Upload"
+  "submitOrUpload": "Submit/Upload",
+  "community": "Community"
 }

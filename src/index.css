@@ -1,7 +1,7 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 @plugin "daisyui";
 @plugin "daisyui/theme" {
-  name: "light";
+  name: 'light';
   default: true;
   prefersdark: true;
 
@@ -11,86 +11,87 @@
 }
 
 @font-face {
-  font-family: "Poppins";
-  src: url("./assets/fonts/Poppins/Poppins-Regular.ttf");
+  font-family: 'Poppins';
+  src: url('./assets/fonts/Poppins/Poppins-Regular.ttf');
 }
 
 @font-face {
-  font-family: "Poppins Italic";
-  src: url("./assets/fonts/Poppins/Poppins-Italic.ttf");
+  font-family: 'Poppins Italic';
+  src: url('./assets/fonts/Poppins/Poppins-Italic.ttf');
 }
 
 @font-face {
-  font-family: "Poppins Bold";
-  src: url("./assets/fonts/Poppins/Poppins-Bold.ttf");
+  font-family: 'Poppins Bold';
+  src: url('./assets/fonts/Poppins/Poppins-Bold.ttf');
 }
 
 @font-face {
-  font-family: "Poppins Black";
-  src: url("./assets/fonts/Poppins/Poppins-Black.ttf");
+  font-family: 'Poppins Black';
+  src: url('./assets/fonts/Poppins/Poppins-Black.ttf');
 }
 
 @font-face {
-  font-family: "Poppins Black Italic";
-  src: url("./assets/fonts/Poppins/Poppins-BlackItalic.ttf");
+  font-family: 'Poppins Black Italic';
+  src: url('./assets/fonts/Poppins/Poppins-BlackItalic.ttf');
 }
 
 @font-face {
-  font-family: "Poppins Bold Italic";
-  src: url("./assets/fonts/Poppins/Poppins-BoldItalic.ttf");
+  font-family: 'Poppins Bold Italic';
+  src: url('./assets/fonts/Poppins/Poppins-BoldItalic.ttf');
 }
 
 @font-face {
-  font-family: "Poppins Extra Bold";
-  src: url("./assets/fonts/Poppins/Poppins-ExtraBold.ttf");
+  font-family: 'Poppins Extra Bold';
+  src: url('./assets/fonts/Poppins/Poppins-ExtraBold.ttf');
 }
 
 @font-face {
-  font-family: "Poppins Light";
-  src: url("./assets/fonts/Poppins/Poppins-Light.ttf");
+  font-family: 'Poppins Light';
+  src: url('./assets/fonts/Poppins/Poppins-Light.ttf');
 }
 
 @font-face {
-  font-family: "Poppins Extra Light";
-  src: url("./assets/fonts/Poppins/Poppins-ExtraLight.ttf");
+  font-family: 'Poppins Extra Light';
+  src: url('./assets/fonts/Poppins/Poppins-ExtraLight.ttf');
 }
 
 @font-face {
-  font-family: "Poppins Semi Bold";
-  src: url("./assets/fonts/Poppins/Poppins-SemiBold.ttf");
+  font-family: 'Poppins Semi Bold';
+  src: url('./assets/fonts/Poppins/Poppins-SemiBold.ttf');
 }
 
 @font-face {
-  font-family: "Poppins Medium";
-  src: url("./assets/fonts/Poppins/Poppins-Medium.ttf");
+  font-family: 'Poppins Medium';
+  src: url('./assets/fonts/Poppins/Poppins-Medium.ttf');
 }
 
 @font-face {
-  font-family: "Poppins Regular";
-  src: url("./assets/fonts/Poppins/Poppins-Regular.ttf");
+  font-family: 'Poppins Regular';
+  src: url('./assets/fonts/Poppins/Poppins-Regular.ttf');
 }
 
 @font-face {
-  font-family: "Inter";
-  src: url("./assets/fonts/Inter/Inter-Italic-VariableFont_opsz\,wght.ttf");
+  font-family: 'Inter';
+  src: url('./assets/fonts/Inter/Inter-Italic-VariableFont_opsz\,wght.ttf');
 }
 
 @theme {
-  --font-poppins: "Poppins", "sans-serif";
-  --font-inter: "Inter", "sans-serif";
-  --font-poppins-bold: "Poppins Bold", "sans-serif";
-  --font-poppins-semi-bold: "Poppins Semi Bold", "sans-serif";
-  --font-poppins-extra-bold: "Poppins Extra Bold", "sans-serif";
-  --font-poppins-medium: "Poppins Medium", "sans-serif";
-  --font-poppins-regular: "Poppins Regular", "sans-serif";
-  --font-poppins-light: "Poppins Light", "sans-serif";
-  --font-poppins-extra-light: "Poppins Extra Light", "sans-serif";
-  --font-poppins-italic: "Poppins Italic", "sans-serif";
-  --font-poppins-black: "Poppins Black", "sans-serif";
+  --font-poppins: 'Poppins', 'sans-serif';
+  --font-inter: 'Inter', 'sans-serif';
+  --font-poppins-bold: 'Poppins Bold', 'sans-serif';
+  --font-poppins-semi-bold: 'Poppins Semi Bold', 'sans-serif';
+  --font-poppins-extra-bold: 'Poppins Extra Bold', 'sans-serif';
+  --font-poppins-medium: 'Poppins Medium', 'sans-serif';
+  --font-poppins-regular: 'Poppins Regular', 'sans-serif';
+  --font-poppins-light: 'Poppins Light', 'sans-serif';
+  --font-poppins-extra-light: 'Poppins Extra Light', 'sans-serif';
+  --font-poppins-italic: 'Poppins Italic', 'sans-serif';
+  --font-poppins-black: 'Poppins Black', 'sans-serif';
   --color-custom-gray: oklch(88.53% 0 0 / 30.2%);
   --color-light-red: oklch(60.3% 0.166 35);
   --breakpoint-3xl: 120rem;
   --breakpoint-mdl: 53rem;
+  --breakpoint-nav: 1355px;
 }
 
 @layer base {
@@ -257,7 +258,7 @@
   &::-webkit-date-and-time-value {
     text-align: inherit;
   }
-  &[type="number"] {
+  &[type='number'] {
     &::-webkit-inner-spin-button {
       margin-block: calc(0.25rem /* 4px */ * -3) /* -0.75rem = -12px */;
       margin-inline-end: calc(0.25rem /* 4px */ * -3) /* -0.75rem = -12px */;

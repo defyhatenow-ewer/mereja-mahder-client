@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useGetChartsQuery } from '../../features/charts.api';
 import { routes } from '../../routing';
 
-const PartnerOverview = () => {
+const CommunityOverview = () => {
   const [currentReportIndex, setCurrentReportIndex] = useState(0);
   const [currentChartIndex, setCurrentChartIndex] = useState(0);
 
@@ -78,4 +78,4 @@ const PartnerOverview = () => {
   );
 };
 
-export default PartnerOverview;
+export default CommunityOverview;

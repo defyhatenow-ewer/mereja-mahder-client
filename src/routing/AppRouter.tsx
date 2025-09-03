@@ -42,11 +42,11 @@ import {
 } from '../pages/fellows';
 import {
   Data,
-  PartnerOverview,
-  PartnersLayout,
+  CommunityOverview,
+  CommunityLayout,
   ReportList,
   SinglePrivateReport,
-} from '../pages/partners';
+} from '../pages/community';
 import {
   SafetyResources,
   SinglePrivateSafetyResource,
@@ -255,16 +255,16 @@ const AppRouter = createBrowserRouter([
             ],
           },
           {
-            path: routes.Partners.relative,
+            path: routes.Community.relative,
             errorElement: <NotFound />,
-            element: <PartnersLayout />,
+            element: <CommunityLayout />,
             children: [
               {
                 index: true,
                 element: (
                   <ProtectedRoute
-                    children={<PartnerOverview />}
-                    restrictedTo={restrictions.partner}
+                    children={<CommunityOverview />}
+                    restrictedTo={restrictions.community}
                   />
                 ),
               },
@@ -273,7 +273,7 @@ const AppRouter = createBrowserRouter([
                 element: (
                   <ProtectedRoute
                     children={<Data />}
-                    restrictedTo={restrictions.partnerAndCurator}
+                    restrictedTo={restrictions.communityAndCurator}
                   />
                 ),
               },
@@ -282,7 +282,7 @@ const AppRouter = createBrowserRouter([
                 element: (
                   <ProtectedRoute
                     children={<SingleChart />}
-                    restrictedTo={restrictions.partnerAndCurator}
+                    restrictedTo={restrictions.communityAndCurator}
                   />
                 ),
               },
@@ -291,7 +291,7 @@ const AppRouter = createBrowserRouter([
                 element: (
                   <ProtectedRoute
                     children={<ReportList />}
-                    restrictedTo={restrictions.partner}
+                    restrictedTo={restrictions.community}
                   />
                 ),
               },
@@ -300,7 +300,7 @@ const AppRouter = createBrowserRouter([
                 element: (
                   <ProtectedRoute
                     children={<SinglePrivateReport />}
-                    restrictedTo={restrictions.partner}
+                    restrictedTo={restrictions.community}
                   />
                 ),
               },

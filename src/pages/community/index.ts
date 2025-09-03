@@ -1,13 +1,13 @@
 import Data from './Data';
-import PartnerOverview from './PartnerOverview';
+import CommunityOverview from './CommunityOverview';
 import ReportList from './ReportList';
 import SinglePrivateReport from './SinglePrivateReport';
-import PartnersLayout from './PartnersLayout';
+import CommunityLayout from './CommunityLayout';
 
 export {
   Data,
-  PartnerOverview,
+  CommunityOverview,
   ReportList,
   SinglePrivateReport,
-  PartnersLayout,
+  CommunityLayout,
 };
