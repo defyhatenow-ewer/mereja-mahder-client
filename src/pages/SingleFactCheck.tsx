@@ -1,5 +1,5 @@
 import { Link, useParams } from 'react-router-dom';
-import { Loader, RichTextReader } from '../components';
+import { Loader } from '../components';
 import { formatDateTime } from '../utils';
 import {
   FacebookButton,
@@ -10,6 +10,7 @@ import { config } from '../config';
 import { routes } from '../routing';
 import { useGetArticlesQuery } from '../features/articles.api';
 import { useTranslation } from 'react-i18next';
+import RichText from '../components/RichText';
 
 const buttonList = [FacebookButton, LinkedInButton, TwitterButton];
 
@@ -43,6 +44,8 @@ const SingleFactCheck = () => {
 
   if (!post) return <Loader />;
 
+  console.log({ post });
+
   return (
     <div className="flex flex-col justify-center bg-white gap-5 p-5 pt-0 md:p-12 md:pt-0 md:gap-12">
       <section className="flex flex-col self-center items-center gap-5 w-full xl:w-4xl md:items-start md:gap-12 xl:gap-16">
@@ -65,7 +68,7 @@ const SingleFactCheck = () => {
             </div>
           </div>
         </div>
-        <RichTextReader data={post.docs[0].content} />
+        <RichText data={post.docs[0].content} />
         <div className="flex flex-col gap-2">
           <small>{t('sharePost')}</small>
           <div className="flex gap-1">

@@ -1,14 +1,13 @@
-import { RichText } from "@payloadcms/richtext-lexical/react";
-import type { SerializedEditorState } from "@payloadcms/richtext-lexical/lexical";
+import { RichText } from '@payloadcms/richtext-lexical/react';
+import type { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical';
 
-const RichTextReader = ({
-  data,
-  className,
-}: {
+type Props = {
   data: SerializedEditorState;
-  className?: string;
-}) => {
-  return <RichText data={data} className={className} />;
+} & React.HTMLAttributes<HTMLDivElement>;
+
+const RichTextReader = (props: Props) => {
+  const { className, ...rest } = props;
+  return <RichText {...rest} className={className} />;
 };
 
 export default RichTextReader;
