@@ -12,6 +12,7 @@ import { ArrowUpRight } from '../components/Icons';
 import { routes } from '../routing';
 import { useGetShowsQuery } from '../features/shows.api';
 import { useTranslation } from 'react-i18next';
+import OpenGraph from '../components/OpenGraph';
 
 const buttonList = [FacebookButton, LinkedInButton, TwitterButton];
 
@@ -64,6 +65,7 @@ const SingleRadioShow = () => {
 
   return (
     <div className="flex justify-center">
+      <OpenGraph meta={post.docs[0].meta} />
       <div className="flex flex-col bg-white gap-5 p-5 pt-0 w-full md:max-w-[1400px] md:p-12 md:pt-0 md:gap-12">
         <section className="flex flex-col gap-3 w-full md:w-4/5 md:gap-5">
           <h2>{post.docs[0].title}</h2>
@@ -95,7 +97,7 @@ const SingleRadioShow = () => {
               <div className="flex gap-1">
                 {buttonList.map((Btn, index) => (
                   <Btn
-                    url={`${config.env.siteUrl}/posts/${slug}`}
+                    url={`${config.env.siteUrl}/${routes.RadioShows.absolute}/${slug}`}
                     title={post.docs[0].title}
                     withText={false}
                     round={false}

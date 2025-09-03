@@ -11,6 +11,7 @@ import { routes } from '../routing';
 import { useGetArticlesQuery } from '../features/articles.api';
 import { useTranslation } from 'react-i18next';
 import RichText from '../components/RichText';
+import OpenGraph from '../components/OpenGraph';
 
 const buttonList = [FacebookButton, LinkedInButton, TwitterButton];
 
@@ -44,10 +45,9 @@ const SingleFactCheck = () => {
 
   if (!post) return <Loader />;
 
-  console.log({ post });
-
   return (
     <div className="flex flex-col justify-center bg-white gap-5 p-5 pt-0 md:p-12 md:pt-0 md:gap-12">
+      <OpenGraph meta={post.docs[0].meta} />
       <section className="flex flex-col self-center items-center gap-5 w-full xl:w-4xl md:items-start md:gap-12 xl:gap-16">
         <div className="flex flex-col gap-3 w-full md:gap-5">
           <h2 className="">{post.docs[0].title}</h2>
@@ -74,7 +74,7 @@ const SingleFactCheck = () => {
           <div className="flex gap-1">
             {buttonList.map((Btn, index) => (
               <Btn
-                url={`${config.env.siteUrl}/posts/${slug}`}
+                url={`${config.env.siteUrl}/${routes.FactChecks.absolute}/${slug}`}
                 title={post.docs[0].title}
                 withText={false}
                 round={false}
