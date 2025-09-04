@@ -91,7 +91,7 @@
   --color-light-red: oklch(60.3% 0.166 35);
   --breakpoint-3xl: 120rem;
   --breakpoint-mdl: 53rem;
-  --breakpoint-nav: 1355px;
+  --breakpoint-nav: 1319px;
 }
 
 @layer base {
