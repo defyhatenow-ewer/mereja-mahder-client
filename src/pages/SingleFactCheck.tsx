@@ -12,6 +12,7 @@ import { useGetArticlesQuery } from '../features/articles.api';
 import { useTranslation } from 'react-i18next';
 import RichText from '../components/RichText';
 import OpenGraph from '../components/OpenGraph';
+import { IMedia } from '../types/media.types';
 
 const buttonList = [FacebookButton, LinkedInButton, TwitterButton];
 
@@ -48,7 +49,7 @@ const SingleFactCheck = () => {
   return (
     <div className="flex flex-col justify-center bg-white gap-5 p-5 pt-0 md:p-12 md:pt-0 md:gap-12">
       <OpenGraph meta={post.docs[0].meta} />
-      <section className="flex flex-col self-center items-center gap-5 w-full xl:w-4xl md:items-start md:gap-12 xl:gap-16">
+      <section className="flex flex-col self-center items-center gap-5 w-full xl:w-4xl md:items-start md:gap-8 xl:gap-12">
         <div className="flex flex-col gap-3 w-full md:gap-5">
           <h2 className="">{post.docs[0].title}</h2>
           <div className="flex gap-3 items-center flex-col md:flex-row md:gap-5">
@@ -68,6 +69,10 @@ const SingleFactCheck = () => {
             </div>
           </div>
         </div>
+        <img
+          src={`${config.env.apiKey}${(post.docs[0].featuredImage as IMedia).sizes?.medium?.url}`}
+          className="h-96 w-full object-cover"
+        />
         <RichText data={post.docs[0].content} />
         <div className="flex flex-col gap-2">
           <small>{t('sharePost')}</small>
