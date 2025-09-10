@@ -71,7 +71,7 @@ const SingleFactCheck = () => {
         </div>
         <img
           src={`${config.env.apiKey}${(post.docs[0].featuredImage as IMedia).sizes?.medium?.url}`}
-          className="h-96 w-full object-cover"
+          className="w-full h-auto"
         />
         <RichText data={post.docs[0].content} />
         <div className="flex flex-col gap-2">
