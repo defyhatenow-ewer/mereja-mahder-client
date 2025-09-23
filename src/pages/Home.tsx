@@ -13,33 +13,50 @@ import { ArrowDown, ArrowUpRight, ChevronRight } from '../components/Icons';
 import { Loader, RichTextReader } from '../components';
 import { config } from '../config';
 import { formatDateTime, makeDownloadable } from '../utils';
-import { useGetReportsQuery } from '../features/reports.api';
 import { useGetShowsQuery } from '../features/shows.api';
 import { useGetResourcesQuery } from '../features/resources.api';
+import { useGetCategoriesQuery } from '../features/categories.api';
 
 const Home = () => {
   const { t } = useTranslation();
-  const { data: reports, isLoading: isReportsLoading } = useGetReportsQuery({
+  const { data: categories } = useGetCategoriesQuery({
     query: {
       where: {
-        and: [
-          {
-            _status: {
-              equals: 'published',
-            },
-          },
-          {
-            privacy: {
-              equals: 'public',
-            },
-          },
-        ],
+        title: {
+          equals: 'Reports',
+        },
       },
     },
-    options: {
-      limit: 4,
-    },
   });
+  const { data: reports, isLoading: isReportsLoading } = useGetResourcesQuery(
+    {
+      query: {
+        where: {
+          and: [
+            {
+              _status: {
+                equals: 'published',
+              },
+            },
+            {
+              privacy: {
+                equals: 'public',
+              },
+            },
+            {
+              categories: {
+                contains: [categories?.docs[0]?.id || ''],
+              },
+            },
+          ],
+        },
+      },
+      options: {
+        limit: 4,
+      },
+    },
+    { skip: !categories || categories.docs.length === 0 }
+  );
   const { data: resources, isLoading: isResourcesLoading } =
     useGetResourcesQuery({
       query: {
