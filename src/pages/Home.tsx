@@ -15,30 +15,37 @@ import { config } from '../config';
 import { formatDateTime, makeDownloadable } from '../utils';
 import { useGetShowsQuery } from '../features/shows.api';
 import { useGetResourcesQuery } from '../features/resources.api';
-import { useGetCategoriesQuery } from '../features/categories.api';
 
 const Home = () => {
   const { t } = useTranslation();
-  const { data: reportsCategory } = useGetCategoriesQuery({
+  const { data: reports, isLoading: isReportsLoading } = useGetResourcesQuery({
     query: {
       where: {
-        title: {
-          equals: 'Reports',
-        },
+        and: [
+          {
+            _status: {
+              equals: 'published',
+            },
+          },
+          {
+            privacy: {
+              equals: 'public',
+            },
+          },
+          {
+            'categories.title': {
+              equals: 'Reports',
+            },
+          },
+        ],
       },
     },
-  });
-  const { data: resourcesCategory } = useGetCategoriesQuery({
-    query: {
-      where: {
-        title: {
-          equals: 'Resources',
-        },
-      },
+    options: {
+      limit: 4,
     },
   });
-  const { data: reports, isLoading: isReportsLoading } = useGetResourcesQuery(
-    {
+  const { data: resources, isLoading: isResourcesLoading } =
+    useGetResourcesQuery({
       query: {
         where: {
           and: [
@@ -53,51 +60,17 @@ const Home = () => {
               },
             },
             {
-              categories: {
-                contains: [reportsCategory?.docs[0]?.id || ''],
+              'categories.title': {
+                equals: 'Resources',
               },
             },
           ],
         },
       },
       options: {
-        limit: 4,
+        limit: 3,
       },
-    },
-    { skip: !reportsCategory || reportsCategory.docs.length === 0 }
-  );
-  const { data: resources, isLoading: isResourcesLoading } =
-    useGetResourcesQuery(
-      {
-        query: {
-          where: {
-            and: [
-              {
-                _status: {
-                  equals: 'published',
-                },
-              },
-              {
-                privacy: {
-                  equals: 'public',
-                },
-              },
-              {
-                categories: {
-                  contains: [resourcesCategory?.docs[0]?.id || ''],
-                },
-              },
-            ],
-          },
-        },
-        options: {
-          limit: 3,
-        },
-      },
-      {
-        skip: !resourcesCategory || resourcesCategory.docs.length === 0,
-      }
-    );
+    });
   const { data: radioShows, isLoading: isRadioShowsLoading } = useGetShowsQuery(
     {
       query: {
