@@ -19,11 +19,20 @@ import { useGetCategoriesQuery } from '../features/categories.api';
 
 const Home = () => {
   const { t } = useTranslation();
-  const { data: categories } = useGetCategoriesQuery({
+  const { data: reportsCategory } = useGetCategoriesQuery({
     query: {
       where: {
         title: {
           equals: 'Reports',
+        },
+      },
+    },
+  });
+  const { data: resourcesCategory } = useGetCategoriesQuery({
+    query: {
+      where: {
+        title: {
+          equals: 'Resources',
         },
       },
     },
@@ -45,7 +54,7 @@ const Home = () => {
             },
             {
               categories: {
-                contains: [categories?.docs[0]?.id || ''],
+                contains: [reportsCategory?.docs[0]?.id || ''],
               },
             },
           ],
@@ -55,30 +64,40 @@ const Home = () => {
         limit: 4,
       },
     },
-    { skip: !categories || categories.docs.length === 0 }
+    { skip: !reportsCategory || reportsCategory.docs.length === 0 }
   );
   const { data: resources, isLoading: isResourcesLoading } =
-    useGetResourcesQuery({
-      query: {
-        where: {
-          and: [
-            {
-              _status: {
-                equals: 'published',
+    useGetResourcesQuery(
+      {
+        query: {
+          where: {
+            and: [
+              {
+                _status: {
+                  equals: 'published',
+                },
               },
-            },
-            {
-              privacy: {
-                equals: 'public',
+              {
+                privacy: {
+                  equals: 'public',
+                },
               },
-            },
-          ],
+              {
+                categories: {
+                  contains: [resourcesCategory?.docs[0]?.id || ''],
+                },
+              },
+            ],
+          },
+        },
+        options: {
+          limit: 3,
         },
       },
-      options: {
-        limit: 3,
-      },
-    });
+      {
+        skip: !resourcesCategory || resourcesCategory.docs.length === 0,
+      }
+    );
   const { data: radioShows, isLoading: isRadioShowsLoading } = useGetShowsQuery(
     {
       query: {
