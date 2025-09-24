@@ -206,7 +206,7 @@ const Home = () => {
                   className="flex flex-col bg-[#E4E4E4] rounded-2xl overflow-hidden hover:shadow-xl transition-shadow duration-300 md:rounded-3xl"
                 >
                   <Link
-                    to={`${routes.Reports.absolute}/${post.slug}`}
+                    to={`${routes.Resources.absolute}/${post.slug}`}
                     className="block w-full"
                   >
                     {typeof post.featuredImage === 'string' && (
@@ -234,7 +234,7 @@ const Home = () => {
 
                       <Link
                         className="font-poppins-medium text-base sm:text-lg hover:text-light-red transition-colors duration-200 line-clamp-2"
-                        to={`${routes.Reports.absolute}/${post.slug}`}
+                        to={`${routes.Resources.absolute}/${post.slug}`}
                       >
                         {post.title}
                       </Link>
@@ -281,7 +281,7 @@ const Home = () => {
             </div>
             <div className="flex justify-center bg-white p-5 pb-0 w-full md:rounded-tl-4xl md:pt-5 md:px-12 md:w-sm xl:w-lg xl:p-12 xl:pb-0 xl:justify-start">
               <Link
-                to={routes.Reports.relative}
+                to={routes.Resources.relative}
                 className="flex justify-between items-center gap-3 bg-secondary hover:bg-primary text-primary hover:text-secondary cursor-pointer rounded-4xl p-3 ps-4 w-fit text-sm md:text-base md:w-[100%-48px] md:ps-6"
               >
                 <span>{t('viewMore')}</span>
