@@ -32,7 +32,7 @@ const WomenLayout = () => {
                 {banners.docs[0].title}
               </h2>
               <div className="flex gap-3 flex-wrap">
-                {banners.docs[0].links.length &&
+                {banners.docs[0].links.length > 0 &&
                   banners.docs[0].links[0].links?.length &&
                   banners.docs[0].links[0].links[0].link.url && (
                     <a
