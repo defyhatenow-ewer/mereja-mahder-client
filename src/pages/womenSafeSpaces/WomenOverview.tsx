@@ -70,7 +70,7 @@ const WomenOverview = () => {
       </section>
       <section>
         <Carousel
-          title="safetyResources"
+          title="resources"
           currentIndex={currentResourceIndex}
           setCurrentIndex={setCurrentResourceIndex}
           posts={resources}
