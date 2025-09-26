@@ -32,7 +32,7 @@ const CommunitysLayout = () => {
                 {banners.docs[0].title}
               </h2>
               <div className="flex gap-3 flex-wrap">
-                {banners.docs[0].links.length > 0 &&
+                {/* {banners.docs[0].links.length > 0 &&
                   banners.docs[0].links[0].links?.length &&
                   banners.docs[0].links[0].links[0].link.url && (
                     <a
@@ -46,7 +46,7 @@ const CommunitysLayout = () => {
                     >
                       {banners.docs[0].links[0].links[0].link.label}
                     </a>
-                  )}
+                  )} */}
                 <Link
                   to={routes.Submit.absolute}
                   className="bg-secondary text-white hover:text-primary text-xs px-5 py-2 rounded-2xl w-fit"
